@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <TesseractOCR/TesseractOCR.h>
 
-@interface storyboardViewController : UIViewController
+@interface storyboardViewController : UIViewController <TesseractDelegate>
+
 
 @end
