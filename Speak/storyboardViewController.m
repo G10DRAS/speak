@@ -32,23 +32,23 @@
     // self should respond to TesseractDelegate and implement shouldCancelImageRecognitionForTesseract: method
     // to have an ability to recieve callback and interrupt Tesseract before it finishes
     
-    Tesseract* tesseract = [[Tesseract alloc] initWithLanguage:@"eng+ita"];
+    Tesseract* tesseract = [[Tesseract alloc] initWithLanguage:@"eng"];
     tesseract.delegate = self;
     
-    [tesseract setVariableValue:@"0123456789" forKey:@"tessedit_char_whitelist"]; //limit search
+//    [tesseract setVariableValue:@"0123456789" forKey:@"tessedit_char_whitelist"]; //limit search
     [tesseract setImage:[UIImage imageNamed:@"image_sample.jpg"]]; //image to check
     [tesseract recognize];
     
     NSLog(@"%@", [tesseract recognizedText]);
     
-    tesseract = nil; //deallocate and free all memory
+//    tesseract = nil; //deallocate and free all memory
 }
 
-- (BOOL)shouldCancelImageRecognitionForTesseract:(Tesseract*)tesseract
-{
-    NSLog(@"progress: %d", tesseract.progress);
-    return NO;  // return YES, if you need to interrupt tesseract before it finishes
-}
+//- (BOOL)shouldCancelImageRecognitionForTesseract:(Tesseract*)tesseract
+//{
+//    NSLog(@"progress: %d", tesseract.progress);
+//    return NO;  // return YES, if you need to interrupt tesseract before it finishes
+//}
 
 - (void)didReceiveMemoryWarning
 {
