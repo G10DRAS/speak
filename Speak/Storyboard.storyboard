@@ -51,39 +51,6 @@
             </objects>
             <point key="canvasLocation" x="311" y="-404"/>
         </scene>
-        <!--Speak View Controller-->
-        <scene sceneID="gQD-cy-I5g">
-            <objects>
-                <viewController id="rRT-GI-Twx" customClass="SpeakViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="fSq-H7-4t7"/>
-                        <viewControllerLayoutGuide type="bottom" id="ZPe-Vm-EBQ"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="wbj-BR-ABG">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h6u-Nu-GhR">
-                                <rect key="frame" x="0.0" y="13" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <items>
-                                    <navigationItem title="Speak" id="YdS-k8-gBN">
-                                        <barButtonItem key="leftBarButtonItem" title="Back" id="P5b-qN-zcB">
-                                            <connections>
-                                                <segue destination="UFX-LC-Bqi" kind="modal" id="LZl-rr-QUA"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4Xi-GU-hJT" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="840" y="353"/>
-        </scene>
         <!--Main View Controller - Photo-->
         <scene sceneID="KA5-Ck-XXb">
             <objects>
@@ -105,33 +72,14 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Photo" id="222-5i-oHe">
-                        <barButtonItem key="leftBarButtonItem" style="plain" id="X7j-oX-Z8J">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="E6w-b9-kwa">
-                                <rect key="frame" x="16" y="5" width="71" height="33"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal" title="Select">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="takePhoto:" destination="UFX-LC-Bqi" eventType="touchUpInside" id="KO3-hF-jQh"/>
-                                </connections>
-                            </button>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="2f1-HG-G7W">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="QKO-P6-3sl">
-                                <rect key="frame" x="233" y="5" width="71" height="33"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                                <state key="normal" title="Go!">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="recognizePhoto:" destination="UFX-LC-Bqi" eventType="touchUpInside" id="DTK-gj-4Qe"/>
-                                </connections>
-                            </button>
+                        <barButtonItem key="leftBarButtonItem" systemItem="camera" id="c12-lB-ies">
                             <connections>
-                                <action selector="recognizePhoto:" destination="UFX-LC-Bqi" id="4v7-Dr-V2y"/>
+                                <action selector="takePhoto:" destination="UFX-LC-Bqi" id="PTE-sa-vFi"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="play" id="d2g-ne-clL">
+                            <connections>
+                                <action selector="recognizePhoto:" destination="UFX-LC-Bqi" id="5wG-Xx-h5j"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -149,7 +97,4 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
-    <inferredMetricsTieBreakers>
-        <segue reference="LZl-rr-QUA"/>
-    </inferredMetricsTieBreakers>
 </document>
