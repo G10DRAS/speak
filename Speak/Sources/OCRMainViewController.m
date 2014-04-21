@@ -21,28 +21,32 @@ static NSString * const kExportFormat = @"txt";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	
-	UIBarButtonItem *takePhotoButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Take Photo", @"Take Photo")
-																		style:UIBarButtonItemStyleBordered
-																	   target:self
-																	   action:@selector(takePhoto:)];
-	
-    UIBarButtonItem *recognizeButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Recognize", @"Recognize")
-																			style:UIBarButtonItemStyleBordered
-																		target:self
-																		action:@selector(recognize:)];
-	
-	self.navigationItem.leftBarButtonItem = takePhotoButton;
-	self.navigationItem.rightBarButtonItem = recognizeButton;
+//	
+//	UIBarButtonItem *takePhotoButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Take Photo", @"Take Photo")
+//																		style:UIBarButtonItemStyleBordered
+//																	   target:self
+//																	   action:@selector(takePhoto:)];
+//	
+//    UIBarButtonItem *recognizeButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Recognize", @"Recognize")
+//																			style:UIBarButtonItemStyleBordered
+//																		target:self
+//																		action:@selector(recognize:)];
+//	
+//	self.navigationItem.leftBarButtonItem = takePhotoButton;
+//	self.navigationItem.rightBarButtonItem = recognizeButton;
 	
 	self.imageView.image = [UIImage imageNamed:@"sample.jpg"];
 }
 
 #pragma mark -
+//
+//- (void)takePhoto:(id)sender
+//{
+//	
+//}
 
-- (void)takePhoto:(id)sender
-{
-	UIImagePickerController* imagePicker = [[UIImagePickerController alloc] init];
+- (IBAction)takePhoto:(id)sender {
+    UIImagePickerController* imagePicker = [[UIImagePickerController alloc] init];
 	
 	imagePicker.sourceType = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] ? UIImagePickerControllerSourceTypeCamera :  UIImagePickerControllerSourceTypePhotoLibrary;
 	imagePicker.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeImage];
@@ -52,9 +56,8 @@ static NSString * const kExportFormat = @"txt";
 	[self presentModalViewController:imagePicker animated:YES];
 }
 
-- (void)recognize:(id)sender
-{
-	self.alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Authorizing...", @"Authorizing...")
+- (IBAction)recognizePhoto:(id)sender {
+    self.alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Authorizing...", @"Authorizing...")
 												message:@"\n\n"
 											   delegate:self
 									  cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel")
@@ -113,12 +116,13 @@ static NSString * const kExportFormat = @"txt";
 		[self.alertView dismissWithClickedButtonIndex:-1 animated:YES];
 		
 		if (self.textViewController == nil) {
-	        self.textViewController = [[OCRTextViewController alloc] initWithNibName:@"TextView" bundle:nil];
+	        self.textViewController = [[SpeakViewController alloc] initWithNibName:nil bundle:nil];
 	    }
 		
 	    self.textViewController.text = [[NSString alloc] initWithData:downloadedData encoding:NSUTF8StringEncoding];
 		
         [self.navigationController pushViewController:self.textViewController animated:YES];
+        
 	} failure:^(NSError *error) {
 		[self showError:error];
 	}];
@@ -158,5 +162,4 @@ static NSString * const kExportFormat = @"txt";
 		[[[OCRDemoClient sharedClient] operationQueue] cancelAllOperations];
 	}
 }
-
 @end

@@ -20,6 +20,8 @@
 		38191AD61905AE8700730C24 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38191AD51905AE8700730C24 /* FirstViewController.m */; };
 		38191AD91905AEE700730C24 /* SpeakViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38191AD81905AEE700730C24 /* SpeakViewController.m */; };
 		38191ADB1905AF0C00730C24 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38191ADA1905AF0C00730C24 /* Storyboard.storyboard */; };
+		38191ADE1905D99C00730C24 /* libGoogle_TTS_ByShamsu_Universal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 38191ADD1905D99C00730C24 /* libGoogle_TTS_ByShamsu_Universal.a */; };
+		38191AE01905D9D700730C24 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38191ADF1905D9D700730C24 /* AVFoundation.framework */; };
 		49C023F0174B89A2000DD375 /* OCRMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C023EE174B89A2000DD375 /* OCRMainViewController.m */; };
 		49C023F1174B89A2000DD375 /* MainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49C023EF174B89A2000DD375 /* MainView.xib */; };
 		49CF5754174CE51500876D14 /* OCRDemoClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 49CF5753174CE51500876D14 /* OCRDemoClient.m */; };
@@ -52,6 +54,9 @@
 		38191AD71905AEE700730C24 /* SpeakViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeakViewController.h; sourceTree = "<group>"; };
 		38191AD81905AEE700730C24 /* SpeakViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpeakViewController.m; sourceTree = "<group>"; };
 		38191ADA1905AF0C00730C24 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
+		38191ADC1905D99C00730C24 /* Google_TTS_BySham.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Google_TTS_BySham.h; sourceTree = "<group>"; };
+		38191ADD1905D99C00730C24 /* libGoogle_TTS_ByShamsu_Universal.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogle_TTS_ByShamsu_Universal.a; sourceTree = "<group>"; };
+		38191ADF1905D9D700730C24 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		45F60683E5D44627B5420859 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		49C023ED174B89A2000DD375 /* OCRMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCRMainViewController.h; sourceTree = "<group>"; };
 		49C023EE174B89A2000DD375 /* OCRMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCRMainViewController.m; sourceTree = "<group>"; };
@@ -67,6 +72,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38191AE01905D9D700730C24 /* AVFoundation.framework in Frameworks */,
+				38191ADE1905D99C00730C24 /* libGoogle_TTS_ByShamsu_Universal.a in Frameworks */,
 				0A26A3E21741746F004DD086 /* UIKit.framework in Frameworks */,
 				0A26A3E41741746F004DD086 /* Foundation.framework in Frameworks */,
 				0A26A3E61741746F004DD086 /* CoreGraphics.framework in Frameworks */,
@@ -107,6 +114,7 @@
 		0A26A3E01741746F004DD086 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				38191ADF1905D9D700730C24 /* AVFoundation.framework */,
 				0A26A3E11741746F004DD086 /* UIKit.framework */,
 				0A26A3E31741746F004DD086 /* Foundation.framework */,
 				0A26A3E51741746F004DD086 /* CoreGraphics.framework */,
@@ -126,6 +134,8 @@
 				0A26A42617492B23004DD086 /* OCRTextViewController.m */,
 				0A26A3EB1741746F004DD086 /* OCRSDKDemo-Prefix.pch */,
 				0A26A3F41741746F004DD086 /* main.m */,
+				38191ADC1905D99C00730C24 /* Google_TTS_BySham.h */,
+				38191ADD1905D99C00730C24 /* libGoogle_TTS_ByShamsu_Universal.a */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -339,6 +349,10 @@
 				GCC_PREFIX_HEADER = "Sources/OCRSDKDemo-Prefix.pch";
 				INFOPLIST_FILE = "Resources/OCRSDKDemo-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Sources",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
@@ -353,6 +367,10 @@
 				GCC_PREFIX_HEADER = "Sources/OCRSDKDemo-Prefix.pch";
 				INFOPLIST_FILE = "Resources/OCRSDKDemo-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Sources",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;

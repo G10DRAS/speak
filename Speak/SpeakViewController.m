@@ -19,6 +19,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        self.google_TTS_BySham = [[Google_TTS_BySham alloc] init];
     }
     return self;
 }
@@ -27,6 +28,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self configureView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -34,6 +36,24 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void)configureView
+{
+	if (self.text != nil) {
+        NSString *stringToSpeak = [NSString stringWithFormat:@"%@", _text];
+        [self.google_TTS_BySham speak:stringToSpeak];
+	}
+}
+
+- (void)setText:(NSString *)text
+{
+    if (_text != text) {
+		_text = text;
+        
+        [self configureView];
+    }
+}
+
 
 /*
 #pragma mark - Navigation
