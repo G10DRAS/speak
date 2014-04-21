@@ -17,7 +17,6 @@
 		0A26A42117492A34004DD086 /* sample.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0A26A41F17492A34004DD086 /* sample.jpg */; };
 		0A26A42717492B23004DD086 /* OCRTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A26A42617492B23004DD086 /* OCRTextViewController.m */; };
 		225EE2E675754B54B1B273BE /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 45F60683E5D44627B5420859 /* libPods.a */; };
-		38FB17F4190242FC0088EA43 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38FB17F3190242FC0088EA43 /* Storyboard.storyboard */; };
 		49C023F0174B89A2000DD375 /* OCRMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C023EE174B89A2000DD375 /* OCRMainViewController.m */; };
 		49C023F1174B89A2000DD375 /* MainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49C023EF174B89A2000DD375 /* MainView.xib */; };
 		49CF5754174CE51500876D14 /* OCRDemoClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 49CF5753174CE51500876D14 /* OCRDemoClient.m */; };
@@ -45,7 +44,6 @@
 		0A26A42517492B23004DD086 /* OCRTextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCRTextViewController.h; sourceTree = "<group>"; };
 		0A26A42617492B23004DD086 /* OCRTextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCRTextViewController.m; sourceTree = "<group>"; };
 		38FB17F21902413D0088EA43 /* OCRSDKDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OCRSDKDemo-Prefix.pch"; sourceTree = "<group>"; };
-		38FB17F3190242FC0088EA43 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Storyboard.storyboard; path = ../Storyboard.storyboard; sourceTree = "<group>"; };
 		45F60683E5D44627B5420859 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		49C023ED174B89A2000DD375 /* OCRMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCRMainViewController.h; sourceTree = "<group>"; };
 		49C023EE174B89A2000DD375 /* OCRMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCRMainViewController.m; sourceTree = "<group>"; };
@@ -105,7 +103,6 @@
 		0A26A40A17417A24004DD086 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				38FB17F3190242FC0088EA43 /* Storyboard.storyboard */,
 				0A26A3F61741746F004DD086 /* OCRAppDelegate.h */,
 				0A26A3F71741746F004DD086 /* OCRAppDelegate.m */,
 				49CF5752174CE51500876D14 /* OCRDemoClient.h */,
@@ -196,7 +193,6 @@
 			files = (
 				0A26A3E91741746F004DD086 /* Podfile in Resources */,
 				0A26A3F31741746F004DD086 /* InfoPlist.strings in Resources */,
-				38FB17F4190242FC0088EA43 /* Storyboard.storyboard in Resources */,
 				0A26A42117492A34004DD086 /* sample.jpg in Resources */,
 				49C023F1174B89A2000DD375 /* MainView.xib in Resources */,
 				49CF5756174CF50E00876D14 /* TextView.xib in Resources */,
