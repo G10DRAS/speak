@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "FirstViewController.h"
 #import "OCRMainViewController.h"
 
 @implementation AppDelegate
@@ -23,14 +24,14 @@
     //    [self.window makeKeyAndVisible];
     
     
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    
-	UIViewController *mainViewController = [[OCRMainViewController alloc] initWithNibName:@"MainView" bundle:nil];
-	
-	self.navigationController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
-	
-	self.window.rootViewController = self.navigationController;
-    [self.window makeKeyAndVisible];
+//    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+//    
+//	UIViewController *mainViewController = [[OCRMainViewController alloc] initWithNibName:nil bundle:nil];
+//	
+//	self.navigationController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
+//	
+//	self.window.rootViewController = self.navigationController;
+//    [self.window makeKeyAndVisible];
     
 	
     return YES;

@@ -51,10 +51,10 @@
             </objects>
             <point key="canvasLocation" x="311" y="-404"/>
         </scene>
-        <!--View Controller - Photo-->
+        <!--Main View Controller - Photo-->
         <scene sceneID="KA5-Ck-XXb">
             <objects>
-                <viewController id="UFX-LC-Bqi" sceneMemberID="viewController">
+                <viewController id="UFX-LC-Bqi" customClass="OCRMainViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="xQl-Ey-eWe"/>
                         <viewControllerLayoutGuide type="bottom" id="bmp-OQ-QVY"/>
@@ -70,7 +70,28 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Photo" id="h4b-D7-ezJ"/>
+                    <navigationItem key="navigationItem" title="Photo" id="h4b-D7-ezJ">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="Jg5-QI-XXa">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="eyH-tb-taQ">
+                                <rect key="frame" x="16" y="5" width="71" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="Select">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="0vz-Lt-w6e">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="q7X-ZA-udW">
+                                <rect key="frame" x="233" y="5" width="71" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                <state key="normal" title="Go!">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kc1-5A-FKr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
