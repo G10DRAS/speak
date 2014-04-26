@@ -42,6 +42,7 @@
 	if (self.text != nil) {
         NSString *stringToSpeak = [NSString stringWithFormat:@"%@", _text];
         [self.google_TTS_BySham speak:stringToSpeak];
+        self.google_TTS_BySham.volume = 1.0f;
 	}
 }
 

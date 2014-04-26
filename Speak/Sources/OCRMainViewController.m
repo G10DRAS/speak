@@ -35,7 +35,7 @@ static NSString * const kExportFormat = @"txt";
 //	self.navigationItem.leftBarButtonItem = takePhotoButton;
 //	self.navigationItem.rightBarButtonItem = recognizeButton;
 	
-	self.imageView.image = [UIImage imageNamed:@"sample.jpg"];
+	self.imageView.image = [UIImage imageNamed:nil];
 }
 
 #pragma mark -
