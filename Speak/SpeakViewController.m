@@ -14,6 +14,9 @@
 
 @implementation SpeakViewController
 
+@synthesize fliteController = _fliteController;
+@synthesize slt = _slt;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -22,6 +25,20 @@
         self.google_TTS_BySham = [[Google_TTS_BySham alloc] init];
     }
     return self;
+}
+
+- (FliteController *)fliteController {
+	if (fliteController == nil) {
+		fliteController = [[FliteController alloc] init];
+	}
+	return fliteController;
+}
+
+- (Slt *)slt {
+	if (slt == nil) {
+		slt = [[Slt alloc] init];
+	}
+	return slt;
 }
 
 - (void)viewDidLoad
@@ -41,8 +58,16 @@
 {
 	if (self.text != nil) {
         NSString *stringToSpeak = [NSString stringWithFormat:@"%@", _text];
-        [self.google_TTS_BySham speak:stringToSpeak];
-        self.google_TTS_BySham.volume = 1.0f;
+//        [self.google_TTS_BySham speak:stringToSpeak];
+        
+//        AVSpeechUtterance *utterance = [AVSpeechUtterance
+//                                        speechUtteranceWithString:stringToSpeak];
+//        AVSpeechSynthesizer *synth = [[AVSpeechSynthesizer alloc] init];
+//        [synth speakUtterance:utterance];
+//        
+//        self.google_TTS_BySham.volume = 1.0f;
+        
+//        [self.fliteController say:stringToSpeak withVoice:self.slt];
 	}
 }
 

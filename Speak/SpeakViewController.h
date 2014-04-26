@@ -11,10 +11,19 @@
 #import <AVFoundation/AVFoundation.h>
 #import "Google_TTS_BySham.h"
 
-@interface SpeakViewController : UIViewController <AVAudioPlayerDelegate>
+#import <Slt/Slt.h>
+#import <OpenEars/FliteController.h>
+
+@interface SpeakViewController : UIViewController <AVAudioPlayerDelegate> {
+    FliteController *fliteController;
+    Slt *slt;
+}
 
 @property (strong, nonatomic) NSString *text;
 
 @property (nonatomic,strong)Google_TTS_BySham *google_TTS_BySham;
+
+@property (strong, nonatomic) FliteController *fliteController;
+@property (strong, nonatomic) Slt *slt;
 
 @end
