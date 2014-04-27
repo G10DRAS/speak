@@ -20,7 +20,6 @@
 		38191AD61905AE8700730C24 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38191AD51905AE8700730C24 /* FirstViewController.m */; };
 		38191AD91905AEE700730C24 /* SpeakViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38191AD81905AEE700730C24 /* SpeakViewController.m */; };
 		38191ADB1905AF0C00730C24 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38191ADA1905AF0C00730C24 /* Storyboard.storyboard */; };
-		38191ADE1905D99C00730C24 /* libGoogle_TTS_ByShamsu_Universal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 38191ADD1905D99C00730C24 /* libGoogle_TTS_ByShamsu_Universal.a */; };
 		38191AE01905D9D700730C24 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38191ADF1905D9D700730C24 /* AVFoundation.framework */; };
 		38739D5D190B3613009AF508 /* AcousticModelEnglish.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 38739D59190B3613009AF508 /* AcousticModelEnglish.bundle */; };
 		38739D5E190B3613009AF508 /* AcousticModelSpanish.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 38739D5A190B3613009AF508 /* AcousticModelSpanish.bundle */; };
@@ -59,8 +58,6 @@
 		38191AD71905AEE700730C24 /* SpeakViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeakViewController.h; sourceTree = "<group>"; };
 		38191AD81905AEE700730C24 /* SpeakViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpeakViewController.m; sourceTree = "<group>"; };
 		38191ADA1905AF0C00730C24 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
-		38191ADC1905D99C00730C24 /* Google_TTS_BySham.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Google_TTS_BySham.h; path = Sources/Google_TTS_BySham.h; sourceTree = "<group>"; };
-		38191ADD1905D99C00730C24 /* libGoogle_TTS_ByShamsu_Universal.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGoogle_TTS_ByShamsu_Universal.a; path = Sources/libGoogle_TTS_ByShamsu_Universal.a; sourceTree = "<group>"; };
 		38191ADF1905D9D700730C24 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		38739D59190B3613009AF508 /* AcousticModelEnglish.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AcousticModelEnglish.bundle; sourceTree = "<group>"; };
 		38739D5A190B3613009AF508 /* AcousticModelSpanish.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AcousticModelSpanish.bundle; sourceTree = "<group>"; };
@@ -85,7 +82,6 @@
 				38739D62190B36B6009AF508 /* AudioToolbox.framework in Frameworks */,
 				38739D5F190B3613009AF508 /* OpenEars.framework in Frameworks */,
 				38191AE01905D9D700730C24 /* AVFoundation.framework in Frameworks */,
-				38191ADE1905D99C00730C24 /* libGoogle_TTS_ByShamsu_Universal.a in Frameworks */,
 				0A26A3E21741746F004DD086 /* UIKit.framework in Frameworks */,
 				38739D60190B3613009AF508 /* Slt.framework in Frameworks */,
 				0A26A3E41741746F004DD086 /* Foundation.framework in Frameworks */,
@@ -129,8 +125,6 @@
 			children = (
 				38739D61190B36B6009AF508 /* AudioToolbox.framework */,
 				38739D58190B3613009AF508 /* Framework */,
-				38191ADC1905D99C00730C24 /* Google_TTS_BySham.h */,
-				38191ADD1905D99C00730C24 /* libGoogle_TTS_ByShamsu_Universal.a */,
 				38191ADF1905D9D700730C24 /* AVFoundation.framework */,
 				0A26A3E11741746F004DD086 /* UIKit.framework */,
 				0A26A3E31741746F004DD086 /* Foundation.framework */,

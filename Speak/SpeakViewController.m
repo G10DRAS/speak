@@ -9,43 +9,23 @@
 #import "SpeakViewController.h"
 #import <AudioToolbox/AudioToolbox.h>
 
-@interface SpeakViewController () {
-}
+@interface SpeakViewController ()
 @end
 
 @implementation SpeakViewController
 
-@synthesize fliteController = _fliteController;
-@synthesize slt = _slt;
 @synthesize player;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
-        self.google_TTS_BySham = [[Google_TTS_BySham alloc] init];
-        
         lines = [[NSMutableArray alloc] init];
         URLArray = [NSMutableArray array];
         soundIsPlaying = NO;
         playerInt = 0;
     }
     return self;
-}
-
-- (FliteController *)fliteController {
-	if (fliteController == nil) {
-		fliteController = [[FliteController alloc] init];
-	}
-	return fliteController;
-}
-
-- (Slt *)slt {
-	if (slt == nil) {
-		slt = [[Slt alloc] init];
-	}
-	return slt;
 }
 
 - (void)viewDidLoad
@@ -142,9 +122,6 @@
         // STEP FOUR: Play the Sound
         [self playSound];
         
-        
-        
-
         // Only for iOS 7
         //        AVSpeechUtterance *utterance = [AVSpeechUtterance
         //                                        speechUtteranceWithString:stringToSpeak];
