@@ -9,15 +9,16 @@
 #import "SpeakViewController.h"
 #import <AudioToolbox/AudioToolbox.h>
 
-@interface SpeakViewController ()
-
+@interface SpeakViewController () {
+    AVAudioPlayer *player;
+}
 @end
 
 @implementation SpeakViewController
 
 @synthesize fliteController = _fliteController;
 @synthesize slt = _slt;
-@synthesize audioPlayer = _audioPlayer;
+//@synthesize audioPlayer = _audioPlayer;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -29,7 +30,7 @@
         lines = [[NSMutableArray alloc] init];
         URLArray = [NSMutableArray array];
         soundIsPlaying = NO;
-        playerInt = -1;
+        playerInt = 0;
     }
     return self;
 }
@@ -143,10 +144,12 @@
         _text = [_text stringByReplacingOccurrencesOfString:@"•" withString:@" "];
         _text = [_text stringByReplacingOccurrencesOfString:@"ª" withString:@" "];
         _text = [_text stringByReplacingOccurrencesOfString:@"º" withString:@" "];
+        _text = [_text stringByReplacingOccurrencesOfString:@">" withString:@" "];
+        _text = [_text stringByReplacingOccurrencesOfString:@"<" withString:@" "];
         
         NSString *pattern = @"(?ws).{1,100}\\b";
         
-        NSError *error = NULL;
+        NSError *error = nil;
         NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern: pattern options: 0 error: &error];
         
         NSArray *matches = [regex matchesInString:_text options:0 range:NSMakeRange(0, [_text length])];
@@ -154,7 +157,6 @@
         result = [NSMutableArray array];
         for (NSTextCheckingResult *match in matches) {
             [result addObject: [_text substringWithRange: match.range]];
-//            NSLog(@"%@", result);
         }
         
 //        NSLog(@"%@", stringToSpeak);
@@ -207,12 +209,12 @@
         
 //        NSString *text = @"You are one chromosome away from being a potato.";
         for (int i = 0; i < [result count]; i++) {
-            NSString *urlString = [NSString stringWithFormat:@"http://www.translate.google.com/translate_tts?ie=UTF-8&tl=en&total=%d&idx=%i&textlen=%i&q=%@", result.count, i, [result[i] length], result[i]];
+//            NSString *urlString = [NSString stringWithFormat:@"http://www.translate.google.com/translate_tts?ie=UTF-8&tl=en&total=%d&idx=%i&textlen=%i&q=%@", result.count, i, [result[i] length], result[i]];
             
         
             [URLArray addObject:[NSString stringWithFormat:@"http://www.translate.google.com/translate_tts?ie=UTF-8&tl=en&total=%d&idx=%i&textlen=%i&q=%@", result.count, i, [result[i] length], result[i]]];
             
-            NSLog(@"%@", URLArray);
+//            NSLog(@"%@", URLArray);
         }
         [self playSound];
 
@@ -236,65 +238,44 @@
 }
 
 -(void) playSound {
-    if (soundIsPlaying == NO) {
-//        for (int i = 0; i < [URLArray count]; i++) {
-            playerInt += 1;
-        
-            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-            NSString *documentsDirectory = [paths objectAtIndex:0];
-            NSString *path = [documentsDirectory stringByAppendingPathComponent:@"file.mp3"];
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *path = [documentsDirectory stringByAppendingPathComponent:@"file.mp3"];
+    
+    NSString *stringer = [NSString stringWithFormat:@"%@", URLArray[playerInt]];
+    
+    NSURL *url = [NSURL URLWithString:[stringer stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSMutableURLRequest* request = [[NSMutableURLRequest alloc] initWithURL:url] ;
+    [request setValue:@"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:2.0.1) Gecko/20100101 Firefox/4.0.1" forHTTPHeaderField:@"User-Agent"];
+    NSURLResponse* response = nil;
+    NSError* error = nil;
+    NSData* data = [NSURLConnection sendSynchronousRequest:request
+                                         returningResponse:&response
+                                                     error:&error];
+    [data writeToFile:path atomically:YES];
 
-        
-            NSString *stringer = [NSString stringWithFormat:@"%@", URLArray[playerInt]];
-            
-            NSURL *url = [NSURL URLWithString:[stringer stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-            
-            NSMutableURLRequest* request = [[NSMutableURLRequest alloc] initWithURL:url] ;
-            [request setValue:@"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:2.0.1) Gecko/20100101 Firefox/4.0.1" forHTTPHeaderField:@"User-Agent"];
-            NSURLResponse* response = nil;
-            NSData* data = [NSURLConnection sendSynchronousRequest:request
-                                                 returningResponse:&response
-                                                             error:nil];
-            [data writeToFile:path atomically:YES];
-            
-//            url2 = [NSURL fileURLWithPath:path];
-//            
-//            AudioServicesCreateSystemSoundID((__bridge CFURLRef)url2, &soundID);
-//            AudioServicesPlaySystemSound (soundID);
-//            
-//            AudioServicesAddSystemSoundCompletion ( soundID, NULL, NULL, endSound, NULL );
-        
-        
-            NSError *err;
-            if ([[NSFileManager defaultManager] fileExistsAtPath:path])
-            {
-                _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:
-                          [NSURL fileURLWithPath:path] error:&err];
-                _audioPlayer.volume = 0.4f;
-                [_audioPlayer prepareToPlay];
-                [_audioPlayer setNumberOfLoops:0];
-                [_audioPlayer play];
-            }
-//            [self checkIfSoundIsPlaying];
-            soundIsPlaying = YES;
-        
-        
-//        }
-    }
+    player = [[AVAudioPlayer alloc] initWithContentsOfURL: [NSURL fileURLWithPath:path] error:nil];
+    [player prepareToPlay];
+    [player play];
+
+    NSLog(@"%@", stringer);
 }
 
-- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)_audioPlayer successfully:(BOOL)flag
+- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
 {
     [self playSound];
+    playerInt += 1;
+    NSLog(@"%i",playerInt);
 }
 
--(void) checkIfSoundIsPlaying {
-    if ([_audioPlayer isPlaying]) {
-        
-    } else {
-        [self playSound];
-    }
-}
+//-(void) checkIfSoundIsPlaying {
+//    if ([player isPlaying]) {
+//        
+//    } else {
+//        [self playSound];
+//    }
+//}
 
 //void endSound (
 //               SystemSoundID  ssID,

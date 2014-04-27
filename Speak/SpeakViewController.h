@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
+#import <AVFoundation/AVAudioPlayer.h>
 #import "Google_TTS_BySham.h"
 
 #import <Slt/Slt.h>
@@ -35,6 +36,6 @@
 @property (strong, nonatomic) FliteController *fliteController;
 @property (strong, nonatomic) Slt *slt;
 
-@property (strong, nonatomic) AVAudioPlayer *audioPlayer;
+- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag;
 
 @end
