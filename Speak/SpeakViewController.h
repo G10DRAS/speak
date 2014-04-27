@@ -27,6 +27,7 @@
     BOOL soundIsPlaying;
     NSMutableArray *result;
     int playerInt;
+    AVAudioPlayer *player;
 }
 
 @property (strong, nonatomic) NSString *text;
@@ -35,6 +36,8 @@
 
 @property (strong, nonatomic) FliteController *fliteController;
 @property (strong, nonatomic) Slt *slt;
+
+@property (nonatomic, retain) AVAudioPlayer *player;
 
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag;
 

@@ -10,7 +10,6 @@
 #import <AudioToolbox/AudioToolbox.h>
 
 @interface SpeakViewController () {
-    AVAudioPlayer *player;
 }
 @end
 
@@ -18,7 +17,7 @@
 
 @synthesize fliteController = _fliteController;
 @synthesize slt = _slt;
-//@synthesize audioPlayer = _audioPlayer;
+@synthesize player;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -99,55 +98,62 @@
     
 	if (self.text != nil) {
         
-        _text = [_text stringByReplacingOccurrencesOfString:@"*" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"(" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@")" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"_" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"@" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"#" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"^" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"~" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"`" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"œ" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"∑" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"´" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"®" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"†" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"¥" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"¨" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"ˆ" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"ø" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"π" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"å" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"ß" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"∂" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"ƒ" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"©" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"˙" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"∆" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"˚" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"¬" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"Ω" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"≈" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"ç" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"√" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"∫" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"˜" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"µ" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"¡" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"™" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"£" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"¢" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"∞" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"§" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"¶" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"•" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"ª" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"º" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@">" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"<" withString:@" "];
+//        _text = [_text stringByReplacingOccurrencesOfString:@"*" withString:@" "];
+//        _text = [_text stringByReplacingOccurrencesOfString:@"(" withString:@" "];
+//        _text = [_text stringByReplacingOccurrencesOfString:@")" withString:@" "];
+//        _text = [_text stringByReplacingOccurrencesOfString:@"_" withString:@" "];
+//        _text = [_text stringByReplacingOccurrencesOfString:@"@" withString:@" "];
+//        _text = [_text stringByReplacingOccurrencesOfString:@"#" withString:@" "];
+//        _text = [_text stringByReplacingOccurrencesOfString:@"^" withString:@" "];
+//        _text = [_text stringByReplacingOccurrencesOfString:@"~" withString:@" "];
+//        _text = [_text stringByReplacingOccurrencesOfString:@"`" withString:@" "];
+//        _text = [_text stringByReplacingOccurrencesOfString:@"œ" withString:@" "];
+//        _text = [_text stringByReplacingOccurrencesOfString:@"∑" withString:@" "];
+//        _text = [_text stringByReplacingOccurrencesOfString:@"´" withString:@" "];
+//        _text = [_text stringByReplacingOccurrencesOfString:@"®" withString:@" "];
+//        _text = [_text stringByReplacingOccurrencesOfString:@"†" withString:@" "];
+//        _text = [_text stringByReplacingOccurrencesOfString:@"¥" withString:@" "];
+//        _text = [_text stringByReplacingOccurrencesOfString:@"¨" withString:@" "];
+//        _text = [_text stringByReplacingOccurrencesOfString:@"ˆ" withString:@" "];
+//        _text = [_text stringByReplacingOccurrencesOfString:@"ø" withString:@" "];
+//        _text = [_text stringByReplacingOccurrencesOfString:@"π" withString:@" "];
+//        _text = [_text stringByReplacingOccurrencesOfString:@"å" withString:@" "];
+//        _text = [_text stringByReplacingOccurrencesOfString:@"ß" withString:@" "];
+//        _text = [_text stringByReplacingOccurrencesOfString:@"∂" withString:@" "];
+//        _text = [_text stringByReplacingOccurrencesOfString:@"ƒ" withString:@" "];
+//        _text = [_text stringByReplacingOccurrencesOfString:@"©" withString:@" "];
+//        _text = [_text stringByReplacingOccurrencesOfString:@"˙" withString:@" "];
+//        _text = [_text stringByReplacingOccurrencesOfString:@"∆" withString:@" "];
+//        _text = [_text stringByReplacingOccurrencesOfString:@"˚" withString:@" "];
+//        _text = [_text stringByReplacingOccurrencesOfString:@"¬" withString:@" "];
+//        _text = [_text stringByReplacingOccurrencesOfString:@"Ω" withString:@" "];
+//        _text = [_text stringByReplacingOccurrencesOfString:@"≈" withString:@" "];
+//        _text = [_text stringByReplacingOccurrencesOfString:@"ç" withString:@" "];
+//        _text = [_text stringByReplacingOccurrencesOfString:@"√" withString:@" "];
+//        _text = [_text stringByReplacingOccurrencesOfString:@"∫" withString:@" "];
+//        _text = [_text stringByReplacingOccurrencesOfString:@"˜" withString:@" "];
+//        _text = [_text stringByReplacingOccurrencesOfString:@"µ" withString:@" "];
+//        _text = [_text stringByReplacingOccurrencesOfString:@"¡" withString:@" "];
+//        _text = [_text stringByReplacingOccurrencesOfString:@"™" withString:@" "];
+//        _text = [_text stringByReplacingOccurrencesOfString:@"£" withString:@" "];
+//        _text = [_text stringByReplacingOccurrencesOfString:@"¢" withString:@" "];
+//        _text = [_text stringByReplacingOccurrencesOfString:@"∞" withString:@" "];
+//        _text = [_text stringByReplacingOccurrencesOfString:@"§" withString:@" "];
+//        _text = [_text stringByReplacingOccurrencesOfString:@"¶" withString:@" "];
+//        _text = [_text stringByReplacingOccurrencesOfString:@"•" withString:@" "];
+//        _text = [_text stringByReplacingOccurrencesOfString:@"ª" withString:@" "];
+//        _text = [_text stringByReplacingOccurrencesOfString:@"º" withString:@" "];
+//        _text = [_text stringByReplacingOccurrencesOfString:@">" withString:@" "];
+//        _text = [_text stringByReplacingOccurrencesOfString:@"<" withString:@" "];
+//        _text = [_text stringByReplacingOccurrencesOfString:@"  " withString:@" "];
+//        _text = [_text stringByReplacingOccurrencesOfString:@"   " withString:@" "];
+//        _text = [_text stringByReplacingOccurrencesOfString:@"    " withString:@" "];
+//        _text = [_text stringByReplacingOccurrencesOfString:@"     " withString:@" "];
+//        _text = [_text stringByReplacingOccurrencesOfString:@"      " withString:@" "];
+//        _text = [_text stringByReplacingOccurrencesOfString:@"       " withString:@" "];
+
         
-        NSString *pattern = @"(?ws).{1,100}\\b";
+        NSString *pattern = @"(?ws).{1,90}\\b";
         
         NSError *error = nil;
         NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern: pattern options: 0 error: &error];
@@ -244,6 +250,7 @@
     NSString *path = [documentsDirectory stringByAppendingPathComponent:@"file.mp3"];
     
     NSString *stringer = [NSString stringWithFormat:@"%@", URLArray[playerInt]];
+    NSLog(@"%i",playerInt);
     
     NSURL *url = [NSURL URLWithString:[stringer stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     NSMutableURLRequest* request = [[NSMutableURLRequest alloc] initWithURL:url] ;
@@ -256,18 +263,21 @@
     [data writeToFile:path atomically:YES];
 
     player = [[AVAudioPlayer alloc] initWithContentsOfURL: [NSURL fileURLWithPath:path] error:nil];
+    player.delegate = self;
     [player prepareToPlay];
     [player play];
 
     NSLog(@"%@", stringer);
 }
 
-- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
-{
-    [self playSound];
-    playerInt += 1;
-    NSLog(@"%i",playerInt);
+- (void) audioPlayerDidFinishPlaying: (AVAudioPlayer *) player successfully: (BOOL) flag {
+    if (flag == YES) {
+        [self playSound];
+        playerInt += 1;
+        NSLog(@"%i",playerInt);
+    }
 }
+
 
 //-(void) checkIfSoundIsPlaying {
 //    if ([player isPlaying]) {
