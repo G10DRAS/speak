@@ -17,6 +17,15 @@
 @interface SpeakViewController : UIViewController <AVAudioPlayerDelegate> {
     FliteController *fliteController;
     Slt *slt;
+    NSMutableArray *lines;
+    NSString *reformattedString;
+    AVAudioPlayer *_googlePlayer;
+    SystemSoundID soundID;
+    NSURL *url2;
+    NSMutableArray *URLArray;
+    BOOL soundIsPlaying;
+    NSMutableArray *result;
+    int playerInt;
 }
 
 @property (strong, nonatomic) NSString *text;
@@ -25,5 +34,7 @@
 
 @property (strong, nonatomic) FliteController *fliteController;
 @property (strong, nonatomic) Slt *slt;
+
+@property (strong, nonatomic) AVAudioPlayer *audioPlayer;
 
 @end
