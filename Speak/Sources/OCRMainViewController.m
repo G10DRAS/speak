@@ -52,7 +52,6 @@ static NSString * const kExportFormat = @"txt";
 	imagePicker.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeImage];
 	imagePicker.allowsEditing = NO;
 	imagePicker.delegate = self;
-	
 	[self presentModalViewController:imagePicker animated:YES];
 }
 

@@ -11,6 +11,11 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AVFoundation/AVAudioPlayer.h>
 
+#define IS_IPHONE5 (([[UIScreen mainScreen] bounds].size.height-568)?NO:YES)
+#define IS_OS_5_OR_LATER    ([[[UIDevice currentDevice] systemVersion] floatValue] >= 5.0)
+#define IS_OS_6_OR_LATER    ([[[UIDevice currentDevice] systemVersion] floatValue] >= 6.0)
+#define IS_OS_7_OR_LATER    ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
+
 @interface SpeakViewController : UIViewController <AVAudioPlayerDelegate> {
     NSMutableArray *lines;
     NSString *reformattedString;
@@ -26,7 +31,7 @@
 
 @property (strong, nonatomic) NSString *text;
 
-@property (nonatomic, retain) AVAudioPlayer *player;
+@property (nonatomic, strong) AVAudioPlayer *player;
 
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag;
 

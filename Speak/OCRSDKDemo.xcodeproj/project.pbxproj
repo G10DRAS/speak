@@ -23,8 +23,6 @@
 		38191AE01905D9D700730C24 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38191ADF1905D9D700730C24 /* AVFoundation.framework */; };
 		38739D5D190B3613009AF508 /* AcousticModelEnglish.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 38739D59190B3613009AF508 /* AcousticModelEnglish.bundle */; };
 		38739D5E190B3613009AF508 /* AcousticModelSpanish.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 38739D5A190B3613009AF508 /* AcousticModelSpanish.bundle */; };
-		38739D5F190B3613009AF508 /* OpenEars.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38739D5B190B3613009AF508 /* OpenEars.framework */; };
-		38739D60190B3613009AF508 /* Slt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38739D5C190B3613009AF508 /* Slt.framework */; };
 		38739D62190B36B6009AF508 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38739D61190B36B6009AF508 /* AudioToolbox.framework */; };
 		49C023F0174B89A2000DD375 /* OCRMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C023EE174B89A2000DD375 /* OCRMainViewController.m */; };
 		49C023F1174B89A2000DD375 /* MainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49C023EF174B89A2000DD375 /* MainView.xib */; };
@@ -80,10 +78,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				38739D62190B36B6009AF508 /* AudioToolbox.framework in Frameworks */,
-				38739D5F190B3613009AF508 /* OpenEars.framework in Frameworks */,
 				38191AE01905D9D700730C24 /* AVFoundation.framework in Frameworks */,
 				0A26A3E21741746F004DD086 /* UIKit.framework in Frameworks */,
-				38739D60190B3613009AF508 /* Slt.framework in Frameworks */,
 				0A26A3E41741746F004DD086 /* Foundation.framework in Frameworks */,
 				0A26A3E61741746F004DD086 /* CoreGraphics.framework in Frameworks */,
 				225EE2E675754B54B1B273BE /* libPods.a in Frameworks */,

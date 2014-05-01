@@ -6,6 +6,15 @@
 //  Copyright (c) 2014 ABBYY. All rights reserved.
 //
 
+/*
+ Fixes Needed:
+ 
+ 1.) Make the speech not repeat (done)
+ 2.) It says the first sentence twice (done)
+ 
+ 
+ */
+
 #import "SpeakViewController.h"
 #import <AudioToolbox/AudioToolbox.h>
 
@@ -23,7 +32,6 @@
         lines = [[NSMutableArray alloc] init];
         URLArray = [NSMutableArray array];
         soundIsPlaying = NO;
-        playerInt = 0;
     }
     return self;
 }
@@ -33,6 +41,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self configureView];
+    playerInt = 0;
 }
 
 - (void)didReceiveMemoryWarning
@@ -51,8 +60,8 @@
         
         // STEP ONE: Make Sure None of These Characters Are Read
         _text = [_text stringByReplacingOccurrencesOfString:@"*" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"(" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@")" withString:@" "];
+//        _text = [_text stringByReplacingOccurrencesOfString:@"(" withString:@" "];
+//        _text = [_text stringByReplacingOccurrencesOfString:@")" withString:@" "];
         _text = [_text stringByReplacingOccurrencesOfString:@"_" withString:@" "];
         _text = [_text stringByReplacingOccurrencesOfString:@"@" withString:@" "];
         _text = [_text stringByReplacingOccurrencesOfString:@"#" withString:@" "];
@@ -104,7 +113,7 @@
         _text = [_text stringByReplacingOccurrencesOfString:@"      " withString:@" "];
         _text = [_text stringByReplacingOccurrencesOfString:@"       " withString:@" "];
 
-        // STEP TWO: Make Strings Shorter than 90 Charactaers
+        // STEP TWO: Make Strings Shorter than 99 Charactaers
         NSString *pattern = @"(?ws).{1,90}\\b";
         NSError *error = nil;
         NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern: pattern options: 0 error: &error];
@@ -117,24 +126,33 @@
         // STEP THREE: Generate the Different Links
         for (int i = 0; i < [result count]; i++) {
             [URLArray addObject:[NSString stringWithFormat:@"http://www.translate.google.com/translate_tts?ie=UTF-8&tl=en&total=%d&idx=%i&textlen=%i&q=%@", result.count, i, [result[i] length], result[i]]];
+            NSLog(@"%i",i);
         }
         
         // STEP FOUR: Play the Sound
-        [self playSound];
         
         // Only for iOS 7
-        //        AVSpeechUtterance *utterance = [AVSpeechUtterance
-        //                                        speechUtteranceWithString:stringToSpeak];
-        //        AVSpeechSynthesizer *synth = [[AVSpeechSynthesizer alloc] init];
-        //        [synth speakUtterance:utterance];
+//        if IS_OS_7_OR_LATER {
+//        AVSpeechUtterance *utterance = [AVSpeechUtterance
+//                                        speechUtteranceWithString:_text];
+//        AVSpeechSynthesizer *synth = [[AVSpeechSynthesizer alloc] init];
+//        [synth speakUtterance:utterance];
+//        } else {
+//        }
+        [self playSound];
 	}
 }
 
 -(void) playSound {
     
+    [[AVAudioSession sharedInstance] setActive:YES error:nil];
+
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *path = [documentsDirectory stringByAppendingPathComponent:@"file.mp3"];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
+        NSLog(@"YES");
+    }
     
     NSString *stringer = [NSString stringWithFormat:@"%@", URLArray[playerInt]];
     NSLog(@"%i",playerInt);
@@ -157,11 +175,15 @@
     NSLog(@"%@", stringer);
 }
 
-- (void) audioPlayerDidFinishPlaying: (AVAudioPlayer *) player successfully: (BOOL) flag {
+- (void) audioPlayerDidFinishPlaying: (AVAudioPlayer *) players successfully: (BOOL) flag {
     if (flag == YES) {
-        [self playSound];
         playerInt += 1;
+        [self playSound];
         NSLog(@"%i",playerInt);
+        
+        if ((playerInt + 1) > result.count) {
+            [player stop];
+        }
     }
 }
 
