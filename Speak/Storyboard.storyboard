@@ -13,51 +13,20 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="BPv-0H-xdi" kind="relationship" relationship="rootViewController" id="Cob-IG-3ua"/>
+                        <segue destination="UFX-LC-Bqi" kind="relationship" relationship="rootViewController" id="aDF-0a-2AT"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bfZ-0T-8BE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-209" y="-402"/>
         </scene>
-        <!--First View Controller - Start-->
-        <scene sceneID="gQb-sC-NIP">
-            <objects>
-                <viewController id="BPv-0H-xdi" customClass="FirstViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="tN3-Ky-CVp"/>
-                        <viewControllerLayoutGuide type="bottom" id="pxm-Hg-Kgp"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="PWq-To-BSs">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QTi-KH-wrE">
-                                <rect key="frame" x="98" y="286" width="124" height="70"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Start!">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="UFX-LC-Bqi" kind="push" id="zlh-XM-aSE"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Start" id="HfA-7o-NcV"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="taX-4y-lQL" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="311" y="-404"/>
-        </scene>
-        <!--Main View Controller - Photo-->
+        <!--Main View Controller-->
         <scene sceneID="KA5-Ck-XXb">
             <objects>
                 <viewController id="UFX-LC-Bqi" customClass="OCRMainViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="xQl-Ey-eWe"/>
-                        <viewControllerLayoutGuide type="bottom" id="bmp-OQ-QVY"/>
+                        <viewControllerLayoutGuide type="top" id="nYD-aU-jYZ"/>
+                        <viewControllerLayoutGuide type="bottom" id="kik-md-prH"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="qDj-Zb-Fc8">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -68,30 +37,57 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="speak.png" translatesAutoresizingMaskIntoConstraints="NO" id="9yi-S0-LcZ">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8sp-Nr-LQn">
+                                <rect key="frame" x="80" y="197" width="161" height="161"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="photo.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="takePhoto:" destination="UFX-LC-Bqi" eventType="touchUpInside" id="1lu-sk-iC0"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NnN-Yc-pCy">
+                                <rect key="frame" x="80" y="379" width="161" height="161"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="talk.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="recognizePhoto:" destination="UFX-LC-Bqi" eventType="touchUpInside" id="Wwm-hl-CAl"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="ygq-sA-fEe">
+                                <rect key="frame" x="30" y="49" width="260" height="99"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Photo" id="222-5i-oHe">
-                        <barButtonItem key="leftBarButtonItem" systemItem="camera" id="c12-lB-ies">
-                            <connections>
-                                <action selector="takePhoto:" destination="UFX-LC-Bqi" id="PTE-sa-vFi"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="play" id="d2g-ne-clL">
-                            <connections>
-                                <action selector="recognizePhoto:" destination="UFX-LC-Bqi" id="5wG-Xx-h5j"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="222-5i-oHe"/>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <size key="freeformSize" width="320" height="568"/>
                     <connections>
                         <outlet property="imageView" destination="Itf-5L-JWS" id="rnb-UT-YXA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kc1-5A-FKr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="311" y="353"/>
+            <point key="canvasLocation" x="302" y="-402"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="logo.png" width="261" height="100"/>
+        <image name="photo.png" width="250" height="250"/>
+        <image name="speak.png" width="320" height="480"/>
+        <image name="talk.png" width="250" height="250"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

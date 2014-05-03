@@ -11,7 +11,8 @@
  
  1.) Make the speech not repeat (done)
  2.) It says the first sentence twice (done)
- 
+ 3.) Better UI
+ 4.) Lesser duration of pauses
  
  */
 

@@ -20,7 +20,9 @@ static NSString * const kExportFormat = @"txt";
 
 - (void)viewDidLoad
 {
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
     [super viewDidLoad];
+
 //	
 //	UIBarButtonItem *takePhotoButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Take Photo", @"Take Photo")
 //																		style:UIBarButtonItemStyleBordered
