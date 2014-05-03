@@ -7,7 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Tesseract.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController<UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIAlertViewDelegate> {
+    Tesseract* tesseract;
+}
+
+
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+
+@property (strong, nonatomic) UIAlertView *alertView;
+
+
+- (IBAction)takePhoto:(id)sender;
+- (IBAction)recognizePhoto:(id)sender;
+
 
 @end

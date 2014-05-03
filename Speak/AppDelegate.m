@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "FirstViewController.h"
 #import "OCRMainViewController.h"
 
 @implementation AppDelegate

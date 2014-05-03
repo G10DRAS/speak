@@ -20,10 +20,10 @@
             </objects>
             <point key="canvasLocation" x="-209" y="-402"/>
         </scene>
-        <!--Main View Controller-->
+        <!--View Controller-->
         <scene sceneID="KA5-Ck-XXb">
             <objects>
-                <viewController id="UFX-LC-Bqi" customClass="OCRMainViewController" sceneMemberID="viewController">
+                <viewController id="UFX-LC-Bqi" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="nYD-aU-jYZ"/>
                         <viewControllerLayoutGuide type="bottom" id="kik-md-prH"/>
