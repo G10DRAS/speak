@@ -10,12 +10,8 @@
 		0A26A3E21741746F004DD086 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A26A3E11741746F004DD086 /* UIKit.framework */; };
 		0A26A3E41741746F004DD086 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A26A3E31741746F004DD086 /* Foundation.framework */; };
 		0A26A3E61741746F004DD086 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A26A3E51741746F004DD086 /* CoreGraphics.framework */; };
-		0A26A3E91741746F004DD086 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 0A26A3E81741746F004DD086 /* Podfile */; };
 		0A26A3F31741746F004DD086 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0A26A3F11741746F004DD086 /* InfoPlist.strings */; };
-		0A26A3F51741746F004DD086 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A26A3F41741746F004DD086 /* main.m */; };
 		0A26A42117492A34004DD086 /* sample.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0A26A41F17492A34004DD086 /* sample.jpg */; };
-		0A26A42717492B23004DD086 /* OCRTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A26A42617492B23004DD086 /* OCRTextViewController.m */; };
-		225EE2E675754B54B1B273BE /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 45F60683E5D44627B5420859 /* libPods.a */; };
 		38191AD31905AC8800730C24 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 38191AD21905AC8800730C24 /* AppDelegate.m */; };
 		38191AD91905AEE700730C24 /* SpeakViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38191AD81905AEE700730C24 /* SpeakViewController.m */; };
 		38191ADB1905AF0C00730C24 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38191ADA1905AF0C00730C24 /* Storyboard.storyboard */; };
@@ -40,12 +36,10 @@
 		3872E9B6191499050094E781 /* libtesseract_all.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3872E9AB191499050094E781 /* libtesseract_all.a */; };
 		3872E9B7191499050094E781 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 3872E9AC191499050094E781 /* README.md */; };
 		3872E9B9191499150094E781 /* tessdata in Resources */ = {isa = PBXBuildFile; fileRef = 3872E9B8191499150094E781 /* tessdata */; };
+		3872E9BD191581DF0094E781 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3872E9BC191581DF0094E781 /* MobileCoreServices.framework */; };
 		38739D5D190B3613009AF508 /* AcousticModelEnglish.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 38739D59190B3613009AF508 /* AcousticModelEnglish.bundle */; };
-		38739D5E190B3613009AF508 /* AcousticModelSpanish.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 38739D5A190B3613009AF508 /* AcousticModelSpanish.bundle */; };
 		38739D62190B36B6009AF508 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38739D61190B36B6009AF508 /* AudioToolbox.framework */; };
-		49C023F0174B89A2000DD375 /* OCRMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C023EE174B89A2000DD375 /* OCRMainViewController.m */; };
 		49C023F1174B89A2000DD375 /* MainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49C023EF174B89A2000DD375 /* MainView.xib */; };
-		49CF5754174CE51500876D14 /* OCRDemoClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 49CF5753174CE51500876D14 /* OCRDemoClient.m */; };
 		49CF5756174CF50E00876D14 /* TextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49CF5755174CF50E00876D14 /* TextView.xib */; };
 		49CF575D174D04D300876D14 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A26A3FD1741746F004DD086 /* Default-568h@2x.png */; };
 		49CF575E174D04DD00876D14 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A26A3FB1741746F004DD086 /* Default@2x.png */; };
@@ -57,17 +51,12 @@
 		0A26A3E11741746F004DD086 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0A26A3E31741746F004DD086 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0A26A3E51741746F004DD086 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		0A26A3E81741746F004DD086 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		0A26A3EB1741746F004DD086 /* OCRSDKDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OCRSDKDemo-Prefix.pch"; sourceTree = "<group>"; };
 		0A26A3F21741746F004DD086 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		0A26A3F41741746F004DD086 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0A26A3F91741746F004DD086 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		0A26A3FB1741746F004DD086 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		0A26A3FD1741746F004DD086 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		0A26A40817417A1E004DD086 /* OCRSDKDemo-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "OCRSDKDemo-Info.plist"; path = "Resources/OCRSDKDemo-Info.plist"; sourceTree = SOURCE_ROOT; };
 		0A26A41F17492A34004DD086 /* sample.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sample.jpg; sourceTree = "<group>"; };
-		0A26A42517492B23004DD086 /* OCRTextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCRTextViewController.h; sourceTree = "<group>"; };
-		0A26A42617492B23004DD086 /* OCRTextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCRTextViewController.m; sourceTree = "<group>"; };
 		38191AD11905AC8800730C24 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		38191AD21905AC8800730C24 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		38191AD71905AEE700730C24 /* SpeakViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeakViewController.h; sourceTree = "<group>"; };
@@ -341,19 +330,12 @@
 		3872E9AB191499050094E781 /* libtesseract_all.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libtesseract_all.a; sourceTree = "<group>"; };
 		3872E9AC191499050094E781 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		3872E9B8191499150094E781 /* tessdata */ = {isa = PBXFileReference; lastKnownFileType = folder; path = tessdata; sourceTree = "<group>"; };
+		3872E9BB191581520094E781 /* OCRSDKDemo-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OCRSDKDemo-Prefix.pch"; sourceTree = "<group>"; };
+		3872E9BC191581DF0094E781 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		38739D59190B3613009AF508 /* AcousticModelEnglish.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AcousticModelEnglish.bundle; sourceTree = "<group>"; };
-		38739D5A190B3613009AF508 /* AcousticModelSpanish.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AcousticModelSpanish.bundle; sourceTree = "<group>"; };
-		38739D5B190B3613009AF508 /* OpenEars.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OpenEars.framework; sourceTree = "<group>"; };
-		38739D5C190B3613009AF508 /* Slt.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Slt.framework; sourceTree = "<group>"; };
 		38739D61190B36B6009AF508 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		45F60683E5D44627B5420859 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		49C023ED174B89A2000DD375 /* OCRMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCRMainViewController.h; sourceTree = "<group>"; };
-		49C023EE174B89A2000DD375 /* OCRMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCRMainViewController.m; sourceTree = "<group>"; };
 		49C023EF174B89A2000DD375 /* MainView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainView.xib; sourceTree = "<group>"; };
-		49CF5752174CE51500876D14 /* OCRDemoClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCRDemoClient.h; sourceTree = "<group>"; };
-		49CF5753174CE51500876D14 /* OCRDemoClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCRDemoClient.m; sourceTree = "<group>"; };
 		49CF5755174CF50E00876D14 /* TextView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextView.xib; sourceTree = "<group>"; };
-		C85F2FC350964F7F9AC14239 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -361,6 +343,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3872E9BD191581DF0094E781 /* MobileCoreServices.framework in Frameworks */,
 				3872E9B1191499050094E781 /* liblept.a in Frameworks */,
 				38739D62190B36B6009AF508 /* AudioToolbox.framework in Frameworks */,
 				3872E9B6191499050094E781 /* libtesseract_all.a in Frameworks */,
@@ -368,7 +351,6 @@
 				0A26A3E21741746F004DD086 /* UIKit.framework in Frameworks */,
 				0A26A3E41741746F004DD086 /* Foundation.framework in Frameworks */,
 				0A26A3E61741746F004DD086 /* CoreGraphics.framework in Frameworks */,
-				225EE2E675754B54B1B273BE /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -393,8 +375,6 @@
 				0A26A40B17417A2D004DD086 /* Resources */,
 				0A26A3E01741746F004DD086 /* Frameworks */,
 				0A26A3DF1741746F004DD086 /* Products */,
-				0A26A3E81741746F004DD086 /* Podfile */,
-				C85F2FC350964F7F9AC14239 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -409,13 +389,13 @@
 		0A26A3E01741746F004DD086 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3872E9BC191581DF0094E781 /* MobileCoreServices.framework */,
 				38739D61190B36B6009AF508 /* AudioToolbox.framework */,
 				38739D58190B3613009AF508 /* Framework */,
 				38191ADF1905D9D700730C24 /* AVFoundation.framework */,
 				0A26A3E11741746F004DD086 /* UIKit.framework */,
 				0A26A3E31741746F004DD086 /* Foundation.framework */,
 				0A26A3E51741746F004DD086 /* CoreGraphics.framework */,
-				45F60683E5D44627B5420859 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -423,14 +403,7 @@
 		0A26A40A17417A24004DD086 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				49CF5752174CE51500876D14 /* OCRDemoClient.h */,
-				49CF5753174CE51500876D14 /* OCRDemoClient.m */,
-				49C023ED174B89A2000DD375 /* OCRMainViewController.h */,
-				49C023EE174B89A2000DD375 /* OCRMainViewController.m */,
-				0A26A42517492B23004DD086 /* OCRTextViewController.h */,
-				0A26A42617492B23004DD086 /* OCRTextViewController.m */,
-				0A26A3EB1741746F004DD086 /* OCRSDKDemo-Prefix.pch */,
-				0A26A3F41741746F004DD086 /* main.m */,
+				3872E9BB191581520094E781 /* OCRSDKDemo-Prefix.pch */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -819,9 +792,6 @@
 			isa = PBXGroup;
 			children = (
 				38739D59190B3613009AF508 /* AcousticModelEnglish.bundle */,
-				38739D5A190B3613009AF508 /* AcousticModelSpanish.bundle */,
-				38739D5B190B3613009AF508 /* OpenEars.framework */,
-				38739D5C190B3613009AF508 /* Slt.framework */,
 			);
 			path = Framework;
 			sourceTree = "<group>";
@@ -833,11 +803,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0A26A4011741746F004DD086 /* Build configuration list for PBXNativeTarget "OCRSDKDemo" */;
 			buildPhases = (
-				3BCAC312A1D9469A81A94C41 /* Check Pods Manifest.lock */,
 				0A26A3DA1741746F004DD086 /* Sources */,
 				0A26A3DB1741746F004DD086 /* Frameworks */,
 				0A26A3DC1741746F004DD086 /* Resources */,
-				1546A1CE03AC484CBFAE1022 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -881,9 +849,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3872E6F9191208240094E781 /* talk.png in Resources */,
-				38739D5E190B3613009AF508 /* AcousticModelSpanish.bundle in Resources */,
 				3872E9B9191499150094E781 /* tessdata in Resources */,
-				0A26A3E91741746F004DD086 /* Podfile in Resources */,
 				3872E9AE191499050094E781 /* LICENSE in Resources */,
 				3872E9B7191499050094E781 /* README.md in Resources */,
 				3872E6F7191208240094E781 /* photo.png in Resources */,
@@ -912,50 +878,15 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		1546A1CE03AC484CBFAE1022 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
-		};
-		3BCAC312A1D9469A81A94C41 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		0A26A3DA1741746F004DD086 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				38191AD91905AEE700730C24 /* SpeakViewController.m in Sources */,
-				0A26A3F51741746F004DD086 /* main.m in Sources */,
 				3872E9AD191499050094E781 /* Tesseract.mm in Sources */,
 				3872E89F1914818E0094E781 /* ViewController.m in Sources */,
 				38191AD31905AC8800730C24 /* AppDelegate.m in Sources */,
-				0A26A42717492B23004DD086 /* OCRTextViewController.m in Sources */,
-				49C023F0174B89A2000DD375 /* OCRMainViewController.m in Sources */,
-				49CF5754174CE51500876D14 /* OCRDemoClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1036,7 +967,6 @@
 		};
 		0A26A4021741746F004DD086 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C85F2FC350964F7F9AC14239 /* Pods.xcconfig */;
 			buildSettings = {
 				ARCHS = armv7;
 				CLANG_CXX_LIBRARY = "compiler-default";
@@ -1062,7 +992,6 @@
 		};
 		0A26A4031741746F004DD086 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C85F2FC350964F7F9AC14239 /* Pods.xcconfig */;
 			buildSettings = {
 				ARCHS = armv7;
 				CLANG_CXX_LIBRARY = "compiler-default";
