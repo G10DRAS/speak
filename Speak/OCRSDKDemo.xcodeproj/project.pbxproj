@@ -14,7 +14,6 @@
 		0A26A3F31741746F004DD086 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0A26A3F11741746F004DD086 /* InfoPlist.strings */; };
 		0A26A3F51741746F004DD086 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A26A3F41741746F004DD086 /* main.m */; };
 		0A26A42117492A34004DD086 /* sample.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0A26A41F17492A34004DD086 /* sample.jpg */; };
-		0A26A42717492B23004DD086 /* OCRTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A26A42617492B23004DD086 /* OCRTextViewController.m */; };
 		225EE2E675754B54B1B273BE /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 45F60683E5D44627B5420859 /* libPods.a */; };
 		38191AD31905AC8800730C24 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 38191AD21905AC8800730C24 /* AppDelegate.m */; };
 		38191AD91905AEE700730C24 /* SpeakViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38191AD81905AEE700730C24 /* SpeakViewController.m */; };
@@ -43,9 +42,7 @@
 		38739D5D190B3613009AF508 /* AcousticModelEnglish.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 38739D59190B3613009AF508 /* AcousticModelEnglish.bundle */; };
 		38739D5E190B3613009AF508 /* AcousticModelSpanish.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 38739D5A190B3613009AF508 /* AcousticModelSpanish.bundle */; };
 		38739D62190B36B6009AF508 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38739D61190B36B6009AF508 /* AudioToolbox.framework */; };
-		49C023F0174B89A2000DD375 /* OCRMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C023EE174B89A2000DD375 /* OCRMainViewController.m */; };
 		49C023F1174B89A2000DD375 /* MainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49C023EF174B89A2000DD375 /* MainView.xib */; };
-		49CF5754174CE51500876D14 /* OCRDemoClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 49CF5753174CE51500876D14 /* OCRDemoClient.m */; };
 		49CF5756174CF50E00876D14 /* TextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49CF5755174CF50E00876D14 /* TextView.xib */; };
 		49CF575D174D04D300876D14 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A26A3FD1741746F004DD086 /* Default-568h@2x.png */; };
 		49CF575E174D04DD00876D14 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A26A3FB1741746F004DD086 /* Default@2x.png */; };
@@ -66,8 +63,6 @@
 		0A26A3FD1741746F004DD086 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		0A26A40817417A1E004DD086 /* OCRSDKDemo-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "OCRSDKDemo-Info.plist"; path = "Resources/OCRSDKDemo-Info.plist"; sourceTree = SOURCE_ROOT; };
 		0A26A41F17492A34004DD086 /* sample.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sample.jpg; sourceTree = "<group>"; };
-		0A26A42517492B23004DD086 /* OCRTextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCRTextViewController.h; sourceTree = "<group>"; };
-		0A26A42617492B23004DD086 /* OCRTextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCRTextViewController.m; sourceTree = "<group>"; };
 		38191AD11905AC8800730C24 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		38191AD21905AC8800730C24 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		38191AD71905AEE700730C24 /* SpeakViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeakViewController.h; sourceTree = "<group>"; };
@@ -347,11 +342,7 @@
 		38739D5C190B3613009AF508 /* Slt.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Slt.framework; sourceTree = "<group>"; };
 		38739D61190B36B6009AF508 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		45F60683E5D44627B5420859 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		49C023ED174B89A2000DD375 /* OCRMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCRMainViewController.h; sourceTree = "<group>"; };
-		49C023EE174B89A2000DD375 /* OCRMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCRMainViewController.m; sourceTree = "<group>"; };
 		49C023EF174B89A2000DD375 /* MainView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainView.xib; sourceTree = "<group>"; };
-		49CF5752174CE51500876D14 /* OCRDemoClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCRDemoClient.h; sourceTree = "<group>"; };
-		49CF5753174CE51500876D14 /* OCRDemoClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCRDemoClient.m; sourceTree = "<group>"; };
 		49CF5755174CF50E00876D14 /* TextView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextView.xib; sourceTree = "<group>"; };
 		C85F2FC350964F7F9AC14239 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -423,12 +414,6 @@
 		0A26A40A17417A24004DD086 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				49CF5752174CE51500876D14 /* OCRDemoClient.h */,
-				49CF5753174CE51500876D14 /* OCRDemoClient.m */,
-				49C023ED174B89A2000DD375 /* OCRMainViewController.h */,
-				49C023EE174B89A2000DD375 /* OCRMainViewController.m */,
-				0A26A42517492B23004DD086 /* OCRTextViewController.h */,
-				0A26A42617492B23004DD086 /* OCRTextViewController.m */,
 				0A26A3EB1741746F004DD086 /* OCRSDKDemo-Prefix.pch */,
 				0A26A3F41741746F004DD086 /* main.m */,
 			);
@@ -953,9 +938,6 @@
 				3872E9AD191499050094E781 /* Tesseract.mm in Sources */,
 				3872E89F1914818E0094E781 /* ViewController.m in Sources */,
 				38191AD31905AC8800730C24 /* AppDelegate.m in Sources */,
-				0A26A42717492B23004DD086 /* OCRTextViewController.m in Sources */,
-				49C023F0174B89A2000DD375 /* OCRMainViewController.m in Sources */,
-				49CF5754174CE51500876D14 /* OCRDemoClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
