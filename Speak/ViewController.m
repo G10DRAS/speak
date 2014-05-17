@@ -49,9 +49,9 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 }
 - (IBAction)recognizePhoto:(id)sender {
     tesseract = [[Tesseract alloc] initWithDataPath:@"tessdata" language:@"eng"];
-    [tesseract setVariableValue:@"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz@.:/()&-,_+!?" forKey:@"tessedit_char_whitelist"];
-    [self toGrayscale:self.imageView.image];
+//    [tesseract setVariableValue:@"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz@.:/()&-,_+!?" forKey:@"tessedit_char_whitelist"];
     UIImage *changedImage = scaleAndRotateImage(self.imageView.image, maxImagePixelsAmount);
+    [self toGrayscale:changedImage];
     
     NSData *imageData = UIImagePNGRepresentation(changedImage);
     [tesseract setImage:[UIImage imageWithData:imageData]];
