@@ -5,7 +5,7 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>26E99F6F-4EF6-4992-9915-88A65FF7A04F</string>
+	<string>B4D1A7EE-4976-447A-A3F6-8BE0C8321624</string>
 	<key>IDESourceControlProjectName</key>
 	<string>OCRSDKDemo</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
@@ -14,11 +14,11 @@
 		<string>https://github.com/shalins/speak.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Speak/OCRSDKDemo.xcworkspace</string>
+	<string>Speak/OCRSDKDemo.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>994584A0-18DB-4B5E-8563-6955B974D74D</key>
-		<string>../..</string>
+		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/shalins/speak.git</string>

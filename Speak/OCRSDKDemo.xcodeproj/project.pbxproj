@@ -10,15 +10,14 @@
 		0A26A3E21741746F004DD086 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A26A3E11741746F004DD086 /* UIKit.framework */; };
 		0A26A3E41741746F004DD086 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A26A3E31741746F004DD086 /* Foundation.framework */; };
 		0A26A3E61741746F004DD086 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A26A3E51741746F004DD086 /* CoreGraphics.framework */; };
-		0A26A3E91741746F004DD086 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 0A26A3E81741746F004DD086 /* Podfile */; };
 		0A26A3F31741746F004DD086 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0A26A3F11741746F004DD086 /* InfoPlist.strings */; };
 		0A26A3F51741746F004DD086 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A26A3F41741746F004DD086 /* main.m */; };
 		0A26A42117492A34004DD086 /* sample.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0A26A41F17492A34004DD086 /* sample.jpg */; };
-		225EE2E675754B54B1B273BE /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 45F60683E5D44627B5420859 /* libPods.a */; };
 		38191AD31905AC8800730C24 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 38191AD21905AC8800730C24 /* AppDelegate.m */; };
 		38191AD91905AEE700730C24 /* SpeakViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38191AD81905AEE700730C24 /* SpeakViewController.m */; };
 		38191ADB1905AF0C00730C24 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38191ADA1905AF0C00730C24 /* Storyboard.storyboard */; };
 		38191AE01905D9D700730C24 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38191ADF1905D9D700730C24 /* AVFoundation.framework */; };
+		3819A97319281D2C009F02E0 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3819A97219281D2C009F02E0 /* MobileCoreServices.framework */; };
 		3872E6F0191205EF0094E781 /* speak-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3872E6ED191205EF0094E781 /* speak-568h@2x.png */; };
 		3872E6F1191205EF0094E781 /* speak.png in Resources */ = {isa = PBXBuildFile; fileRef = 3872E6EE191205EF0094E781 /* speak.png */; };
 		3872E6F2191205EF0094E781 /* speak@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3872E6EF191205EF0094E781 /* speak@2x.png */; };
@@ -54,7 +53,6 @@
 		0A26A3E11741746F004DD086 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0A26A3E31741746F004DD086 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0A26A3E51741746F004DD086 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		0A26A3E81741746F004DD086 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		0A26A3EB1741746F004DD086 /* OCRSDKDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OCRSDKDemo-Prefix.pch"; sourceTree = "<group>"; };
 		0A26A3F21741746F004DD086 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0A26A3F41741746F004DD086 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -69,6 +67,7 @@
 		38191AD81905AEE700730C24 /* SpeakViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpeakViewController.m; sourceTree = "<group>"; };
 		38191ADA1905AF0C00730C24 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		38191ADF1905D9D700730C24 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		3819A97219281D2C009F02E0 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		3872E6ED191205EF0094E781 /* speak-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "speak-568h@2x.png"; sourceTree = "<group>"; };
 		3872E6EE191205EF0094E781 /* speak.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = speak.png; sourceTree = "<group>"; };
 		3872E6EF191205EF0094E781 /* speak@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "speak@2x.png"; sourceTree = "<group>"; };
@@ -344,7 +343,6 @@
 		45F60683E5D44627B5420859 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		49C023EF174B89A2000DD375 /* MainView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainView.xib; sourceTree = "<group>"; };
 		49CF5755174CF50E00876D14 /* TextView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextView.xib; sourceTree = "<group>"; };
-		C85F2FC350964F7F9AC14239 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -352,6 +350,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3819A97319281D2C009F02E0 /* MobileCoreServices.framework in Frameworks */,
 				3872E9B1191499050094E781 /* liblept.a in Frameworks */,
 				38739D62190B36B6009AF508 /* AudioToolbox.framework in Frameworks */,
 				3872E9B6191499050094E781 /* libtesseract_all.a in Frameworks */,
@@ -359,7 +358,6 @@
 				0A26A3E21741746F004DD086 /* UIKit.framework in Frameworks */,
 				0A26A3E41741746F004DD086 /* Foundation.framework in Frameworks */,
 				0A26A3E61741746F004DD086 /* CoreGraphics.framework in Frameworks */,
-				225EE2E675754B54B1B273BE /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -384,8 +382,6 @@
 				0A26A40B17417A2D004DD086 /* Resources */,
 				0A26A3E01741746F004DD086 /* Frameworks */,
 				0A26A3DF1741746F004DD086 /* Products */,
-				0A26A3E81741746F004DD086 /* Podfile */,
-				C85F2FC350964F7F9AC14239 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -400,6 +396,7 @@
 		0A26A3E01741746F004DD086 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3819A97219281D2C009F02E0 /* MobileCoreServices.framework */,
 				38739D61190B36B6009AF508 /* AudioToolbox.framework */,
 				38739D58190B3613009AF508 /* Framework */,
 				38191ADF1905D9D700730C24 /* AVFoundation.framework */,
@@ -818,11 +815,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0A26A4011741746F004DD086 /* Build configuration list for PBXNativeTarget "OCRSDKDemo" */;
 			buildPhases = (
-				3BCAC312A1D9469A81A94C41 /* Check Pods Manifest.lock */,
 				0A26A3DA1741746F004DD086 /* Sources */,
 				0A26A3DB1741746F004DD086 /* Frameworks */,
 				0A26A3DC1741746F004DD086 /* Resources */,
-				1546A1CE03AC484CBFAE1022 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -868,7 +863,6 @@
 				3872E6F9191208240094E781 /* talk.png in Resources */,
 				38739D5E190B3613009AF508 /* AcousticModelSpanish.bundle in Resources */,
 				3872E9B9191499150094E781 /* tessdata in Resources */,
-				0A26A3E91741746F004DD086 /* Podfile in Resources */,
 				3872E9AE191499050094E781 /* LICENSE in Resources */,
 				3872E9B7191499050094E781 /* README.md in Resources */,
 				3872E6F7191208240094E781 /* photo.png in Resources */,
@@ -896,37 +890,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		1546A1CE03AC484CBFAE1022 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
-		};
-		3BCAC312A1D9469A81A94C41 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0A26A3DA1741746F004DD086 /* Sources */ = {
@@ -1018,7 +981,6 @@
 		};
 		0A26A4021741746F004DD086 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C85F2FC350964F7F9AC14239 /* Pods.xcconfig */;
 			buildSettings = {
 				ARCHS = armv7;
 				CLANG_CXX_LIBRARY = "compiler-default";
@@ -1044,7 +1006,6 @@
 		};
 		0A26A4031741746F004DD086 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C85F2FC350964F7F9AC14239 /* Pods.xcconfig */;
 			buildSettings = {
 				ARCHS = armv7;
 				CLANG_CXX_LIBRARY = "compiler-default";
