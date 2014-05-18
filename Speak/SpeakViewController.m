@@ -43,6 +43,7 @@
     // Do any additional setup after loading the view.
     [self configureView];
     playerInt = 0;
+    self.speakText.text = _text;
 }
 
 - (void)didReceiveMemoryWarning
