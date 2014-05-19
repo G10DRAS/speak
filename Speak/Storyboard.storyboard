@@ -32,6 +32,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="speak.png" translatesAutoresizingMaskIntoConstraints="NO" id="Nnt-nc-adV">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                             <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Itf-5L-JWS">
                                 <rect key="frame" x="0.0" y="426" width="320" height="142"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -113,6 +117,7 @@
     <resources>
         <image name="logo.png" width="261" height="100"/>
         <image name="photo.png" width="250" height="250"/>
+        <image name="speak.png" width="320" height="480"/>
         <image name="talk.png" width="250" height="250"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
