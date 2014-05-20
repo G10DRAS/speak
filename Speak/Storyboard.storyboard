@@ -42,7 +42,7 @@
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8sp-Nr-LQn">
-                                <rect key="frame" x="89" y="168" width="142" height="142"/>
+                                <rect key="frame" x="89" y="176" width="142" height="142"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="photo.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -52,13 +52,14 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NnN-Yc-pCy">
-                                <rect key="frame" x="89" y="326" width="142" height="142"/>
+                                <rect key="frame" x="89" y="341" width="142" height="142"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="talk.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="recognizePhoto:" destination="UFX-LC-Bqi" eventType="touchUpInside" id="Wwm-hl-CAl"/>
+                                    <segue destination="M4K-hr-fcK" kind="modal" modalTransitionStyle="coverVertical" id="KeF-UD-2Vo"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="ygq-sA-fEe">
@@ -84,6 +85,7 @@
         <!--Speak View Controller-->
         <scene sceneID="hDh-fG-0v7">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="q65-al-WUv" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="M4K-hr-fcK" customClass="SpeakViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dAa-lD-5Rs"/>
@@ -93,23 +95,38 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Au-tp-XT9">
-                                <rect key="frame" x="0.0" y="39" width="320" height="326"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Au-tp-XT9">
+                                <rect key="frame" x="0.0" y="63" width="320" height="284"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="yes"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3bO-Eo-xAY">
+                                <rect key="frame" x="0.0" y="19" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Speaking..." id="5BS-B2-osD">
+                                        <barButtonItem key="backBarButtonItem" title="Back" id="DEs-Cw-Jaw"/>
+                                        <barButtonItem key="leftBarButtonItem" style="plain" systemItem="stop" id="r3F-ZR-PgG">
+                                            <color key="tintColor" red="0.0" green="0.0014772294280000001" blue="0.29282924110000003" alpha="1" colorSpace="calibratedRGB"/>
+                                            <connections>
+                                                <segue destination="UFX-LC-Bqi" kind="modal" modalTransitionStyle="coverVertical" id="9Xp-wP-asL"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="YwF-00-yDv"/>
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
-                        <outlet property="speakText" destination="5Au-tp-XT9" id="Bu8-0g-a4N"/>
+                        <outlet property="speakText" destination="5Au-tp-XT9" id="0fB-5o-lhr"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="q65-al-WUv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="812" y="-402"/>
         </scene>
@@ -125,4 +142,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="9Xp-wP-asL"/>
+    </inferredMetricsTieBreakers>
 </document>

@@ -25,6 +25,7 @@
 @implementation SpeakViewController
 
 @synthesize player;
+//@synthesize speakText = _speakText;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -43,7 +44,6 @@
     // Do any additional setup after loading the view.
     [self configureView];
     playerInt = 0;
-    self.speakText.text = _text;
 }
 
 - (void)didReceiveMemoryWarning
@@ -166,7 +166,7 @@
     NSError* error = nil;
     NSData* data = [NSURLConnection sendSynchronousRequest:request
                                          returningResponse:&response
-                                                     error:&error];
+                                                      error:&error];
     [data writeToFile:path atomically:YES];
 
     player = [[AVAudioPlayer alloc] initWithContentsOfURL: [NSURL fileURLWithPath:path] error:nil];

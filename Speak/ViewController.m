@@ -60,14 +60,15 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
         self.textViewController = [[SpeakViewController alloc] initWithNibName:nil bundle:nil];
     }
     self.textViewController.text = [[NSString alloc] initWithString:[tesseract recognizedText]];
-    [self.navigationController pushViewController:self.textViewController animated:YES];
+    self.textViewController.speakText.text = [[NSString alloc] initWithString:[tesseract recognizedText]];
+//    [self.navigationController pushViewController:self.textViewController animated:NO];
     NSLog(@"%@", [tesseract recognizedText]);
 }
 #pragma mark - UIImagePickerControllerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
 	self.imageView.image = [info objectForKey:UIImagePickerControllerOriginalImage];
-	[picker dismissModalViewControllerAnimated:YES];
+	[picker dismissViewControllerAnimated:YES completion:nil];
 }
 /*
  

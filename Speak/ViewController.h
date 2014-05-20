@@ -23,7 +23,6 @@
 
 @property (strong, nonatomic) SpeakViewController *textViewController;
 
-
 - (IBAction)takePhoto:(id)sender;
 - (IBAction)recognizePhoto:(id)sender;
 
