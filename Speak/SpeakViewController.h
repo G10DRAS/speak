@@ -33,6 +33,7 @@
 
 @property (nonatomic, strong) AVAudioPlayer *player;
 @property (weak, nonatomic) IBOutlet UITextView *speakText;
+- (IBAction)speakClosed:(id)sender;
 
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag;
 

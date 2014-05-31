@@ -34,6 +34,10 @@
         lines = [[NSMutableArray alloc] init];
         URLArray = [NSMutableArray array];
         soundIsPlaying = NO;
+        
+        if (self.text != nil) {
+            self.speakText.text = _text;
+        }
     }
     return self;
 }
@@ -115,7 +119,7 @@
         _text = [_text stringByReplacingOccurrencesOfString:@"      " withString:@" "];
         _text = [_text stringByReplacingOccurrencesOfString:@"       " withString:@" "];
 
-        // STEP TWO: Make Strings Shorter than 99 Charactaers
+        // STEP TWO: Make Strings Shorter than 90 Charactaers
         NSString *pattern = @"(?ws).{1,90}\\b";
         NSError *error = nil;
         NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern: pattern options: 0 error: &error];
@@ -142,6 +146,7 @@
 //        } else {
 //        }
         [self playSound];
+        
 	}
 }
 
@@ -160,7 +165,8 @@
     NSLog(@"%i",playerInt);
     
     NSURL *url = [NSURL URLWithString:[stringer stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    NSMutableURLRequest* request = [[NSMutableURLRequest alloc] initWithURL:url] ;
+    
+    NSMutableURLRequest* request = [[NSMutableURLRequest alloc] initWithURL:url];
     [request setValue:@"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:2.0.1) Gecko/20100101 Firefox/4.0.1" forHTTPHeaderField:@"User-Agent"];
     NSURLResponse* response = nil;
     NSError* error = nil;
@@ -175,6 +181,10 @@
     [player play];
 
     NSLog(@"%@", stringer);
+}
+
+- (IBAction)speakClosed:(id)sender {
+    [player stop];
 }
 
 - (void) audioPlayerDidFinishPlaying: (AVAudioPlayer *) players successfully: (BOOL) flag {

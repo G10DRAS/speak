@@ -32,10 +32,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="speak.png" translatesAutoresizingMaskIntoConstraints="NO" id="Nnt-nc-adV">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Itf-5L-JWS">
                                 <rect key="frame" x="0.0" y="426" width="320" height="142"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -85,7 +81,6 @@
         <!--Speak View Controller-->
         <scene sceneID="hDh-fG-0v7">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="q65-al-WUv" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="M4K-hr-fcK" customClass="SpeakViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dAa-lD-5Rs"/>
@@ -104,7 +99,7 @@
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3bO-Eo-xAY">
-                                <rect key="frame" x="0.0" y="19" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="Speaking..." id="5BS-B2-osD">
@@ -112,6 +107,7 @@
                                         <barButtonItem key="leftBarButtonItem" style="plain" systemItem="stop" id="r3F-ZR-PgG">
                                             <color key="tintColor" red="0.0" green="0.0014772294280000001" blue="0.29282924110000003" alpha="1" colorSpace="calibratedRGB"/>
                                             <connections>
+                                                <action selector="speakClosed:" destination="M4K-hr-fcK" id="vJ7-ra-VFr"/>
                                                 <segue destination="UFX-LC-Bqi" kind="modal" modalTransitionStyle="coverVertical" id="9Xp-wP-asL"/>
                                             </connections>
                                         </barButtonItem>
@@ -127,6 +123,7 @@
                         <outlet property="speakText" destination="5Au-tp-XT9" id="0fB-5o-lhr"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="q65-al-WUv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="812" y="-402"/>
         </scene>
@@ -134,7 +131,6 @@
     <resources>
         <image name="logo.png" width="261" height="100"/>
         <image name="photo.png" width="250" height="250"/>
-        <image name="speak.png" width="320" height="480"/>
         <image name="talk.png" width="250" height="250"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

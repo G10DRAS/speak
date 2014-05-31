@@ -10,6 +10,7 @@
 #import "Tesseract.h"
 #import "SpeakViewController.h"
 #import <MobileCoreServices/MobileCoreServices.h>
+#define ASSET_BY_SCREEN_HEIGHT(regular, longScreen) (([[UIScreen mainScreen] bounds].size.height <= 480.0) ? regular : longScreen)
 
 
 @interface ViewController : UIViewController<UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIAlertViewDelegate> {

@@ -27,6 +27,9 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 
 - (void)viewDidLoad
 {
+    UIImage *myImage = [UIImage imageNamed:ASSET_BY_SCREEN_HEIGHT(@"speak", @"speak-568h")];
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:myImage]];
+//    }
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -60,7 +63,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
         self.textViewController = [[SpeakViewController alloc] initWithNibName:nil bundle:nil];
     }
     self.textViewController.text = [[NSString alloc] initWithString:[tesseract recognizedText]];
-    self.textViewController.speakText.text = [[NSString alloc] initWithString:[tesseract recognizedText]];
+//    self.textViewController.speakText.text = [[NSString alloc] initWithString:[tesseract recognizedText]];
 //    [self.navigationController pushViewController:self.textViewController animated:NO];
     NSLog(@"%@", [tesseract recognizedText]);
 }
