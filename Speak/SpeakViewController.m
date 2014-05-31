@@ -44,6 +44,9 @@
 
 - (void)viewDidLoad
 {
+    UIImage *myImage = [UIImage imageNamed:ASSET_BY_SCREEN_HEIGHT(@"speak", @"speak-568h")];
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:myImage]];
+
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self configureView];
