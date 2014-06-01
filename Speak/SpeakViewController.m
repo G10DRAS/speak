@@ -9,9 +9,9 @@
 /*
  Fixes Needed:
  
- 1.) Make the speech not repeat (done)
+ 1.) Make the speech not repeat (done - crashes)
  2.) It says the first sentence twice (done)
- 3.) Better UI
+ 3.) Better UI (almost done)
  4.) Lesser duration of pauses
  
  */
@@ -34,23 +34,21 @@
         lines = [[NSMutableArray alloc] init];
         URLArray = [NSMutableArray array];
         soundIsPlaying = NO;
-        
-        if (self.text != nil) {
-            self.speakText.text = _text;
-        }
     }
     return self;
 }
 
 - (void)viewDidLoad
 {
-    UIImage *myImage = [UIImage imageNamed:ASSET_BY_SCREEN_HEIGHT(@"speak", @"speak-568h")];
+    UIImage *myImage = [UIImage imageNamed:ASSET_BY_SCREEN_HEIGHT(@"player", @"player-568h")];
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:myImage]];
 
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self configureView];
     playerInt = 0;
+    
+    [[UISlider appearance] setThumbImage:[UIImage imageNamed:@"pointer.png"] forState:UIControlStateNormal];
 }
 
 - (void)didReceiveMemoryWarning
@@ -188,6 +186,16 @@
 
 - (IBAction)speakClosed:(id)sender {
     [player stop];
+    
+    if (self.mainView == nil) {
+        self.mainView = [[ViewController alloc] initWithNibName:nil bundle:nil];
+    }
+    [self.navigationController pushViewController:self.mainView animated:NO];
+}
+
+-(IBAction)sliderValueChanged:(UISlider *)slider
+{
+    player.volume = slider.value;
 }
 
 - (void) audioPlayerDidFinishPlaying: (AVAudioPlayer *) players successfully: (BOOL) flag {

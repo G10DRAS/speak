@@ -11,7 +11,7 @@
 #import "SpeakViewController.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 #define ASSET_BY_SCREEN_HEIGHT(regular, longScreen) (([[UIScreen mainScreen] bounds].size.height <= 480.0) ? regular : longScreen)
-
+@class SpeakViewController;
 
 @interface ViewController : UIViewController<UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIAlertViewDelegate> {
     Tesseract* tesseract;
@@ -22,7 +22,7 @@
 
 @property (strong, nonatomic) UIAlertView *alertView;
 
-@property (strong, nonatomic) SpeakViewController *textViewController;
+@property (nonatomic, strong) SpeakViewController *textViewController;
 
 - (IBAction)takePhoto:(id)sender;
 - (IBAction)recognizePhoto:(id)sender;
