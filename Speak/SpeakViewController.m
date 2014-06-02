@@ -34,6 +34,7 @@
         lines = [[NSMutableArray alloc] init];
         URLArray = [NSMutableArray array];
         soundIsPlaying = NO;
+//        self.volumeSlider.value = 0.5;
     }
     return self;
 }
@@ -47,8 +48,9 @@
     // Do any additional setup after loading the view.
     [self configureView];
     playerInt = 0;
+//    [player volume] = self.volumeSlider.value;
     
-    [[UISlider appearance] setThumbImage:[UIImage imageNamed:@"pointer.png"] forState:UIControlStateNormal];
+//    [[UISlider appearance] setThumbImage:[UIImage imageNamed:@"pointer.png"] forState:UIControlStateNormal];
 }
 
 - (void)didReceiveMemoryWarning
@@ -191,11 +193,6 @@
         self.mainView = [[ViewController alloc] initWithNibName:nil bundle:nil];
     }
     [self.navigationController pushViewController:self.mainView animated:NO];
-}
-
--(IBAction)sliderValueChanged:(UISlider *)slider
-{
-    player.volume = slider.value;
 }
 
 - (void) audioPlayerDidFinishPlaying: (AVAudioPlayer *) players successfully: (BOOL) flag {

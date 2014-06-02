@@ -35,7 +35,9 @@
 @property (strong, nonatomic) NSString *text;
 @property (nonatomic, strong) ViewController *mainView;
 @property (nonatomic, strong) AVAudioPlayer *player;
--(IBAction)sliderValueChanged:(UISlider *)slider;
+@property (strong, nonatomic) IBOutlet UISlider *volumeSlider;
+//-(IBAction)sliderValueChanged:(UISlider *)slider;
+
 
 - (IBAction)speakClosed:(id)sender;
 
