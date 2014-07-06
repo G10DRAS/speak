@@ -30,6 +30,7 @@
     NSMutableArray *result;
     int playerInt;
     AVAudioPlayer *player;
+    float volumeLevel;
 }
 
 @property (strong, nonatomic) NSString *text;
@@ -38,6 +39,8 @@
 @property (strong, nonatomic) IBOutlet UISlider *volumeSlider;
 //-(IBAction)sliderValueChanged:(UISlider *)slider;
 
+- (IBAction)stopSpeech:(id)sender;
+- (IBAction)startSpeech:(id)sender;
 
 - (IBAction)speakClosed:(id)sender;
 

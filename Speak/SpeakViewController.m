@@ -26,6 +26,7 @@
 
 @synthesize player;
 //@synthesize speakText = _speakText;
+@synthesize volumeSlider = _volumeSlider;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -35,8 +36,15 @@
         URLArray = [NSMutableArray array];
         soundIsPlaying = NO;
 //        self.volumeSlider.value = 0.5;
+        
     }
     return self;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    volumeLevel = self.volumeSlider.value;
 }
 
 - (void)viewDidLoad
@@ -149,7 +157,6 @@
 //        } else {
 //        }
         [self playSound];
-        
 	}
 }
 
@@ -180,10 +187,19 @@
 
     player = [[AVAudioPlayer alloc] initWithContentsOfURL: [NSURL fileURLWithPath:path] error:nil];
     player.delegate = self;
+//    player.volume = volumeLevel;
     [player prepareToPlay];
     [player play];
 
     NSLog(@"%@", stringer);
+}
+
+- (IBAction)stopSpeech:(id)sender {
+    [player pause];
+}
+
+- (IBAction)startSpeech:(id)sender {
+    [player play];
 }
 
 - (IBAction)speakClosed:(id)sender {
