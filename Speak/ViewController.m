@@ -76,7 +76,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 /*
  
  THESE MAKE TESSERACT'S IMAGE READING MORE ACCURATE AND WORK BETTER
- (IT MAY ALSO MAKE IT SLOWER)
+ (IT MAY ALSO MAKE IT SLOWER, BUT NOT NECESSARILY)
  
  */
 UIImage *scaleAndRotateImage(UIImage *image, int maxPixelsAmount)
@@ -177,104 +177,6 @@ UIImage *scaleAndRotateImage(UIImage *image, int maxPixelsAmount)
     
 	return imageCopy;
 }
-//UIImage * gs_convert_image (UIImage * src_img) {
-//    
-//    CGColorSpaceRef d_colorSpace = CGColorSpaceCreateDeviceRGB();
-//    /*
-//     * Note we specify 4 bytes per pixel here even though we ignore the
-//     * alpha value; you can't specify 3 bytes per-pixel.
-//     */
-//    size_t d_bytesPerRow = src_img.size.width * 4;
-//    unsigned char * imgData = (unsigned char*)malloc(src_img.size.height*d_bytesPerRow);
-//    CGContextRef context =  CGBitmapContextCreate(imgData, src_img.size.width,
-//                                                  src_img.size.height,
-//                                                  8, d_bytesPerRow,
-//                                                  d_colorSpace,
-//                                                  kCGImageAlphaNoneSkipFirst);
-//    
-//    UIGraphicsPushContext(context);
-//    // These next two lines 'flip' the drawing so it doesn't appear upside-down.
-//    CGContextTranslateCTM(context, 0.0, src_img.size.height);
-//    CGContextScaleCTM(context, 1.0, -1.0);
-//    // Use UIImage's drawInRect: instead of the CGContextDrawImage function, otherwise you'll have issues when the source image is in portrait orientation.
-//    [src_img drawInRect:CGRectMake(0.0, 0.0, src_img.size.width, src_img.size.height)];
-//    UIGraphicsPopContext();
-//    
-//    /*
-//     * At this point, we have the raw ARGB pixel data in the imgData buffer, so
-//     * we can perform whatever image processing here.
-//     */
-//    
-//    
-//    // After we've processed the raw data, turn it back into a UIImage instance.
-//    CGImageRef new_img = CGBitmapContextCreateImage(context);
-//    UIImage * convertedImage = [[UIImage alloc] initWithCGImage:
-//                                new_img];
-//    
-//    CGImageRelease(new_img);
-//    CGContextRelease(context);
-//    CGColorSpaceRelease(d_colorSpace);
-//    free(imgData);
-//    return convertedImage;
-//}
-
-
-//-(UIImage *)resizeImage:(UIImage *)image {
-//    
-//    CGImageRef imageRef = [image CGImage];
-//    CGImageAlphaInfo alphaInfo = CGImageGetAlphaInfo(imageRef);
-//    CGColorSpaceRef colorSpaceInfo = CGColorSpaceCreateDeviceRGB();
-//    
-//    if (alphaInfo == kCGImageAlphaNone)
-//        alphaInfo = kCGImageAlphaNoneSkipLast;
-//    
-//    int width, height;
-//    
-//    width = 640;//[image size].width;
-//    height = 640;//[image size].height;
-//    
-//    CGContextRef bitmap;
-//    
-//    if (image.imageOrientation == UIImageOrientationUp | image.imageOrientation == UIImageOrientationDown) {
-//        bitmap = CGBitmapContextCreate(NULL, width, height, CGImageGetBitsPerComponent(imageRef), CGImageGetBytesPerRow(imageRef), colorSpaceInfo, alphaInfo);
-//        
-//    } else {
-//        bitmap = CGBitmapContextCreate(NULL, height, width, CGImageGetBitsPerComponent(imageRef), CGImageGetBytesPerRow(imageRef), colorSpaceInfo, alphaInfo);
-//        
-//    }
-//    
-//    if (image.imageOrientation == UIImageOrientationLeft) {
-//        NSLog(@"image orientation left");
-//        CGContextRotateCTM (bitmap, radians(90));
-//        CGContextTranslateCTM (bitmap, 0, -height);
-//        
-//    } else if (image.imageOrientation == UIImageOrientationRight) {
-//        NSLog(@"image orientation right");
-//        CGContextRotateCTM (bitmap, radians(-90));
-//        CGContextTranslateCTM (bitmap, -width, 0);
-//        
-//    } else if (image.imageOrientation == UIImageOrientationUp) {
-//        NSLog(@"image orientation up");
-//        
-//    } else if (image.imageOrientation == UIImageOrientationDown) {
-//        NSLog(@"image orientation down");
-//        CGContextTranslateCTM (bitmap, width,height);
-//        CGContextRotateCTM (bitmap, radians(-180.));
-//        
-//    }
-//    
-//    CGContextDrawImage(bitmap, CGRectMake(0, 0, width, height), imageRef);
-//    CGImageRef ref = CGBitmapContextCreateImage(bitmap);
-//    UIImage *result = [UIImage imageWithCGImage:ref];
-//    
-//    CGContextRelease(bitmap);
-//    CGImageRelease(ref);
-//    
-//    return result;
-//    
-//}
-//
-//
 - (UIImage *) toGrayscale:(UIImage*)img
 {
     const int RED = 1;

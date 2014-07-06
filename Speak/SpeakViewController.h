@@ -9,29 +9,21 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
-//#import <AVFoundation/AVAudioPlayer.h>
 #import "ViewController.h"
-#define ASSET_BY_SCREEN_HEIGHT(regular, longScreen) (([[UIScreen mainScreen] bounds].size.height <= 480.0) ? regular : longScreen)
-
-#define IS_IPHONE5 (([[UIScreen mainScreen] bounds].size.height-568)?NO:YES)
-#define IS_OS_5_OR_LATER    ([[[UIDevice currentDevice] systemVersion] floatValue] >= 5.0)
-#define IS_OS_6_OR_LATER    ([[[UIDevice currentDevice] systemVersion] floatValue] >= 6.0)
-#define IS_OS_7_OR_LATER    ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
 
 @class ViewController;
 
-@interface SpeakViewController : UIViewController <AVAudioPlayerDelegate> {
+@interface SpeakViewController : UIViewController {
     NSMutableArray *lines;
     NSString *reformattedString;
-    AVAudioPlayer *_googlePlayer;
     SystemSoundID soundID;
     NSURL *url2;
     NSMutableArray *URLArray;
     BOOL soundIsPlaying;
     NSMutableArray *result;
     int playerInt;
-    AVAudioPlayer *player;
     float volumeLevel;
+    AVSpeechUtterance *utter;
 }
 
 @property (strong, nonatomic) NSString *text;
@@ -44,7 +36,5 @@
 - (IBAction)startSpeech:(id)sender;
 
 - (IBAction)speakClosed:(id)sender;
-
-- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag;
 
 @end
