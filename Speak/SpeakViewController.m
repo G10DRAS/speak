@@ -20,6 +20,7 @@
 #import <AudioToolbox/AudioToolbox.h>
 
 @interface SpeakViewController ()
+@property (nonatomic, strong) AVSpeechSynthesizer* talker;
 @end
 
 @implementation SpeakViewController
@@ -131,20 +132,20 @@
         _text = [_text stringByReplacingOccurrencesOfString:@"       " withString:@" "];
 
         // STEP TWO: Make Strings Shorter than 90 Charactaers
-        NSString *pattern = @"(?ws).{1,90}\\b";
-        NSError *error = nil;
-        NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern: pattern options: 0 error: &error];
-        NSArray *matches = [regex matchesInString:_text options:0 range:NSMakeRange(0, [_text length])];
-        result = [NSMutableArray array];
-        for (NSTextCheckingResult *match in matches) {
-            [result addObject: [_text substringWithRange: match.range]];
-        }
+//        NSString *pattern = @"(?ws).{1,90}\\b";
+//        NSError *error = nil;
+//        NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern: pattern options: 0 error: &error];
+//        NSArray *matches = [regex matchesInString:_text options:0 range:NSMakeRange(0, [_text length])];
+//        result = [NSMutableArray array];
+//        for (NSTextCheckingResult *match in matches) {
+//            [result addObject: [_text substringWithRange: match.range]];
+//        }
         
         // STEP THREE: Generate the Different Links
-        for (int i = 0; i < [result count]; i++) {
-            [URLArray addObject:[NSString stringWithFormat:@"http://www.translate.google.com/translate_tts?ie=UTF-8&tl=en&total=%d&idx=%i&textlen=%i&q=%@", result.count, i, [result[i] length], result[i]]];
-            NSLog(@"%i",i);
-        }
+//        for (int i = 0; i < [result count]; i++) {
+//            [URLArray addObject:[NSString stringWithFormat:@"http://www.translate.google.com/translate_tts?ie=UTF-8&tl=en&total=%d&idx=%i&textlen=%i&q=%@", result.count, i, [result[i] length], result[i]]];
+//            NSLog(@"%i",i);
+//        }
         
         // STEP FOUR: Play the Sound
         
@@ -156,7 +157,16 @@
 //        [synth speakUtterance:utterance];
 //        } else {
 //        }
-        [self playSound];
+        
+        AVSpeechUtterance *utter = [[AVSpeechUtterance alloc] initWithString:_text];
+        utter.voice = [AVSpeechSynthesisVoice voiceWithLanguage:@"en-US"];
+        [utter setRate:0.2f];
+        if (!self.talker) {
+            self.talker = [AVSpeechSynthesizer new];
+        }
+        [self.talker speakUtterance:utter];
+        
+//        [self playSound];
 	}
 }
 
@@ -211,17 +221,17 @@
     [self.navigationController pushViewController:self.mainView animated:NO];
 }
 
-- (void) audioPlayerDidFinishPlaying: (AVAudioPlayer *) players successfully: (BOOL) flag {
-    if (flag == YES) {
-        playerInt += 1;
-        [self playSound];
-        NSLog(@"%i",playerInt);
-        
-        if ((playerInt + 1) > result.count) {
-            [player stop];
-        }
-    }
-}
+//- (void) audioPlayerDidFinishPlaying: (AVAudioPlayer *) players successfully: (BOOL) flag {
+//    if (flag == YES) {
+//        playerInt += 1;
+//        [self playSound];
+//        NSLog(@"%i",playerInt);
+//        
+//        if ((playerInt + 1) > result.count) {
+//            [player stop];
+//        }
+//    }
+//}
 
 - (void)setText:(NSString *)text
 {
@@ -230,6 +240,34 @@
         
         [self configureView];
     }
+}
+
+
+#pragma AVSpeechSynthesizer Delegate Methods
+
+- (void)speechSynthesizer:(AVSpeechSynthesizer *)synthesizer didStartSpeechUtterance:(AVSpeechUtterance *)utterance
+{
+    //NSLog(@”speechSynthesizer didStartSpeechUtterance”);
+}
+- (void)speechSynthesizer:(AVSpeechSynthesizer *)synthesizer didFinishSpeechUtterance:(AVSpeechUtterance *)utteranc
+{
+    // NSLog(@”speechSynthesizer didFinishSpeechUtterance”);
+}
+- (void)speechSynthesizer:(AVSpeechSynthesizer *)synthesizer didPauseSpeechUtterance:(AVSpeechUtterance *)utterance
+{
+    // NSLog(@”speechSynthesizer didPauseSpeechUtterance”);
+}
+- (void)speechSynthesizer:(AVSpeechSynthesizer *)synthesizer didContinueSpeechUtterance:(AVSpeechUtterance *)utterance
+{
+    // NSLog(@”speechSynthesizer didContinueSpeechUtterance”);
+}
+- (void)speechSynthesizer:(AVSpeechSynthesizer *)synthesizer didCancelSpeechUtterance:(AVSpeechUtterance *)utterance
+{
+    // NSLog(@”speechSynthesizer didCancelSpeechUtterance”);
+}
+- (void)speechSynthesizer:(AVSpeechSynthesizer *)synthesizer willSpeakRangeOfSpeechString:(NSRange)characterRange utterance:(AVSpeechUtterance *)utterance
+{
+    
 }
 
 
