@@ -29,10 +29,10 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 {
     UIImage *myImage = [UIImage imageNamed:ASSET_BY_SCREEN_HEIGHT(@"speak", @"speak-568h")];
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:myImage]];
-//    }
+    
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
     self.imageView.image = [UIImage imageNamed:nil];
 }
 
@@ -51,28 +51,92 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     [self presentViewController:imagePicker animated:YES completion:nil];
 }
 - (IBAction)recognizePhoto:(id)sender {
-    tesseract = [[Tesseract alloc] initWithDataPath:@"tessdata" language:@"eng"];
-//    [tesseract setVariableValue:@"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz@.:/()&-,_+!?" forKey:@"tessedit_char_whitelist"];
-    UIImage *changedImage = scaleAndRotateImage(self.imageView.image, maxImagePixelsAmount);
-    [self toGrayscale:changedImage];
-    
-    NSData *imageData = UIImagePNGRepresentation(changedImage);
-    [tesseract setImage:[UIImage imageWithData:imageData]];
-    [tesseract recognize];
-    if (self.textViewController == nil) {
-        self.textViewController = [[SpeakViewController alloc] initWithNibName:nil bundle:nil];
+    if (self.textViewController.text == nil) {
+        [self startLoading];
     }
-    self.textViewController.text = [[NSString alloc] initWithString:[tesseract recognizedText]];
-//    self.textViewController.speakText.text = [[NSString alloc] initWithString:[tesseract recognizedText]];
-//    [self.navigationController pushViewController:self.textViewController animated:NO];
-    NSLog(@"%@", [tesseract recognizedText]);
+    if (self.imageView.image == nil) {
+        UIAlertView *alertView = [[UIAlertView alloc]
+                                  initWithTitle:@"Take A Picture"
+                                  message:@"You have to take a picture first before we can start reading it to you."
+                                  delegate:self
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles:nil];
+        [alertView show];
+    } else {
+        tesseract = [[Tesseract alloc] initWithDataPath:@"tessdata" language:@"eng"];
+        //    [tesseract setVariableValue:@"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz@.:/()&-,_+!?" forKey:@"tessedit_char_whitelist"];
+        UIImage *changedImage = scaleAndRotateImage(self.imageView.image, maxImagePixelsAmount);
+        [self toGrayscale:changedImage];
+        
+        NSData *imageData = UIImagePNGRepresentation(changedImage);
+        [tesseract setImage:[UIImage imageWithData:imageData]];
+        [tesseract recognize];
+        if (self.textViewController == nil) {
+            self.textViewController = [[SpeakViewController alloc] initWithNibName:nil bundle:nil];
+        }
+        self.textViewController.text = [[NSString alloc] initWithString:[tesseract recognizedText]];
+        if (self.textViewController.text != nil) {
+            [self stopLoading];
+        }
+        //    self.textViewController.speakText.text = [[NSString alloc] initWithString:[tesseract recognizedText]];
+        //    [self.navigationController pushViewController:self.textViewController animated:NO];
+        NSLog(@"%@", [tesseract recognizedText]);
+    }
 }
+
+-(void)startLoading
+{
+    alert = [[UIAlertView alloc]
+             initWithTitle:@"Recognizing..."
+             message:@"\n"
+             delegate:self
+             cancelButtonTitle:nil
+             otherButtonTitles:nil];
+    [alert show];
+}
+-(void)stopLoading
+{
+    [alert dismissWithClickedButtonIndex:0 animated:YES];
+}
+
 #pragma mark - UIImagePickerControllerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
 	self.imageView.image = [info objectForKey:UIImagePickerControllerOriginalImage];
 	[picker dismissViewControllerAnimated:YES completion:nil];
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
  
  THESE MAKE TESSERACT'S IMAGE READING MORE ACCURATE AND WORK BETTER
