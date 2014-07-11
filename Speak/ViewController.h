@@ -15,7 +15,6 @@
 
 @interface ViewController : UIViewController<UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIAlertViewDelegate> {
     Tesseract* tesseract;
-    UIAlertView *alert;
 }
 
 

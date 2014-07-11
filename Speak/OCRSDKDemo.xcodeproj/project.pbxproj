@@ -15,6 +15,7 @@
 		0A26A42117492A34004DD086 /* sample.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0A26A41F17492A34004DD086 /* sample.jpg */; };
 		38191AD31905AC8800730C24 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 38191AD21905AC8800730C24 /* AppDelegate.m */; };
 		38191AD91905AEE700730C24 /* SpeakViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38191AD81905AEE700730C24 /* SpeakViewController.m */; };
+		38191ADB1905AF0C00730C24 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38191ADA1905AF0C00730C24 /* Storyboard.storyboard */; };
 		38191AE01905D9D700730C24 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38191ADF1905D9D700730C24 /* AVFoundation.framework */; };
 		3819A97319281D2C009F02E0 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3819A97219281D2C009F02E0 /* MobileCoreServices.framework */; };
 		383D5E15193AA3E100454B78 /* player-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 383D5E12193AA3E100454B78 /* player-568h@2x.png */; };
@@ -55,8 +56,6 @@
 		38739D5D190B3613009AF508 /* AcousticModelEnglish.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 38739D59190B3613009AF508 /* AcousticModelEnglish.bundle */; };
 		38739D5E190B3613009AF508 /* AcousticModelSpanish.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 38739D5A190B3613009AF508 /* AcousticModelSpanish.bundle */; };
 		38739D62190B36B6009AF508 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38739D61190B36B6009AF508 /* AudioToolbox.framework */; };
-		38C7C2DB1969F85C00AB7348 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38C7C2DA1969F85C00AB7348 /* ViewController.xib */; };
-		38C7C2DD1969F86F00AB7348 /* SpeakViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38C7C2DC1969F86F00AB7348 /* SpeakViewController.xib */; };
 		49C023F1174B89A2000DD375 /* MainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49C023EF174B89A2000DD375 /* MainView.xib */; };
 		49CF5756174CF50E00876D14 /* TextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49CF5755174CF50E00876D14 /* TextView.xib */; };
 		49CF575D174D04D300876D14 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A26A3FD1741746F004DD086 /* Default-568h@2x.png */; };
@@ -81,6 +80,7 @@
 		38191AD21905AC8800730C24 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		38191AD71905AEE700730C24 /* SpeakViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeakViewController.h; sourceTree = "<group>"; };
 		38191AD81905AEE700730C24 /* SpeakViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpeakViewController.m; sourceTree = "<group>"; };
+		38191ADA1905AF0C00730C24 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		38191ADF1905D9D700730C24 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		3819A97219281D2C009F02E0 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		383D5E12193AA3E100454B78 /* player-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "player-568h@2x.png"; sourceTree = "<group>"; };
@@ -370,8 +370,6 @@
 		38739D5B190B3613009AF508 /* OpenEars.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OpenEars.framework; sourceTree = "<group>"; };
 		38739D5C190B3613009AF508 /* Slt.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Slt.framework; sourceTree = "<group>"; };
 		38739D61190B36B6009AF508 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		38C7C2DA1969F85C00AB7348 /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
-		38C7C2DC1969F86F00AB7348 /* SpeakViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpeakViewController.xib; sourceTree = "<group>"; };
 		45F60683E5D44627B5420859 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		49C023EF174B89A2000DD375 /* MainView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainView.xib; sourceTree = "<group>"; };
 		49CF5755174CF50E00876D14 /* TextView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextView.xib; sourceTree = "<group>"; };
@@ -403,10 +401,9 @@
 				38191AD21905AC8800730C24 /* AppDelegate.m */,
 				3872E89D1914818E0094E781 /* ViewController.h */,
 				3872E89E1914818E0094E781 /* ViewController.m */,
-				38C7C2DA1969F85C00AB7348 /* ViewController.xib */,
+				38191ADA1905AF0C00730C24 /* Storyboard.storyboard */,
 				38191AD71905AEE700730C24 /* SpeakViewController.h */,
 				38191AD81905AEE700730C24 /* SpeakViewController.m */,
-				38C7C2DC1969F86F00AB7348 /* SpeakViewController.xib */,
 				3872E9B8191499150094E781 /* tessdata */,
 				3872E8A2191499050094E781 /* tesseract-ios */,
 				3872E940191499050094E781 /* tesseract-ios-lib */,
@@ -928,6 +925,7 @@
 				383D5E2A193AAAA800454B78 /* pause.png in Resources */,
 				3872E9B4191499050094E781 /* .gitignore in Resources */,
 				0A26A3F31741746F004DD086 /* InfoPlist.strings in Resources */,
+				38191ADB1905AF0C00730C24 /* Storyboard.storyboard in Resources */,
 				383D5E16193AA3E100454B78 /* player.png in Resources */,
 				383D5E24193AAAA800454B78 /* backward.png in Resources */,
 				38739D5D190B3613009AF508 /* AcousticModelEnglish.bundle in Resources */,
@@ -935,7 +933,6 @@
 				3872E6F1191205EF0094E781 /* speak.png in Resources */,
 				383D5E28193AAAA800454B78 /* logo.png in Resources */,
 				3872E6FA191208240094E781 /* talk@2x.png in Resources */,
-				38C7C2DB1969F85C00AB7348 /* ViewController.xib in Resources */,
 				0A26A42117492A34004DD086 /* sample.jpg in Resources */,
 				383D5E29193AAAA800454B78 /* logo@2x.png in Resources */,
 				3872E6FD19120CF50094E781 /* logo.png in Resources */,
@@ -949,7 +946,6 @@
 				3872E9AF191499050094E781 /* README.md in Resources */,
 				3872E6F2191205EF0094E781 /* speak@2x.png in Resources */,
 				383D5E36193AAD3000454B78 /* pointer.png in Resources */,
-				38C7C2DD1969F86F00AB7348 /* SpeakViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
