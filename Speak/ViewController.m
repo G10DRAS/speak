@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "JSON.h"
 
 @interface ViewController ()
 
@@ -27,6 +28,18 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 
 - (void)viewDidLoad
 {
+    // Getting a new Access Token each time user goes to this page
+    NSString *data = [NSString stringWithFormat:@"&client_id=438231029903-9ve0hmokgvv3cbtidj0ousq94j4g7akv.apps.googleusercontent.com&client_secret=VKasD9vBIfxScguFcSLCvS-c&refresh_token=1/IG_uAZ0G1zuuvJT5XFl5P2Sie1F5RMJQf53vwniPfZQ&grant_type=refresh_token"];
+    
+    NSLog(@"Access token refresh parameters: %@",data);
+    NSString *url = [NSString stringWithFormat:@"https://accounts.google.com/o/oauth2/token"];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:url]];
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody:[data dataUsingEncoding:NSUTF8StringEncoding]];
+    NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
+    receivedData = [[NSMutableData alloc] init];
+    isAuthenticating = YES;
+    
     UIImage *myImage = [UIImage imageNamed:ASSET_BY_SCREEN_HEIGHT(@"speak", @"speak-568h")];
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:myImage]];
 //    }
@@ -51,6 +64,32 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     [self presentViewController:imagePicker animated:YES completion:nil];
 }
 - (IBAction)recognizePhoto:(id)sender {
+    
+    unsigned long long size = [[NSFileManager defaultManager] attributesOfItemAtPath:localUrl error:nil].fileSize;
+    NSLog(@"Size %llu", size);
+    
+    // POST request to Google Drive
+    NSString *thedata = [NSString stringWithFormat:@"&ocr=TRUE&ocrLanguage=en"];
+
+    NSData *file1Data = [[NSData alloc] initWithContentsOfFile:localUrl];
+    NSString *url = [NSString stringWithFormat:@"https://www.googleapis.com/upload/drive/v2/files?uploadType=media"];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:url]];
+    
+    // Headers
+    [request setValue:[NSString stringWithFormat:@"%llu", size] forHTTPHeaderField:@"Content-length"];
+    [request setValue:[NSString stringWithFormat:@"Bearer %@", hardCodedToken] forHTTPHeaderField:@"Authorization"];
+    [request setValue:@"image/jpeg" forHTTPHeaderField:@"Content-Type"];
+    
+    NSMutableData *body = [NSMutableData data];
+    [body appendData:[NSData dataWithData:file1Data]];
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody:body];
+    [request setHTTPBody:[thedata dataUsingEncoding:NSUTF8StringEncoding]];
+    NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
+    receivedData = [[NSMutableData alloc] init];
+
+    
+/*
     tesseract = [[Tesseract alloc] initWithDataPath:@"tessdata" language:@"eng"];
 //    [tesseract setVariableValue:@"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz@.:/()&-,_+!?" forKey:@"tessedit_char_whitelist"];
     UIImage *changedImage = scaleAndRotateImage(self.imageView.image, maxImagePixelsAmount);
@@ -66,13 +105,61 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 //    self.textViewController.speakText.text = [[NSString alloc] initWithString:[tesseract recognizedText]];
 //    [self.navigationController pushViewController:self.textViewController animated:NO];
     NSLog(@"%@", [tesseract recognizedText]);
+ */
 }
 #pragma mark - UIImagePickerControllerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
 	self.imageView.image = [info objectForKey:UIImagePickerControllerOriginalImage];
 	[picker dismissViewControllerAnimated:YES completion:nil];
+    
+    
+    localUrl = (NSURL *)[info valueForKey:UIImagePickerControllerReferenceURL];
+
+    NSLog(@"%@", localUrl);
 }
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+{
+    [receivedData appendData:data];
+}
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*)response;
+    if ([response respondsToSelector:@selector(allHeaderFields)]) {
+        NSDictionary *dictionary = [httpResponse allHeaderFields];
+        NSLog(@"%@",[dictionary description]);
+    }
+}
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                    message:[NSString stringWithFormat:@"%@", error]
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+}
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+    if (isAuthenticating == YES) {
+        NSError* error;
+        NSDictionary* json = [NSJSONSerialization
+                              JSONObjectWithData:receivedData // step 1
+                              options:kNilOptions
+                              error:&error];
+        
+        NSDictionary *contentsOfJSON = [json objectForKey:@"access_token"]; // step 2
+        
+        hardCodedToken = [NSString stringWithFormat:@"%@", contentsOfJSON];
+        isAuthenticating = NO;
+        
+        [[NSUserDefaults standardUserDefaults] setObject:[json objectForKey:@"access_token"] forKey:@"accessToken"];
+        
+        NSLog(@"access token 2: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"]);
+    }
+}
+
+
+
+
 /*
  
  THESE MAKE TESSERACT'S IMAGE READING MORE ACCURATE AND WORK BETTER

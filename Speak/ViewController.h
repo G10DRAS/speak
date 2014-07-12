@@ -10,11 +10,19 @@
 #import "Tesseract.h"
 #import "SpeakViewController.h"
 #import <MobileCoreServices/MobileCoreServices.h>
+#import <AssetsLibrary/AssetsLibrary.h>
+
+static NSString* hardCodedToken;
+
 #define ASSET_BY_SCREEN_HEIGHT(regular, longScreen) (([[UIScreen mainScreen] bounds].size.height <= 480.0) ? regular : longScreen)
+
 @class SpeakViewController;
 
 @interface ViewController : UIViewController<UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIAlertViewDelegate> {
     Tesseract* tesseract;
+    NSMutableData *receivedData;
+    BOOL isAuthenticating;
+    NSURL* localUrl;
 }
 
 
