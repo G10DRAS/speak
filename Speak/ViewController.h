@@ -22,7 +22,7 @@ static NSString* hardCodedToken;
     Tesseract* tesseract;
     NSMutableData *receivedData;
     BOOL isAuthenticating;
-    NSURL* localUrl;
+    NSString *imagePath;
 }
 
 

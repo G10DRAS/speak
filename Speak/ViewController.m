@@ -65,13 +65,13 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 }
 - (IBAction)recognizePhoto:(id)sender {
     
-    unsigned long long size = [[NSFileManager defaultManager] attributesOfItemAtPath:localUrl error:nil].fileSize;
+    unsigned long long size = [[NSFileManager defaultManager] attributesOfItemAtPath:imagePath error:nil].fileSize;
     NSLog(@"Size %llu", size);
     
     // POST request to Google Drive
-    NSString *thedata = [NSString stringWithFormat:@"&ocr=TRUE&ocrLanguage=en"];
+//    NSString *thedata = [NSString stringWithFormat:@"&ocr=TRUE&ocrLanguage=en"];
 
-    NSData *file1Data = [[NSData alloc] initWithContentsOfFile:localUrl];
+    NSData *file1Data = [[NSData alloc] initWithContentsOfFile:imagePath];
     NSString *url = [NSString stringWithFormat:@"https://www.googleapis.com/upload/drive/v2/files?uploadType=media"];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:url]];
     
@@ -84,7 +84,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     [body appendData:[NSData dataWithData:file1Data]];
     [request setHTTPMethod:@"POST"];
     [request setHTTPBody:body];
-    [request setHTTPBody:[thedata dataUsingEncoding:NSUTF8StringEncoding]];
+//    [request setHTTPBody:[thedata dataUsingEncoding:NSUTF8StringEncoding]];
     NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
     receivedData = [[NSMutableData alloc] init];
 
@@ -113,10 +113,20 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 	self.imageView.image = [info objectForKey:UIImagePickerControllerOriginalImage];
 	[picker dismissViewControllerAnimated:YES completion:nil];
     
+    //obtaining saving path
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    imagePath = [documentsDirectory stringByAppendingPathComponent:@"latest_photo.png"];
     
-    localUrl = (NSURL *)[info valueForKey:UIImagePickerControllerReferenceURL];
+    //extracting image from the picker and saving it
+    NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
+    if ([mediaType isEqualToString:@"public.image"]){
+        UIImage *editedImage = [info objectForKey:UIImagePickerControllerOriginalImage];
+        NSData *webData = UIImagePNGRepresentation(editedImage);
+        [webData writeToFile:imagePath atomically:YES];
+    }
 
-    NSLog(@"%@", localUrl);
+    NSLog(@"%@", imagePath);
 }
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
