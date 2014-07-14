@@ -31,10 +31,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Itf-5L-JWS">
-                                <rect key="frame" x="0.0" y="426" width="320" height="142"/>
-                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8sp-Nr-LQn">
                                 <rect key="frame" x="89" y="170" width="142" height="142"/>
                                 <state key="normal" image="photo.png">
@@ -44,6 +40,9 @@
                                     <action selector="takePhoto:" destination="UFX-LC-Bqi" eventType="touchUpInside" id="1lu-sk-iC0"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="ygq-sA-fEe">
+                                <rect key="frame" x="30" y="43" width="260" height="99"/>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NnN-Yc-pCy">
                                 <rect key="frame" x="89" y="334" width="142" height="142"/>
                                 <state key="normal" image="talk.png">
@@ -51,11 +50,11 @@
                                 </state>
                                 <connections>
                                     <action selector="recognizePhoto:" destination="UFX-LC-Bqi" eventType="touchUpInside" id="Wwm-hl-CAl"/>
-                                    <segue destination="M4K-hr-fcK" kind="modal" modalTransitionStyle="coverVertical" id="KeF-UD-2Vo"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="ygq-sA-fEe">
-                                <rect key="frame" x="30" y="43" width="260" height="99"/>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Itf-5L-JWS">
+                                <rect key="frame" x="0.0" y="467" width="320" height="101"/>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

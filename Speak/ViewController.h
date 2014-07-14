@@ -23,6 +23,7 @@ static NSString* hardCodedToken;
     NSMutableData *receivedData;
     BOOL isAuthenticating;
     NSString *imagePath;
+    UIAlertView *loading;
 }
 
 

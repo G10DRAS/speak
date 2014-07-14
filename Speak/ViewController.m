@@ -28,7 +28,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 
 - (void)viewDidLoad
 {
-    // Getting a new Access Token each time user goes to this page
+    // Getting a new Access Token each time user opens the app
     NSString *data = [NSString stringWithFormat:@"&client_id=438231029903-9ve0hmokgvv3cbtidj0ousq94j4g7akv.apps.googleusercontent.com&client_secret=VKasD9vBIfxScguFcSLCvS-c&refresh_token=1/IG_uAZ0G1zuuvJT5XFl5P2Sie1F5RMJQf53vwniPfZQ&grant_type=refresh_token"];
     
     NSLog(@"Access token refresh parameters: %@",data);
@@ -64,12 +64,13 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     [self presentViewController:imagePicker animated:YES completion:nil];
 }
 - (IBAction)recognizePhoto:(id)sender {
+    [self startLoading];
     
     unsigned long long size = [[NSFileManager defaultManager] attributesOfItemAtPath:imagePath error:nil].fileSize;
     NSLog(@"Size %llu", size);
     
     // POST request to Google Drive
-//    NSString *thedata = [NSString stringWithFormat:@"&ocr=TRUE&ocrLanguage=en"];
+    NSString *thedata = [NSString stringWithFormat:@"&convert=TRUE&ocr=TRUE&ocrLanguage=en"];
 
     NSData *file1Data = [[NSData alloc] initWithContentsOfFile:imagePath];
     NSString *url = [NSString stringWithFormat:@"https://www.googleapis.com/upload/drive/v2/files?uploadType=media"];
@@ -82,9 +83,9 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     
     NSMutableData *body = [NSMutableData data];
     [body appendData:[NSData dataWithData:file1Data]];
+    [body appendData:[thedata dataUsingEncoding:NSUTF8StringEncoding]];
     [request setHTTPMethod:@"POST"];
     [request setHTTPBody:body];
-//    [request setHTTPBody:[thedata dataUsingEncoding:NSUTF8StringEncoding]];
     NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
     receivedData = [[NSMutableData alloc] init];
 
@@ -110,35 +111,35 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 #pragma mark - UIImagePickerControllerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-	self.imageView.image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    self.imageView.image = [info objectForKey:UIImagePickerControllerOriginalImage];
 	[picker dismissViewControllerAnimated:YES completion:nil];
     
-    //obtaining saving path
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
-    imagePath = [documentsDirectory stringByAppendingPathComponent:@"latest_photo.png"];
-    
+    imagePath = [documentsDirectory stringByAppendingPathComponent:@"latest_photo.jpg"];
+
     //extracting image from the picker and saving it
     NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
     if ([mediaType isEqualToString:@"public.image"]){
-        UIImage *editedImage = [info objectForKey:UIImagePickerControllerOriginalImage];
-        NSData *webData = UIImagePNGRepresentation(editedImage);
+        NSData *webData = UIImageJPEGRepresentation(self.imageView.image, 5000.0f); //(self.imageView.image);
         [webData writeToFile:imagePath atomically:YES];
     }
-
     NSLog(@"%@", imagePath);
 }
+
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
-    [receivedData appendData:data];
-}
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*)response;
-    if ([response respondsToSelector:@selector(allHeaderFields)]) {
-        NSDictionary *dictionary = [httpResponse allHeaderFields];
-        NSLog(@"%@",[dictionary description]);
+    if (isAuthenticating == YES) {
+        [receivedData appendData:data];
     }
 }
+//- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+//    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*)response;
+//    if ([response respondsToSelector:@selector(allHeaderFields)]) {
+//        NSDictionary *dictionary = [httpResponse allHeaderFields];
+//        NSLog(@"%@",[dictionary description]);
+//    }
+//}
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
                                                     message:[NSString stringWithFormat:@"%@", error]
@@ -164,10 +165,25 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
         [[NSUserDefaults standardUserDefaults] setObject:[json objectForKey:@"access_token"] forKey:@"accessToken"];
         
         NSLog(@"access token 2: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"]);
+    } else {
+        NSLog(@"Uploaded to Google Drive");
+        [self stopLoading];
     }
 }
 
-
+-(void)startLoading
+{
+    loading = [[UIAlertView alloc]
+             initWithTitle:@"Processing Image..."
+             message:@"\n"
+             delegate:self
+             cancelButtonTitle:nil
+             otherButtonTitles:nil];
+    [loading show];
+}
+-(void)stopLoading {
+    [loading dismissWithClickedButtonIndex:0 animated:YES];
+}
 
 
 /*
