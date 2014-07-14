@@ -70,10 +70,12 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     NSLog(@"Size %llu", size);
     
     // POST request to Google Drive
-    NSString *thedata = [NSString stringWithFormat:@"&convert=TRUE&ocr=TRUE&ocrLanguage=en"];
+//    NSString *thedata = [NSString stringWithFormat:@"&convert=TRUE&ocr=TRUE&ocrLanguage=en"];
+    
+    NSMutableDictionary* _params = [[NSMutableDictionary alloc] init];
 
     NSData *file1Data = [[NSData alloc] initWithContentsOfFile:imagePath];
-    NSString *url = [NSString stringWithFormat:@"https://www.googleapis.com/upload/drive/v2/files?uploadType=media"];
+    NSString *url = [NSString stringWithFormat:@"https://www.googleapis.com/upload/drive/v2/files?uploadType=media&convert=true&ocr=true&ocrLanguage=en"];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:url]];
     
     // Headers
@@ -83,7 +85,8 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     
     NSMutableData *body = [NSMutableData data];
     [body appendData:[NSData dataWithData:file1Data]];
-    [body appendData:[thedata dataUsingEncoding:NSUTF8StringEncoding]];
+//    [body appendData:[thedata dataUsingEncoding:NSUTF8StringEncoding]];
+    
     [request setHTTPMethod:@"POST"];
     [request setHTTPBody:body];
     NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
