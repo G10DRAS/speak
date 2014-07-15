@@ -5,34 +5,34 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>B4D1A7EE-4976-447A-A3F6-8BE0C8321624</string>
+	<string>81416E1C-8ADB-4AB8-83CD-E89C44108005</string>
 	<key>IDESourceControlProjectName</key>
-	<string>OCRSDKDemo</string>
+	<string>Speak</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>994584A0-18DB-4B5E-8563-6955B974D74D</key>
+		<key>5C929E26-C633-4E50-8467-2B9FA17BAB7B</key>
 		<string>https://github.com/shalins/speak.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Speak/OCRSDKDemo.xcodeproj/project.xcworkspace</string>
+	<string>Speak.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>994584A0-18DB-4B5E-8563-6955B974D74D</key>
-		<string>../../..</string>
+		<key>5C929E26-C633-4E50-8467-2B9FA17BAB7B</key>
+		<string>..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/shalins/speak.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>994584A0-18DB-4B5E-8563-6955B974D74D</string>
+	<string>5C929E26-C633-4E50-8467-2B9FA17BAB7B</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>994584A0-18DB-4B5E-8563-6955B974D74D</string>
+			<string>5C929E26-C633-4E50-8467-2B9FA17BAB7B</string>
 			<key>IDESourceControlWCCName</key>
 			<string>Speak</string>
 		</dict>

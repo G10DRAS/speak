@@ -8,7 +8,6 @@
 
 #import "ViewController.h"
 #import "JSON.h"
-#import "GTLDrive.h"
 
 @interface ViewController ()
 
@@ -137,7 +136,6 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     
     NSDictionary *allURLS = [contentsOfJSON objectForKey:@"exportLinks"];
     plainTextURL = [allURLS objectForKey:@"text/plain"];
-    NSLog(@"file ID: %@", contentsOfJSON);
     NSLog(@"file ID: %@", fileID);
     NSLog(@"download URL: %@", plainTextURL);
 
