@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "JSON.h"
+#import "GTLDrive.h"
 
 @interface ViewController ()
 
@@ -28,6 +29,8 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 
 - (void)viewDidLoad
 {
+    isGettingFileData = FALSE;
+    
     // Getting a new Access Token each time user opens the app
     NSString *data = [NSString stringWithFormat:@"&client_id=438231029903-9ve0hmokgvv3cbtidj0ousq94j4g7akv.apps.googleusercontent.com&client_secret=VKasD9vBIfxScguFcSLCvS-c&refresh_token=1/IG_uAZ0G1zuuvJT5XFl5P2Sie1F5RMJQf53vwniPfZQ&grant_type=refresh_token"];
     
@@ -48,7 +51,6 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     // Do any additional setup after loading the view.
     self.imageView.image = [UIImage imageNamed:nil];
 }
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -91,6 +93,8 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     [request setHTTPBody:body];
     NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
     receivedData = [[NSMutableData alloc] init];
+    
+    [self getDataFrom:@"https://www.googleapis.com/drive/v2/files"];
 
     
 /*
@@ -110,6 +114,26 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 //    [self.navigationController pushViewController:self.textViewController animated:NO];
     NSLog(@"%@", [tesseract recognizedText]);
  */
+}
+
+- (NSString *) getDataFrom:(NSString *)url{
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setHTTPMethod:@"GET"];
+    [request setURL:[NSURL URLWithString:url]];
+    [request setValue:[NSString stringWithFormat:@"Bearer %@", hardCodedToken] forHTTPHeaderField:@"Authorization"];
+    
+    NSError *error = [[NSError alloc] init];
+    NSHTTPURLResponse *responseCode = nil;
+    
+    NSData *oResponseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&responseCode error:&error];
+    
+    if([responseCode statusCode] != 200){
+        NSLog(@"Error getting %@, HTTP status code %i", url, [responseCode statusCode]);
+        return nil;
+    }
+    isGettingFileData = TRUE;
+    return [[NSString alloc] initWithData:oResponseData encoding:NSUTF8StringEncoding];
+    NSLog(@"%@",[[NSString alloc] initWithData:oResponseData encoding:NSUTF8StringEncoding]);
 }
 #pragma mark - UIImagePickerControllerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
