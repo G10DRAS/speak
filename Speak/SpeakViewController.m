@@ -21,6 +21,7 @@
 
 @interface SpeakViewController ()
 @property (nonatomic, strong) AVSpeechSynthesizer* talker;
+
 @end
 
 @implementation SpeakViewController
@@ -28,6 +29,7 @@
 @synthesize player;
 //@synthesize speakText = _speakText;
 @synthesize volumeSlider = _volumeSlider;
+@synthesize text = _text;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -70,65 +72,18 @@
 
 - (void)configureView
 {
-	if (self.text != nil) {
+	if (_text != nil) {
         
     /*
         CONVERTING FROM TEXT TO SPEECH: 2 STEPS
      */
         // STEP ONE: Get Rid of Special Characters
-        _text = [_text stringByReplacingOccurrencesOfString:@"*" withString:@" "];
+        
+        NSCharacterSet *doNotWant = [NSCharacterSet characterSetWithCharactersInString:@"*_@#^~`œ∑´®†¥¨ˆøπåß∂ƒ©˙∆˚¬Ω≈ç√∫˜µ¡™£¢∞§¶•ªº><"];
+        _text = [[_text componentsSeparatedByCharactersInSet:doNotWant] componentsJoinedByString: @" "];
+        NSLog(@"New Text: %@",_text);
 //        _text = [_text stringByReplacingOccurrencesOfString:@"(" withString:@" "];
 //        _text = [_text stringByReplacingOccurrencesOfString:@")" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"_" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"@" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"#" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"^" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"~" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"`" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"œ" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"∑" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"´" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"®" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"†" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"¥" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"¨" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"ˆ" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"ø" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"π" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"å" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"ß" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"∂" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"ƒ" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"©" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"˙" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"∆" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"˚" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"¬" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"Ω" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"≈" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"ç" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"√" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"∫" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"˜" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"µ" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"¡" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"™" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"£" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"¢" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"∞" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"§" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"¶" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"•" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"ª" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"º" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@">" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"<" withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"  " withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"   " withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"    " withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"     " withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"      " withString:@" "];
-        _text = [_text stringByReplacingOccurrencesOfString:@"       " withString:@" "];
         
         // STEP TWO: Play the Sound
         [self playSound];
@@ -136,7 +91,7 @@
 }
 
 -(void) playSound {
-    utter = [[AVSpeechUtterance alloc] initWithString:_text];
+    AVSpeechUtterance *utter = [[AVSpeechUtterance alloc] initWithString:_text];
     utter.voice = [AVSpeechSynthesisVoice voiceWithLanguage:@"en-US"];
     [utter setRate:0.2f];
     if (!self.talker) {
@@ -198,7 +153,6 @@
 {
     
 }
-
 
 /*
 #pragma mark - Navigation

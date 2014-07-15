@@ -11,13 +11,16 @@
 		0A26A3E41741746F004DD086 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A26A3E31741746F004DD086 /* Foundation.framework */; };
 		0A26A3E61741746F004DD086 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A26A3E51741746F004DD086 /* CoreGraphics.framework */; };
 		38191AE01905D9D700730C24 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38191ADF1905D9D700730C24 /* AVFoundation.framework */; };
-		38739D5D190B3613009AF508 /* AcousticModelEnglish.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 38739D59190B3613009AF508 /* AcousticModelEnglish.bundle */; };
-		38739D5E190B3613009AF508 /* AcousticModelSpanish.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 38739D5A190B3613009AF508 /* AcousticModelSpanish.bundle */; };
+		3862E00C1975A59E00C00150 /* SBJson4Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3862DFFF1975A59E00C00150 /* SBJson4Parser.m */; };
+		3862E00D1975A59E00C00150 /* SBJson4StreamParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3862E0011975A59E00C00150 /* SBJson4StreamParser.m */; };
+		3862E00E1975A59E00C00150 /* SBJson4StreamParserState.m in Sources */ = {isa = PBXBuildFile; fileRef = 3862E0031975A59E00C00150 /* SBJson4StreamParserState.m */; };
+		3862E00F1975A59E00C00150 /* SBJson4StreamTokeniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3862E0051975A59E00C00150 /* SBJson4StreamTokeniser.m */; };
+		3862E0101975A59E00C00150 /* SBJson4StreamWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3862E0071975A59E00C00150 /* SBJson4StreamWriter.m */; };
+		3862E0111975A59E00C00150 /* SBJson4StreamWriterState.m in Sources */ = {isa = PBXBuildFile; fileRef = 3862E0091975A59E00C00150 /* SBJson4StreamWriterState.m */; };
+		3862E0121975A59E00C00150 /* SBJson4Writer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3862E00B1975A59E00C00150 /* SBJson4Writer.m */; };
 		38739D62190B36B6009AF508 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38739D61190B36B6009AF508 /* AudioToolbox.framework */; };
 		38E5EFDE19751C13001442E1 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3819A97219281D2C009F02E0 /* MobileCoreServices.framework */; };
 		38E5F08819751D93001442E1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E5F04E19751D93001442E1 /* AppDelegate.m */; };
-		38E5F08919751D93001442E1 /* AcousticModelEnglish.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 38E5F05019751D93001442E1 /* AcousticModelEnglish.bundle */; };
-		38E5F08A19751D93001442E1 /* AcousticModelSpanish.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 38E5F05119751D93001442E1 /* AcousticModelSpanish.bundle */; };
 		38E5F08B19751D93001442E1 /* backward.png in Resources */ = {isa = PBXBuildFile; fileRef = 38E5F05319751D93001442E1 /* backward.png */; };
 		38E5F08C19751D93001442E1 /* backward@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38E5F05419751D93001442E1 /* backward@2x.png */; };
 		38E5F08D19751D93001442E1 /* forward.png in Resources */ = {isa = PBXBuildFile; fileRef = 38E5F05519751D93001442E1 /* forward.png */; };
@@ -40,11 +43,6 @@
 		38E5F09E19751D93001442E1 /* speak@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38E5F06619751D93001442E1 /* speak@2x.png */; };
 		38E5F09F19751D93001442E1 /* talk.png in Resources */ = {isa = PBXBuildFile; fileRef = 38E5F06719751D93001442E1 /* talk.png */; };
 		38E5F0A019751D93001442E1 /* talk@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38E5F06819751D93001442E1 /* talk@2x.png */; };
-		38E5F0A119751D93001442E1 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E5F06C19751D93001442E1 /* NSObject+SBJSON.m */; };
-		38E5F0A219751D93001442E1 /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E5F06E19751D93001442E1 /* NSString+SBJSON.m */; };
-		38E5F0A319751D93001442E1 /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E5F07019751D93001442E1 /* SBJsonBase.m */; };
-		38E5F0A419751D93001442E1 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E5F07219751D93001442E1 /* SBJsonParser.m */; };
-		38E5F0A519751D93001442E1 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E5F07419751D93001442E1 /* SBJsonWriter.m */; };
 		38E5F0A619751D93001442E1 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 38E5F07519751D93001442E1 /* README.md */; };
 		38E5F0A719751D93001442E1 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38E5F07719751D93001442E1 /* Default-568h@2x.png */; };
 		38E5F0A819751D93001442E1 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 38E5F07819751D93001442E1 /* Default.png */; };
@@ -67,18 +65,26 @@
 		0A26A3E51741746F004DD086 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		38191ADF1905D9D700730C24 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		3819A97219281D2C009F02E0 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
-		38739D59190B3613009AF508 /* AcousticModelEnglish.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AcousticModelEnglish.bundle; sourceTree = "<group>"; };
-		38739D5A190B3613009AF508 /* AcousticModelSpanish.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AcousticModelSpanish.bundle; sourceTree = "<group>"; };
-		38739D5B190B3613009AF508 /* OpenEars.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OpenEars.framework; sourceTree = "<group>"; };
-		38739D5C190B3613009AF508 /* Slt.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Slt.framework; sourceTree = "<group>"; };
+		3862DFFD1975A59E00C00150 /* SBJson4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson4.h; sourceTree = "<group>"; };
+		3862DFFE1975A59E00C00150 /* SBJson4Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson4Parser.h; sourceTree = "<group>"; };
+		3862DFFF1975A59E00C00150 /* SBJson4Parser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJson4Parser.m; sourceTree = "<group>"; };
+		3862E0001975A59E00C00150 /* SBJson4StreamParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson4StreamParser.h; sourceTree = "<group>"; };
+		3862E0011975A59E00C00150 /* SBJson4StreamParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJson4StreamParser.m; sourceTree = "<group>"; };
+		3862E0021975A59E00C00150 /* SBJson4StreamParserState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson4StreamParserState.h; sourceTree = "<group>"; };
+		3862E0031975A59E00C00150 /* SBJson4StreamParserState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJson4StreamParserState.m; sourceTree = "<group>"; };
+		3862E0041975A59E00C00150 /* SBJson4StreamTokeniser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson4StreamTokeniser.h; sourceTree = "<group>"; };
+		3862E0051975A59E00C00150 /* SBJson4StreamTokeniser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJson4StreamTokeniser.m; sourceTree = "<group>"; };
+		3862E0061975A59E00C00150 /* SBJson4StreamWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson4StreamWriter.h; sourceTree = "<group>"; };
+		3862E0071975A59E00C00150 /* SBJson4StreamWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJson4StreamWriter.m; sourceTree = "<group>"; };
+		3862E0081975A59E00C00150 /* SBJson4StreamWriterState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson4StreamWriterState.h; sourceTree = "<group>"; };
+		3862E0091975A59E00C00150 /* SBJson4StreamWriterState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJson4StreamWriterState.m; sourceTree = "<group>"; };
+		3862E00A1975A59E00C00150 /* SBJson4Writer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson4Writer.h; sourceTree = "<group>"; };
+		3862E00B1975A59E00C00150 /* SBJson4Writer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJson4Writer.m; sourceTree = "<group>"; };
 		38739D61190B36B6009AF508 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		38D33EE81974B9A100EC1A74 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		38D33EEA1974B9A800EC1A74 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		38D33EEC1974CA7500EC1A74 /* libGTLTouchStaticLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGTLTouchStaticLib.a; path = "../google-api-objectivec-client-read-only/Source/build/Debug-iphoneos/libGTLTouchStaticLib.a"; sourceTree = "<group>"; };
 		38E5F04D19751D93001442E1 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Speak/AppDelegate.h; sourceTree = "<group>"; };
 		38E5F04E19751D93001442E1 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Speak/AppDelegate.m; sourceTree = "<group>"; };
-		38E5F05019751D93001442E1 /* AcousticModelEnglish.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AcousticModelEnglish.bundle; sourceTree = "<group>"; };
-		38E5F05119751D93001442E1 /* AcousticModelSpanish.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AcousticModelSpanish.bundle; sourceTree = "<group>"; };
 		38E5F05319751D93001442E1 /* backward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backward.png; sourceTree = "<group>"; };
 		38E5F05419751D93001442E1 /* backward@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backward@2x.png"; sourceTree = "<group>"; };
 		38E5F05519751D93001442E1 /* forward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = forward.png; sourceTree = "<group>"; };
@@ -101,17 +107,6 @@
 		38E5F06619751D93001442E1 /* speak@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "speak@2x.png"; sourceTree = "<group>"; };
 		38E5F06719751D93001442E1 /* talk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = talk.png; sourceTree = "<group>"; };
 		38E5F06819751D93001442E1 /* talk@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "talk@2x.png"; sourceTree = "<group>"; };
-		38E5F06A19751D93001442E1 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
-		38E5F06B19751D93001442E1 /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
-		38E5F06C19751D93001442E1 /* NSObject+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJSON.m"; sourceTree = "<group>"; };
-		38E5F06D19751D93001442E1 /* NSString+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SBJSON.h"; sourceTree = "<group>"; };
-		38E5F06E19751D93001442E1 /* NSString+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SBJSON.m"; sourceTree = "<group>"; };
-		38E5F06F19751D93001442E1 /* SBJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonBase.h; sourceTree = "<group>"; };
-		38E5F07019751D93001442E1 /* SBJsonBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonBase.m; sourceTree = "<group>"; };
-		38E5F07119751D93001442E1 /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
-		38E5F07219751D93001442E1 /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonParser.m; sourceTree = "<group>"; };
-		38E5F07319751D93001442E1 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
-		38E5F07419751D93001442E1 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
 		38E5F07519751D93001442E1 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.md; path = Speak/README.md; sourceTree = "<group>"; };
 		38E5F07719751D93001442E1 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		38E5F07819751D93001442E1 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
@@ -128,7 +123,6 @@
 		38E5F08519751D93001442E1 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Storyboard.storyboard; path = Speak/Storyboard.storyboard; sourceTree = "<group>"; };
 		38E5F08619751D93001442E1 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewController.h; path = Speak/ViewController.h; sourceTree = "<group>"; };
 		38E5F08719751D93001442E1 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewController.m; path = Speak/ViewController.m; sourceTree = "<group>"; };
-		45F60683E5D44627B5420859 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,7 +147,6 @@
 			children = (
 				38E5F04D19751D93001442E1 /* AppDelegate.h */,
 				38E5F04E19751D93001442E1 /* AppDelegate.m */,
-				38E5F04F19751D93001442E1 /* Framework */,
 				38E5F05219751D93001442E1 /* Images */,
 				38E5F06919751D93001442E1 /* JSON */,
 				38E5F07519751D93001442E1 /* README.md */,
@@ -180,7 +173,6 @@
 		0A26A3E01741746F004DD086 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				38D33EEC1974CA7500EC1A74 /* libGTLTouchStaticLib.a */,
 				38D33EEA1974B9A800EC1A74 /* SystemConfiguration.framework */,
 				38D33EE81974B9A100EC1A74 /* Security.framework */,
 				3819A97219281D2C009F02E0 /* MobileCoreServices.framework */,
@@ -190,7 +182,6 @@
 				0A26A3E11741746F004DD086 /* UIKit.framework */,
 				0A26A3E31741746F004DD086 /* Foundation.framework */,
 				0A26A3E51741746F004DD086 /* CoreGraphics.framework */,
-				45F60683E5D44627B5420859 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -198,22 +189,8 @@
 		38739D58190B3613009AF508 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
-				38739D59190B3613009AF508 /* AcousticModelEnglish.bundle */,
-				38739D5A190B3613009AF508 /* AcousticModelSpanish.bundle */,
-				38739D5B190B3613009AF508 /* OpenEars.framework */,
-				38739D5C190B3613009AF508 /* Slt.framework */,
 			);
 			path = Framework;
-			sourceTree = "<group>";
-		};
-		38E5F04F19751D93001442E1 /* Framework */ = {
-			isa = PBXGroup;
-			children = (
-				38E5F05019751D93001442E1 /* AcousticModelEnglish.bundle */,
-				38E5F05119751D93001442E1 /* AcousticModelSpanish.bundle */,
-			);
-			name = Framework;
-			path = Speak/Framework;
 			sourceTree = "<group>";
 		};
 		38E5F05219751D93001442E1 /* Images */ = {
@@ -249,17 +226,21 @@
 		38E5F06919751D93001442E1 /* JSON */ = {
 			isa = PBXGroup;
 			children = (
-				38E5F06A19751D93001442E1 /* JSON.h */,
-				38E5F06B19751D93001442E1 /* NSObject+SBJSON.h */,
-				38E5F06C19751D93001442E1 /* NSObject+SBJSON.m */,
-				38E5F06D19751D93001442E1 /* NSString+SBJSON.h */,
-				38E5F06E19751D93001442E1 /* NSString+SBJSON.m */,
-				38E5F06F19751D93001442E1 /* SBJsonBase.h */,
-				38E5F07019751D93001442E1 /* SBJsonBase.m */,
-				38E5F07119751D93001442E1 /* SBJsonParser.h */,
-				38E5F07219751D93001442E1 /* SBJsonParser.m */,
-				38E5F07319751D93001442E1 /* SBJsonWriter.h */,
-				38E5F07419751D93001442E1 /* SBJsonWriter.m */,
+				3862DFFD1975A59E00C00150 /* SBJson4.h */,
+				3862DFFE1975A59E00C00150 /* SBJson4Parser.h */,
+				3862DFFF1975A59E00C00150 /* SBJson4Parser.m */,
+				3862E0001975A59E00C00150 /* SBJson4StreamParser.h */,
+				3862E0011975A59E00C00150 /* SBJson4StreamParser.m */,
+				3862E0021975A59E00C00150 /* SBJson4StreamParserState.h */,
+				3862E0031975A59E00C00150 /* SBJson4StreamParserState.m */,
+				3862E0041975A59E00C00150 /* SBJson4StreamTokeniser.h */,
+				3862E0051975A59E00C00150 /* SBJson4StreamTokeniser.m */,
+				3862E0061975A59E00C00150 /* SBJson4StreamWriter.h */,
+				3862E0071975A59E00C00150 /* SBJson4StreamWriter.m */,
+				3862E0081975A59E00C00150 /* SBJson4StreamWriterState.h */,
+				3862E0091975A59E00C00150 /* SBJson4StreamWriterState.m */,
+				3862E00A1975A59E00C00150 /* SBJson4Writer.h */,
+				3862E00B1975A59E00C00150 /* SBJson4Writer.m */,
 			);
 			name = JSON;
 			path = Speak/JSON;
@@ -343,8 +324,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				38E5F08A19751D93001442E1 /* AcousticModelSpanish.bundle in Resources */,
-				38739D5E190B3613009AF508 /* AcousticModelSpanish.bundle in Resources */,
 				38E5F08F19751D93001442E1 /* logo.png in Resources */,
 				38E5F0AC19751D93001442E1 /* sample.jpg in Resources */,
 				38E5F09719751D93001442E1 /* player-568h@2x.png in Resources */,
@@ -353,12 +332,10 @@
 				38E5F09919751D93001442E1 /* player@2x.png in Resources */,
 				38E5F09619751D93001442E1 /* play@2x.png in Resources */,
 				38E5F09119751D93001442E1 /* pause.png in Resources */,
-				38E5F08919751D93001442E1 /* AcousticModelEnglish.bundle in Resources */,
 				38E5F08B19751D93001442E1 /* backward.png in Resources */,
 				38E5F0A619751D93001442E1 /* README.md in Resources */,
 				38E5F09C19751D93001442E1 /* speak-568h@2x.png in Resources */,
 				38E5F0AB19751D93001442E1 /* MainView.xib in Resources */,
-				38739D5D190B3613009AF508 /* AcousticModelEnglish.bundle in Resources */,
 				38E5F09019751D93001442E1 /* logo@2x.png in Resources */,
 				38E5F08C19751D93001442E1 /* backward@2x.png in Resources */,
 				38E5F0A019751D93001442E1 /* talk@2x.png in Resources */,
@@ -389,15 +366,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3862E00E1975A59E00C00150 /* SBJson4StreamParserState.m in Sources */,
 				38E5F0B219751D93001442E1 /* ViewController.m in Sources */,
-				38E5F0A519751D93001442E1 /* SBJsonWriter.m in Sources */,
-				38E5F0A319751D93001442E1 /* SBJsonBase.m in Sources */,
+				3862E0101975A59E00C00150 /* SBJson4StreamWriter.m in Sources */,
+				3862E0121975A59E00C00150 /* SBJson4Writer.m in Sources */,
 				38E5F0B019751D93001442E1 /* SpeakViewController.m in Sources */,
+				3862E00D1975A59E00C00150 /* SBJson4StreamParser.m in Sources */,
 				38E5F0AF19751D93001442E1 /* main.m in Sources */,
+				3862E0111975A59E00C00150 /* SBJson4StreamWriterState.m in Sources */,
+				3862E00C1975A59E00C00150 /* SBJson4Parser.m in Sources */,
+				3862E00F1975A59E00C00150 /* SBJson4StreamTokeniser.m in Sources */,
 				38E5F08819751D93001442E1 /* AppDelegate.m in Sources */,
-				38E5F0A119751D93001442E1 /* NSObject+SBJSON.m in Sources */,
-				38E5F0A419751D93001442E1 /* SBJsonParser.m in Sources */,
-				38E5F0A219751D93001442E1 /* NSString+SBJSON.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -486,8 +465,8 @@
 					"$(PROJECT_DIR)/Framework",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Sources/Speak-Prefix.pch";
-				INFOPLIST_FILE = "Resources/Speak-Info.plist";
+				GCC_PREFIX_HEADER = "Speak/Sources/Speak-Prefix.pch";
+				INFOPLIST_FILE = "Speak/Resources/Speak-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -514,8 +493,8 @@
 					"$(PROJECT_DIR)/Framework",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Sources/Speak-Prefix.pch";
-				INFOPLIST_FILE = "Resources/Speak-Info.plist";
+				GCC_PREFIX_HEADER = "Speak/Sources/Speak-Prefix.pch";
+				INFOPLIST_FILE = "Speak/Resources/Speak-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

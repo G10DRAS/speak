@@ -23,7 +23,6 @@
     NSMutableArray *result;
     int playerInt;
     float volumeLevel;
-    AVSpeechUtterance *utter;
 }
 
 @property (strong, nonatomic) NSString *text;
