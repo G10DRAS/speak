@@ -22,7 +22,7 @@ static NSString* hardCodedToken;
     BOOL isAuthenticating;
     NSString *imagePath;
     UIAlertView *loading;
-    BOOL isGettingFileData;
+    NSDictionary *plainTextURL;
 }
 
 

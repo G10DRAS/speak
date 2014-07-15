@@ -29,7 +29,6 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 
 - (void)viewDidLoad
 {
-    isGettingFileData = FALSE;
     
     // Getting a new Access Token each time user opens the app
     NSString *data = [NSString stringWithFormat:@"&client_id=438231029903-9ve0hmokgvv3cbtidj0ousq94j4g7akv.apps.googleusercontent.com&client_secret=VKasD9vBIfxScguFcSLCvS-c&refresh_token=1/IG_uAZ0G1zuuvJT5XFl5P2Sie1F5RMJQf53vwniPfZQ&grant_type=refresh_token"];
@@ -113,7 +112,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
  */
 }
 
-- (void) getData{
+- (void) getFile{
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setHTTPMethod:@"GET"];
     [request setURL:[NSURL URLWithString:@"https://www.googleapis.com/drive/v2/files"]];
@@ -127,10 +126,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     if([responseCode statusCode] != 200){
         NSLog(@"Error getting https://www.googleapis.com/drive/v2/files, HTTP status code %i", [responseCode statusCode]);
     }
-    isGettingFileData = TRUE;
-//    NSLog(@"%@",[[NSString alloc] initWithData:oResponseData encoding:NSUTF8StringEncoding]);
-    
-    
+
     NSDictionary* json = [NSJSONSerialization
                           JSONObjectWithData:oResponseData // step 1
                           options:kNilOptions
@@ -139,15 +135,64 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     NSDictionary *contentsOfJSON = [[json objectForKey:@"items"] objectAtIndex:0]; // step 2
     NSDictionary *fileID = [contentsOfJSON objectForKey:@"id"];
     
-    NSDictionary *downloadURL = [[contentsOfJSON objectForKey:@"exportLinks"] objectAtIndex:4];
+    NSDictionary *allURLS = [contentsOfJSON objectForKey:@"exportLinks"];
+    plainTextURL = [allURLS objectForKey:@"text/plain"];
     NSLog(@"file ID: %@", contentsOfJSON);
     NSLog(@"file ID: %@", fileID);
-    NSLog(@"download URL: %@", downloadURL);
+    NSLog(@"download URL: %@", plainTextURL);
 
+    [self extractText];
+}
 
+- (void) extractText{
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setHTTPMethod:@"GET"];
+    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", plainTextURL]]];
+    [request setValue:[NSString stringWithFormat:@"Bearer %@", hardCodedToken] forHTTPHeaderField:@"Authorization"];
+    
+    NSError *error = [[NSError alloc] init];
+    NSHTTPURLResponse *responseCode = nil;
+    
+    NSData *oResponseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&responseCode error:&error];
+    NSString *actualText = [[NSString alloc] initWithData:oResponseData encoding:NSUTF8StringEncoding];
+    
+    if([responseCode statusCode] != 200){
+        NSLog(@"Error getting %@, HTTP status code %i", plainTextURL, [responseCode statusCode]);
+    }
+    
+    if (self.textViewController == nil) {
+        self.textViewController = [[SpeakViewController alloc] initWithNibName:nil bundle:nil];
+    }
+    self.textViewController.text = [[NSString alloc] initWithString:actualText];
+    [self.navigationController pushViewController:self.textViewController animated:NO];
+    
+    NSLog(@"%@",[[NSString alloc] initWithData:oResponseData encoding:NSUTF8StringEncoding]);
     
     [self stopLoading];
 }
+
+- (void) read {
+    /*
+     tesseract = [[Tesseract alloc] initWithDataPath:@"tessdata" language:@"eng"];
+     //    [tesseract setVariableValue:@"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz@.:/()&-,_+!?" forKey:@"tessedit_char_whitelist"];
+     UIImage *changedImage = scaleAndRotateImage(self.imageView.image, maxImagePixelsAmount);
+     [self toGrayscale:changedImage];
+     
+     NSData *imageData = UIImagePNGRepresentation(changedImage);
+     [tesseract setImage:[UIImage imageWithData:imageData]];
+     [tesseract recognize];
+     if (self.textViewController == nil) {
+     self.textViewController = [[SpeakViewController alloc] initWithNibName:nil bundle:nil];
+     }
+     self.textViewController.text = [[NSString alloc] initWithString:[tesseract recognizedText]];
+     //    self.textViewController.speakText.text = [[NSString alloc] initWithString:[tesseract recognizedText]];
+     //    [self.navigationController pushViewController:self.textViewController animated:NO];
+     NSLog(@"%@", [tesseract recognizedText]);
+     */
+    
+    
+}
+
 #pragma mark - UIImagePickerControllerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
@@ -207,7 +252,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
         NSLog(@"access token 2: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"]);
     } else {
         NSLog(@"Uploaded to Google Drive");
-        [self getData];
+        [self getFile];
     }
 }
 
