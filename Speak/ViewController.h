@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Tesseract.h"
 #import "SpeakViewController.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <AssetsLibrary/AssetsLibrary.h>
@@ -19,7 +18,6 @@ static NSString* hardCodedToken;
 @class SpeakViewController;
 
 @interface ViewController : UIViewController<UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIAlertViewDelegate> {
-    Tesseract* tesseract;
     NSMutableData *receivedData;
     BOOL isAuthenticating;
     NSString *imagePath;

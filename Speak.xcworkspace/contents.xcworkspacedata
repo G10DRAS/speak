@@ -2,9 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:google-api-objectivec-client-read-only/Source/GTL.xcodeproj">
+      location = "container:Speak/Speak.xcodeproj">
    </FileRef>
    <FileRef
-      location = "container:Speak/Speak.xcodeproj">
+      location = "group:google-api-objectivec-client-read-only/Source/GTL.xcodeproj">
    </FileRef>
 </Workspace>

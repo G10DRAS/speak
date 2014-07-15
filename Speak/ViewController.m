@@ -94,9 +94,6 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
     receivedData = [[NSMutableData alloc] init];
     
-    [self getDataFrom:@"https://www.googleapis.com/drive/v2/files"];
-
-    
 /*
     tesseract = [[Tesseract alloc] initWithDataPath:@"tessdata" language:@"eng"];
 //    [tesseract setVariableValue:@"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz@.:/()&-,_+!?" forKey:@"tessedit_char_whitelist"];
@@ -116,10 +113,10 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
  */
 }
 
-- (NSString *) getDataFrom:(NSString *)url{
+- (void) getData{
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setHTTPMethod:@"GET"];
-    [request setURL:[NSURL URLWithString:url]];
+    [request setURL:[NSURL URLWithString:@"https://www.googleapis.com/drive/v2/files"]];
     [request setValue:[NSString stringWithFormat:@"Bearer %@", hardCodedToken] forHTTPHeaderField:@"Authorization"];
     
     NSError *error = [[NSError alloc] init];
@@ -128,12 +125,28 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     NSData *oResponseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&responseCode error:&error];
     
     if([responseCode statusCode] != 200){
-        NSLog(@"Error getting %@, HTTP status code %i", url, [responseCode statusCode]);
-        return nil;
+        NSLog(@"Error getting https://www.googleapis.com/drive/v2/files, HTTP status code %i", [responseCode statusCode]);
     }
     isGettingFileData = TRUE;
-    return [[NSString alloc] initWithData:oResponseData encoding:NSUTF8StringEncoding];
-    NSLog(@"%@",[[NSString alloc] initWithData:oResponseData encoding:NSUTF8StringEncoding]);
+//    NSLog(@"%@",[[NSString alloc] initWithData:oResponseData encoding:NSUTF8StringEncoding]);
+    
+    
+    NSDictionary* json = [NSJSONSerialization
+                          JSONObjectWithData:oResponseData // step 1
+                          options:kNilOptions
+                          error:&error];
+    
+    NSDictionary *contentsOfJSON = [[json objectForKey:@"items"] objectAtIndex:0]; // step 2
+    NSDictionary *fileID = [contentsOfJSON objectForKey:@"id"];
+    
+    NSDictionary *downloadURL = [[contentsOfJSON objectForKey:@"exportLinks"] objectAtIndex:4];
+    NSLog(@"file ID: %@", contentsOfJSON);
+    NSLog(@"file ID: %@", fileID);
+    NSLog(@"download URL: %@", downloadURL);
+
+
+    
+    [self stopLoading];
 }
 #pragma mark - UIImagePickerControllerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
@@ -194,7 +207,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
         NSLog(@"access token 2: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"]);
     } else {
         NSLog(@"Uploaded to Google Drive");
-        [self stopLoading];
+        [self getData];
     }
 }
 
