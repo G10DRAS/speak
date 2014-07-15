@@ -17,7 +17,6 @@
 		38191AD91905AEE700730C24 /* SpeakViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38191AD81905AEE700730C24 /* SpeakViewController.m */; };
 		38191ADB1905AF0C00730C24 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38191ADA1905AF0C00730C24 /* Storyboard.storyboard */; };
 		38191AE01905D9D700730C24 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38191ADF1905D9D700730C24 /* AVFoundation.framework */; };
-		3819A97319281D2C009F02E0 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3819A97219281D2C009F02E0 /* MobileCoreServices.framework */; };
 		3836A4211970B072009C9F82 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 3836A4181970B072009C9F82 /* NSObject+SBJSON.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		3836A4221970B072009C9F82 /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 3836A41A1970B072009C9F82 /* NSString+SBJSON.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		3836A4231970B072009C9F82 /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 3836A41C1970B072009C9F82 /* SBJsonBase.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -51,11 +50,6 @@
 		38739D5D190B3613009AF508 /* AcousticModelEnglish.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 38739D59190B3613009AF508 /* AcousticModelEnglish.bundle */; };
 		38739D5E190B3613009AF508 /* AcousticModelSpanish.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 38739D5A190B3613009AF508 /* AcousticModelSpanish.bundle */; };
 		38739D62190B36B6009AF508 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38739D61190B36B6009AF508 /* AudioToolbox.framework */; };
-		38D33EE91974B9A100EC1A74 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38D33EE81974B9A100EC1A74 /* Security.framework */; };
-		38D33EEB1974B9A800EC1A74 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38D33EEA1974B9A800EC1A74 /* SystemConfiguration.framework */; };
-		38D33EED1974CA7500EC1A74 /* libGTLTouchStaticLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 38D33EEC1974CA7500EC1A74 /* libGTLTouchStaticLib.a */; };
-		38D33EF01974CC3F00EC1A74 /* GTMOAuth2ViewTouch.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38D33EEF1974CC3F00EC1A74 /* GTMOAuth2ViewTouch.xib */; };
-		38D33EF31974CC7800EC1A74 /* GTLDrive_Sources.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D33EF11974CC7800EC1A74 /* GTLDrive_Sources.m */; };
 		49C023F1174B89A2000DD375 /* MainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49C023EF174B89A2000DD375 /* MainView.xib */; };
 		49CF5756174CF50E00876D14 /* TextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49CF5755174CF50E00876D14 /* TextView.xib */; };
 		49CF575D174D04D300876D14 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A26A3FD1741746F004DD086 /* Default-568h@2x.png */; };
@@ -128,9 +122,6 @@
 		38D33EE81974B9A100EC1A74 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		38D33EEA1974B9A800EC1A74 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		38D33EEC1974CA7500EC1A74 /* libGTLTouchStaticLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGTLTouchStaticLib.a; path = "../google-api-objectivec-client-read-only/Source/build/Debug-iphoneos/libGTLTouchStaticLib.a"; sourceTree = "<group>"; };
-		38D33EEF1974CC3F00EC1A74 /* GTMOAuth2ViewTouch.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GTMOAuth2ViewTouch.xib; sourceTree = "<group>"; };
-		38D33EF11974CC7800EC1A74 /* GTLDrive_Sources.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTLDrive_Sources.m; sourceTree = "<group>"; };
-		38D33EF21974CC7800EC1A74 /* GTLDrive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTLDrive.h; sourceTree = "<group>"; };
 		45F60683E5D44627B5420859 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		49C023EF174B89A2000DD375 /* MainView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainView.xib; sourceTree = "<group>"; };
 		49CF5755174CF50E00876D14 /* TextView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextView.xib; sourceTree = "<group>"; };
@@ -141,10 +132,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				38D33EED1974CA7500EC1A74 /* libGTLTouchStaticLib.a in Frameworks */,
-				3819A97319281D2C009F02E0 /* MobileCoreServices.framework in Frameworks */,
-				38D33EEB1974B9A800EC1A74 /* SystemConfiguration.framework in Frameworks */,
-				38D33EE91974B9A100EC1A74 /* Security.framework in Frameworks */,
 				38739D62190B36B6009AF508 /* AudioToolbox.framework in Frameworks */,
 				38191AE01905D9D700730C24 /* AVFoundation.framework in Frameworks */,
 				0A26A3E21741746F004DD086 /* UIKit.framework in Frameworks */,
@@ -167,7 +154,6 @@
 				38191AD71905AEE700730C24 /* SpeakViewController.h */,
 				38191AD81905AEE700730C24 /* SpeakViewController.m */,
 				3836A4151970B072009C9F82 /* JSON */,
-				38D33EEE1974CBEB00EC1A74 /* Supporting Files */,
 				3872E6EC191205E20094E781 /* Images */,
 				0A26A40A17417A24004DD086 /* Sources */,
 				0A26A40B17417A2D004DD086 /* Resources */,
@@ -286,16 +272,6 @@
 			path = Framework;
 			sourceTree = "<group>";
 		};
-		38D33EEE1974CBEB00EC1A74 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				38D33EF11974CC7800EC1A74 /* GTLDrive_Sources.m */,
-				38D33EF21974CC7800EC1A74 /* GTLDrive.h */,
-				38D33EEF1974CC3F00EC1A74 /* GTMOAuth2ViewTouch.xib */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -348,7 +324,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				38D33EF01974CC3F00EC1A74 /* GTMOAuth2ViewTouch.xib in Resources */,
 				3872E6F9191208240094E781 /* talk.png in Resources */,
 				383D5E2E193AAAA800454B78 /* play.png in Resources */,
 				38739D5E190B3613009AF508 /* AcousticModelSpanish.bundle in Resources */,
@@ -393,7 +368,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				38D33EF31974CC7800EC1A74 /* GTLDrive_Sources.m in Sources */,
 				38191AD91905AEE700730C24 /* SpeakViewController.m in Sources */,
 				3836A4251970B072009C9F82 /* SBJsonWriter.m in Sources */,
 				3836A4231970B072009C9F82 /* SBJsonBase.m in Sources */,
@@ -501,13 +475,10 @@
 					"$(PROJECT_DIR)/tesseract-ios-lib/lib",
 					"/Users/shalinvs/Dropbox/Technology/Developer/Apps/Speak/google-api-objectivec-client-read-only/Source/build/Debug-iphoneos",
 				);
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-all_load",
-				);
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = Speak;
 				TARGETED_DEVICE_FAMILY = 1;
-				USER_HEADER_SEARCH_PATHS = "/Users/shalinvs/Dropbox/Technology/Developer/Apps/Speak/google-api-objectivec-client-read-only/Source/**";
+				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -532,13 +503,10 @@
 					"$(PROJECT_DIR)/tesseract-ios-lib/lib",
 					"/Users/shalinvs/Dropbox/Technology/Developer/Apps/Speak/google-api-objectivec-client-read-only/Source/build/Debug-iphoneos",
 				);
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-all_load",
-				);
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = Speak;
 				TARGETED_DEVICE_FAMILY = 1;
-				USER_HEADER_SEARCH_PATHS = "/Users/shalinvs/Dropbox/Technology/Developer/Apps/Speak/google-api-objectivec-client-read-only/Source/**";
+				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

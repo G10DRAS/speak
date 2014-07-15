@@ -146,15 +146,15 @@
 }
 
 - (IBAction)stopSpeech:(id)sender {
-    [player pause];
+//    [player pause];
 }
 
 - (IBAction)startSpeech:(id)sender {
-    [player play];
+//    [player play];
 }
 
 - (IBAction)speakClosed:(id)sender {
-    [player stop];
+//    [player stop];
     
     if (self.mainView == nil) {
         self.mainView = [[ViewController alloc] initWithNibName:nil bundle:nil];
