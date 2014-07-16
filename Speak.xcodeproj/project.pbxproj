@@ -18,6 +18,7 @@
 		3862E0101975A59E00C00150 /* SBJson4StreamWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3862E0071975A59E00C00150 /* SBJson4StreamWriter.m */; };
 		3862E0111975A59E00C00150 /* SBJson4StreamWriterState.m in Sources */ = {isa = PBXBuildFile; fileRef = 3862E0091975A59E00C00150 /* SBJson4StreamWriterState.m */; };
 		3862E0121975A59E00C00150 /* SBJson4Writer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3862E00B1975A59E00C00150 /* SBJson4Writer.m */; };
+		3862E017197645FC00C00150 /* UIImage+Grayscale.m in Sources */ = {isa = PBXBuildFile; fileRef = 3862E016197645FC00C00150 /* UIImage+Grayscale.m */; };
 		38739D62190B36B6009AF508 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38739D61190B36B6009AF508 /* AudioToolbox.framework */; };
 		38E5EFDE19751C13001442E1 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3819A97219281D2C009F02E0 /* MobileCoreServices.framework */; };
 		38E5F08819751D93001442E1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E5F04E19751D93001442E1 /* AppDelegate.m */; };
@@ -80,6 +81,8 @@
 		3862E0091975A59E00C00150 /* SBJson4StreamWriterState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJson4StreamWriterState.m; sourceTree = "<group>"; };
 		3862E00A1975A59E00C00150 /* SBJson4Writer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson4Writer.h; sourceTree = "<group>"; };
 		3862E00B1975A59E00C00150 /* SBJson4Writer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJson4Writer.m; sourceTree = "<group>"; };
+		3862E015197645FC00C00150 /* UIImage+Grayscale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Grayscale.h"; path = "Speak/UIImage+Grayscale.h"; sourceTree = "<group>"; };
+		3862E016197645FC00C00150 /* UIImage+Grayscale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Grayscale.m"; path = "Speak/UIImage+Grayscale.m"; sourceTree = "<group>"; };
 		38739D61190B36B6009AF508 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		38D33EE81974B9A100EC1A74 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		38D33EEA1974B9A800EC1A74 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -147,16 +150,18 @@
 			children = (
 				38E5F04D19751D93001442E1 /* AppDelegate.h */,
 				38E5F04E19751D93001442E1 /* AppDelegate.m */,
-				38E5F05219751D93001442E1 /* Images */,
-				38E5F06919751D93001442E1 /* JSON */,
 				38E5F07519751D93001442E1 /* README.md */,
-				38E5F07619751D93001442E1 /* Resources */,
-				38E5F08019751D93001442E1 /* Sources */,
 				38E5F08319751D93001442E1 /* SpeakViewController.h */,
 				38E5F08419751D93001442E1 /* SpeakViewController.m */,
 				38E5F08519751D93001442E1 /* Storyboard.storyboard */,
 				38E5F08619751D93001442E1 /* ViewController.h */,
 				38E5F08719751D93001442E1 /* ViewController.m */,
+				3862E015197645FC00C00150 /* UIImage+Grayscale.h */,
+				3862E016197645FC00C00150 /* UIImage+Grayscale.m */,
+				38E5F05219751D93001442E1 /* Images */,
+				38E5F06919751D93001442E1 /* JSON */,
+				38E5F07619751D93001442E1 /* Resources */,
+				38E5F08019751D93001442E1 /* Sources */,
 				0A26A3E01741746F004DD086 /* Frameworks */,
 				0A26A3DF1741746F004DD086 /* Products */,
 			);
@@ -367,6 +372,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3862E00E1975A59E00C00150 /* SBJson4StreamParserState.m in Sources */,
+				3862E017197645FC00C00150 /* UIImage+Grayscale.m in Sources */,
 				38E5F0B219751D93001442E1 /* ViewController.m in Sources */,
 				3862E0101975A59E00C00150 /* SBJson4StreamWriter.m in Sources */,
 				3862E0121975A59E00C00150 /* SBJson4Writer.m in Sources */,

@@ -22,7 +22,7 @@
         <!--View Controller-->
         <scene sceneID="KA5-Ck-XXb">
             <objects>
-                <viewController id="UFX-LC-Bqi" customClass="ViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainView" id="UFX-LC-Bqi" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="nYD-aU-jYZ"/>
                         <viewControllerLayoutGuide type="bottom" id="kik-md-prH"/>
@@ -75,7 +75,7 @@
         <!--Speak View Controller-->
         <scene sceneID="hDh-fG-0v7">
             <objects>
-                <viewController id="M4K-hr-fcK" customClass="SpeakViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SpeakView" id="M4K-hr-fcK" customClass="SpeakViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dAa-lD-5Rs"/>
                         <viewControllerLayoutGuide type="bottom" id="izW-zV-CFW"/>

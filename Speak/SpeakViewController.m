@@ -52,6 +52,7 @@
 
 - (void)viewDidLoad
 {
+    self.view.backgroundColor = [UIColor clearColor];
     UIImage *myImage = [UIImage imageNamed:ASSET_BY_SCREEN_HEIGHT(@"player", @"player-568h")];
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:myImage]];
 
