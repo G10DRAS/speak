@@ -31,7 +31,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 {
     
     // Getting a new Access Token each time user opens the app
-    NSString *data = [NSString stringWithFormat:@"&client_id=438231029903-9ve0hmokgvv3cbtidj0ousq94j4g7akv.apps.googleusercontent.com&client_secret=VKasD9vBIfxScguFcSLCvS-c&refresh_token=1/IG_uAZ0G1zuuvJT5XFl5P2Sie1F5RMJQf53vwniPfZQ&grant_type=refresh_token"];
+    NSString *data = [NSString stringWithFormat:@"&client_id=438231029903-9ve0hmokgvv3cbtidj0ousq94j4g7akv.apps.googleusercontent.com&client_secret=VKasD9vBIfxScguFcSLCvS-c&refresh_token=1/m9DHwxkFR6Wm2f2NwOxhBzon6MyoHUl3ohqv7ezV10c&grant_type=refresh_token"];
     
     NSLog(@"Access token refresh parameters: %@",data);
     NSString *url = [NSString stringWithFormat:@"https://accounts.google.com/o/oauth2/token"];
@@ -153,9 +153,11 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     self.imageView.image = [info objectForKey:UIImagePickerControllerOriginalImage];
-    UIImage *grayscaleImg = [self.imageView.image convertToGrayscale];
-
-    self.imageView.image = grayscaleImg;
+//    UIImage *grayscaleImg = [self.imageView.image convertToGrayscale];
+    CGRect screen = [UIScreen mainScreen].bounds;
+    UIImage *myIcon = [self imageWithImage:self.imageView.image scaledToSize:CGSizeMake(screen.size.width*2, screen.size.height*2)];
+    
+//    self.imageView.image = grayscaleImg;
 
 	[picker dismissViewControllerAnimated:YES completion:nil];
     
@@ -166,7 +168,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     //extracting image from the picker and saving it
     NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
     if ([mediaType isEqualToString:@"public.image"]){
-        NSData *webData = UIImageJPEGRepresentation(self.imageView.image, 0.5); //(self.imageView.image);
+        NSData *webData = UIImageJPEGRepresentation(self.imageView.image, 1.0); //(self.imageView.image);
         [webData writeToFile:imagePath atomically:YES];
     }
     NSLog(@"%@", imagePath);
@@ -243,6 +245,14 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
  (IT MAY ALSO MAKE IT SLOWER, BUT NOT NECESSARILY)
  
  */
+
+- (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
+    UIGraphicsBeginImageContext(newSize);
+    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
 
 
 @end
