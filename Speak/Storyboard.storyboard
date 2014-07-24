@@ -90,9 +90,22 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="stopSpeech:" destination="M4K-hr-fcK" eventType="touchUpInside" id="lsp-cW-tT9"/>
+                                    <action selector="pauseSpeech:" destination="M4K-hr-fcK" eventType="touchUpInside" id="VNb-np-FZW"/>
                                 </connections>
                             </button>
+                            <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" text="Speaking..." textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Yau-Oy-FB9">
+                                <rect key="frame" x="20" y="38" width="280" height="112"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="59"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="oxq-iT-gGJ">
+                                <rect key="frame" x="18" y="429" width="284" height="31"/>
+                                <color key="minimumTrackTintColor" red="0.24815169570000001" green="0.75910434299999996" blue="0.78607302300000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="sliderValueChanged:" destination="M4K-hr-fcK" eventType="valueChanged" id="1eg-xs-mgH"/>
+                                </connections>
+                            </slider>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SuH-cA-8o4">
                                 <rect key="frame" x="97" y="363" width="50" height="50"/>
                                 <state key="normal" image="play.png">
@@ -102,21 +115,13 @@
                                     <action selector="startSpeech:" destination="M4K-hr-fcK" eventType="touchUpInside" id="9TP-yU-nbt"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" text="Speaking..." textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Yau-Oy-FB9">
-                                <rect key="frame" x="20" y="38" width="280" height="112"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="59"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="oxq-iT-gGJ">
-                                <rect key="frame" x="18" y="429" width="284" height="31"/>
-                                <color key="minimumTrackTintColor" red="0.2720492202" green="0.99597306350000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            </slider>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="YwF-00-yDv"/>
                     <nil key="simulatedStatusBarMetrics"/>
+                    <connections>
+                        <outlet property="volumeSlider" destination="oxq-iT-gGJ" id="PeC-7a-jkA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q65-al-WUv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

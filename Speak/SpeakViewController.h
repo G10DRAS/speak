@@ -23,15 +23,19 @@
     NSMutableArray *result;
     int playerInt;
     float volumeLevel;
+    
+    BOOL speechPaused;
 }
 
 @property (strong, nonatomic) NSString *text;
 @property (nonatomic, strong) ViewController *mainView;
 @property (nonatomic, strong) AVAudioPlayer *player;
+@property (nonatomic, strong) AVSpeechUtterance *utter;
 @property (strong, nonatomic) IBOutlet UISlider *volumeSlider;
+- (IBAction)sliderValueChanged:(UISlider *)sender;
 //-(IBAction)sliderValueChanged:(UISlider *)slider;
 
-- (IBAction)stopSpeech:(id)sender;
+- (IBAction)pauseSpeech:(id)sender;
 - (IBAction)startSpeech:(id)sender;
 
 - (IBAction)speakClosed:(id)sender;

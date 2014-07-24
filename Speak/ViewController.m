@@ -222,7 +222,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 {
     loading = [[UIAlertView alloc]
              initWithTitle:@"Processing Image..."
-             message:@"\n"
+             message:nil
              delegate:self
              cancelButtonTitle:nil
              otherButtonTitles:nil];

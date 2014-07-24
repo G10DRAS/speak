@@ -30,6 +30,7 @@
 //@synthesize speakText = _speakText;
 @synthesize volumeSlider = _volumeSlider;
 @synthesize text = _text;
+@synthesize utter = _utter;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -50,16 +51,20 @@
     volumeLevel = self.volumeSlider.value;
 }
 
-- (void)viewDidLoad
+-(void)viewDidLoad
 {
     self.view.backgroundColor = [UIColor clearColor];
     UIImage *myImage = [UIImage imageNamed:ASSET_BY_SCREEN_HEIGHT(@"player", @"player-568h")];
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:myImage]];
+    
+    [[UISlider appearance] setThumbImage:[UIImage imageNamed:@"pointer.png"] forState:UIControlStateNormal];
 
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self configureView];
     playerInt = 0;
+    
+    speechPaused = NO;
 //    [player volume] = self.volumeSlider.value;
     
 //    [[UISlider appearance] setThumbImage:[UIImage imageNamed:@"pointer.png"] forState:UIControlStateNormal];
@@ -92,22 +97,38 @@
 }
 
 -(void) playSound {
-    AVSpeechUtterance *utter = [[AVSpeechUtterance alloc] initWithString:_text];
-    utter.voice = [AVSpeechSynthesisVoice voiceWithLanguage:@"en-US"];
-    [utter setRate:0.2f];
+    _utter = [[AVSpeechUtterance alloc] initWithString:_text];
+    _utter.voice = [AVSpeechSynthesisVoice voiceWithLanguage:@"en-US"];
+    [_utter setRate:0.2f];
     if (!self.talker) {
         self.talker = [AVSpeechSynthesizer new];
     }
-    [self.talker speakUtterance:utter];
+    [self.talker speakUtterance:_utter];
 }
 
-- (IBAction)stopSpeech:(id)sender {
-//    [player pause];
+- (IBAction)pauseSpeech:(id)sender {
+    [self pauseSpeech];
 }
 
 - (IBAction)startSpeech:(id)sender {
-//    [player play];
+    [self playSpeech];
 }
+
+- (void) pauseSpeech {
+    if (speechPaused == NO) {
+        [self.talker pauseSpeakingAtBoundary:AVSpeechBoundaryImmediate];
+        speechPaused = YES;
+    }
+    if (self.talker.speaking == NO) {
+        AVSpeechUtterance *utterance = [[AVSpeechUtterance alloc] initWithString:@""];
+        [self.talker speakUtterance:utterance];
+    }
+}
+- (void) playSpeech {
+    [self.talker continueSpeaking];
+    speechPaused = NO;
+}
+
 
 - (IBAction)speakClosed:(id)sender {
 //    [player stop];
@@ -166,4 +187,7 @@
 }
 */
 
+- (IBAction)sliderValueChanged:(UISlider *)sender {
+    _utter.volume =  (int)sender.value;
+}
 @end
