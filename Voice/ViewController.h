@@ -1,0 +1,44 @@
+//
+//  ViewController.h
+//  Voice
+//
+//  Created by Shalin Shah on 7/26/14.
+//  Copyright (c) 2014 Shalin Shah. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+#import "TalkViewController.h"
+#import <MobileCoreServices/MobileCoreServices.h>
+
+static NSString* hardCodedToken;
+static NSString* theOCRText;
+
+#define ASSET_BY_SCREEN_HEIGHT(regular, longScreen) (([[UIScreen mainScreen] bounds].size.height <= 480.0) ? regular : longScreen)
+
+@class TalkViewController;
+
+@interface ViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIAlertViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate> {
+    NSMutableData *receivedData;
+    BOOL isAuthenticating;
+    NSString *imagePath;
+    UIAlertView *loading;
+    NSDictionary *plainTextURL;
+    NSArray *_pickerData;
+    
+    NSString *pickerRowName;
+}
+
++ (NSString*)globalText;
+
+@property (strong, nonatomic) IBOutlet UIPickerView *picker;
+@property (strong, nonatomic) IBOutlet UIImageView *imageView;
+
+@property (strong, nonatomic) UIAlertView *alertView;
+
+@property (nonatomic, strong) TalkViewController *talkView;
+
+- (IBAction)takePhoto:(id)sender;
+- (IBAction)recognizePhoto:(id)sender;
+
+
+@end
