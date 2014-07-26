@@ -13,11 +13,13 @@
 
 @interface TalkViewController : UIViewController {
     BOOL speechPaused;
+    BOOL alreadyStartedTalking;
 }
 
 @property (strong, nonatomic) NSString *text;
 
 - (IBAction)playButtonPressed:(id)sender;
 - (IBAction)pauseButtonPressed:(id)sender;
+- (IBAction)goToMain:(id)sender;
 
 @end

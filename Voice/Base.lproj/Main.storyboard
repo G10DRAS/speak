@@ -87,7 +87,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="H4w-y2-9nU">
-                                <rect key="frame" x="157" y="342" width="50" height="50"/>
+                                <rect key="frame" x="175" y="342" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="pause.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -96,7 +96,19 @@
                                     <action selector="pauseButtonPressed:" destination="NjP-4X-2fU" eventType="touchUpInside" id="fVy-EZ-JIF"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="qAa-hd-tJl">
+                                <rect key="frame" x="126" y="400" width="68" height="77"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="back.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="goToMain:" destination="NjP-4X-2fU" eventType="touchUpInside" id="7LH-qy-ied"/>
+                                    <segue destination="Hb5-Gl-zTd" kind="push" id="Kxh-vo-otT"/>
+                                </connections>
+                            </button>
                         </subviews>
+                        <color key="backgroundColor" red="0.24815169570000001" green="0.75910434299999996" blue="0.78607302300000004" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7UW-8Z-FdA" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -123,6 +135,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="back.png" width="64" height="64"/>
         <image name="pause.png" width="50" height="50"/>
         <image name="photo.png" width="250" height="250"/>
         <image name="play.png" width="50" height="50"/>
@@ -133,4 +146,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="Kxh-vo-otT"/>
+    </inferredMetricsTieBreakers>
 </document>

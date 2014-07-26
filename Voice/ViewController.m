@@ -28,6 +28,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 
 - (void)viewDidLoad
 {
+    self.imageView.image = nil;
     
     // Initialize Data for UIPickerView
     _pickerData = @[@"Camera", @"Photos Library"];

@@ -13,23 +13,16 @@
 		385CF9DF19842B4F00CF9563 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 385CF9DD19842B4F00CF9563 /* Main.storyboard */; };
 		385CF9E119842B4F00CF9563 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 385CF9E019842B4F00CF9563 /* Images.xcassets */; };
 		385CF9ED19842B4F00CF9563 /* VoiceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 385CF9EC19842B4F00CF9563 /* VoiceTests.m */; };
-		385CFA1D19842FAF00CF9563 /* backward.png in Resources */ = {isa = PBXBuildFile; fileRef = 385CF9F719842FAF00CF9563 /* backward.png */; };
 		385CFA1E19842FAF00CF9563 /* backward@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 385CF9F819842FAF00CF9563 /* backward@2x.png */; };
-		385CFA1F19842FAF00CF9563 /* forward.png in Resources */ = {isa = PBXBuildFile; fileRef = 385CF9F919842FAF00CF9563 /* forward.png */; };
 		385CFA2019842FAF00CF9563 /* forward@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 385CF9FA19842FAF00CF9563 /* forward@2x.png */; };
-		385CFA2319842FAF00CF9563 /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 385CF9FD19842FAF00CF9563 /* pause.png */; };
 		385CFA2419842FAF00CF9563 /* pause@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 385CF9FE19842FAF00CF9563 /* pause@2x.png */; };
-		385CFA2519842FAF00CF9563 /* photo.png in Resources */ = {isa = PBXBuildFile; fileRef = 385CF9FF19842FAF00CF9563 /* photo.png */; };
 		385CFA2619842FAF00CF9563 /* photo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 385CFA0019842FAF00CF9563 /* photo@2x.png */; };
-		385CFA2719842FAF00CF9563 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 385CFA0119842FAF00CF9563 /* play.png */; };
 		385CFA2819842FAF00CF9563 /* play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 385CFA0219842FAF00CF9563 /* play@2x.png */; };
 		385CFA2919842FAF00CF9563 /* player-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 385CFA0319842FAF00CF9563 /* player-568h@2x.png */; };
 		385CFA2B19842FAF00CF9563 /* player@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 385CFA0519842FAF00CF9563 /* player@2x.png */; };
-		385CFA2C19842FAF00CF9563 /* pointer.png in Resources */ = {isa = PBXBuildFile; fileRef = 385CFA0619842FAF00CF9563 /* pointer.png */; };
 		385CFA2D19842FAF00CF9563 /* pointer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 385CFA0719842FAF00CF9563 /* pointer@2x.png */; };
 		385CFA2E19842FAF00CF9563 /* speak-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 385CFA0819842FAF00CF9563 /* speak-568h@2x.png */; };
 		385CFA3019842FAF00CF9563 /* speak@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 385CFA0A19842FAF00CF9563 /* speak@2x.png */; };
-		385CFA3119842FAF00CF9563 /* talk.png in Resources */ = {isa = PBXBuildFile; fileRef = 385CFA0B19842FAF00CF9563 /* talk.png */; };
 		385CFA3219842FAF00CF9563 /* talk@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 385CFA0C19842FAF00CF9563 /* talk@2x.png */; };
 		385CFA3319842FAF00CF9563 /* SBJson4Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = 385CFA1019842FAF00CF9563 /* SBJson4Parser.m */; };
 		385CFA3419842FAF00CF9563 /* SBJson4StreamParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 385CFA1219842FAF00CF9563 /* SBJson4StreamParser.m */; };
@@ -40,6 +33,7 @@
 		385CFA3919842FAF00CF9563 /* SBJson4Writer.m in Sources */ = {isa = PBXBuildFile; fileRef = 385CFA1C19842FAF00CF9563 /* SBJson4Writer.m */; };
 		385CFA3C1984309A00CF9563 /* TalkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 385CFA3B1984309A00CF9563 /* TalkViewController.m */; };
 		385CFA3E1984346200CF9563 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 385CFA3D1984346200CF9563 /* MobileCoreServices.framework */; };
+		38C46E6E19845CEA00DCF7A5 /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38C46E6D19845CEA00DCF7A5 /* back@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,23 +59,16 @@
 		385CF9E619842B4F00CF9563 /* VoiceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VoiceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		385CF9EB19842B4F00CF9563 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		385CF9EC19842B4F00CF9563 /* VoiceTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VoiceTests.m; sourceTree = "<group>"; };
-		385CF9F719842FAF00CF9563 /* backward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backward.png; sourceTree = "<group>"; };
 		385CF9F819842FAF00CF9563 /* backward@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backward@2x.png"; sourceTree = "<group>"; };
-		385CF9F919842FAF00CF9563 /* forward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = forward.png; sourceTree = "<group>"; };
 		385CF9FA19842FAF00CF9563 /* forward@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "forward@2x.png"; sourceTree = "<group>"; };
-		385CF9FD19842FAF00CF9563 /* pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause.png; sourceTree = "<group>"; };
 		385CF9FE19842FAF00CF9563 /* pause@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pause@2x.png"; sourceTree = "<group>"; };
-		385CF9FF19842FAF00CF9563 /* photo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photo.png; sourceTree = "<group>"; };
 		385CFA0019842FAF00CF9563 /* photo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo@2x.png"; sourceTree = "<group>"; };
-		385CFA0119842FAF00CF9563 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
 		385CFA0219842FAF00CF9563 /* play@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play@2x.png"; sourceTree = "<group>"; };
 		385CFA0319842FAF00CF9563 /* player-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "player-568h@2x.png"; sourceTree = "<group>"; };
 		385CFA0519842FAF00CF9563 /* player@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "player@2x.png"; sourceTree = "<group>"; };
-		385CFA0619842FAF00CF9563 /* pointer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pointer.png; sourceTree = "<group>"; };
 		385CFA0719842FAF00CF9563 /* pointer@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pointer@2x.png"; sourceTree = "<group>"; };
 		385CFA0819842FAF00CF9563 /* speak-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "speak-568h@2x.png"; sourceTree = "<group>"; };
 		385CFA0A19842FAF00CF9563 /* speak@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "speak@2x.png"; sourceTree = "<group>"; };
-		385CFA0B19842FAF00CF9563 /* talk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = talk.png; sourceTree = "<group>"; };
 		385CFA0C19842FAF00CF9563 /* talk@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "talk@2x.png"; sourceTree = "<group>"; };
 		385CFA0E19842FAF00CF9563 /* SBJson4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson4.h; sourceTree = "<group>"; };
 		385CFA0F19842FAF00CF9563 /* SBJson4Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson4Parser.h; sourceTree = "<group>"; };
@@ -101,6 +88,7 @@
 		385CFA3A1984309A00CF9563 /* TalkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TalkViewController.h; sourceTree = "<group>"; };
 		385CFA3B1984309A00CF9563 /* TalkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TalkViewController.m; sourceTree = "<group>"; };
 		385CFA3D1984346200CF9563 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		38C46E6D19845CEA00DCF7A5 /* back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,23 +176,17 @@
 		385CF9F619842FAF00CF9563 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				385CF9F719842FAF00CF9563 /* backward.png */,
+				38C46E6D19845CEA00DCF7A5 /* back@2x.png */,
 				385CF9F819842FAF00CF9563 /* backward@2x.png */,
-				385CF9F919842FAF00CF9563 /* forward.png */,
 				385CF9FA19842FAF00CF9563 /* forward@2x.png */,
-				385CF9FD19842FAF00CF9563 /* pause.png */,
 				385CF9FE19842FAF00CF9563 /* pause@2x.png */,
-				385CF9FF19842FAF00CF9563 /* photo.png */,
 				385CFA0019842FAF00CF9563 /* photo@2x.png */,
-				385CFA0119842FAF00CF9563 /* play.png */,
 				385CFA0219842FAF00CF9563 /* play@2x.png */,
 				385CFA0319842FAF00CF9563 /* player-568h@2x.png */,
 				385CFA0519842FAF00CF9563 /* player@2x.png */,
-				385CFA0619842FAF00CF9563 /* pointer.png */,
 				385CFA0719842FAF00CF9563 /* pointer@2x.png */,
 				385CFA0819842FAF00CF9563 /* speak-568h@2x.png */,
 				385CFA0A19842FAF00CF9563 /* speak@2x.png */,
-				385CFA0B19842FAF00CF9563 /* talk.png */,
 				385CFA0C19842FAF00CF9563 /* talk@2x.png */,
 			);
 			path = Images;
@@ -314,22 +296,16 @@
 			files = (
 				385CFA2819842FAF00CF9563 /* play@2x.png in Resources */,
 				385CF9DF19842B4F00CF9563 /* Main.storyboard in Resources */,
-				385CFA1D19842FAF00CF9563 /* backward.png in Resources */,
 				385CFA3219842FAF00CF9563 /* talk@2x.png in Resources */,
 				385CFA2019842FAF00CF9563 /* forward@2x.png in Resources */,
-				385CFA3119842FAF00CF9563 /* talk.png in Resources */,
 				385CFA3019842FAF00CF9563 /* speak@2x.png in Resources */,
-				385CFA2C19842FAF00CF9563 /* pointer.png in Resources */,
 				385CFA2919842FAF00CF9563 /* player-568h@2x.png in Resources */,
 				385CF9E119842B4F00CF9563 /* Images.xcassets in Resources */,
-				385CFA2319842FAF00CF9563 /* pause.png in Resources */,
 				385CFA2419842FAF00CF9563 /* pause@2x.png in Resources */,
 				385CFA1E19842FAF00CF9563 /* backward@2x.png in Resources */,
-				385CFA1F19842FAF00CF9563 /* forward.png in Resources */,
 				385CFA2D19842FAF00CF9563 /* pointer@2x.png in Resources */,
 				385CFA2B19842FAF00CF9563 /* player@2x.png in Resources */,
-				385CFA2519842FAF00CF9563 /* photo.png in Resources */,
-				385CFA2719842FAF00CF9563 /* play.png in Resources */,
+				38C46E6E19845CEA00DCF7A5 /* back@2x.png in Resources */,
 				385CFA2E19842FAF00CF9563 /* speak-568h@2x.png in Resources */,
 				385CFA2619842FAF00CF9563 /* photo@2x.png in Resources */,
 			);

@@ -43,7 +43,7 @@
 
 - (void) startTalking {
     speechPaused = NO;
-    AVSpeechUtterance* utter = [[AVSpeechUtterance alloc] initWithString:@"Hello World My name is shalin and this is a complete test just to see if the tts actually pauses and works in a different project. If not, we would have to create a whole new project but i wouldnt mind doing that."];
+    AVSpeechUtterance* utter = [[AVSpeechUtterance alloc] initWithString:_text];
     utter.voice = [AVSpeechSynthesisVoice voiceWithLanguage:@"en-US"];
     [utter setRate:0.2f];
     if (!self.synthesizer) {
@@ -76,6 +76,9 @@
 
 - (IBAction)pauseButtonPressed:(id)sender {
     [self pauseSpeech];
+}
+
+- (IBAction)goToMain:(id)sender {
 }
 
 
