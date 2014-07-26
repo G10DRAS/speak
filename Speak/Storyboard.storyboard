@@ -32,7 +32,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8sp-Nr-LQn">
-                                <rect key="frame" x="89" y="170" width="142" height="142"/>
+                                <rect key="frame" x="89" y="180" width="142" height="142"/>
                                 <state key="normal" image="photo.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -40,11 +40,8 @@
                                     <action selector="takePhoto:" destination="UFX-LC-Bqi" eventType="touchUpInside" id="1lu-sk-iC0"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="ygq-sA-fEe">
-                                <rect key="frame" x="30" y="43" width="260" height="99"/>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NnN-Yc-pCy">
-                                <rect key="frame" x="89" y="334" width="142" height="142"/>
+                                <rect key="frame" x="89" y="341" width="142" height="142"/>
                                 <state key="normal" image="talk.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -56,12 +53,17 @@
                                 <rect key="frame" x="0.0" y="467" width="320" height="101"/>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
+                            <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" text="Voice" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="68Z-CH-2TC">
+                                <rect key="frame" x="20" y="20" width="280" height="112"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="93"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                             <pickerView hidden="YES" alpha="0.79999999999999982" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8aF-p8-tZX">
                                 <rect key="frame" x="0.0" y="406" width="320" height="162"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </pickerView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="222-5i-oHe"/>
                     <nil key="simulatedStatusBarMetrics"/>
@@ -75,7 +77,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kc1-5A-FKr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="302" y="-387"/>
+            <point key="canvasLocation" x="305" y="-402"/>
         </scene>
         <!--Speak View Controller-->
         <scene sceneID="hDh-fG-0v7">
@@ -121,6 +123,7 @@
                                 </connections>
                             </button>
                         </subviews>
+                        <color key="backgroundColor" red="0.24815169570000001" green="0.75910434299999996" blue="0.78607302300000004" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="YwF-00-yDv"/>
                     <nil key="simulatedStatusBarMetrics"/>
@@ -134,7 +137,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="logo.png" width="261" height="100"/>
         <image name="pause.png" width="50" height="50"/>
         <image name="photo.png" width="250" height="250"/>
         <image name="play.png" width="50" height="50"/>

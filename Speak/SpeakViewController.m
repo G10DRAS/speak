@@ -136,6 +136,10 @@
     }
 }
 
+-(void) moveToMainView {
+    UIViewController *myNext = [self.storyboard instantiateViewControllerWithIdentifier:@"MainView"];
+    [self.navigationController pushViewController:myNext animated:YES];
+}
 
 #pragma AVSpeechSynthesizer Delegate Methods
 
@@ -147,6 +151,7 @@
 {
      NSLog(@"speechSynthesizer didFinishSpeechUtterance");
     speechPaused = NO;
+    [self moveToMainView];
 
 }
 - (void)speechSynthesizer:(AVSpeechSynthesizer *)synthesizer didPauseSpeechUtterance:(AVSpeechUtterance *)utterance
