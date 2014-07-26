@@ -74,30 +74,40 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     self.picker.hidden = NO;
 }
 - (IBAction)recognizePhoto:(id)sender {
-    [self startLoading];
-    
-    unsigned long long size = [[NSFileManager defaultManager] attributesOfItemAtPath:imagePath error:nil].fileSize;
-    NSLog(@"Size %llu", size);
-    
-    // POST request to Google Drive
-    NSMutableDictionary* _params = [[NSMutableDictionary alloc] init];
+    if (self.imageView.image == nil) {
+        UIAlertView *alertView = [[UIAlertView alloc]
+                                  initWithTitle:@"Take A Picture"
+                                  message:@"You have to take a picture first before we can start reading it to you."
+                                  delegate:self
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles:nil];
+        [alertView show];
+    } else {
+        [self startLoading];
+        
+        unsigned long long size = [[NSFileManager defaultManager] attributesOfItemAtPath:imagePath error:nil].fileSize;
+        NSLog(@"Size %llu", size);
+        
+        // POST request to Google Drive
+        NSMutableDictionary* _params = [[NSMutableDictionary alloc] init];
 
-    NSData *file1Data = [[NSData alloc] initWithContentsOfFile:imagePath];
-    NSString *url = [NSString stringWithFormat:@"https://www.googleapis.com/upload/drive/v2/files?uploadType=media&convert=true&ocr=true&ocrLanguage=en"];
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:url]];
-    
-    // Headers
-    [request setValue:[NSString stringWithFormat:@"%llu", size] forHTTPHeaderField:@"Content-length"];
-    [request setValue:[NSString stringWithFormat:@"Bearer %@", hardCodedToken] forHTTPHeaderField:@"Authorization"];
-    [request setValue:@"image/jpeg" forHTTPHeaderField:@"Content-Type"];
-    
-    NSMutableData *body = [NSMutableData data];
-    [body appendData:[NSData dataWithData:file1Data]];
-    
-    [request setHTTPMethod:@"POST"];
-    [request setHTTPBody:body];
-    NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
-    receivedData = [[NSMutableData alloc] init];
+        NSData *file1Data = [[NSData alloc] initWithContentsOfFile:imagePath];
+        NSString *url = [NSString stringWithFormat:@"https://www.googleapis.com/upload/drive/v2/files?uploadType=media&convert=true&ocr=true&ocrLanguage=en"];
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:url]];
+        
+        // Headers
+        [request setValue:[NSString stringWithFormat:@"%llu", size] forHTTPHeaderField:@"Content-length"];
+        [request setValue:[NSString stringWithFormat:@"Bearer %@", hardCodedToken] forHTTPHeaderField:@"Authorization"];
+        [request setValue:@"image/jpeg" forHTTPHeaderField:@"Content-Type"];
+        
+        NSMutableData *body = [NSMutableData data];
+        [body appendData:[NSData dataWithData:file1Data]];
+        
+        [request setHTTPMethod:@"POST"];
+        [request setHTTPBody:body];
+        NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
+        receivedData = [[NSMutableData alloc] init];
+    }
 }
 
 - (void) getFile{
