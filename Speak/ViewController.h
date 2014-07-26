@@ -17,14 +17,18 @@ static NSString* hardCodedToken;
 
 @class SpeakViewController;
 
-@interface ViewController : UIViewController<UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIAlertViewDelegate> {
+@interface ViewController : UIViewController<UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIAlertViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate> {
     NSMutableData *receivedData;
     BOOL isAuthenticating;
     NSString *imagePath;
     UIAlertView *loading;
     NSDictionary *plainTextURL;
+    NSArray *_pickerData;
+    
+    NSString *pickerRowName;
 }
 
+@property (strong, nonatomic) IBOutlet UIPickerView *picker;
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 

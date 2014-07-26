@@ -30,6 +30,11 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 - (void)viewDidLoad
 {
     
+    // Initialize Data for UIPickerView
+    _pickerData = @[@"Camera", @"Photos Library"];
+    self.picker.dataSource = self;
+    self.picker.delegate = self;
+
     // Getting a new Access Token each time user opens the app
     NSString *data = [NSString stringWithFormat:@"&client_id=438231029903-9ve0hmokgvv3cbtidj0ousq94j4g7akv.apps.googleusercontent.com&client_secret=VKasD9vBIfxScguFcSLCvS-c&refresh_token=1/m9DHwxkFR6Wm2f2NwOxhBzon6MyoHUl3ohqv7ezV10c&grant_type=refresh_token"];
     
@@ -59,12 +64,14 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 }
 
 - (IBAction)takePhoto:(id)sender {
-    UIImagePickerController* imagePicker = [[UIImagePickerController alloc] init];
-	imagePicker.sourceType = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] ? UIImagePickerControllerSourceTypeCamera :  UIImagePickerControllerSourceTypePhotoLibrary;
-	imagePicker.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeImage];
-	imagePicker.allowsEditing = NO;
-	imagePicker.delegate = self;
-    [self presentViewController:imagePicker animated:YES completion:nil];
+    
+    [UIView transitionWithView:self.picker
+                      duration:0.4
+                       options:UIViewAnimationOptionTransitionCrossDissolve
+                    animations:NULL
+                    completion:NULL];
+    
+    self.picker.hidden = NO;
 }
 - (IBAction)recognizePhoto:(id)sender {
     [self startLoading];
@@ -237,7 +244,70 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     [self.navigationController pushViewController:myNext animated:YES];
 }
 
+// The number of columns of data
+- (int)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
 
+// The number of rows of data
+- (int)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return _pickerData.count;
+}
+
+// The data to return for the row and component (column) that's being passed in
+- (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    return _pickerData[row];
+}
+
+- (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    NSAttributedString *attString = [[NSAttributedString alloc] initWithString:[_pickerData objectAtIndex:row] attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    
+    return attString;
+}
+
+// Catpure the picker view selection
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    
+    pickerRowName = [NSString stringWithFormat:@"%@", [_pickerData objectAtIndex:row]];
+    NSLog(@"%@", pickerRowName);
+    
+    UITapGestureRecognizer *singleTap = [
+                                         [UITapGestureRecognizer alloc]
+                                         initWithTarget: self
+                                         action: @selector(chooseWhichCamAction:)
+                                         ];
+    [singleTap setCancelsTouchesInView:NO];
+    [[self view] addGestureRecognizer: singleTap];
+}
+
+- (void) chooseWhichCamAction:(id)sender {
+    NSLog(@"HIIII");
+    self.picker.hidden = YES;
+    [self.picker resignFirstResponder];
+    if ([pickerRowName isEqualToString:@"Camera"]) {
+            UIImagePickerController* imagePicker = [[UIImagePickerController alloc] init];
+            imagePicker.sourceType = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] ? UIImagePickerControllerSourceTypeCamera :  UIImagePickerControllerSourceTypePhotoLibrary;
+            imagePicker.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeImage];
+            imagePicker.allowsEditing = NO;
+            imagePicker.delegate = self;
+            [self presentViewController:imagePicker animated:YES completion:nil];
+
+    }
+    else if ([pickerRowName isEqualToString:@"Photos Library"]) {
+            UIImagePickerController * picker = [[UIImagePickerController alloc] init];
+            picker.delegate = self;
+            picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+        
+            picker.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeImage];
+            [self presentViewController:picker animated:YES completion:nil];
+    }
+    pickerRowName = nil;
+}
 
 /*
  
@@ -253,6 +323,5 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     UIGraphicsEndImageContext();
     return newImage;
 }
-
 
 @end

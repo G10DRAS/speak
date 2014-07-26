@@ -56,6 +56,10 @@
                                 <rect key="frame" x="0.0" y="467" width="320" height="101"/>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
+                            <pickerView hidden="YES" alpha="0.79999999999999982" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8aF-p8-tZX">
+                                <rect key="frame" x="0.0" y="406" width="320" height="162"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </pickerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -66,11 +70,12 @@
                     <size key="freeformSize" width="320" height="568"/>
                     <connections>
                         <outlet property="imageView" destination="Itf-5L-JWS" id="rnb-UT-YXA"/>
+                        <outlet property="picker" destination="8aF-p8-tZX" id="Lop-mq-1di"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kc1-5A-FKr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="302" y="-402"/>
+            <point key="canvasLocation" x="302" y="-387"/>
         </scene>
         <!--Speak View Controller-->
         <scene sceneID="hDh-fG-0v7">

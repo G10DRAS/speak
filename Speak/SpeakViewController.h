@@ -7,13 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 #import "ViewController.h"
 
 @class ViewController;
 
-@interface SpeakViewController : UIViewController {
+@interface SpeakViewController : UIViewController <AVSpeechSynthesizerDelegate> {
     NSMutableArray *lines;
     NSString *reformattedString;
     SystemSoundID soundID;
@@ -30,7 +29,6 @@
 @property (strong, nonatomic) NSString *text;
 @property (nonatomic, strong) ViewController *mainView;
 @property (nonatomic, strong) AVAudioPlayer *player;
-@property (nonatomic, strong) AVSpeechUtterance *utter;
 @property (strong, nonatomic) IBOutlet UISlider *volumeSlider;
 - (IBAction)sliderValueChanged:(UISlider *)sender;
 //-(IBAction)sliderValueChanged:(UISlider *)slider;
