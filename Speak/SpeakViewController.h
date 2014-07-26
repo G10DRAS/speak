@@ -8,29 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
-#import "ViewController.h"
 
-@class ViewController;
+#define ASSET_BY_SCREEN_HEIGHT(regular, longScreen) (([[UIScreen mainScreen] bounds].size.height <= 480.0) ? regular : longScreen)
 
 @interface SpeakViewController : UIViewController <AVSpeechSynthesizerDelegate> {
-    NSMutableArray *lines;
-    NSString *reformattedString;
-    SystemSoundID soundID;
-    NSURL *url2;
-    NSMutableArray *URLArray;
-    BOOL soundIsPlaying;
-    NSMutableArray *result;
-    int playerInt;
     float volumeLevel;
-    
     BOOL speechPaused;
 }
 
 @property (strong, nonatomic) NSString *text;
-@property (nonatomic, strong) ViewController *mainView;
-@property (nonatomic, strong) AVAudioPlayer *player;
 @property (strong, nonatomic) IBOutlet UISlider *volumeSlider;
-- (IBAction)sliderValueChanged:(UISlider *)sender;
+@property (strong, nonatomic) AVSpeechSynthesizer *synthesizer;
+//- (IBAction)sliderValueChanged:(UISlider *)sender;
 //-(IBAction)sliderValueChanged:(UISlider *)slider;
 
 - (IBAction)pauseSpeech:(id)sender;

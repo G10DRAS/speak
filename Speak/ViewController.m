@@ -171,21 +171,21 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 {
     self.imageView.image = [info objectForKey:UIImagePickerControllerOriginalImage];
 //    UIImage *grayscaleImg = [self.imageView.image convertToGrayscale];
-    CGRect screen = [UIScreen mainScreen].bounds;
-    UIImage *myIcon = [self imageWithImage:self.imageView.image scaledToSize:CGSizeMake(screen.size.width*2, screen.size.height*2)];
-    
 //    self.imageView.image = grayscaleImg;
-
+    CGRect screen = [UIScreen mainScreen].bounds;
+    UIImage *myScaledImage = [self imageWithImage:self.imageView.image scaledToSize:CGSizeMake(screen.size.width * 2, screen.size.height * 2)];
+    self.imageView.image = myScaledImage;
+    
 	[picker dismissViewControllerAnimated:YES completion:nil];
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
-    imagePath = [documentsDirectory stringByAppendingPathComponent:@"latest_photo.jpg"];
+    imagePath = [documentsDirectory stringByAppendingPathComponent:@"latest_photo.png"];
 
     //extracting image from the picker and saving it
     NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
     if ([mediaType isEqualToString:@"public.image"]){
-        NSData *webData = UIImageJPEGRepresentation(self.imageView.image, 1.0); //(self.imageView.image);
+        NSData *webData = UIImagePNGRepresentation(self.imageView.image); //(self.imageView.image);
         [webData writeToFile:imagePath atomically:YES];
     }
     NSLog(@"%@", imagePath);

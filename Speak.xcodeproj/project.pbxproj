@@ -11,6 +11,7 @@
 		0A26A3E41741746F004DD086 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A26A3E31741746F004DD086 /* Foundation.framework */; };
 		0A26A3E61741746F004DD086 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A26A3E51741746F004DD086 /* CoreGraphics.framework */; };
 		38191AE01905D9D700730C24 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38191ADF1905D9D700730C24 /* AVFoundation.framework */; };
+		385CF9621983CDF900CF9563 /* TalkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 385CF9611983CDF900CF9563 /* TalkViewController.m */; };
 		3862E00C1975A59E00C00150 /* SBJson4Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3862DFFF1975A59E00C00150 /* SBJson4Parser.m */; };
 		3862E00D1975A59E00C00150 /* SBJson4StreamParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3862E0011975A59E00C00150 /* SBJson4StreamParser.m */; };
 		3862E00E1975A59E00C00150 /* SBJson4StreamParserState.m in Sources */ = {isa = PBXBuildFile; fileRef = 3862E0031975A59E00C00150 /* SBJson4StreamParserState.m */; };
@@ -66,6 +67,8 @@
 		0A26A3E51741746F004DD086 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		38191ADF1905D9D700730C24 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		3819A97219281D2C009F02E0 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		385CF9601983CDF900CF9563 /* TalkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TalkViewController.h; path = Speak/TalkViewController.h; sourceTree = "<group>"; };
+		385CF9611983CDF900CF9563 /* TalkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TalkViewController.m; path = Speak/TalkViewController.m; sourceTree = "<group>"; };
 		3862DFFD1975A59E00C00150 /* SBJson4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson4.h; sourceTree = "<group>"; };
 		3862DFFE1975A59E00C00150 /* SBJson4Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson4Parser.h; sourceTree = "<group>"; };
 		3862DFFF1975A59E00C00150 /* SBJson4Parser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJson4Parser.m; sourceTree = "<group>"; };
@@ -153,6 +156,8 @@
 				38E5F07519751D93001442E1 /* README.md */,
 				38E5F08319751D93001442E1 /* SpeakViewController.h */,
 				38E5F08419751D93001442E1 /* SpeakViewController.m */,
+				385CF9601983CDF900CF9563 /* TalkViewController.h */,
+				385CF9611983CDF900CF9563 /* TalkViewController.m */,
 				38E5F08519751D93001442E1 /* Storyboard.storyboard */,
 				38E5F08619751D93001442E1 /* ViewController.h */,
 				38E5F08719751D93001442E1 /* ViewController.m */,
@@ -376,6 +381,7 @@
 				38E5F0B219751D93001442E1 /* ViewController.m in Sources */,
 				3862E0101975A59E00C00150 /* SBJson4StreamWriter.m in Sources */,
 				3862E0121975A59E00C00150 /* SBJson4Writer.m in Sources */,
+				385CF9621983CDF900CF9563 /* TalkViewController.m in Sources */,
 				38E5F0B019751D93001442E1 /* SpeakViewController.m in Sources */,
 				3862E00D1975A59E00C00150 /* SBJson4StreamParser.m in Sources */,
 				38E5F0AF19751D93001442E1 /* main.m in Sources */,
