@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "TalkViewController.h"
+#import "TutorialViewController.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 
 static NSString* hardCodedToken;
@@ -35,6 +36,7 @@ static NSString* theOCRText;
 
 @property (strong, nonatomic) UIAlertView *alertView;
 
+- (IBAction)helpPressed:(id)sender;
 @property (nonatomic, strong) TalkViewController *talkView;
 
 - (IBAction)takePhoto:(id)sender;

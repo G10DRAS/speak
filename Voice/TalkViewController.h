@@ -17,6 +17,7 @@
 }
 
 @property (strong, nonatomic) NSString *text;
+- (IBAction)moveToMain:(id)sender;
 
 - (IBAction)playButtonPressed:(id)sender;
 - (IBAction)pauseButtonPressed:(id)sender;

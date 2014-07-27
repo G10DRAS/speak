@@ -30,6 +30,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
+    if ([self canBecomeFirstResponder]) {
+        [self becomeFirstResponder];
+    }
+    
     speechPaused = NO;
     
     self.view.backgroundColor = [UIColor clearColor];
@@ -69,6 +74,23 @@
     NSLog(@"Played");
     speechPaused = NO;
 }
+- (void) playPauseToggle {
+    if (speechPaused == NO) {
+        [self pauseSpeech];
+    } else if (speechPaused == YES) {
+        [self playSpeech];
+    }
+}
+
+- (IBAction)moveToMain:(id)sender {
+    AVSpeechSynthesizer *talked = self.synthesizer;
+    if([talked isSpeaking]) {
+        [talked stopSpeakingAtBoundary:AVSpeechBoundaryImmediate];
+        AVSpeechUtterance *utterance = [AVSpeechUtterance speechUtteranceWithString:@""];
+        [talked speakUtterance:utterance];
+        [talked stopSpeakingAtBoundary:AVSpeechBoundaryImmediate];
+    }
+}
 
 - (IBAction)playButtonPressed:(id)sender {
     [self playSpeech];
@@ -78,9 +100,25 @@
     [self pauseSpeech];
 }
 
-- (IBAction)goToMain:(id)sender {
-}
 
+/*---------------------------------
+ HEADPHONES/EARPHONE ACTIONS
+ ------------------------------- */
+
+#pragma Earphone Button Events
+- (void)remoteControlReceivedWithEvent:(UIEvent *)theEvent
+{
+    if (theEvent.type == UIEventTypeRemoteControl)
+    {
+        switch(theEvent.subtype) {
+            case UIEventSubtypeRemoteControlTogglePlayPause:
+                [self playPauseToggle];
+                break;
+            default:
+                return;
+        }
+    }
+}
 
 - (void)didReceiveMemoryWarning
 {

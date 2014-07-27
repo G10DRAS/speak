@@ -318,6 +318,12 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     }
     pickerRowName = nil;
 }
+
+- (IBAction)helpPressed:(id)sender {
+    UIViewController *myNext = [self.storyboard instantiateViewControllerWithIdentifier:@"TutorialView"];
+    [self.navigationController pushViewController:myNext animated:YES];
+}
+
 + (NSString*)globalText {
     return theOCRText;
 }
@@ -335,4 +341,6 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     UIGraphicsEndImageContext();
     return newImage;
 }
+
+
 @end

@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "TutorialViewController.h"
+#import "ViewController.h"
 
 @interface AppDelegate ()
             
@@ -17,6 +19,29 @@
             
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    if ([[NSUserDefaults standardUserDefaults] integerForKey:@"isFirstTimeInt"] == 20) {
+        ViewController *mainView = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"MainView"];
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:mainView];
+        self.window.rootViewController = navController;
+    } else {
+        TutorialViewController *tutView = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"TutorialView"];
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:tutView];
+        self.window.rootViewController = navController;
+    }
+
+    
+    NSError *error = NULL;
+    AVAudioSession *session = [AVAudioSession sharedInstance];
+    [session setCategory:AVAudioSessionCategoryPlayback error:&error];
+    if(error) {
+        // Do some error handling
+    }
+    [session setActive:YES error:&error];
+    if (error) {
+        // Do some error handling
+    }
+
     // Override point for customization after application launch.
     return YES;
 }
