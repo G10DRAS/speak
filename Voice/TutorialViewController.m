@@ -30,8 +30,6 @@
 {
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:YES];
     
-    [[NSUserDefaults standardUserDefaults] setInteger:20 forKey:@"isFirstTimeInt"];
-    
     NSLog(@"Tut View");
     [super viewDidLoad];
     [self showIntroWithCrossDissolve];
@@ -96,7 +94,7 @@
 
 - (void)introDidFinish:(EAIntroView *)introView {
     NSLog(@"introDidFinish callback");
-    [[NSUserDefaults standardUserDefaults] setBool:FALSE forKey:@"firstTime"];
+    [[NSUserDefaults standardUserDefaults] setInteger:20 forKey:@"isFirstTimeInt"];
     [self moveToMain];
 }
 

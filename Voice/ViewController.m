@@ -39,7 +39,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     self.picker.delegate = self;
     
     // Getting a new Access Token each time user opens the app
-    NSString *data = [NSString stringWithFormat:@"&client_id=949987337109-637mnc7ajesdiuthjdubmtkjnsgjrvud.apps.googleusercontent.com&client_secret=XatsSRPBJvS-8vqUd5-wuTKA&refresh_token=1/m9DHwxkFR6Wm2f2NwOxhBzon6MyoHUl3ohqv7ezV10c&grant_type=refresh_token"];
+    NSString *data = [NSString stringWithFormat:@"&client_id=949987337109-637mnc7ajesdiuthjdubmtkjnsgjrvud.apps.googleusercontent.com&client_secret=XatsSRPBJvS-8vqUd5-wuTKA&refresh_token=1/42-VzBRsbaSf1uO4IpD89pWL9EpJrAAJfsWBBQHZPYg&grant_type=refresh_token"];
     
     NSLog(@"Access token refresh parameters: %@",data);
     NSString *url = [NSString stringWithFormat:@"https://accounts.google.com/o/oauth2/token"];
@@ -170,6 +170,10 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
         NSLog(@"Error getting %@, HTTP status code %i", plainTextURL, [responseCode statusCode]);
     }
     
+    self.talkView = [[TalkViewController alloc] initWithNibName:nil bundle:nil];
+    self.talkView.text = [[NSString alloc] initWithString:actualText];
+    
+    NSLog(@"%@",[[NSString alloc] initWithData:oResponseData encoding:NSUTF8StringEncoding]);
     
     NSMutableURLRequest *deleteRequest = [[NSMutableURLRequest alloc] init];
     [deleteRequest setHTTPMethod:@"DELETE"];
@@ -177,14 +181,9 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     [deleteRequest setValue:[NSString stringWithFormat:@"Bearer %@", hardCodedToken] forHTTPHeaderField:@"Authorization"];
     
     NSData *theResponseData = [NSURLConnection sendSynchronousRequest:deleteRequest returningResponse:&responseCode error:&error];
-    
-    self.talkView = [[TalkViewController alloc] initWithNibName:nil bundle:nil];
-    self.talkView.text = [[NSString alloc] initWithString:actualText];
-    [self moveToTalkView];
-    
-    NSLog(@"%@",[[NSString alloc] initWithData:oResponseData encoding:NSUTF8StringEncoding]);
-    
+
     [self stopLoading];
+    [self moveToTalkView];
 }
 
 #pragma mark - UIImagePickerControllerDelegate
@@ -217,13 +216,13 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
         [receivedData appendData:data];
     }
 }
-//- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-//    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*)response;
-//    if ([response respondsToSelector:@selector(allHeaderFields)]) {
-//        NSDictionary *dictionary = [httpResponse allHeaderFields];
-//        NSLog(@"%@",[dictionary description]);
-//    }
-//}
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*)response;
+    if ([response respondsToSelector:@selector(allHeaderFields)]) {
+        NSDictionary *dictionary = [httpResponse allHeaderFields];
+        NSLog(@"%@",[dictionary description]);
+    }
+}
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
                                                     message:[NSString stringWithFormat:@"%@", error]
@@ -307,6 +306,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 }
 
 - (void) chooseWhichCamAction:(id)sender {
+    [[self view] removeGestureRecognizer:singleTap];
     NSLog(@"HIIII");
     self.picker.hidden = YES;
     [self.picker resignFirstResponder];
@@ -317,7 +317,6 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
         imagePicker.allowsEditing = NO;
         imagePicker.delegate = self;
         [self presentViewController:imagePicker animated:YES completion:nil];
-        [[self view] removeGestureRecognizer:singleTap];
     }
     else if ([pickerRowName isEqualToString:@"Photos Library"]) {
         UIImagePickerController * picker = [[UIImagePickerController alloc] init];
@@ -326,7 +325,6 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
         
         picker.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeImage];
         [self presentViewController:picker animated:YES completion:nil];
-        [[self view] removeGestureRecognizer:singleTap];
     } else {
         UIImagePickerController* imagePicker = [[UIImagePickerController alloc] init];
         imagePicker.sourceType = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] ? UIImagePickerControllerSourceTypeCamera :  UIImagePickerControllerSourceTypePhotoLibrary;
@@ -334,7 +332,6 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
         imagePicker.allowsEditing = NO;
         imagePicker.delegate = self;
         [self presentViewController:imagePicker animated:YES completion:nil];
-        [[self view] removeGestureRecognizer:singleTap];
     }
     pickerRowName = nil;
 }

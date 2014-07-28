@@ -21,6 +21,6 @@
 
 - (IBAction)playButtonPressed:(id)sender;
 - (IBAction)pauseButtonPressed:(id)sender;
-- (IBAction)goToMain:(id)sender;
+//- (IBAction)restart:(id)sender;
 
 @end

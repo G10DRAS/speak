@@ -41,13 +41,12 @@
     UIImage *myImage = [UIImage imageNamed:ASSET_BY_SCREEN_HEIGHT(@"player", @"player-568h")];
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:myImage]];
     
-    _text = [ViewController globalText];
-    
     [self startTalking];
 }
 
 - (void) startTalking {
     speechPaused = NO;
+    _text = [ViewController globalText];
     AVSpeechUtterance* utter = [[AVSpeechUtterance alloc] initWithString:_text];
     utter.voice = [AVSpeechSynthesisVoice voiceWithLanguage:@"en-US"];
     [utter setRate:0.2f];
@@ -60,7 +59,7 @@
 
 - (void) pauseSpeech {
     if (speechPaused == NO) {
-        [self.synthesizer pauseSpeakingAtBoundary:AVSpeechBoundaryWord];
+        [self.synthesizer pauseSpeakingAtBoundary:AVSpeechBoundaryImmediate];
         NSLog(@"Paused");
         speechPaused = YES;
     }
@@ -81,6 +80,29 @@
         [self playSpeech];
     }
 }
+- (void) restartSpeech {
+    [self pauseSpeech];
+    [self startTalking];
+//    dispatch_time_t countdownTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC));
+//    dispatch_after(countdownTime, dispatch_get_main_queue(), ^(void){
+//        [self startTalking];
+//    });
+}
+
+- (void) stopSpeech {
+    AVSpeechSynthesizer *talked = self.synthesizer;
+    if([talked isSpeaking]) {
+        [talked stopSpeakingAtBoundary:AVSpeechBoundaryImmediate];
+//        AVSpeechUtterance *utterance = [AVSpeechUtterance speechUtteranceWithString:@""];
+//        [talked speakUtterance:utterance];
+//        [talked stopSpeakingAtBoundary:AVSpeechBoundaryImmediate];
+    }
+    _text = nil;
+}
+-(void) moveToMainView {
+    UIViewController *myNext = [self.storyboard instantiateViewControllerWithIdentifier:@"MainView"];
+    [self.navigationController pushViewController:myNext animated:YES];
+}
 
 - (IBAction)moveToMain:(id)sender {
     AVSpeechSynthesizer *talked = self.synthesizer;
@@ -100,6 +122,10 @@
     [self pauseSpeech];
 }
 
+//- (IBAction)restart:(id)sender {
+//    [self restartSpeech];
+//}
+
 
 /*---------------------------------
  HEADPHONES/EARPHONE ACTIONS
@@ -118,6 +144,10 @@
                 return;
         }
     }
+}
+
+- (void)speechSynthesizer:(AVSpeechSynthesizer *)synthesizer didFinishSpeechUtterance:(AVSpeechUtterance *)utteranc
+{
 }
 
 - (void)didReceiveMemoryWarning
