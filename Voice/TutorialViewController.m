@@ -28,6 +28,8 @@
 
 - (void)viewDidLoad
 {
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:YES];
+    
     [[NSUserDefaults standardUserDefaults] setInteger:20 forKey:@"isFirstTimeInt"];
     
     NSLog(@"Tut View");
@@ -83,7 +85,9 @@
 //    btn.layer.borderWidth = 2.0f;
 //    btn.layer.cornerRadius = 10;
 //    btn.layer.borderColor = [[UIColor whiteColor] CGColor];
+    
     intro.skipButton = nil;
+    intro.showSkipButtonOnlyOnLastPage = TRUE;
     
     [intro setDelegate:self];
     

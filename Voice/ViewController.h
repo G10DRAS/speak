@@ -25,7 +25,7 @@ static NSString* theOCRText;
     UIAlertView *loading;
     NSDictionary *plainTextURL;
     NSArray *_pickerData;
-    
+    UITapGestureRecognizer *singleTap;
     NSString *pickerRowName;
 }
 

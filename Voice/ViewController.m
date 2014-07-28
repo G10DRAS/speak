@@ -28,6 +28,9 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 
 - (void)viewDidLoad
 {
+    
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:NO];
+
     self.imageView.image = nil;
     
     // Initialize Data for UIPickerView
@@ -71,6 +74,14 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
                     completion:NULL];
     
     self.picker.hidden = NO;
+    
+    singleTap = [
+                                         [UITapGestureRecognizer alloc]
+                                         initWithTarget: self
+                                         action: @selector(chooseWhichCamAction:)
+                                         ];
+    [singleTap setCancelsTouchesInView:NO];
+    [[self view] addGestureRecognizer: singleTap];
 }
 
 - (IBAction)recognizePhoto:(id)sender {
@@ -282,17 +293,8 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 // Catpure the picker view selection
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    
     pickerRowName = [NSString stringWithFormat:@"%@", [_pickerData objectAtIndex:row]];
     NSLog(@"%@", pickerRowName);
-    
-    UITapGestureRecognizer *singleTap = [
-                                         [UITapGestureRecognizer alloc]
-                                         initWithTarget: self
-                                         action: @selector(chooseWhichCamAction:)
-                                         ];
-    [singleTap setCancelsTouchesInView:NO];
-    [[self view] addGestureRecognizer: singleTap];
 }
 
 - (void) chooseWhichCamAction:(id)sender {
@@ -306,7 +308,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
         imagePicker.allowsEditing = NO;
         imagePicker.delegate = self;
         [self presentViewController:imagePicker animated:YES completion:nil];
-        
+        [[self view] removeGestureRecognizer:singleTap];
     }
     else if ([pickerRowName isEqualToString:@"Photos Library"]) {
         UIImagePickerController * picker = [[UIImagePickerController alloc] init];
@@ -315,6 +317,15 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
         
         picker.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeImage];
         [self presentViewController:picker animated:YES completion:nil];
+        [[self view] removeGestureRecognizer:singleTap];
+    } else {
+        UIImagePickerController* imagePicker = [[UIImagePickerController alloc] init];
+        imagePicker.sourceType = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] ? UIImagePickerControllerSourceTypeCamera :  UIImagePickerControllerSourceTypePhotoLibrary;
+        imagePicker.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeImage];
+        imagePicker.allowsEditing = NO;
+        imagePicker.delegate = self;
+        [self presentViewController:imagePicker animated:YES completion:nil];
+        [[self view] removeGestureRecognizer:singleTap];
     }
     pickerRowName = nil;
 }
