@@ -80,7 +80,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
                                   message:@"You have to take a picture first before we can start reading it to you."
                                   delegate:self
                                   cancelButtonTitle:@"OK"
-                                  otherButtonTitles:nil];
+                                  otherButtonTitles:nil];        
         [alertView show];
     } else {
         [self startLoading];

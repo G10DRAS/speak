@@ -41,35 +41,35 @@
     page1.desc = nil;
     page1.titleIconView = nil;
     UIImage *bg1 = [UIImage imageNamed:ASSET_BY_SCREEN_HEIGHT(@"1", @"1-568h")];
-    page1.bgImage = [UIImage imageNamed:@"1.png"];
+    page1.bgImage = bg1;
     
     EAIntroPage *page2 = [EAIntroPage page];
     page2.title = nil;
     page2.desc = nil;
     page2.titleIconView = nil;
-    UIImage *bg2 = [UIImage imageNamed:ASSET_BY_SCREEN_HEIGHT(@"1", @"1-568h")];
-    page2.bgImage = [UIImage imageNamed:@"2.png"];
+    UIImage *bg2 = [UIImage imageNamed:ASSET_BY_SCREEN_HEIGHT(@"2", @"2-568h")];
+    page2.bgImage = bg2;
     
     EAIntroPage *page3 = [EAIntroPage page];
     page3.title = nil;
     page3.desc = nil;
     page3.titleIconView = nil;
-    UIImage *bg3 = [UIImage imageNamed:ASSET_BY_SCREEN_HEIGHT(@"1", @"1-568h")];
-    page3.bgImage = [UIImage imageNamed:@"3.png"];
+    UIImage *bg3 = [UIImage imageNamed:ASSET_BY_SCREEN_HEIGHT(@"3", @"3-568h")];
+    page3.bgImage = bg3;
 
     EAIntroPage *page4 = [EAIntroPage page];
     page4.title = nil;
     page4.desc = nil;
     page4.titleIconView = nil;
-    UIImage *bg4 = [UIImage imageNamed:ASSET_BY_SCREEN_HEIGHT(@"1", @"1-568h")];
-    page4.bgImage = [UIImage imageNamed:@"4.png"];
+    UIImage *bg4 = [UIImage imageNamed:ASSET_BY_SCREEN_HEIGHT(@"4", @"4-568h")];
+    page4.bgImage = bg4;
     
     EAIntroPage *page5 = [EAIntroPage page];
     page5.title = nil;
     page5.desc = nil;
     page5.titleIconView = nil;
-    UIImage *bg5 = [UIImage imageNamed:ASSET_BY_SCREEN_HEIGHT(@"1", @"1-568h")];
-    page5.bgImage = [UIImage imageNamed:@"5.png"];
+    UIImage *bg5 = [UIImage imageNamed:ASSET_BY_SCREEN_HEIGHT(@"5", @"5-568h")];
+    page5.bgImage = bg5;
 
     
     EAIntroView *intro = [[EAIntroView alloc] initWithFrame:self.view.bounds andPages:@[page1,page2,page3,page4,page5]];
