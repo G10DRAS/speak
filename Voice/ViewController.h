@@ -22,6 +22,7 @@ static NSString* theOCRText;
     NSMutableData *receivedData;
     BOOL isAuthenticating;
     NSString *imagePath;
+    NSString *imageFileID;
     UIAlertView *loading;
     NSDictionary *plainTextURL;
     NSArray *_pickerData;

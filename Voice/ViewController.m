@@ -39,7 +39,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     self.picker.delegate = self;
     
     // Getting a new Access Token each time user opens the app
-    NSString *data = [NSString stringWithFormat:@"&client_id=438231029903-9ve0hmokgvv3cbtidj0ousq94j4g7akv.apps.googleusercontent.com&client_secret=VKasD9vBIfxScguFcSLCvS-c&refresh_token=1/m9DHwxkFR6Wm2f2NwOxhBzon6MyoHUl3ohqv7ezV10c&grant_type=refresh_token"];
+    NSString *data = [NSString stringWithFormat:@"&client_id=949987337109-637mnc7ajesdiuthjdubmtkjnsgjrvud.apps.googleusercontent.com&client_secret=XatsSRPBJvS-8vqUd5-wuTKA&refresh_token=1/m9DHwxkFR6Wm2f2NwOxhBzon6MyoHUl3ohqv7ezV10c&grant_type=refresh_token"];
     
     NSLog(@"Access token refresh parameters: %@",data);
     NSString *url = [NSString stringWithFormat:@"https://accounts.google.com/o/oauth2/token"];
@@ -143,6 +143,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     
     NSDictionary *contentsOfJSON = [[json objectForKey:@"items"] objectAtIndex:0]; // step 2
     NSDictionary *fileID = [contentsOfJSON objectForKey:@"id"];
+    imageFileID = [contentsOfJSON objectForKey:@"id"];
     
     NSDictionary *allURLS = [contentsOfJSON objectForKey:@"exportLinks"];
     plainTextURL = [allURLS objectForKey:@"text/plain"];
@@ -168,6 +169,14 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     if([responseCode statusCode] != 200){
         NSLog(@"Error getting %@, HTTP status code %i", plainTextURL, [responseCode statusCode]);
     }
+    
+    
+    NSMutableURLRequest *deleteRequest = [[NSMutableURLRequest alloc] init];
+    [deleteRequest setHTTPMethod:@"DELETE"];
+    [deleteRequest setURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://www.googleapis.com/drive/v2/files/%@", imageFileID]]];
+    [deleteRequest setValue:[NSString stringWithFormat:@"Bearer %@", hardCodedToken] forHTTPHeaderField:@"Authorization"];
+    
+    NSData *theResponseData = [NSURLConnection sendSynchronousRequest:deleteRequest returningResponse:&responseCode error:&error];
     
     self.talkView = [[TalkViewController alloc] initWithNibName:nil bundle:nil];
     self.talkView.text = [[NSString alloc] initWithString:actualText];
