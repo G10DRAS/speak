@@ -10,6 +10,7 @@
 #import "TalkViewController.h"
 #import "TutorialViewController.h"
 #import <MobileCoreServices/MobileCoreServices.h>
+#import "ELCImagePickerHeader.h"
 
 static NSString* hardCodedToken;
 static NSString* theOCRText;
@@ -18,7 +19,7 @@ static NSString* theOCRText;
 
 @class TalkViewController;
 
-@interface ViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIAlertViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate> {
+@interface ViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIAlertViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate, ELCImagePickerControllerDelegate> {
     NSMutableData *receivedData;
     BOOL isAuthenticating;
     NSString *imagePath;
@@ -31,6 +32,8 @@ static NSString* theOCRText;
 }
 
 + (NSString*)globalText;
+
+@property (nonatomic, copy) NSArray *chosenImages;
 
 @property (strong, nonatomic) IBOutlet UIPickerView *picker;
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;

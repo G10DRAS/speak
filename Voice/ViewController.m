@@ -28,7 +28,6 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 
 - (void)viewDidLoad
 {
-    
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:NO];
 
     self.imageView.image = nil;
@@ -46,7 +45,8 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:url]];
     [request setHTTPMethod:@"POST"];
     [request setHTTPBody:[data dataUsingEncoding:NSUTF8StringEncoding]];
-    NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
+    NSURLConnection *theConnection;
+    theConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
     receivedData = [[NSMutableData alloc] init];
     isAuthenticating = YES;
     
@@ -65,6 +65,10 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+/*---------------------------------
+ GET THE PHOTO(S) FROM USER
+ ------------------------------- */
 - (IBAction)takePhoto:(id)sender {
     
     [UIView transitionWithView:self.picker
@@ -83,7 +87,133 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     [singleTap setCancelsTouchesInView:NO];
     [[self view] addGestureRecognizer: singleTap];
 }
+- (void) chooseWhichCamAction:(id)sender {
+    [[self view] removeGestureRecognizer:singleTap];
+    self.picker.hidden = YES;
+    [self.picker resignFirstResponder];
+    if ([pickerRowName isEqualToString:@"Camera"]) {
+        UIImagePickerController* imagePicker = [[UIImagePickerController alloc] init];
+        imagePicker.sourceType = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] ? UIImagePickerControllerSourceTypeCamera :  UIImagePickerControllerSourceTypePhotoLibrary;
+        imagePicker.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeImage];
+        imagePicker.allowsEditing = NO;
+        imagePicker.delegate = self;
+        [self presentViewController:imagePicker animated:YES completion:nil];
+    }
+    else if ([pickerRowName isEqualToString:@"Photos Library"]) {
+//        UIImagePickerController * picker = [[UIImagePickerController alloc] init];
+//        picker.delegate = self;
+//        picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+//        
+//        picker.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeImage];
+//        [self presentViewController:picker animated:YES completion:nil];
+        ELCImagePickerController *elcPicker = [[ELCImagePickerController alloc] initImagePicker];
+        
+        elcPicker.maximumImagesCount = 10;
+        elcPicker.returnsOriginalImage =YES; //Only return the fullScreenImage, not the fullResolutionImage
+        elcPicker.imagePickerDelegate = self;
+        elcPicker.onOrder = YES;
+        [self presentViewController:elcPicker animated:YES completion:nil];
+        
+    } else {
+        UIImagePickerController* imagePicker = [[UIImagePickerController alloc] init];
+        imagePicker.sourceType = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] ? UIImagePickerControllerSourceTypeCamera :  UIImagePickerControllerSourceTypePhotoLibrary;
+        imagePicker.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeImage];
+        imagePicker.allowsEditing = NO;
+        imagePicker.delegate = self;
+        [self presentViewController:imagePicker animated:YES completion:nil];
+    }
+    pickerRowName = nil;
+}
 
+//
+//
+// Image Picker Delegate Methods
+//
+//
+
+- (void)elcImagePickerController:(ELCImagePickerController *)picker didFinishPickingMediaWithInfo:(NSArray *)info
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    NSMutableArray *images = [NSMutableArray arrayWithCapacity:[info count]];
+    for (NSDictionary *dict in info) {
+        if ([dict objectForKey:UIImagePickerControllerMediaType] == ALAssetTypePhoto){
+            if ([dict objectForKey:UIImagePickerControllerOriginalImage]){
+                UIImage *photo = [dict objectForKey:UIImagePickerControllerOriginalImage];
+                UIImage *image = photo;
+                [images addObject:image];
+            } else {
+                NSLog(@"UIImagePickerControllerReferenceURL = %@", dict);
+            }
+        } else if ([dict objectForKey:UIImagePickerControllerMediaType] == ALAssetTypeVideo){
+            if ([dict objectForKey:UIImagePickerControllerOriginalImage]){
+                UIImage *photo = [dict objectForKey:UIImagePickerControllerOriginalImage];
+                UIImage *image = photo;
+                [images addObject:image];
+            } else {
+                NSLog(@"UIImagePickerControllerReferenceURL = %@", dict);
+            }
+        } else {
+            NSLog(@"Uknown asset type");
+        }
+    }
+    self.chosenImages = images;
+    
+    self.imageView.image = [self.chosenImages objectAtIndex:0];
+    
+    CGRect screen = [UIScreen mainScreen].bounds;
+    UIImage *myScaledImage = [self imageWithImage:self.imageView.image scaledToSize:CGSizeMake(screen.size.width * 2, screen.size.height * 2)];
+    self.imageView.image = myScaledImage;
+    
+    //extracting image from the picker and saving it
+    
+    // Create path.
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    imagePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"image.png"];
+    
+    // Save image.
+    [UIImagePNGRepresentation(self.imageView.image) writeToFile:imagePath atomically:YES];
+    NSLog(@"%@", imagePath);
+
+}
+
+//
+//
+// The Options Picker Delegate Methods
+//
+//
+
+// The number of columns of data
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+// The number of rows of data
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return _pickerData.count;
+}
+// The data to return for the row and component (column) that's being passed in
+- (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    return _pickerData[row];
+}
+- (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    NSAttributedString *attString = [[NSAttributedString alloc] initWithString:[_pickerData objectAtIndex:row] attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    
+    return attString;
+}
+// Catpure the picker view selection
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    pickerRowName = [NSString stringWithFormat:@"%@", [_pickerData objectAtIndex:row]];
+    NSLog(@"%@", pickerRowName);
+}
+
+/*---------------------------------
+ PROCESS THE PHOTO (OCR)
+ ------------------------------- */
 - (IBAction)recognizePhoto:(id)sender {
     if (self.imageView.image == nil) {
         UIAlertView *alertView = [[UIAlertView alloc]
@@ -91,7 +221,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
                                   message:@"You have to take a picture first before we can start reading it to you."
                                   delegate:self
                                   cancelButtonTitle:@"OK"
-                                  otherButtonTitles:nil];        
+                                  otherButtonTitles:nil];
         [alertView show];
     } else {
         [self startLoading];
@@ -100,8 +230,6 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
         NSLog(@"Size %llu", size);
         
         // POST request to Google Drive
-        NSMutableDictionary* _params = [[NSMutableDictionary alloc] init];
-        
         NSData *file1Data = [[NSData alloc] initWithContentsOfFile:imagePath];
         NSString *url = [NSString stringWithFormat:@"https://www.googleapis.com/upload/drive/v2/files?uploadType=media&convert=true&ocr=true&ocrLanguage=en"];
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:url]];
@@ -116,11 +244,11 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
         
         [request setHTTPMethod:@"POST"];
         [request setHTTPBody:body];
-        NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:request delegate:self];
+        NSURLConnection *theConnection;
+        theConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
         receivedData = [[NSMutableData alloc] init];
     }
 }
-
 - (void) getFile{
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setHTTPMethod:@"GET"];
@@ -133,7 +261,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     NSData *oResponseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&responseCode error:&error];
     
     if([responseCode statusCode] != 200){
-        NSLog(@"Error getting https://www.googleapis.com/drive/v2/files, HTTP status code %i", [responseCode statusCode]);
+        NSLog(@"Error getting https://www.googleapis.com/drive/v2/files, HTTP status code %f", (float)[responseCode statusCode]);
     }
     
     NSDictionary* json = [NSJSONSerialization
@@ -167,7 +295,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     theOCRText = actualText;
     
     if([responseCode statusCode] != 200){
-        NSLog(@"Error getting %@, HTTP status code %i", plainTextURL, [responseCode statusCode]);
+        NSLog(@"Error getting %@, HTTP status code %f", plainTextURL, (float)[responseCode statusCode]);
     }
     
     self.talkView = [[TalkViewController alloc] initWithNibName:nil bundle:nil];
@@ -180,36 +308,12 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     [deleteRequest setURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://www.googleapis.com/drive/v2/files/%@", imageFileID]]];
     [deleteRequest setValue:[NSString stringWithFormat:@"Bearer %@", hardCodedToken] forHTTPHeaderField:@"Authorization"];
     
-    NSData *theResponseData = [NSURLConnection sendSynchronousRequest:deleteRequest returningResponse:&responseCode error:&error];
-
+    NSData *theResponseData;
+    theResponseData = [NSURLConnection sendSynchronousRequest:deleteRequest returningResponse:&responseCode error:&error];
+    
     [self stopLoading];
     [self moveToTalkView];
 }
-
-#pragma mark - UIImagePickerControllerDelegate
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-{
-    self.imageView.image = [info objectForKey:UIImagePickerControllerOriginalImage];
-
-    CGRect screen = [UIScreen mainScreen].bounds;
-    UIImage *myScaledImage = [self imageWithImage:self.imageView.image scaledToSize:CGSizeMake(screen.size.width * 2, screen.size.height * 2)];
-    self.imageView.image = myScaledImage;
-    
-    [picker dismissViewControllerAnimated:YES completion:nil];
-    
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    imagePath = [documentsDirectory stringByAppendingPathComponent:@"latest_photo.png"];
-    
-    //extracting image from the picker and saving it
-    NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
-    if ([mediaType isEqualToString:@"public.image"]){
-        NSData *webData = UIImagePNGRepresentation(self.imageView.image); //(self.imageView.image);
-        [webData writeToFile:imagePath atomically:YES];
-    }
-    NSLog(@"%@", imagePath);
-}
-
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
     if (isAuthenticating == YES) {
@@ -254,6 +358,22 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     }
 }
 
+/*---------------------------------
+ NAVIGATION
+ ------------------------------- */
+
+-(void) moveToTalkView {
+    UIViewController *myNext = [self.storyboard instantiateViewControllerWithIdentifier:@"TalkView"];
+    [self.navigationController pushViewController:myNext animated:YES];
+}
+- (IBAction)helpPressed:(id)sender {
+    UIViewController *myNext = [self.storyboard instantiateViewControllerWithIdentifier:@"TutorialView"];
+    [self.navigationController pushViewController:myNext animated:YES];
+}
+
+/*---------------------------------
+ EXTRA STUFF
+ ------------------------------- */
 -(void)startLoading
 {
     loading = [[UIAlertView alloc]
@@ -268,87 +388,12 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     [loading dismissWithClickedButtonIndex:0 animated:YES];
 }
 
--(void) moveToTalkView {
-    UIViewController *myNext = [self.storyboard instantiateViewControllerWithIdentifier:@"TalkView"];
-    [self.navigationController pushViewController:myNext animated:YES];
-}
-
-// The number of columns of data
-- (int)numberOfComponentsInPickerView:(UIPickerView *)pickerView
-{
-    return 1;
-}
-
-// The number of rows of data
-- (int)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
-{
-    return _pickerData.count;
-}
-
-// The data to return for the row and component (column) that's being passed in
-- (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
-{
-    return _pickerData[row];
-}
-
-- (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component
-{
-    NSAttributedString *attString = [[NSAttributedString alloc] initWithString:[_pickerData objectAtIndex:row] attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
-    
-    return attString;
-}
-
-// Catpure the picker view selection
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
-{
-    pickerRowName = [NSString stringWithFormat:@"%@", [_pickerData objectAtIndex:row]];
-    NSLog(@"%@", pickerRowName);
-}
-
-- (void) chooseWhichCamAction:(id)sender {
-    [[self view] removeGestureRecognizer:singleTap];
-    NSLog(@"HIIII");
-    self.picker.hidden = YES;
-    [self.picker resignFirstResponder];
-    if ([pickerRowName isEqualToString:@"Camera"]) {
-        UIImagePickerController* imagePicker = [[UIImagePickerController alloc] init];
-        imagePicker.sourceType = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] ? UIImagePickerControllerSourceTypeCamera :  UIImagePickerControllerSourceTypePhotoLibrary;
-        imagePicker.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeImage];
-        imagePicker.allowsEditing = NO;
-        imagePicker.delegate = self;
-        [self presentViewController:imagePicker animated:YES completion:nil];
-    }
-    else if ([pickerRowName isEqualToString:@"Photos Library"]) {
-        UIImagePickerController * picker = [[UIImagePickerController alloc] init];
-        picker.delegate = self;
-        picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
-        
-        picker.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeImage];
-        [self presentViewController:picker animated:YES completion:nil];
-    } else {
-        UIImagePickerController* imagePicker = [[UIImagePickerController alloc] init];
-        imagePicker.sourceType = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] ? UIImagePickerControllerSourceTypeCamera :  UIImagePickerControllerSourceTypePhotoLibrary;
-        imagePicker.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeImage];
-        imagePicker.allowsEditing = NO;
-        imagePicker.delegate = self;
-        [self presentViewController:imagePicker animated:YES completion:nil];
-    }
-    pickerRowName = nil;
-}
-
-- (IBAction)helpPressed:(id)sender {
-    UIViewController *myNext = [self.storyboard instantiateViewControllerWithIdentifier:@"TutorialView"];
-    [self.navigationController pushViewController:myNext animated:YES];
-}
-
 + (NSString*)globalText {
     return theOCRText;
 }
+
 /*
- 
- THESE MAKE TESSERACT'S IMAGE READING MORE ACCURATE AND WORK BETTER
- (IT MAY ALSO MAKE IT SLOWER, BUT NOT NECESSARILY)
- 
+ THIS MAKES THE OCR'S IMAGE READING MORE ACCURATE AND WORK FASTER
  */
 
 - (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
