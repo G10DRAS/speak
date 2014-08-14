@@ -157,21 +157,24 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
             NSLog(@"Uknown asset type");
         }
     }
-    self.chosenImages = images;
+    NSMutableArray *imgs = [[NSMutableArray alloc] init];
+    for (int i = 0; i < [images count]; i++) {
+        NSData *imageData = UIImagePNGRepresentation([images objectAtIndex:i]);
+        [imgs addObject:imageData];
+    }
+    [[NSUserDefaults standardUserDefaults] setObject:imgs forKey:@"ImagesArray"];
     
-    self.imageView.image = [self.chosenImages objectAtIndex:0];
+    self.imageView.image = [images objectAtIndex:0];
     
     CGRect screen = [UIScreen mainScreen].bounds;
     UIImage *myScaledImage = [self imageWithImage:self.imageView.image scaledToSize:CGSizeMake(screen.size.width * 2, screen.size.height * 2)];
     self.imageView.image = myScaledImage;
     
-    //extracting image from the picker and saving it
-    
-    // Create path.
+    // Create path for image.
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     imagePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"image.png"];
     
-    // Save image.
+    // Save image to disk.
     [UIImagePNGRepresentation(self.imageView.image) writeToFile:imagePath atomically:YES];
     NSLog(@"%@", imagePath);
 
@@ -292,14 +295,12 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     
     NSData *oResponseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&responseCode error:&error];
     NSString *actualText = [[NSString alloc] initWithData:oResponseData encoding:NSUTF8StringEncoding];
-    theOCRText = actualText;
     
     if([responseCode statusCode] != 200){
         NSLog(@"Error getting %@, HTTP status code %f", plainTextURL, (float)[responseCode statusCode]);
     }
     
-    self.talkView = [[TalkViewController alloc] initWithNibName:nil bundle:nil];
-    self.talkView.text = [[NSString alloc] initWithString:actualText];
+    [[NSUserDefaults standardUserDefaults] setObject:actualText forKey:@"ImageText"];
     
     NSLog(@"%@",[[NSString alloc] initWithData:oResponseData encoding:NSUTF8StringEncoding]);
     
@@ -388,8 +389,8 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     [loading dismissWithClickedButtonIndex:0 animated:YES];
 }
 
-+ (NSString*)globalText {
-    return theOCRText;
++ (NSString*)globalToken {
+    return hardCodedToken;
 }
 
 /*

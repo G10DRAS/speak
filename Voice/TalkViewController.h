@@ -14,6 +14,15 @@
 @interface TalkViewController : UIViewController {
     BOOL speechPaused;
     BOOL alreadyStartedTalking;
+    NSMutableArray *imageArray;
+    NSMutableArray *speakArray;
+    NSString *imagePath;
+    NSMutableData *receivedData;
+    NSString *imageFileID;
+    NSDictionary *plainTextURL;
+    NSString *theToken;
+    int imageNumber;
+
 }
 
 @property (strong, nonatomic) NSString *text;

@@ -32,8 +32,7 @@ static NSString* theOCRText;
 }
 
 + (NSString*)globalText;
-
-@property (nonatomic, copy) NSArray *chosenImages;
++ (NSString*)globalToken;
 
 @property (strong, nonatomic) IBOutlet UIPickerView *picker;
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
