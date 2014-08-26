@@ -11,19 +11,23 @@
 
 #define ASSET_BY_SCREEN_HEIGHT(regular, longScreen) (([[UIScreen mainScreen] bounds].size.height <= 480.0) ? regular : longScreen)
 
-@interface TalkViewController : UIViewController {
+@interface TalkViewController : UIViewController <UIScrollViewDelegate> {
     BOOL speechPaused;
     BOOL alreadyStartedTalking;
+    BOOL compressingImage;
     NSMutableArray *imageArray;
     NSMutableArray *speakArray;
     NSString *imagePath;
     NSMutableData *receivedData;
     NSString *imageFileID;
+    NSString *compressedImageURL;
     NSDictionary *plainTextURL;
     NSString *theToken;
     int imageNumber;
+    NSData *compressedImageData;
 
 }
+@property (nonatomic, strong) IBOutlet UIScrollView *scrollView;
 
 @property (strong, nonatomic) NSString *text;
 - (IBAction)moveToMain:(id)sender;

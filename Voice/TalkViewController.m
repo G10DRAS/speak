@@ -27,15 +27,46 @@
 
 - (void)viewDidLoad
 {
+    
+    speakArray = [[NSMutableArray alloc] init];
+    imageArray = [[NSMutableArray alloc] init];
+    
+    imageArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"ImagesArray"]];
+    [speakArray addObject:[[NSUserDefaults standardUserDefaults] objectForKey:@"ImageText"]];
+    
+    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, 460)];
+    self.scrollView.contentSize = CGSizeMake(320, 465);
+    self.scrollView.delegate = self;
+    [self.view addSubview:self.scrollView];
+    
+    CGRect workingFrame = self.scrollView.frame;
+    workingFrame.origin.x = 0;
+    
+    NSMutableArray *images = [NSMutableArray arrayWithCapacity:[imageArray count]];
+    for (int i = 0; i < [imageArray count]; i++) {
+        UIImage* image = [UIImage imageWithData:[imageArray objectAtIndex:i]];
+        [images addObject:image];
+        
+        UIImageView *imageview = [[UIImageView alloc] initWithImage:image];
+        [imageview setContentMode:UIViewContentModeScaleAspectFit];
+        imageview.frame = workingFrame;
+        
+        [self.scrollView addSubview: imageview];
+        workingFrame.origin.x = workingFrame.origin.x + workingFrame.size.width;
+    }
+    [self.scrollView setPagingEnabled:YES];
+    [self.scrollView setContentSize:CGSizeMake(workingFrame.origin.x, workingFrame.size.height)];
+    
+    
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
     
     [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
     if ([self canBecomeFirstResponder]) {
         [self becomeFirstResponder];
     }
-    speakArray = [[NSMutableArray alloc] init];
-    imageArray = [[NSMutableArray alloc] init];
+
     
     speechPaused = NO;
     imageNumber = 1;
@@ -44,17 +75,25 @@
     UIImage *myImage = [UIImage imageNamed:ASSET_BY_SCREEN_HEIGHT(@"player", @"player-568h")];
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:myImage]];
     
-    imageArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"ImagesArray"]];
-    [speakArray addObject:[[NSUserDefaults standardUserDefaults] objectForKey:@"ImageText"]];
+    
+    compressingImage = YES;
+    
+//    NSLog(@"speakArray: %@", speakArray);
 
     
     [self startTalking];
+    
+    NSLog(@"imageArray Count: %d", [imageArray count]);
+}
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     
     if ([imageArray count] > imageNumber) {
         [self fetchTextFromImage:[imageArray objectAtIndex:imageNumber]];
     }
 
 }
+
 - (void) startTalking {
     speechPaused = NO;
     NSString *imageText = [NSString stringWithFormat:@"%@", [speakArray objectAtIndex:0]];
@@ -129,7 +168,7 @@
  ------------------------------- */
 - (void)speechSynthesizer:(AVSpeechSynthesizer *)synthesizer didFinishSpeechUtterance:(AVSpeechUtterance *)utterance {
     imageNumber += 1;
-    if ([imageArray count] > imageNumber) {
+    if ([speakArray count] + 1 > imageNumber) {
         [self fetchTextFromImage:[imageArray objectAtIndex:imageNumber]];
         
         speechPaused = NO;
@@ -151,15 +190,76 @@
  ------------------------------- */
 
 - (void) fetchTextFromImage: (NSData *)theImage {
+    compressingImage = YES;
+    
+    UIImage *imageFromData = [UIImage imageWithData:theImage];
+    UIImage *myScaledImage = [self imageWithImage:imageFromData scaledToSize:CGSizeMake(imageFromData.size.width * .3, imageFromData.size.height * .3)];
+    NSData *dataFromImage = UIImagePNGRepresentation(myScaledImage);
+
+    
     // Create path for image.
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     imagePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"image.png"];
     
     // Save image to disk.
-    NSData *data = theImage;
+    NSData *data = dataFromImage;
     [data writeToFile:imagePath atomically:YES];
     NSLog(@"%@", imagePath);
     
+    [self postToGoogleDrive];
+    
+//    // POST request to TinyPNG
+//    NSString *tinyPNGToken = @"lIC0N4QDMFfE2QfPj8Qz2Hh_ZsUaLDbQ";
+//    NSData *fileData = [[NSData alloc] initWithContentsOfFile:imagePath];
+//    NSString *link = [NSString stringWithFormat:@"https://api.tinypng.com/shrink"];
+//    NSMutableURLRequest *makeRequest = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:link]];
+//    
+//    // Headers
+//    [makeRequest setValue:[NSString stringWithFormat:@"Basic %@", tinyPNGToken] forHTTPHeaderField:@"Authorization"];
+//    
+//    NSMutableData *theBody = [NSMutableData data];
+//    [theBody appendData:[NSData dataWithData:fileData]];
+//    
+//    [makeRequest setHTTPMethod:@"POST"];
+//    [makeRequest setHTTPBody:theBody];
+//    NSURLConnection *connection;
+//    connection = [[NSURLConnection alloc] initWithRequest:makeRequest delegate:self];
+//    receivedData = [[NSMutableData alloc] init];
+}
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+    if (compressingImage == NO) {
+        NSLog(@"Uploaded to Google Drive");
+        [self getFile];
+    } else {
+        NSError* error;
+        NSDictionary* json = [NSJSONSerialization
+                              JSONObjectWithData:receivedData // step 1
+                              options:kNilOptions
+                              error:&error];
+        
+        NSDictionary *output = [json objectForKey:@"output"];
+        compressedImageURL = [output objectForKey:@"url"];
+        
+        NSLog(@"The JSON Data: %@", json);
+        
+        [self getCompressedImage];
+    }
+}
+- (void) getCompressedImage{
+    compressedImageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString:compressedImageURL]];
+    [self postToGoogleDrive];
+}
+-(void) postToGoogleDrive {
+//    // Create path for image.
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//    imagePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"image.png"];
+//    
+//    // Save image to disk.
+//    NSData *data = compressedImageData;
+//    [data writeToFile:imagePath atomically:YES];
+    
+    compressingImage = NO;
     
     // Get the size of the image
     unsigned long long size = [[NSFileManager defaultManager] attributesOfItemAtPath:imagePath error:nil].fileSize;
@@ -174,7 +274,7 @@
     // Headers
     [request setValue:[NSString stringWithFormat:@"%llu", size] forHTTPHeaderField:@"Content-length"];
     [request setValue:[NSString stringWithFormat:@"Bearer %@", theToken] forHTTPHeaderField:@"Authorization"];
-    [request setValue:@"image/jpeg" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:@"image/png" forHTTPHeaderField:@"Content-Type"];
     
     NSMutableData *body = [NSMutableData data];
     [body appendData:[NSData dataWithData:file1Data]];
@@ -184,11 +284,6 @@
     NSURLConnection *theConnection;
     theConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
     receivedData = [[NSMutableData alloc] init];
-}
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
-{
-    NSLog(@"Uploaded to Google Drive");
-    [self getFile];
 }
 - (void) getFile{
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
@@ -250,6 +345,8 @@
     
     NSData *theResponseData;
     theResponseData = [NSURLConnection sendSynchronousRequest:deleteRequest returningResponse:&responseCode error:&error];
+    
+    compressingImage = YES;
 }
 
 
@@ -276,6 +373,18 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+/*---------------------------------
+ EXTRA STUFF
+ ------------------------------- */
+
+- (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
+    UIGraphicsBeginImageContext(newSize);
+    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
 }
 
 @end

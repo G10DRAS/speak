@@ -166,9 +166,15 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     
     self.imageView.image = [images objectAtIndex:0];
     
-    CGRect screen = [UIScreen mainScreen].bounds;
-    UIImage *myScaledImage = [self imageWithImage:self.imageView.image scaledToSize:CGSizeMake(screen.size.width * 2, screen.size.height * 2)];
+//    CGRect screen = [UIScreen mainScreen].bounds;
+    UIImage *myScaledImage = [self imageWithImage:self.imageView.image scaledToSize:CGSizeMake(self.imageView.image.size.width * .3, self.imageView.image.size.height * .3)];
     self.imageView.image = myScaledImage;
+    
+//    // grab the original image
+//    UIImage *originalImage = self.imageView.image;
+//    // scaling set to 2.0 makes the image 1/2 the size.
+//    UIImage *scaledImage = [UIImage imageWithCGImage:[originalImage CGImage] scale:(originalImage.scale * 2.0) orientation:(originalImage.imageOrientation)];
+//    self.imageView.image = scaledImage;
     
     // Create path for image.
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -240,7 +246,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
         // Headers
         [request setValue:[NSString stringWithFormat:@"%llu", size] forHTTPHeaderField:@"Content-length"];
         [request setValue:[NSString stringWithFormat:@"Bearer %@", hardCodedToken] forHTTPHeaderField:@"Authorization"];
-        [request setValue:@"image/jpeg" forHTTPHeaderField:@"Content-Type"];
+        [request setValue:@"image/png" forHTTPHeaderField:@"Content-Type"];
         
         NSMutableData *body = [NSMutableData data];
         [body appendData:[NSData dataWithData:file1Data]];
