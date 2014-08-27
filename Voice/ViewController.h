@@ -27,7 +27,9 @@ static NSString* theOCRText;
     UIAlertView *loading;
     NSDictionary *plainTextURL;
     NSArray *_pickerData;
+    NSArray *_languagePickerData;
     UITapGestureRecognizer *singleTap;
+    UITapGestureRecognizer *languageTap;
     NSString *pickerRowName;
 }
 
@@ -35,11 +37,15 @@ static NSString* theOCRText;
 + (NSString*)globalToken;
 
 @property (strong, nonatomic) IBOutlet UIPickerView *picker;
+@property (strong, nonatomic) IBOutlet UIPickerView *languagePicker;
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
 
 @property (strong, nonatomic) UIAlertView *alertView;
 
 - (IBAction)helpPressed:(id)sender;
+- (IBAction)languageSelection:(id)sender;
+
+
 @property (nonatomic, strong) TalkViewController *talkView;
 
 - (IBAction)takePhoto:(id)sender;

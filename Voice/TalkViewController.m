@@ -98,7 +98,7 @@
     speechPaused = NO;
     NSString *imageText = [NSString stringWithFormat:@"%@", [speakArray objectAtIndex:0]];
     AVSpeechUtterance* utter = [[AVSpeechUtterance alloc] initWithString:imageText];
-    utter.voice = [AVSpeechSynthesisVoice voiceWithLanguage:@"en-US"];
+    utter.voice = [AVSpeechSynthesisVoice voiceWithLanguage:[[NSUserDefaults standardUserDefaults] objectForKey:@"languageForTTS"]];
     [utter setRate:0.2f];
     if (!self.synthesizer) {
         self.synthesizer = [AVSpeechSynthesizer new];
@@ -174,7 +174,7 @@
         speechPaused = NO;
         NSString *imageText = [NSString stringWithFormat:@"%@", [speakArray objectAtIndex:imageNumber-1]];
         AVSpeechUtterance* utter = [[AVSpeechUtterance alloc] initWithString:imageText];
-        utter.voice = [AVSpeechSynthesisVoice voiceWithLanguage:@"en-US"];
+        utter.voice = [AVSpeechSynthesisVoice voiceWithLanguage:[[NSUserDefaults standardUserDefaults] objectForKey:@"languageForTTS"]];
         [utter setRate:0.2f];
         if (!self.synthesizer) {
             self.synthesizer = [AVSpeechSynthesizer new];
@@ -268,7 +268,7 @@
     // POST request to Google Drive
     theToken = [ViewController globalToken];
     NSData *file1Data = [[NSData alloc] initWithContentsOfFile:imagePath];
-    NSString *url = [NSString stringWithFormat:@"https://www.googleapis.com/upload/drive/v2/files?uploadType=media&convert=true&ocr=true&ocrLanguage=en"];
+    NSString *url = [NSString stringWithFormat:@"https://www.googleapis.com/upload/drive/v2/files?uploadType=media&convert=true&ocr=true&ocrLanguage=%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"languageForOCR"]];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:url]];
     
     // Headers

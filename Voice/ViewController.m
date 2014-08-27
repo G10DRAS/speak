@@ -32,6 +32,11 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 
     self.imageView.image = nil;
     
+    // Initialize Langauges for LanguagePicker
+    _languagePickerData = @[@"Arabic (Saudi Arabia)", @"Chinese (China)", @"Chinese (Hong Kong)", @"Chinese (Taiwan)", @"Czech (Czech Republic)", @"Danish (Denmark)", @"Dutch (Belgium)", @"Dutch (Netherlands)", @"English (Australia)", @"English (Ireland)", @"English (South Africa)", @"English (UK)", @"English (USA)", @"Finnish (Finland)", @"French (Canada)", @"French (France)", @"German (Germany)", @"Greek (Greece)", @"Hindi (India)", @"Hungarian (Hungary)", @"Indonesian (Indonesia)", @"Italian (Italy)", @"Japanese (Japan)", @"Korean (South Korea)", @"Norwegian (Norway)", @"Polish (Poland)", @"Portuguese (Brazil)", @"Portuguese (Portugal)", @"Romanian (Romania)", @"Russian (Russia)", @"Slovak (Slovakia)", @"Spanish (Mexico)", @"Spanish (Spain)", @"Swedish (Sweden)", @"Thai (Thailand)", @"Turkish (Turkey)"];
+    self.languagePicker.dataSource = self;
+    self.languagePicker.delegate = self;
+    
     // Initialize Data for UIPickerView
     _pickerData = @[@"Camera", @"Photos Library"];
     self.picker.dataSource = self;
@@ -54,7 +59,6 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     UIImage *myImage = [UIImage imageNamed:ASSET_BY_SCREEN_HEIGHT(@"speak", @"speak-568h")];
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:myImage]];
     
-    //    }
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -65,6 +69,155 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+/*---------------------------------
+ SELECT THE OCR LANGUAGE
+ ------------------------------- */
+
+- (IBAction)languageSelection:(id)sender {
+    [UIView transitionWithView:self.languagePicker
+                      duration:0.4
+                       options:UIViewAnimationOptionTransitionCrossDissolve
+                    animations:NULL
+                    completion:NULL];
+    
+    self.languagePicker.hidden = NO;
+    
+    languageTap = [
+                 [UITapGestureRecognizer alloc]
+                 initWithTarget: self
+                 action: @selector(whichLanguage:)
+                 ];
+    [languageTap setCancelsTouchesInView:NO];
+    [[self view] addGestureRecognizer: languageTap];
+}
+
+- (void) whichLanguage:(id)sender {
+    [[self view] removeGestureRecognizer:languageTap];
+    self.languagePicker.hidden = YES;
+    [self.languagePicker resignFirstResponder];
+    
+    NSString *languageForOCR;
+    NSString *languageForTTS;
+    
+    if ([pickerRowName isEqualToString:@"Arabic (Saudi Arabia)"]) {
+        languageForOCR = @"ar";
+        languageForTTS = @"ar-SA";
+    } else if ([pickerRowName isEqualToString:@"Chinese (China)"]) {
+        languageForOCR = @"zh";
+        languageForTTS = @"zh-CN";
+    } else if ([pickerRowName isEqualToString:@"Chinese (Hong Kong)"]) {
+        languageForOCR = @"zh";
+        languageForTTS = @"zh-HK";
+    } else if ([pickerRowName isEqualToString:@"Chinese (Taiwan)"]) {
+        languageForOCR = @"zh";
+        languageForTTS = @"zh-TW";
+    } else if ([pickerRowName isEqualToString:@"Czech (Czech Republic)"]) {
+        languageForOCR = @"cs";
+        languageForTTS = @"cs-CZ";
+    } else if ([pickerRowName isEqualToString:@"Danish (Denmark)"]) {
+        languageForOCR = @"da";
+        languageForTTS = @"da-DK";
+    } else if ([pickerRowName isEqualToString:@"Dutch (Belgium)"]) {
+        languageForOCR = @"nl";
+        languageForTTS = @"nl-BE";
+    } else if ([pickerRowName isEqualToString:@"Dutch (Netherlands)"]) {
+        languageForOCR = @"nl";
+        languageForTTS = @"nl-NL";
+    } else if ([pickerRowName isEqualToString:@"English (Australia)"]) {
+        languageForOCR = @"en";
+        languageForTTS = @"en-AU";
+    } else if ([pickerRowName isEqualToString:@"English (Ireland)"]) {
+        languageForOCR = @"en";
+        languageForTTS = @"en-IE";
+    } else if ([pickerRowName isEqualToString:@"English (South Africa)"]) {
+        languageForOCR = @"en";
+        languageForTTS = @"en-ZA";
+    } else if ([pickerRowName isEqualToString:@"English (UK)"]) {
+        languageForOCR = @"en";
+        languageForTTS = @"en-GB";
+    } else if ([pickerRowName isEqualToString:@"English (USA)"]) {
+        languageForOCR = @"en";
+        languageForTTS = @"en-US";
+    } else if ([pickerRowName isEqualToString:@"Finnish (Finland)"]) {
+        languageForOCR = @"fi";
+        languageForTTS = @"fi-FI";
+    } else if ([pickerRowName isEqualToString:@"French (Canada)"]) {
+        languageForOCR = @"fr";
+        languageForTTS = @"fr-CA";
+    } else if ([pickerRowName isEqualToString:@"French (France)"]) {
+        languageForOCR = @"fr";
+        languageForTTS = @"fr-FR";
+    } else if ([pickerRowName isEqualToString:@"German (Germany)"]) {
+        languageForOCR = @"de";
+        languageForTTS = @"de-DE";
+    } else if ([pickerRowName isEqualToString:@"Greek (Greece)"]) {
+        languageForOCR = @"el";
+        languageForTTS = @"el-GR";
+    } else if ([pickerRowName isEqualToString:@"Hindi (India)"]) {
+        languageForOCR = @"hi";
+        languageForTTS = @"hi-IN";
+    } else if ([pickerRowName isEqualToString:@"Hungarian (Hungary)"]) {
+        languageForOCR = @"hu";
+        languageForTTS = @"hu-HU";
+    } else if ([pickerRowName isEqualToString:@"Indonesian (Indonesia)"]) {
+        languageForOCR = @"id";
+        languageForTTS = @"id-ID";
+    } else if ([pickerRowName isEqualToString:@"Italian (Italy)"]) {
+        languageForOCR = @"it";
+        languageForTTS = @"it-IT";
+    } else if ([pickerRowName isEqualToString:@"Japanese (Japan)"]) {
+        languageForOCR = @"ja";
+        languageForTTS = @"ja-JP";
+    } else if ([pickerRowName isEqualToString:@"Korean (South Korea)"]) {
+        languageForOCR = @"ko";
+        languageForTTS = @"ko-KR";
+    } else if ([pickerRowName isEqualToString:@"Norwegian (Norway)"]) {
+        languageForOCR = @"no";
+        languageForTTS = @"no-NO";
+    } else if ([pickerRowName isEqualToString:@"Polish (Poland)"]) {
+        languageForOCR = @"pl";
+        languageForTTS = @"pl-PL";
+    } else if ([pickerRowName isEqualToString:@"Portuguese (Brazil)"]) {
+        languageForOCR = @"pt";
+        languageForTTS = @"pt-BR";
+    } else if ([pickerRowName isEqualToString:@"Portuguese (Portugal)"]) {
+        languageForOCR = @"pt";
+        languageForTTS = @"pt-PT";
+    } else if ([pickerRowName isEqualToString:@"Romanian (Romania)"]) {
+        languageForOCR = @"ro";
+        languageForTTS = @"ro-RO";
+    } else if ([pickerRowName isEqualToString:@"Russian (Russia)"]) {
+        languageForOCR = @"ru";
+        languageForTTS = @"ru-RU";
+    } else if ([pickerRowName isEqualToString:@"Slovak (Slovakia)"]) {
+        languageForOCR = @"sk";
+        languageForTTS = @"sk-SK";
+    } else if ([pickerRowName isEqualToString:@"Spanish (Mexico)"]) {
+        languageForOCR = @"es";
+        languageForTTS = @"es-MX";
+    } else if ([pickerRowName isEqualToString:@"Spanish (Spain)"]) {
+        languageForOCR = @"es";
+        languageForTTS = @"es-ES";
+    } else if ([pickerRowName isEqualToString:@"Swedish (Sweden)"]) {
+        languageForOCR = @"sv";
+        languageForTTS = @"sv-SE";
+    } else if ([pickerRowName isEqualToString:@"Thai (Thailand)"]) {
+        languageForOCR = @"th";
+        languageForTTS = @"th-TH";
+    } else if ([pickerRowName isEqualToString:@"Turkish (Turkey)"]) {
+        languageForOCR = @"tr";
+        languageForTTS = @"tr-TR";
+    } else {
+        languageForOCR = @"en";
+        languageForTTS = @"en-US";
+    }
+    NSLog(@"%@", languageForOCR);
+    NSLog(@"%@", languageForTTS);
+    [[NSUserDefaults standardUserDefaults] setObject:languageForTTS forKey:@"languageForTTS"];
+    [[NSUserDefaults standardUserDefaults] setObject:languageForOCR forKey:@"languageForOCR"];
+}
+
 
 /*---------------------------------
  GET THE PHOTO(S) FROM USER
@@ -131,6 +284,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 //
 //
 
+// If mult. images picked from photos library
 - (void)elcImagePickerController:(ELCImagePickerController *)picker didFinishPickingMediaWithInfo:(NSArray *)info
 {
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -166,15 +320,9 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     
     self.imageView.image = [images objectAtIndex:0];
     
-//    CGRect screen = [UIScreen mainScreen].bounds;
+    // Scale the image
     UIImage *myScaledImage = [self imageWithImage:self.imageView.image scaledToSize:CGSizeMake(self.imageView.image.size.width * .3, self.imageView.image.size.height * .3)];
     self.imageView.image = myScaledImage;
-    
-//    // grab the original image
-//    UIImage *originalImage = self.imageView.image;
-//    // scaling set to 2.0 makes the image 1/2 the size.
-//    UIImage *scaledImage = [UIImage imageWithCGImage:[originalImage CGImage] scale:(originalImage.scale * 2.0) orientation:(originalImage.imageOrientation)];
-//    self.imageView.image = scaledImage;
     
     // Create path for image.
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -184,6 +332,29 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     [UIImagePNGRepresentation(self.imageView.image) writeToFile:imagePath atomically:YES];
     NSLog(@"%@", imagePath);
 
+}
+
+// If image taken from camera within the app
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    self.imageView.image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    
+    UIImage *myScaledImage = [self imageWithImage:self.imageView.image scaledToSize:CGSizeMake(self.imageView.image.size.width * .3, self.imageView.image.size.height * .3)];
+    self.imageView.image = myScaledImage;
+    
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    imagePath = [documentsDirectory stringByAppendingPathComponent:@"latest_photo.png"];
+    
+    //extracting image from the picker and saving it
+    NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
+    if ([mediaType isEqualToString:@"public.image"]){
+        NSData *webData = UIImagePNGRepresentation(self.imageView.image); //(self.imageView.image);
+        [webData writeToFile:imagePath atomically:YES];
+    }
+    NSLog(@"%@", imagePath);
 }
 
 //
@@ -200,23 +371,33 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 // The number of rows of data
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return _pickerData.count;
+    return ( pickerView == self.picker ? _pickerData.count: _languagePickerData.count);
 }
 // The data to return for the row and component (column) that's being passed in
 - (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    return _pickerData[row];
+    return ( pickerView == self.picker ? _pickerData[row]: _languagePickerData[row]);
 }
+
 - (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    NSAttributedString *attString = [[NSAttributedString alloc] initWithString:[_pickerData objectAtIndex:row] attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    NSAttributedString *attString;
+    if (pickerView == self.picker) {
+        attString = [[NSAttributedString alloc] initWithString:[_pickerData objectAtIndex:row] attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    } else {
+        attString = [[NSAttributedString alloc] initWithString:[_languagePickerData objectAtIndex:row] attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    }
     
     return attString;
 }
 // Catpure the picker view selection
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    pickerRowName = [NSString stringWithFormat:@"%@", [_pickerData objectAtIndex:row]];
+    if (pickerView == self.picker) {
+        pickerRowName = [NSString stringWithFormat:@"%@", [_pickerData objectAtIndex:row]];
+    } else {
+        pickerRowName = [NSString stringWithFormat:@"%@", [_languagePickerData objectAtIndex:row]];
+    }
     NSLog(@"%@", pickerRowName);
 }
 
@@ -240,7 +421,8 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
         
         // POST request to Google Drive
         NSData *file1Data = [[NSData alloc] initWithContentsOfFile:imagePath];
-        NSString *url = [NSString stringWithFormat:@"https://www.googleapis.com/upload/drive/v2/files?uploadType=media&convert=true&ocr=true&ocrLanguage=en"];
+        NSString *url = [NSString stringWithFormat:@"https://www.googleapis.com/upload/drive/v2/files?uploadType=media&convert=true&ocr=true&ocrLanguage=%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"languageForOCR"]];
+
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:url]];
         
         // Headers
@@ -377,7 +559,6 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     UIViewController *myNext = [self.storyboard instantiateViewControllerWithIdentifier:@"TutorialView"];
     [self.navigationController pushViewController:myNext animated:YES];
 }
-
 /*---------------------------------
  EXTRA STUFF
  ------------------------------- */

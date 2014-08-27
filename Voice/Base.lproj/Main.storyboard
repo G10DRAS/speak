@@ -13,7 +13,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Y85-ow-wKJ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="T0R-jV-Ezx">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X4M-QS-PtK">
@@ -52,7 +52,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3aZ-nW-DAQ">
-                                <rect key="frame" x="25" y="426" width="37" height="37"/>
+                                <rect key="frame" x="25" y="514" width="37" height="37"/>
                                 <state key="normal" image="help.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -60,20 +60,45 @@
                                     <action selector="helpPressed:" destination="Hb5-Gl-zTd" eventType="touchUpInside" id="AOA-t1-Yht"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7bu-hM-56L">
+                                <rect key="frame" x="255" y="514" width="37" height="37"/>
+                                <state key="normal" image="languages.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="languageSelection:" destination="Hb5-Gl-zTd" eventType="touchUpInside" id="FEO-2v-LGG"/>
+                                </connections>
+                            </button>
                             <pickerView hidden="YES" alpha="0.80000001192092896" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O8O-G4-uMr">
-                                <rect key="frame" x="0.0" y="318" width="320" height="162"/>
+                                <rect key="frame" x="0.0" y="406" width="320" height="162"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Hb5-Gl-zTd" id="VWw-sM-Bt6"/>
+                                    <outlet property="delegate" destination="Hb5-Gl-zTd" id="ttz-HB-pmD"/>
+                                </connections>
+                            </pickerView>
+                            <pickerView hidden="YES" alpha="0.80000001192092896" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X5x-Vb-4J6">
+                                <rect key="frame" x="0.0" y="406" width="320" height="162"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Hb5-Gl-zTd" id="APW-DJ-fVY"/>
+                                    <outlet property="delegate" destination="Hb5-Gl-zTd" id="Ca5-OJ-hFs"/>
+                                </connections>
                             </pickerView>
                         </subviews>
                         <color key="backgroundColor" red="0.24815169570000001" green="0.75910434299999996" blue="0.78607302300000004" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="3aZ-nW-DAQ" secondAttribute="bottom" constant="17" id="U5e-11-aiU"/>
+                            <constraint firstItem="Y85-ow-wKJ" firstAttribute="top" secondItem="X5x-Vb-4J6" secondAttribute="bottom" id="VAP-JZ-OXB"/>
+                            <constraint firstItem="Y85-ow-wKJ" firstAttribute="top" secondItem="7bu-hM-56L" secondAttribute="bottom" constant="17" id="XVv-6P-WYf"/>
+                            <constraint firstAttribute="trailing" secondItem="7bu-hM-56L" secondAttribute="trailing" constant="25" id="dIC-Rv-aMt"/>
                             <constraint firstAttribute="bottom" secondItem="O8O-G4-uMr" secondAttribute="bottom" id="jFq-Hl-NWk"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="DPN-Vn-hhu"/>
                     <connections>
                         <outlet property="imageView" destination="X4M-QS-PtK" id="2AI-U3-xvo"/>
+                        <outlet property="languagePicker" destination="X5x-Vb-4J6" id="tRq-mJ-mik"/>
                         <outlet property="picker" destination="O8O-G4-uMr" id="Pmk-Li-pq7"/>
                     </connections>
                 </viewController>
@@ -90,7 +115,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Rfz-bS-U7V"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="BOp-Id-grU">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -109,7 +134,7 @@
                         <viewControllerLayoutGuide type="bottom" id="kPb-8b-euu"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="UCK-gI-fAS">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cAE-tC-d62">
@@ -185,6 +210,7 @@
     <resources>
         <image name="back.png" width="64" height="64"/>
         <image name="help.png" width="37" height="37"/>
+        <image name="languages.png" width="37" height="37"/>
         <image name="pause.png" width="128" height="128"/>
         <image name="photo.png" width="250" height="250"/>
         <image name="play.png" width="128" height="128"/>
@@ -193,6 +219,6 @@
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
 </document>
