@@ -10,6 +10,9 @@
 #import "ViewController.h"
 
 #define ASSET_BY_SCREEN_HEIGHT(regular, longScreen) (([[UIScreen mainScreen] bounds].size.height <= 480.0) ? regular : longScreen)
+#define IMAGE_WIDTH 320
+#define IMAGE_HEIGHT 360
+
 
 @interface TalkViewController : UIViewController <UIScrollViewDelegate> {
     BOOL speechPaused;

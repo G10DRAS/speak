@@ -43,16 +43,36 @@
     workingFrame.origin.x = 0;
     
     NSMutableArray *images = [NSMutableArray arrayWithCapacity:[imageArray count]];
-    for (int i = 0; i < [imageArray count]; i++) {
-        UIImage* image = [UIImage imageWithData:[imageArray objectAtIndex:i]];
-        [images addObject:image];
+    
+//    for (int i = 0; i < [imageArray count]; i++) {
+//        UIImage* image = [UIImage imageWithData:[imageArray objectAtIndex:i]];
+//        [images addObject:image];
+//        
+//        UIImageView *imageview = [[UIImageView alloc] initWithImage:image];
+//        [imageview setContentMode:UIViewContentModeScaleAspectFit];
+//        imageview.frame = workingFrame;
+//        
+//        [self.scrollView addSubview: imageview];
+//        workingFrame.origin.x = workingFrame.origin.x + workingFrame.size.width;
+//    }
+//
+    
+    int i=0;
+    for ( NSString *image in imageArray)
+    {
+        UIImage *photos = [UIImage imageWithData:[imageArray objectAtIndex:i]];
+        UIImageView *imageview = [[UIImageView alloc] initWithImage:photos];
+        imageview.contentMode = UIViewContentModeScaleAspectFit;
+        imageview.clipsToBounds = YES;
+        imageview.tag = 1;
         
-        UIImageView *imageview = [[UIImageView alloc] initWithImage:image];
-        [imageview setContentMode:UIViewContentModeScaleAspectFit];
-        imageview.frame = workingFrame;
+        UIScrollView *scrollingView = [[UIScrollView alloc] initWithFrame:CGRectMake( IMAGE_WIDTH * i++, 0, IMAGE_WIDTH, IMAGE_HEIGHT)];
+        scrollingView.delegate = self;
+        scrollingView.maximumZoomScale = 3.0f;
+        imageview.frame = scrollingView.bounds;
+        [scrollingView addSubview:imageview];
         
-        [self.scrollView addSubview: imageview];
-        workingFrame.origin.x = workingFrame.origin.x + workingFrame.size.width;
+        [self.scrollView addSubview:scrollingView];
     }
     [self.scrollView setPagingEnabled:YES];
     [self.scrollView setContentSize:CGSizeMake(workingFrame.origin.x, workingFrame.size.height)];
@@ -76,14 +96,14 @@
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:myImage]];
     
     
-    compressingImage = YES;
+//    compressingImage = YES;
     
 //    NSLog(@"speakArray: %@", speakArray);
 
     
     [self startTalking];
     
-    NSLog(@"imageArray Count: %d", [imageArray count]);
+    NSLog(@"imageArray Count: %d", (int)[imageArray count]);
 }
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -167,10 +187,7 @@
  AVSPEECHSYNTHESIZER DELEGATE METHODS
  ------------------------------- */
 - (void)speechSynthesizer:(AVSpeechSynthesizer *)synthesizer didFinishSpeechUtterance:(AVSpeechUtterance *)utterance {
-    imageNumber += 1;
     if ([speakArray count] + 1 > imageNumber) {
-        [self fetchTextFromImage:[imageArray objectAtIndex:imageNumber]];
-        
         speechPaused = NO;
         NSString *imageText = [NSString stringWithFormat:@"%@", [speakArray objectAtIndex:imageNumber-1]];
         AVSpeechUtterance* utter = [[AVSpeechUtterance alloc] initWithString:imageText];
@@ -181,6 +198,18 @@
         }
         self.synthesizer.delegate = self;
         [self.synthesizer speakUtterance:utter];
+    } else {
+//        dispatch_time_t countdownTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC));
+//        dispatch_after(countdownTime, dispatch_get_main_queue(), ^(void){
+            AVSpeechUtterance* utter = [[AVSpeechUtterance alloc] initWithString:@""];
+            utter.voice = [AVSpeechSynthesisVoice voiceWithLanguage:[[NSUserDefaults standardUserDefaults] objectForKey:@"languageForTTS"]];
+            [utter setRate:0.2f];
+            if (!self.synthesizer) {
+                self.synthesizer = [AVSpeechSynthesizer new];
+            }
+            self.synthesizer.delegate = self;
+            [self.synthesizer speakUtterance:utter];
+//        });
     }
 }
 
@@ -190,13 +219,12 @@
  ------------------------------- */
 
 - (void) fetchTextFromImage: (NSData *)theImage {
-    compressingImage = YES;
+//    compressingImage = YES;
     
     UIImage *imageFromData = [UIImage imageWithData:theImage];
     UIImage *myScaledImage = [self imageWithImage:imageFromData scaledToSize:CGSizeMake(imageFromData.size.width * .3, imageFromData.size.height * .3)];
     NSData *dataFromImage = UIImagePNGRepresentation(myScaledImage);
 
-    
     // Create path for image.
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     imagePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"image.png"];
@@ -204,7 +232,8 @@
     // Save image to disk.
     NSData *data = dataFromImage;
     [data writeToFile:imagePath atomically:YES];
-    NSLog(@"%@", imagePath);
+    
+    NSLog(@"The image path: %@", imagePath);
     
     [self postToGoogleDrive];
     
@@ -228,23 +257,23 @@
 }
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-    if (compressingImage == NO) {
+//    if (compressingImage == NO) {
         NSLog(@"Uploaded to Google Drive");
         [self getFile];
-    } else {
-        NSError* error;
-        NSDictionary* json = [NSJSONSerialization
-                              JSONObjectWithData:receivedData // step 1
-                              options:kNilOptions
-                              error:&error];
-        
-        NSDictionary *output = [json objectForKey:@"output"];
-        compressedImageURL = [output objectForKey:@"url"];
-        
-        NSLog(@"The JSON Data: %@", json);
-        
-        [self getCompressedImage];
-    }
+//    } else {
+//        NSError* error;
+//        NSDictionary* json = [NSJSONSerialization
+//                              JSONObjectWithData:receivedData // step 1
+//                              options:kNilOptions
+//                              error:&error];
+//        
+//        NSDictionary *output = [json objectForKey:@"output"];
+//        compressedImageURL = [output objectForKey:@"url"];
+//        
+//        NSLog(@"The JSON Data: %@", json);
+//        
+//        [self getCompressedImage];
+//    }
 }
 - (void) getCompressedImage{
     compressedImageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString:compressedImageURL]];
@@ -330,8 +359,6 @@
     NSString *actualText = [[NSString alloc] initWithData:oResponseData encoding:NSUTF8StringEncoding];
     theOCRText = actualText;
     
-    [speakArray addObject:actualText];
-    
     if([responseCode statusCode] != 200){
         NSLog(@"Error getting %@, HTTP status code %f", plainTextURL, (float)[responseCode statusCode]);
     }
@@ -346,7 +373,14 @@
     NSData *theResponseData;
     theResponseData = [NSURLConnection sendSynchronousRequest:deleteRequest returningResponse:&responseCode error:&error];
     
-    compressingImage = YES;
+    [speakArray addObject:actualText];
+    imageNumber += 1;
+    if (imageNumber < [imageArray count]) {
+        [self fetchTextFromImage:[imageArray objectAtIndex:imageNumber]];
+    }
+
+    
+//    compressingImage = YES;
 }
 
 
