@@ -25,7 +25,6 @@
     NSString *theToken;
     int imageNumber;
     NSData *compressedImageData;
-
 }
 @property (nonatomic, strong) IBOutlet UIScrollView *scrollView;
 

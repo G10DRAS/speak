@@ -37,6 +37,11 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     self.languagePicker.dataSource = self;
     self.languagePicker.delegate = self;
     
+    // If no language selected, defualt is english
+    [[NSUserDefaults standardUserDefaults] setObject:@"en-US" forKey:@"languageForTTS"];
+    [[NSUserDefaults standardUserDefaults] setObject:@"en" forKey:@"languageForOCR"];
+
+    
     // Initialize Data for UIPickerView
     _pickerData = @[@"Camera", @"Photos Library"];
     self.picker.dataSource = self;
@@ -55,13 +60,14 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     receivedData = [[NSMutableData alloc] init];
     isAuthenticating = YES;
     
+    // Some UI stuff
     self.view.backgroundColor = [UIColor clearColor];
     UIImage *myImage = [UIImage imageNamed:ASSET_BY_SCREEN_HEIGHT(@"speak", @"speak-568h")];
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:myImage]];
     
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
     self.imageView.image = [UIImage imageNamed:nil];
 }
 - (void)didReceiveMemoryWarning
@@ -253,12 +259,6 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
         [self presentViewController:imagePicker animated:YES completion:nil];
     }
     else if ([pickerRowName isEqualToString:@"Photos Library"]) {
-//        UIImagePickerController * picker = [[UIImagePickerController alloc] init];
-//        picker.delegate = self;
-//        picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
-//        
-//        picker.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeImage];
-//        [self presentViewController:picker animated:YES completion:nil];
         ELCImagePickerController *elcPicker = [[ELCImagePickerController alloc] initImagePicker];
         
         elcPicker.maximumImagesCount = 10;
@@ -266,7 +266,6 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
         elcPicker.imagePickerDelegate = self;
         elcPicker.onOrder = YES;
         [self presentViewController:elcPicker animated:YES completion:nil];
-        
     } else {
         UIImagePickerController* imagePicker = [[UIImagePickerController alloc] init];
         imagePicker.sourceType = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] ? UIImagePickerControllerSourceTypeCamera :  UIImagePickerControllerSourceTypePhotoLibrary;
@@ -330,57 +329,59 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     
     // Save image to disk.
     [UIImagePNGRepresentation(self.imageView.image) writeToFile:imagePath atomically:YES];
-    NSLog(@"%@", imagePath);
+    NSLog(@"First Image's Path: %@", imagePath);
 
 }
 
 // If image taken from camera within the app
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    
     self.imageView.image = [info objectForKey:UIImagePickerControllerOriginalImage];
     
+    // Add IMG to the array
+    NSMutableArray *imgs = [[NSMutableArray alloc] init];
+    NSData *imageData = UIImagePNGRepresentation(self.imageView.image);
+    [imgs addObject:imageData];
+    [[NSUserDefaults standardUserDefaults] setObject:imgs forKey:@"ImagesArray"];
+
+    // Scale the image
     UIImage *myScaledImage = [self imageWithImage:self.imageView.image scaledToSize:CGSizeMake(self.imageView.image.size.width * .3, self.imageView.image.size.height * .3)];
     self.imageView.image = myScaledImage;
     
-    [picker dismissViewControllerAnimated:YES completion:nil];
-    
+    // Create path for image.
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    imagePath = [documentsDirectory stringByAppendingPathComponent:@"latest_photo.png"];
+    imagePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"image.png"];
     
-    //extracting image from the picker and saving it
+    // Save image to disk.
     NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
     if ([mediaType isEqualToString:@"public.image"]){
-        NSData *webData = UIImagePNGRepresentation(self.imageView.image); //(self.imageView.image);
-        [webData writeToFile:imagePath atomically:YES];
+        [UIImagePNGRepresentation(self.imageView.image) writeToFile:imagePath atomically:YES];
     }
-    NSLog(@"%@", imagePath);
+    NSLog(@"Only Image's Path: %@", imagePath);
 }
 
 //
 //
-// The Options Picker Delegate Methods
+// The Options/Language Picker Delegate Methods
 //
 //
 
 // The number of columns of data
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
-{
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
     return 1;
 }
 // The number of rows of data
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
-{
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
     return ( pickerView == self.picker ? _pickerData.count: _languagePickerData.count);
 }
 // The data to return for the row and component (column) that's being passed in
-- (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
-{
+- (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     return ( pickerView == self.picker ? _pickerData[row]: _languagePickerData[row]);
 }
 
-- (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component
-{
+- (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component {
     NSAttributedString *attString;
     if (pickerView == self.picker) {
         attString = [[NSAttributedString alloc] initWithString:[_pickerData objectAtIndex:row] attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
@@ -391,14 +392,13 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     return attString;
 }
 // Catpure the picker view selection
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
-{
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     if (pickerView == self.picker) {
         pickerRowName = [NSString stringWithFormat:@"%@", [_pickerData objectAtIndex:row]];
     } else {
         pickerRowName = [NSString stringWithFormat:@"%@", [_languagePickerData objectAtIndex:row]];
     }
-    NSLog(@"%@", pickerRowName);
+    NSLog(@"What was picked: %@", pickerRowName);
 }
 
 /*---------------------------------

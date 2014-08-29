@@ -11,6 +11,8 @@
 #import "TutorialViewController.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "ELCImagePickerHeader.h"
+#import "MagickWand.h"
+
 
 static NSString* hardCodedToken;
 static NSString* theOCRText;
@@ -33,7 +35,6 @@ static NSString* theOCRText;
     NSString *pickerRowName;
 }
 
-+ (NSString*)globalText;
 + (NSString*)globalToken;
 
 @property (strong, nonatomic) IBOutlet UIPickerView *picker;
