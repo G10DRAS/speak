@@ -11,6 +11,10 @@
 
 @interface TalkViewController () <AVSpeechSynthesizerDelegate>
 @property (nonatomic, strong) AVSpeechSynthesizer *synthesizer;
+
+@property (nonatomic, strong) NSTimer *autoScrollTimer;
+@property (nonatomic, assign) NSInteger currentPage;
+
 @end
 
 @implementation TalkViewController
@@ -34,13 +38,11 @@
     imageArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"ImagesArray"]];
     [speakArray addObject:[[NSUserDefaults standardUserDefaults] objectForKey:@"ImageText"]];
     
-    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, 460)];
-    self.scrollView.contentSize = CGSizeMake(320, 465);
+//    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, 460)];
+//    self.scrollView.contentSize = CGSizeMake(320, 465);
     self.scrollView.delegate = self;
     [self.view addSubview:self.scrollView];
     
-    CGRect workingFrame = self.scrollView.frame;
-    workingFrame.origin.x = 0;
     
     NSMutableArray *images = [NSMutableArray arrayWithCapacity:[imageArray count]];
     
@@ -55,27 +57,65 @@
 //        [self.scrollView addSubview: imageview];
 //        workingFrame.origin.x = workingFrame.origin.x + workingFrame.size.width;
 //    }
+    
+    for (UIView *v in [_scrollView subviews]) {
+        [v removeFromSuperview];
+    }
+    
+    CGRect workingFrame = CGRectMake (0,0,self.scrollView.frame.size.width,self.scrollView.frame.size.height);
+    workingFrame.origin.x = 0;
+
+    
+    for (int i = 0; i < [imageArray count]; i++) {
+        UIImage *image = [UIImage imageWithData:[imageArray objectAtIndex:i]];
+        
+        // If the image is in Landscape
+        UIImageView *iv;
+        if (image.size.width > image.size.height) {
+            iv = [[UIImageView alloc] initWithImage:image];
+            iv.transform = CGAffineTransformMakeRotation(M_PI_2);
+        } else if (image.size.width < image.size.height) {
+            iv = [[UIImageView alloc] initWithImage:image];
+        }
+
+        [images addObject:iv];
+        
+        UIImageView *imageview = [[UIImageView alloc] initWithImage:image];
+        [imageview setContentMode:UIViewContentModeScaleAspectFit];
+        imageview.frame = workingFrame;
+        
+        [_scrollView addSubview:imageview];
+        workingFrame.origin.x = workingFrame.origin.x + workingFrame.size.width;
+
+    }
+    
+    [_scrollView setPagingEnabled:YES];
+    [_scrollView setContentSize:CGSizeMake(workingFrame.origin.x, workingFrame.size.height)];
+
 //
     
-    int i=0;
-    for ( NSString *image in imageArray)
-    {
-        UIImage *photos = [UIImage imageWithData:[imageArray objectAtIndex:i]];
-        UIImageView *imageview = [[UIImageView alloc] initWithImage:photos];
-        imageview.contentMode = UIViewContentModeScaleAspectFit;
-        imageview.clipsToBounds = YES;
-        imageview.tag = 1;
-        
-        UIScrollView *scrollingView = [[UIScrollView alloc] initWithFrame:CGRectMake( IMAGE_WIDTH * i++, 0, IMAGE_WIDTH, IMAGE_HEIGHT)];
-        scrollingView.delegate = self;
-        scrollingView.maximumZoomScale = 3.0f;
-        imageview.frame = scrollingView.bounds;
-        [scrollingView addSubview:imageview];
-        
-        [self.scrollView addSubview:scrollingView];
-    }
-    [self.scrollView setPagingEnabled:YES];
-    [self.scrollView setContentSize:CGSizeMake(workingFrame.origin.x, workingFrame.size.height)];
+//    int i=0;
+//    for ( NSString *image in imageArray)
+//    {
+//        UIImage *photos = [UIImage imageWithData:[imageArray objectAtIndex:i]];
+//        UIImageView *imageview = [[UIImageView alloc] initWithImage:photos];
+//        imageview.contentMode = UIViewContentModeScaleAspectFit;
+//        imageview.clipsToBounds = YES;
+//        imageview.tag = 1;
+//        
+//        UIScrollView *scrollingView = [[UIScrollView alloc] initWithFrame:CGRectMake( IMAGE_WIDTH * i++, 0, IMAGE_WIDTH, IMAGE_HEIGHT)];
+//        scrollingView.delegate = self;
+//        scrollingView.maximumZoomScale = 3.0f;
+//        imageview.frame = scrollingView.bounds;
+//        [scrollingView addSubview:imageview];
+//        
+//        [self.scrollView addSubview:scrollingView];
+//    }
+    
+    
+//    [self scrollViewInit];
+    
+    
     
     
     [super viewDidLoad];
@@ -105,6 +145,115 @@
     
     NSLog(@"imageArray Count: %d", (int)[imageArray count]);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#pragma mark - NSTimer methods
+//- (void) autoScrollTimerTick:(NSTimer *) timer {
+//    if (!_scrollView.dragging) {
+//        // check if we're on the last suggestion
+//        if (_currentPage == imageArray.count - 1) {
+//            [_scrollView setContentOffset:CGPointZero animated:YES];
+//        }
+//        else {
+//            [_scrollView setContentOffset:CGPointMake((_currentPage + 1) * _scrollView.bounds.size.width, 0.0f) animated:YES];
+//        }
+//    }
+//}
+#pragma mark - UIScrollViewDelegate methods
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+//    CGFloat pageWidth = scrollView.bounds.size.width;
+//    float fractionalPage = scrollView.contentOffset.x / pageWidth;
+//    NSInteger nearestNumber = lround(fractionalPage);
+//    
+//    if (_currentPage != nearestNumber) {
+//        _currentPage = nearestNumber;
+//        if (scrollView.dragging) {
+//            [_autoScrollTimer invalidate];
+//            _autoScrollTimer = [NSTimer scheduledTimerWithTimeInterval:AutoScrollDuration target:self selector:@selector(autoScrollTimerTick:) userInfo:nil repeats:YES];
+//        }
+//    }
+//}
+- (void) scrollViewInit {
+    CGRect workingFrame = self.scrollView.frame;
+    workingFrame.origin.x = 0;
+
+    _scrollView.delegate=self;
+    
+    int i=0;
+    for ( NSString *image in imageArray)
+    {
+        UIImage *photos = [UIImage imageWithData:[imageArray objectAtIndex:i]];
+        UIImageView *imageview = [[UIImageView alloc] initWithImage:photos];
+        imageview.contentMode = UIViewContentModeScaleAspectFit;
+        imageview.clipsToBounds = YES;
+        imageview.tag = 1;
+        
+        UIScrollView *scrollingView = [[UIScrollView alloc] initWithFrame:CGRectMake( IMAGE_WIDTH * i++, 0, IMAGE_WIDTH, IMAGE_HEIGHT)];
+        scrollingView.delegate = self;
+        scrollingView.maximumZoomScale = 3.0f;
+        imageview.frame = scrollingView.bounds;
+        [scrollingView addSubview:imageview];
+        
+        [self.scrollView addSubview:scrollingView];
+    }
+    [self.scrollView setPagingEnabled:YES];
+    [self.scrollView setContentSize:CGSizeMake(workingFrame.origin.x, workingFrame.size.height)];
+    
+//    _autoScrollTimer = [NSTimer scheduledTimerWithTimeInterval:AutoScrollDuration target:self selector:@selector(autoScrollTimerTick:) userInfo:nil repeats:YES];
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     

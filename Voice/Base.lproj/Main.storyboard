@@ -172,7 +172,7 @@
                                 </connections>
                             </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AMX-ov-jKx">
-                                <rect key="frame" x="118" y="222" width="84" height="149"/>
+                                <rect key="frame" x="85" y="226" width="150" height="150"/>
                                 <connections>
                                     <outlet property="delegate" destination="NjP-4X-2fU" id="9Ys-yS-TjG"/>
                                 </connections>

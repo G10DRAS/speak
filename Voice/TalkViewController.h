@@ -13,6 +13,9 @@
 #define IMAGE_WIDTH 320
 #define IMAGE_HEIGHT 360
 
+static NSInteger const MaxSuggestions = 8;
+static NSTimeInterval const AutoScrollDuration = 3.0f;
+
 
 @interface TalkViewController : UIViewController <UIScrollViewDelegate> {
     BOOL speechPaused;
