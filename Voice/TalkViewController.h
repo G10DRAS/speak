@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ViewController.h"
+#import <Mixpanel/Mixpanel.h>
 
 #define ASSET_BY_SCREEN_HEIGHT(regular, longScreen) (([[UIScreen mainScreen] bounds].size.height <= 480.0) ? regular : longScreen)
 #define IMAGE_WIDTH 320
@@ -31,6 +32,7 @@ static NSTimeInterval const AutoScrollDuration = 3.0f;
     NSString *theToken;
     int imageNumber;
     NSData *compressedImageData;
+    Mixpanel *mixpanel;
 }
 @property (nonatomic, strong) IBOutlet UIScrollView *scrollView;
 

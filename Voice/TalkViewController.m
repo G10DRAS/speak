@@ -31,7 +31,8 @@
 
 - (void)viewDidLoad
 {
-    
+    mixpanel = [Mixpanel sharedInstance];
+
     speakArray = [[NSMutableArray alloc] init];
     imageArray = [[NSMutableArray alloc] init];
     

@@ -12,6 +12,7 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "ELCImagePickerHeader.h"
 #import "MagickWand.h"
+#import <Mixpanel/Mixpanel.h>
 
 
 static NSString* hardCodedToken;
@@ -25,6 +26,7 @@ static NSString* theOCRText;
     NSMutableData *receivedData;
     BOOL isAuthenticating;
     NSString *imagePath;
+    NSString *imagePathSize;
     NSString *imageFileID;
     UIAlertView *loading;
     NSDictionary *plainTextURL;
@@ -33,6 +35,7 @@ static NSString* theOCRText;
     UITapGestureRecognizer *singleTap;
     UITapGestureRecognizer *languageTap;
     NSString *pickerRowName;
+    Mixpanel *mixpanel;
 }
 
 + (NSString*)globalToken;

@@ -28,6 +28,8 @@
 
 - (void)viewDidLoad
 {
+    mixpanel = [Mixpanel sharedInstance];
+
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:YES];
     
     NSLog(@"Tut View");

@@ -29,6 +29,8 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 - (void)viewDidLoad
 {
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:NO];
+    
+    mixpanel = [Mixpanel sharedInstance];
 
     self.imageView.image = nil;
     
@@ -222,6 +224,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     NSLog(@"%@", languageForTTS);
     [[NSUserDefaults standardUserDefaults] setObject:languageForTTS forKey:@"languageForTTS"];
     [[NSUserDefaults standardUserDefaults] setObject:languageForOCR forKey:@"languageForOCR"];
+
 }
 
 
@@ -251,6 +254,8 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     self.picker.hidden = YES;
     [self.picker resignFirstResponder];
     if ([pickerRowName isEqualToString:@"Camera"]) {
+        // clear the array of images
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ImagesArray"];
         UIImagePickerController* imagePicker = [[UIImagePickerController alloc] init];
         imagePicker.sourceType = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] ? UIImagePickerControllerSourceTypeCamera :  UIImagePickerControllerSourceTypePhotoLibrary;
         imagePicker.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeImage];
@@ -259,6 +264,8 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
         [self presentViewController:imagePicker animated:YES completion:nil];
     }
     else if ([pickerRowName isEqualToString:@"Photos Library"]) {
+        // clear the array of images
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ImagesArray"];
         ELCImagePickerController *elcPicker = [[ELCImagePickerController alloc] initImagePicker];
         
         elcPicker.maximumImagesCount = 10;
@@ -267,6 +274,8 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
         elcPicker.onOrder = YES;
         [self presentViewController:elcPicker animated:YES completion:nil];
     } else {
+        // clear the array of images
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ImagesArray"];
         UIImagePickerController* imagePicker = [[UIImagePickerController alloc] init];
         imagePicker.sourceType = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] ? UIImagePickerControllerSourceTypeCamera :  UIImagePickerControllerSourceTypePhotoLibrary;
         imagePicker.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeImage];
@@ -414,6 +423,44 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
                                   otherButtonTitles:nil];
         [alertView show];
     } else {
+        [mixpanel track:@"Language" properties:@{
+                                                 @"TTS": [[NSUserDefaults standardUserDefaults] objectForKey:@"languageForTTS"],
+                                                 @"OCR": [[NSUserDefaults standardUserDefaults] objectForKey:@"languageForOCR"]
+                                                 }];
+        
+        NSMutableArray *sizeArray = [[NSMutableArray alloc] init];
+        NSMutableArray *imageArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"ImagesArray"]];
+        
+        for (int i = 0; i < [imageArray count]; i++) {
+            // Create path for image.
+            imagePathSize = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:@"image_for_size.png"];
+            
+            // Save image to disk.
+            [[imageArray objectAtIndex:i] writeToFile:imagePathSize atomically:YES];
+            
+            // Get the image size
+            unsigned long long size = [[NSFileManager defaultManager] attributesOfItemAtPath:imagePathSize error:nil].fileSize;
+            NSLog(@"Sizes: %llu", size);
+            [sizeArray addObject:[NSString stringWithFormat:@"%llu",size]];
+            
+            // Delete the image afterwards
+//            NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+//            NSString *pngFilePath = [docDir stringByAppendingPathComponent:imagePathSize];
+//            NSError *error;
+//            [[NSFileManager defaultManager] removeItemAtPath:pngFilePath error:&error];
+        }
+        
+        for (int i = 0; i < [sizeArray count]; i++) {
+            [mixpanel track:@"Image Sizes" properties:@{
+                                                        @"Size": [sizeArray objectAtIndex:i],
+                                                        }];
+        }
+        
+        [mixpanel track:@"Recognition" properties:@{
+                                               @"Image Count": [[NSUserDefaults standardUserDefaults] objectForKey:@"ImagesArray"],
+                                               @"Date of Recognition" : [NSDate date],
+                                               }];
+        
         [self startLoading];
         
         unsigned long long size = [[NSFileManager defaultManager] attributesOfItemAtPath:imagePath error:nil].fileSize;

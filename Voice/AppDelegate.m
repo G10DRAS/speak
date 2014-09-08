@@ -5,10 +5,10 @@
 //  Created by Shalin Shah on 7/26/14.
 //  Copyright (c) 2014 Shalin Shah. All rights reserved.
 //
-
 #import "AppDelegate.h"
 #import "TutorialViewController.h"
 #import "ViewController.h"
+#import <Mixpanel/Mixpanel.h>
 
 @interface AppDelegate ()
             
@@ -20,6 +20,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    [Mixpanel sharedInstanceWithToken:@"166a87a0eaa5851861952daf96b48f32"];
+
     if ([[NSUserDefaults standardUserDefaults] integerForKey:@"isFirstTimeInt"] == 20) {
         ViewController *mainView = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"MainView"];
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:mainView];
