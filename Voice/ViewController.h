@@ -13,6 +13,7 @@
 #import "ELCImagePickerHeader.h"
 #import "MagickWand.h"
 #import <Mixpanel/Mixpanel.h>
+#import <AVFoundation/AVFoundation.h>
 
 
 static NSString* hardCodedToken;
@@ -36,6 +37,8 @@ static NSString* theOCRText;
     UITapGestureRecognizer *languageTap;
     NSString *pickerRowName;
     Mixpanel *mixpanel;
+    NSString *time;
+
 }
 
 + (NSString*)globalToken;

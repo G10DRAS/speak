@@ -17,6 +17,7 @@
 
 int const maxImagePixelsAmount = 3200000; // 3.2 MP
 
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -28,6 +29,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 
 - (void)viewDidLoad
 {
+    
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:NO];
     
     mixpanel = [Mixpanel sharedInstance];
@@ -38,6 +40,9 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     _languagePickerData = @[@"Arabic (Saudi Arabia)", @"Chinese (China)", @"Chinese (Hong Kong)", @"Chinese (Taiwan)", @"Czech (Czech Republic)", @"Danish (Denmark)", @"Dutch (Belgium)", @"Dutch (Netherlands)", @"English (Australia)", @"English (Ireland)", @"English (South Africa)", @"English (UK)", @"English (USA)", @"Finnish (Finland)", @"French (Canada)", @"French (France)", @"German (Germany)", @"Greek (Greece)", @"Hindi (India)", @"Hungarian (Hungary)", @"Indonesian (Indonesia)", @"Italian (Italy)", @"Japanese (Japan)", @"Korean (South Korea)", @"Norwegian (Norway)", @"Polish (Poland)", @"Portuguese (Brazil)", @"Portuguese (Portugal)", @"Romanian (Romania)", @"Russian (Russia)", @"Slovak (Slovakia)", @"Spanish (Mexico)", @"Spanish (Spain)", @"Swedish (Sweden)", @"Thai (Thailand)", @"Turkish (Turkey)"];
     self.languagePicker.dataSource = self;
     self.languagePicker.delegate = self;
+    
+    // Get the time of day
+    [self timeOfDay];
     
     // If no language selected, defualt is english
     [[NSUserDefaults standardUserDefaults] setObject:@"en-US" forKey:@"languageForTTS"];
@@ -254,9 +259,17 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     self.picker.hidden = YES;
     [self.picker resignFirstResponder];
     if ([pickerRowName isEqualToString:@"Camera"]) {
+        // make sure to turn on the flash
+        if ([time isEqualToString:@"night"]) {
+            [self turnTorchOn:YES];
+        } else if ([time isEqualToString:@"day"]) {
+            [self turnTorchOn:NO];
+        }
+
         // clear the array of images
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ImagesArray"];
         UIImagePickerController* imagePicker = [[UIImagePickerController alloc] init];
+        
         imagePicker.sourceType = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] ? UIImagePickerControllerSourceTypeCamera :  UIImagePickerControllerSourceTypePhotoLibrary;
         imagePicker.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeImage];
         imagePicker.allowsEditing = NO;
@@ -274,6 +287,13 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
         elcPicker.onOrder = YES;
         [self presentViewController:elcPicker animated:YES completion:nil];
     } else {
+        // make sure to turn on the flash
+        if ([time isEqualToString:@"night"]) {
+            [self turnTorchOn:YES];
+        } else if ([time isEqualToString:@"day"]) {
+            [self turnTorchOn:NO];
+        }
+
         // clear the array of images
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ImagesArray"];
         UIImagePickerController* imagePicker = [[UIImagePickerController alloc] init];
@@ -346,6 +366,10 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     [picker dismissViewControllerAnimated:YES completion:nil];
+    
+    // make sure to turn off the flash
+    [self turnTorchOn:NO];
+
     
     self.imageView.image = [info objectForKey:UIImagePickerControllerOriginalImage];
     
@@ -638,6 +662,53 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     UIGraphicsEndImageContext();
     return newImage;
 }
+
+/*
+ GET WHETHER THE TIME IS DAY OR NIGHT
+ */
+-(void)timeOfDay
+{
+    NSDate *currentTime = [NSDate date];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"hh:mm a"];
+    [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+    NSString *resultTime = [dateFormatter stringFromDate:currentTime];
+
+    NSString *morningStart = [NSString stringWithFormat:@"07:00 AM"];
+    NSString *morningEnd = [NSString stringWithFormat:@"7:59 AM"];
+    NSString *nightStart = [NSString stringWithFormat:@"08:00 PM"];
+    NSString *nightEnd = [NSString stringWithFormat:@"06:59 AM"];
+    NSLog(@"resultTime: %@", resultTime);
+    
+    if([[dateFormatter dateFromString:morningStart] compare:[dateFormatter dateFromString:resultTime]] == NSOrderedDescending || [[dateFormatter dateFromString:morningEnd] compare:[dateFormatter dateFromString:resultTime]] == NSOrderedAscending) {
+        time = @"day";
+    }
+    if([[dateFormatter dateFromString:nightStart] compare:[dateFormatter dateFromString:resultTime]] == NSOrderedDescending || [[dateFormatter dateFromString:nightEnd] compare:[dateFormatter dateFromString:resultTime]] == NSOrderedAscending) {
+        time = @"night";
+    }
+    NSLog(@"%@",time);
+}
+
+- (void) turnTorchOn: (bool) on {
+    // check if flashlight available
+    Class captureDeviceClass = NSClassFromString(@"AVCaptureDevice");
+    if (captureDeviceClass != nil) {
+        AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+        if ([device hasTorch] && [device hasFlash]){
+            
+            [device lockForConfiguration:nil];
+            if (on) {
+                [device setTorchMode:AVCaptureTorchModeOn];
+                [device setFlashMode:AVCaptureFlashModeOn];
+                //torchIsOn = YES; //define as a variable/property if you need to know status
+            } else {
+                [device setTorchMode:AVCaptureTorchModeOff];
+                [device setFlashMode:AVCaptureFlashModeOff];
+                //torchIsOn = NO;
+            }
+            [device unlockForConfiguration];
+        }
+    } }
 
 
 @end
