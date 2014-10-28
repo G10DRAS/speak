@@ -362,6 +362,11 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 
 }
 
+- (void)elcImagePickerControllerDidCancel:(ELCImagePickerController *)picker
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 // If image taken from camera within the app
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
