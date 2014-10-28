@@ -8,7 +8,7 @@
 #import "AppDelegate.h"
 #import "TutorialViewController.h"
 #import "ViewController.h"
-#import <Mixpanel/Mixpanel.h>
+#import "Mixpanel.h"
 
 @interface AppDelegate ()
             
@@ -20,7 +20,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    [Mixpanel sharedInstanceWithToken:@"166a87a0eaa5851861952daf96b48f32"];
+    [Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];
 
     if ([[NSUserDefaults standardUserDefaults] integerForKey:@"isFirstTimeInt"] == 20) {
         ViewController *mainView = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"MainView"];
@@ -31,6 +31,10 @@
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:tutView];
         self.window.rootViewController = navController;
     }
+    
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    
+    [mixpanel track:@"App Opened"];
 
     
     NSError *error = NULL;

@@ -41,13 +41,12 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     self.languagePicker.dataSource = self;
     self.languagePicker.delegate = self;
     
-    // Get the time of day
-    [self timeOfDay];
-    
     // If no language selected, defualt is english
     [[NSUserDefaults standardUserDefaults] setObject:@"en-US" forKey:@"languageForTTS"];
     [[NSUserDefaults standardUserDefaults] setObject:@"en" forKey:@"languageForOCR"];
-
+    
+    // Get the time of day
+    [self timeOfDay];
     
     // Initialize Data for UIPickerView
     _pickerData = @[@"Camera", @"Photos Library"];
