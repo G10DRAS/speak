@@ -11,7 +11,6 @@
 #import "TutorialViewController.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "ELCImagePickerHeader.h"
-#import "MagickWand.h"
 #import <Mixpanel/Mixpanel.h>
 #import <AVFoundation/AVFoundation.h>
 

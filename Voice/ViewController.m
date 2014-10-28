@@ -642,8 +642,13 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
                cancelButtonTitle:nil
                otherButtonTitles:nil];
     [loading show];
+    
+    [mixpanel timeEvent:@"Image Upload"];
+    
 }
 -(void)stopLoading {
+    [mixpanel track:@"Image Upload"];
+
     [loading dismissWithClickedButtonIndex:0 animated:YES];
 }
 
