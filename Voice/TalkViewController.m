@@ -140,6 +140,7 @@
     
     speechPaused = NO;
     imageNumber = 1;
+    speechNumber = 1;
     
     self.view.backgroundColor = [UIColor clearColor];
     UIImage *myImage = [UIImage imageNamed:ASSET_BY_SCREEN_HEIGHT(@"player", @"player-568h")];
@@ -275,7 +276,7 @@
 
 - (void) startTalking {
     speechPaused = NO;
-    NSString *imageText = [NSString stringWithFormat:@"%@", [speakArray objectAtIndex:0]];
+    NSString *imageText = [NSString stringWithFormat:@"%@", [speakArray objectAtIndex:(speechNumber-1)]];
     AVSpeechUtterance* utter = [[AVSpeechUtterance alloc] initWithString:imageText];
     utter.voice = [AVSpeechSynthesisVoice voiceWithLanguage:[[NSUserDefaults standardUserDefaults] objectForKey:@"languageForTTS"]];
     [utter setRate:0.2f];
@@ -346,9 +347,9 @@
  AVSPEECHSYNTHESIZER DELEGATE METHODS
  ------------------------------- */
 - (void)speechSynthesizer:(AVSpeechSynthesizer *)synthesizer didFinishSpeechUtterance:(AVSpeechUtterance *)utterance {
-    if ([speakArray count] + 1 > imageNumber) {
+    if ([speakArray count] > speechNumber) {
         speechPaused = NO;
-        NSString *imageText = [NSString stringWithFormat:@"%@", [speakArray objectAtIndex:imageNumber-1]];
+        NSString *imageText = [NSString stringWithFormat:@"%@", [speakArray objectAtIndex:speechNumber]];
         AVSpeechUtterance* utter = [[AVSpeechUtterance alloc] initWithString:imageText];
         utter.voice = [AVSpeechSynthesisVoice voiceWithLanguage:[[NSUserDefaults standardUserDefaults] objectForKey:@"languageForTTS"]];
         [utter setRate:0.2f];
@@ -357,6 +358,7 @@
         }
         self.synthesizer.delegate = self;
         [self.synthesizer speakUtterance:utter];
+        speechNumber++;
     } else {
 //        dispatch_time_t countdownTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC));
 //        dispatch_after(countdownTime, dispatch_get_main_queue(), ^(void){
@@ -533,13 +535,12 @@
     theResponseData = [NSURLConnection sendSynchronousRequest:deleteRequest returningResponse:&responseCode error:&error];
     
     [speakArray addObject:actualText];
-    imageNumber += 1;
-    if (imageNumber < [imageArray count]) {
+    
+    imageNumber ++;
+    if ([imageArray count] > imageNumber) {
         [self fetchTextFromImage:[imageArray objectAtIndex:imageNumber]];
     }
-
-    
-//    compressingImage = YES;
+    //    compressingImage = YES;
 }
 
 

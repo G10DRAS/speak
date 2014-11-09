@@ -31,6 +31,7 @@ static NSTimeInterval const AutoScrollDuration = 3.0f;
     NSDictionary *plainTextURL;
     NSString *theToken;
     int imageNumber;
+    int speechNumber;
     NSData *compressedImageData;
     Mixpanel *mixpanel;
 }

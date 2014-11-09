@@ -36,6 +36,17 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 
     self.imageView.image = nil;
     
+    // Clear NSUserDefaults
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"en-US"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"en"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"languageForTTS"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"languageForOCR"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ImagesArray"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ImageText"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"accessToken"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
+    
     // Initialize Langauges for LanguagePicker
     _languagePickerData = @[@"Arabic (Saudi Arabia)", @"Chinese (China)", @"Chinese (Hong Kong)", @"Chinese (Taiwan)", @"Czech (Czech Republic)", @"Danish (Denmark)", @"Dutch (Belgium)", @"Dutch (Netherlands)", @"English (Australia)", @"English (Ireland)", @"English (South Africa)", @"English (UK)", @"English (USA)", @"Finnish (Finland)", @"French (Canada)", @"French (France)", @"German (Germany)", @"Greek (Greece)", @"Hindi (India)", @"Hungarian (Hungary)", @"Indonesian (Indonesia)", @"Italian (Italy)", @"Japanese (Japan)", @"Korean (South Korea)", @"Norwegian (Norway)", @"Polish (Poland)", @"Portuguese (Brazil)", @"Portuguese (Portugal)", @"Romanian (Romania)", @"Russian (Russia)", @"Slovak (Slovakia)", @"Spanish (Mexico)", @"Spanish (Spain)", @"Swedish (Sweden)", @"Thai (Thailand)", @"Turkish (Turkey)"];
     self.languagePicker.dataSource = self;
@@ -266,7 +277,6 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
         }
 
         // clear the array of images
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ImagesArray"];
         UIImagePickerController* imagePicker = [[UIImagePickerController alloc] init];
         
         imagePicker.sourceType = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] ? UIImagePickerControllerSourceTypeCamera :  UIImagePickerControllerSourceTypePhotoLibrary;
@@ -277,7 +287,6 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     }
     else if ([pickerRowName isEqualToString:@"Photos Library"]) {
         // clear the array of images
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ImagesArray"];
         ELCImagePickerController *elcPicker = [[ELCImagePickerController alloc] initImagePicker];
         
         elcPicker.maximumImagesCount = 10;
@@ -294,7 +303,6 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
         }
 
         // clear the array of images
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ImagesArray"];
         UIImagePickerController* imagePicker = [[UIImagePickerController alloc] init];
         imagePicker.sourceType = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] ? UIImagePickerControllerSourceTypeCamera :  UIImagePickerControllerSourceTypePhotoLibrary;
         imagePicker.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeImage];
@@ -476,9 +484,8 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 //            NSString *pngFilePath = [docDir stringByAppendingPathComponent:imagePathSize];
 //            NSError *error;
 //            [[NSFileManager defaultManager] removeItemAtPath:pngFilePath error:&error];
-        }
-        
-        for (int i = 0; i < [sizeArray count]; i++) {
+            
+            // Track the size with MixPanel
             [mixpanel track:@"Image Sizes" properties:@{
                                                         @"Size": [sizeArray objectAtIndex:i],
                                                         }];
