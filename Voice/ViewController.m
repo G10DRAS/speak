@@ -312,7 +312,6 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     }
     pickerRowName = nil;
 }
-
 //
 //
 // Image Picker Delegate Methods
@@ -356,7 +355,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     self.imageView.image = [images objectAtIndex:0];
     
     // Scale the image
-    UIImage *myScaledImage = [self imageWithImage:self.imageView.image scaledToSize:CGSizeMake(self.imageView.image.size.width * .3, self.imageView.image.size.height * .3)];
+    UIImage *myScaledImage = [self imageWithImage:self.imageView.image scaledToSize:CGSizeMake(self.imageView.image.size.width * .5, self.imageView.image.size.height * .5)];
     self.imageView.image = myScaledImage;
     
     // Create path for image.
@@ -433,7 +432,6 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     } else {
         attString = [[NSAttributedString alloc] initWithString:[_languagePickerData objectAtIndex:row] attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     }
-    
     return attString;
 }
 // Catpure the picker view selection
