@@ -55,7 +55,5 @@ static NSString* theOCRText;
 @property (nonatomic, strong) TalkViewController *talkView;
 
 - (IBAction)takePhoto:(id)sender;
-- (IBAction)recognizePhoto:(id)sender;
-
 
 @end

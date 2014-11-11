@@ -39,19 +39,6 @@
                                     <action selector="takePhoto:" destination="Hb5-Gl-zTd" eventType="touchUpInside" id="RqD-Yo-Fgm"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ECZ-3B-U16">
-                                <rect key="frame" x="89" y="321" width="142" height="142"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="130" id="GXa-8d-dq5"/>
-                                    <constraint firstAttribute="width" constant="130" id="ZRH-Os-SKV"/>
-                                </constraints>
-                                <state key="normal" image="talk.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="recognizePhoto:" destination="Hb5-Gl-zTd" eventType="touchUpInside" id="XCb-9U-rMi"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3aZ-nW-DAQ">
                                 <rect key="frame" x="25" y="514" width="37" height="37"/>
                                 <state key="normal" image="help.png">
@@ -215,7 +202,6 @@
         <image name="pause.png" width="128" height="128"/>
         <image name="photo.png" width="250" height="250"/>
         <image name="play.png" width="128" height="128"/>
-        <image name="talk.png" width="250" height="250"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

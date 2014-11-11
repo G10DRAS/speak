@@ -365,6 +365,8 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     // Save image to disk.
     [UIImagePNGRepresentation(self.imageView.image) writeToFile:imagePath atomically:YES];
     NSLog(@"First Image's Path: %@", imagePath);
+    
+    [self finishedPickingImage];
 
 }
 
@@ -404,6 +406,8 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
         [UIImagePNGRepresentation(self.imageView.image) writeToFile:imagePath atomically:YES];
     }
     NSLog(@"Only Image's Path: %@", imagePath);
+    
+    [self finishedPickingImage];
 }
 
 //
@@ -447,7 +451,11 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 /*---------------------------------
  PROCESS THE PHOTO (OCR)
  ------------------------------- */
-- (IBAction)recognizePhoto:(id)sender {
+- (void) finishedPickingImage {
+    NSLog(@"finished picking the image");
+    [self recognizePhoto];
+}
+- (void)recognizePhoto {
     if (self.imageView.image == nil) {
         UIAlertView *alertView = [[UIAlertView alloc]
                                   initWithTitle:@"Take A Picture"
@@ -583,6 +591,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     [self stopLoading];
     [self moveToTalkView];
 }
+// This is for sending get, post, delete, and other types of requests
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
     if (isAuthenticating == YES) {
@@ -607,6 +616,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
     if (isAuthenticating == YES) {
+        // get request for google oauth tokens
         NSError* error;
         NSDictionary* json = [NSJSONSerialization
                               JSONObjectWithData:receivedData // step 1
@@ -622,6 +632,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
         
         NSLog(@"access token 2: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"]);
     } else {
+        // post request after uploading the image
         NSLog(@"Uploaded to Google Drive");
         [self getFile];
     }

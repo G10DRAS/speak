@@ -279,7 +279,7 @@
     NSString *imageText = [NSString stringWithFormat:@"%@", [speakArray objectAtIndex:(speechNumber-1)]];
     AVSpeechUtterance* utter = [[AVSpeechUtterance alloc] initWithString:imageText];
     utter.voice = [AVSpeechSynthesisVoice voiceWithLanguage:[[NSUserDefaults standardUserDefaults] objectForKey:@"languageForTTS"]];
-    [utter setRate:0.2f];
+    [utter setRate:0.1f];
     if (!self.synthesizer) {
         self.synthesizer = [AVSpeechSynthesizer new];
     }
