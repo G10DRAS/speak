@@ -79,7 +79,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     
     // Some UI stuff
     self.view.backgroundColor = [UIColor clearColor];
-    UIImage *myImage = [UIImage imageNamed:ASSET_BY_SCREEN_HEIGHT(@"speak", @"speak-568h")];
+    UIImage *myImage = [UIImage imageNamed:@"background"];
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:myImage]];
     
     [self.navigationController setNavigationBarHidden:YES animated:YES];
