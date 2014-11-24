@@ -135,7 +135,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     
     self.languagePicker.hidden = NO;
     
-    toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, self.languagePicker.frame.origin.y, screenWidth, 44)];
+    toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, self.languagePicker.frame.origin.y-10, screenWidth, 44)];
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:self action:@selector(whichLanguage:)];
     doneButton.tintColor=[UIColor darkGrayColor];
     [toolBar setItems:[NSArray arrayWithObjects:doneButton, nil]];
@@ -285,7 +285,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     
     self.picker.hidden = NO;
     
-    toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, self.picker.frame.origin.y, screenWidth, 44)];
+    toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, self.picker.frame.origin.y-10, screenWidth, 44)];
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:self action:@selector(chooseWhichCamAction:)];
     doneButton.tintColor=[UIColor darkGrayColor];
     [toolBar setItems:[NSArray arrayWithObjects:doneButton, nil]];
