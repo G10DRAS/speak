@@ -9,7 +9,7 @@
         <!--View Controller-->
         <scene sceneID="H1m-gh-1Z4">
             <objects>
-                <viewController storyboardIdentifier="MainView" id="Hb5-Gl-zTd" customClass="ViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainView" modalTransitionStyle="crossDissolve" id="Hb5-Gl-zTd" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="FrQ-gu-LYv"/>
                         <viewControllerLayoutGuide type="bottom" id="Y85-ow-wKJ"/>
@@ -74,20 +74,21 @@
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="7bu-hM-56L" secondAttribute="trailing" constant="12" id="9LJ-Uy-HB5"/>
-                            <constraint firstItem="O8O-G4-uMr" firstAttribute="leading" secondItem="T0R-jV-Ezx" secondAttribute="leadingMargin" constant="-16" id="HK5-yN-w8r"/>
+                            <constraint firstItem="Y85-ow-wKJ" firstAttribute="top" secondItem="O8O-G4-uMr" secondAttribute="bottom" id="B0s-Bq-WEw"/>
+                            <constraint firstItem="O8O-G4-uMr" firstAttribute="leading" secondItem="T0R-jV-Ezx" secondAttribute="leadingMargin" constant="-16" id="F95-wn-WRP"/>
                             <constraint firstAttribute="centerX" secondItem="99q-Y8-nBA" secondAttribute="centerX" id="He6-Sd-Q50"/>
                             <constraint firstAttribute="centerY" secondItem="99q-Y8-nBA" secondAttribute="centerY" id="LBS-iP-vOu"/>
-                            <constraint firstItem="Y85-ow-wKJ" firstAttribute="top" secondItem="X5x-Vb-4J6" secondAttribute="bottom" id="MxK-z6-7ir"/>
-                            <constraint firstItem="X5x-Vb-4J6" firstAttribute="leading" secondItem="T0R-jV-Ezx" secondAttribute="leadingMargin" constant="-16" id="UAh-IC-hs3"/>
-                            <constraint firstItem="Y85-ow-wKJ" firstAttribute="top" secondItem="O8O-G4-uMr" secondAttribute="bottom" id="WAW-CH-Jta"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="X5x-Vb-4J6" secondAttribute="trailing" constant="-16" id="cfN-zv-8CZ"/>
+                            <constraint firstItem="X5x-Vb-4J6" firstAttribute="leading" secondItem="T0R-jV-Ezx" secondAttribute="leadingMargin" constant="-16" id="T8H-BN-KKx"/>
                             <constraint firstItem="Y85-ow-wKJ" firstAttribute="top" secondItem="3aZ-nW-DAQ" secondAttribute="bottom" constant="17" id="hdM-Dh-7GX"/>
                             <constraint firstItem="3aZ-nW-DAQ" firstAttribute="leading" secondItem="T0R-jV-Ezx" secondAttribute="leadingMargin" constant="9" id="nry-fn-qIa"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="X5x-Vb-4J6" secondAttribute="trailing" constant="-16" id="qNh-Mu-Z9f"/>
                             <constraint firstItem="Y85-ow-wKJ" firstAttribute="top" secondItem="7bu-hM-56L" secondAttribute="bottom" constant="17" id="sZi-NS-kgD"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="O8O-G4-uMr" secondAttribute="trailing" constant="-16" id="tH6-Rp-BEA"/>
+                            <constraint firstItem="Y85-ow-wKJ" firstAttribute="top" secondItem="X5x-Vb-4J6" secondAttribute="bottom" id="u2g-MM-uqe"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="O8O-G4-uMr" secondAttribute="trailing" constant="-16" id="yxN-KA-a7F"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="DPN-Vn-hhu"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="imageView" destination="X4M-QS-PtK" id="2AI-U3-xvo"/>
                         <outlet property="languagePicker" destination="X5x-Vb-4J6" id="tRq-mJ-mik"/>
@@ -191,7 +192,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="eqI-Eu-fBI" kind="relationship" relationship="rootViewController" id="zS7-l4-t23"/>
+                        <segue destination="eqI-Eu-fBI" kind="relationship" relationship="rootViewController" id="lLN-qI-SDW"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="POw-uL-adF" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -36,6 +36,12 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 
     self.imageView.image = nil;
     
+    // Get the iphone's screen height and width
+    screenRect = [[UIScreen mainScreen] bounds];
+    screenWidth = screenRect.size.width;
+    screenHeight = screenRect.size.height;
+
+    
     // Clear NSUserDefaults
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"en-US"];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"en"];
@@ -82,7 +88,30 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     UIImage *myImage = [UIImage imageNamed:@"background"];
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:myImage]];
     
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    
+    // Nav Bar UI Stuff
+    [[self navigationController] setNavigationBarHidden:NO animated:YES];
+    [self.navigationItem setHidesBackButton:YES animated:YES];
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:26.0f];;
+    label.textAlignment = NSTextAlignmentCenter;
+    label.textColor = [UIColor whiteColor]; // change this color
+    
+    self.navigationItem.titleView = label;
+    label.text = NSLocalizedString(@"Voice", @"");
+    [label sizeToFit];
+    
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
+                                                  forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    self.navigationController.navigationBar.translucent = YES;
+    
+    UIImage *image = [UIImage imageNamed:@"nav_bg.png"];
+    [self.navigationController.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
+
+
     [super viewDidLoad];
 
     self.imageView.image = [UIImage imageNamed:nil];
@@ -256,16 +285,27 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     
     self.picker.hidden = NO;
     
-    singleTap = [
-                                         [UITapGestureRecognizer alloc]
-                                         initWithTarget: self
-                                         action: @selector(chooseWhichCamAction:)
-                                         ];
-    [singleTap setCancelsTouchesInView:NO];
-    [[self view] addGestureRecognizer: singleTap];
+//    singleTap = [
+//                                         [UITapGestureRecognizer alloc]
+//                                         initWithTarget: self
+//                                         action: @selector(chooseWhichCamAction:)
+//                                         ];
+//    [singleTap setCancelsTouchesInView:NO];
+//    [[self view] addGestureRecognizer: singleTap];
+    
+    
+
+    toolBar = [[UIToolbar alloc] initWithFrame:self.picker.frame];
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:self action:@selector(chooseWhichCamAction:)];
+    doneButton.tintColor=[UIColor darkGrayColor];
+    [toolBar setItems:[NSArray arrayWithObjects:doneButton, nil]];
+    
+    [self.view addSubview:toolBar];
+    
 }
 - (void) chooseWhichCamAction:(id)sender {
-    [[self view] removeGestureRecognizer:singleTap];
+//    [[self view] removeGestureRecognizer:singleTap];
+    [toolBar removeFromSuperview];
     self.picker.hidden = YES;
     [self.picker resignFirstResponder];
     if ([pickerRowName isEqualToString:@"Camera"]) {

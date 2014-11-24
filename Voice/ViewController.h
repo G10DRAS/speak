@@ -32,12 +32,15 @@ static NSString* theOCRText;
     NSDictionary *plainTextURL;
     NSArray *_pickerData;
     NSArray *_languagePickerData;
-    UITapGestureRecognizer *singleTap;
     UITapGestureRecognizer *languageTap;
     NSString *pickerRowName;
     Mixpanel *mixpanel;
     NSString *time;
-
+    UIToolbar *toolBar;
+    
+    CGRect screenRect;
+    CGFloat screenWidth;
+    CGFloat screenHeight;
 }
 
 + (NSString*)globalToken;
