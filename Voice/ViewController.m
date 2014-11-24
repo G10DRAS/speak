@@ -135,17 +135,17 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     
     self.languagePicker.hidden = NO;
     
-    languageTap = [
-                 [UITapGestureRecognizer alloc]
-                 initWithTarget: self
-                 action: @selector(whichLanguage:)
-                 ];
-    [languageTap setCancelsTouchesInView:NO];
-    [[self view] addGestureRecognizer: languageTap];
+    toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, self.languagePicker.frame.origin.y, screenWidth, 44)];
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:self action:@selector(whichLanguage:)];
+    doneButton.tintColor=[UIColor darkGrayColor];
+    [toolBar setItems:[NSArray arrayWithObjects:doneButton, nil]];
+    
+    [self.view addSubview:toolBar];
+
 }
 
 - (void) whichLanguage:(id)sender {
-    [[self view] removeGestureRecognizer:languageTap];
+    [toolBar removeFromSuperview];
     self.languagePicker.hidden = YES;
     [self.languagePicker resignFirstResponder];
     
@@ -285,16 +285,6 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     
     self.picker.hidden = NO;
     
-//    singleTap = [
-//                                         [UITapGestureRecognizer alloc]
-//                                         initWithTarget: self
-//                                         action: @selector(chooseWhichCamAction:)
-//                                         ];
-//    [singleTap setCancelsTouchesInView:NO];
-//    [[self view] addGestureRecognizer: singleTap];
-    
-    
-
     toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, self.picker.frame.origin.y, screenWidth, 44)];
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:self action:@selector(chooseWhichCamAction:)];
     doneButton.tintColor=[UIColor darkGrayColor];
@@ -304,7 +294,6 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     
 }
 - (void) chooseWhichCamAction:(id)sender {
-//    [[self view] removeGestureRecognizer:singleTap];
     [toolBar removeFromSuperview];
     self.picker.hidden = YES;
     [self.picker resignFirstResponder];

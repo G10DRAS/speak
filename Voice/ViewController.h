@@ -32,7 +32,6 @@ static NSString* theOCRText;
     NSDictionary *plainTextURL;
     NSArray *_pickerData;
     NSArray *_languagePickerData;
-    UITapGestureRecognizer *languageTap;
     NSString *pickerRowName;
     Mixpanel *mixpanel;
     NSString *time;
