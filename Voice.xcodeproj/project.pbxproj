@@ -28,6 +28,7 @@
 		38487FF319BD23330016EE5E /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38487FE719BD20200016EE5E /* CoreTelephony.framework */; };
 		38487FF419BD23460016EE5E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38487FE519BD20170016EE5E /* SystemConfiguration.framework */; };
 		38578DB019AE490C00FCC97A /* languages@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38578DAF19AE490C00FCC97A /* languages@2x.png */; };
+		38597F2A1A23F26B0057D4E8 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38597F291A23F26B0057D4E8 /* SettingsViewController.m */; };
 		385A902E1984B274008F6FA1 /* help@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 385A902D1984B274008F6FA1 /* help@2x.png */; };
 		385A90391985BDDD008F6FA1 /* 1-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 385A902F1985BDDD008F6FA1 /* 1-568h@2x.png */; };
 		385A903A1985BDDD008F6FA1 /* 1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 385A90301985BDDD008F6FA1 /* 1@2x.png */; };
@@ -124,6 +125,8 @@
 		38487FEF19BD21770016EE5E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		38487FF119BD21900016EE5E /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		38578DAF19AE490C00FCC97A /* languages@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "languages@2x.png"; sourceTree = "<group>"; };
+		38597F281A23F26B0057D4E8 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		38597F291A23F26B0057D4E8 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		385A902D1984B274008F6FA1 /* help@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "help@2x.png"; sourceTree = "<group>"; };
 		385A902F1985BDDD008F6FA1 /* 1-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1-568h@2x.png"; sourceTree = "<group>"; };
 		385A90301985BDDD008F6FA1 /* 1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1@2x.png"; sourceTree = "<group>"; };
@@ -310,6 +313,8 @@
 				385CF9D819842B4F00CF9563 /* AppDelegate.m */,
 				385CF9DA19842B4F00CF9563 /* ViewController.h */,
 				385CF9DB19842B4F00CF9563 /* ViewController.m */,
+				38597F281A23F26B0057D4E8 /* SettingsViewController.h */,
+				38597F291A23F26B0057D4E8 /* SettingsViewController.m */,
 				385CF9DD19842B4F00CF9563 /* Main.storyboard */,
 				385CFA3A1984309A00CF9563 /* TalkViewController.h */,
 				385CFA3B1984309A00CF9563 /* TalkViewController.m */,
@@ -655,6 +660,7 @@
 				385CF9D919842B4F00CF9563 /* AppDelegate.m in Sources */,
 				38E8CDC0198481C100FAA465 /* EAIntroView.m in Sources */,
 				385CFA3319842FAF00CF9563 /* SBJson4Parser.m in Sources */,
+				38597F2A1A23F26B0057D4E8 /* SettingsViewController.m in Sources */,
 				385CF9D619842B4F00CF9563 /* main.m in Sources */,
 				38E8CDBF198481C100FAA465 /* EAIntroPage.m in Sources */,
 			);
