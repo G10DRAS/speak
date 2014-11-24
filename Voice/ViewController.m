@@ -295,7 +295,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     
     
 
-    toolBar = [[UIToolbar alloc] initWithFrame:self.picker.frame];
+    toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, self.picker.frame.origin.y, screenWidth, 44)];
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:self action:@selector(chooseWhichCamAction:)];
     doneButton.tintColor=[UIColor darkGrayColor];
     [toolBar setItems:[NSArray arrayWithObjects:doneButton, nil]];
