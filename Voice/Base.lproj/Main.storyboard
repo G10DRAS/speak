@@ -87,7 +87,9 @@
                             <constraint firstAttribute="trailingMargin" secondItem="O8O-G4-uMr" secondAttribute="trailing" constant="-16" id="yxN-KA-a7F"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="DPN-Vn-hhu"/>
+                    <navigationItem key="navigationItem" id="DPN-Vn-hhu">
+                        <barButtonItem key="backBarButtonItem" title=" " id="xe9-rO-DqD"/>
+                    </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="imageView" destination="X4M-QS-PtK" id="2AI-U3-xvo"/>
@@ -148,12 +150,6 @@
                                     <action selector="pauseButtonPressed:" destination="NjP-4X-2fU" eventType="touchUpInside" id="fVy-EZ-JIF"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" text="Speaking..." textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="C3H-FX-en6">
-                                <rect key="frame" x="20" y="20" width="280" height="100"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="56"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qAa-hd-tJl">
                                 <rect key="frame" x="124" y="394" width="72" height="72"/>
                                 <state key="normal" image="back.png">

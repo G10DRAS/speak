@@ -75,7 +75,7 @@
         if (image.size.width > image.size.height) {
 //            rotate(image, UIImageOrientationLeft);
 //            UIImage *rotatedImage = [image imageRotatedByDegrees:90.0];
-            hi = [self imageByRotatingImage:image fromImageOrientation:UIImageOrientationUp];
+            hi = [self imageByRotatingImage:image fromImageOrientation:UIImageOrientationRight];
             NSLog(@"Image is landscape");
         } else {
             hi = [UIImage imageWithData:[imageArray objectAtIndex:i]];
@@ -142,9 +142,37 @@
     imageNumber = 1;
     speechNumber = 1;
     
+    
+    
+    // Some UI stuff
     self.view.backgroundColor = [UIColor clearColor];
-    UIImage *myImage = [UIImage imageNamed:ASSET_BY_SCREEN_HEIGHT(@"player", @"player-568h")];
+    UIImage *myImage = [UIImage imageNamed:@"player"];
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:myImage]];
+    
+    
+    // Nav Bar UI Stuff
+    [[self navigationController] setNavigationBarHidden:NO animated:YES];
+    [self.navigationItem setHidesBackButton:NO animated:YES];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:26.0f];;
+    label.textAlignment = NSTextAlignmentCenter;
+    label.textColor = [UIColor whiteColor]; // change this color
+    
+    self.navigationItem.titleView = label;
+    label.text = NSLocalizedString(@"Speaking...", @"");
+    [label sizeToFit];
+    
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
+                                                  forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    self.navigationController.navigationBar.translucent = YES;
+    
+    UIImage *image = [UIImage imageNamed:@"nav_bg.png"];
+    [self.navigationController.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
+
     
     
 //    compressingImage = YES;
