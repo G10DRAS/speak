@@ -142,8 +142,6 @@
     imageNumber = 1;
     speechNumber = 1;
     
-    
-    
     // Some UI stuff
     self.view.backgroundColor = [UIColor clearColor];
     UIImage *myImage = [UIImage imageNamed:@"player"];
@@ -347,20 +345,6 @@
 //        [talked stopSpeakingAtBoundary:AVSpeechBoundaryImmediate];
     }
     _text = nil;
-}
--(void) moveToMainView {
-    UIViewController *myNext = [self.storyboard instantiateViewControllerWithIdentifier:@"MainView"];
-    [self.navigationController pushViewController:myNext animated:YES];
-}
-
-- (IBAction)moveToMain:(id)sender {
-    AVSpeechSynthesizer *talked = self.synthesizer;
-    if([talked isSpeaking]) {
-        [talked stopSpeakingAtBoundary:AVSpeechBoundaryImmediate];
-        AVSpeechUtterance *utterance = [AVSpeechUtterance speechUtteranceWithString:@""];
-        [talked speakUtterance:utterance];
-        [talked stopSpeakingAtBoundary:AVSpeechBoundaryImmediate];
-    }
 }
 
 - (IBAction)playButtonPressed:(id)sender {
@@ -598,6 +582,25 @@
 }
 
 /*---------------------------------
+ NAVIGATION
+ ------------------------------- */
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    if (self.isMovingFromParentViewController || self.isBeingDismissed) {
+        // Stop the TTS
+        AVSpeechSynthesizer *talked = self.synthesizer;
+        if([talked isSpeaking]) {
+            [talked stopSpeakingAtBoundary:AVSpeechBoundaryImmediate];
+            AVSpeechUtterance *utterance = [AVSpeechUtterance speechUtteranceWithString:@""];
+            [talked speakUtterance:utterance];
+            [talked stopSpeakingAtBoundary:AVSpeechBoundaryImmediate];
+        }
+    }
+}
+
+/*---------------------------------
  EXTRA STUFF
  ------------------------------- */
 -(UIImage*)imageByRotatingImage:(UIImage*)initImage fromImageOrientation:(UIImageOrientation)orientation
@@ -724,5 +727,6 @@
     UIGraphicsEndImageContext();
     return newImage;
 }
+
 
 @end

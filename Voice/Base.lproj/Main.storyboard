@@ -150,16 +150,6 @@
                                     <action selector="pauseButtonPressed:" destination="NjP-4X-2fU" eventType="touchUpInside" id="fVy-EZ-JIF"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qAa-hd-tJl">
-                                <rect key="frame" x="124" y="394" width="72" height="72"/>
-                                <state key="normal" image="back.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="moveToMain:" destination="NjP-4X-2fU" eventType="touchUpInside" id="Bhb-O9-GA3"/>
-                                    <segue destination="Hb5-Gl-zTd" kind="push" id="7fw-ON-30x"/>
-                                </connections>
-                            </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AMX-ov-jKx">
                                 <rect key="frame" x="85" y="226" width="150" height="150"/>
                                 <connections>
@@ -197,7 +187,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="back.png" width="64" height="64"/>
         <image name="help.png" width="37" height="37"/>
         <image name="languages.png" width="37" height="37"/>
         <image name="pause.png" width="128" height="128"/>

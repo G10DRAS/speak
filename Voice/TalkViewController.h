@@ -38,7 +38,6 @@ static NSTimeInterval const AutoScrollDuration = 3.0f;
 @property (nonatomic, strong) IBOutlet UIScrollView *scrollView;
 
 @property (strong, nonatomic) NSString *text;
-- (IBAction)moveToMain:(id)sender;
 
 - (IBAction)playButtonPressed:(id)sender;
 - (IBAction)pauseButtonPressed:(id)sender;
