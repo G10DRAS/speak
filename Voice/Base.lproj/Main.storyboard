@@ -189,7 +189,7 @@
                                     <action selector="restartButtonPressed:" destination="NjP-4X-2fU" eventType="touchUpInside" id="yzh-aq-pPK"/>
                                 </connections>
                             </button>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="263" placeholderIntrinsicHeight="263" delaysContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AMX-ov-jKx">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" delaysContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AMX-ov-jKx">
                                 <rect key="frame" x="29" y="70" width="263" height="263"/>
                                 <connections>
                                     <outlet property="delegate" destination="NjP-4X-2fU" id="9Ys-yS-TjG"/>

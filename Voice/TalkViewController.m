@@ -354,7 +354,7 @@
         [talked speakUtterance:utterance];
         [talked stopSpeakingAtBoundary:AVSpeechBoundaryImmediate];
     }
-    speechNumber = 0;
+    speechNumber = 1;
     [self startTalking];
 }
 
