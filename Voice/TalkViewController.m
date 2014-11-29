@@ -346,6 +346,17 @@
     }
     _text = nil;
 }
+- (void) restartSpeech {
+    AVSpeechSynthesizer *talked = self.synthesizer;
+    if([talked isSpeaking]) {
+        [talked stopSpeakingAtBoundary:AVSpeechBoundaryImmediate];
+        AVSpeechUtterance *utterance = [AVSpeechUtterance speechUtteranceWithString:@""];
+        [talked speakUtterance:utterance];
+        [talked stopSpeakingAtBoundary:AVSpeechBoundaryImmediate];
+    }
+    speechNumber = 0;
+    [self startTalking];
+}
 
 - (IBAction)playButtonPressed:(id)sender {
     [self playSpeech];
@@ -354,6 +365,11 @@
 - (IBAction)pauseButtonPressed:(id)sender {
     [self pauseSpeech];
 }
+
+- (IBAction)restartButtonPressed:(id)sender {
+    [self restartSpeech];
+}
+
 
 /*---------------------------------
  AVSPEECHSYNTHESIZER DELEGATE METHODS

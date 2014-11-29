@@ -41,6 +41,6 @@ static NSTimeInterval const AutoScrollDuration = 3.0f;
 
 - (IBAction)playButtonPressed:(id)sender;
 - (IBAction)pauseButtonPressed:(id)sender;
-//- (IBAction)restart:(id)sender;
+- (IBAction)restartButtonPressed:(id)sender;
 
 @end
