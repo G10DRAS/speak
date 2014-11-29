@@ -99,6 +99,12 @@
 
     }
     
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"speedForTTS"] == nil) {
+        [[NSUserDefaults standardUserDefaults] setFloat:0.2f forKey:@"speedForTTS"];
+    }
+    
+    ttsSpeed = [[NSUserDefaults standardUserDefaults] floatForKey:@"speedForTTS"];
+    
     [_scrollView setPagingEnabled:YES];
     [_scrollView setContentSize:CGSizeMake(workingFrame.origin.x, workingFrame.size.height)];
 
@@ -305,7 +311,7 @@
     NSString *imageText = [NSString stringWithFormat:@"%@", [speakArray objectAtIndex:(speechNumber-1)]];
     AVSpeechUtterance* utter = [[AVSpeechUtterance alloc] initWithString:imageText];
     utter.voice = [AVSpeechSynthesisVoice voiceWithLanguage:[[NSUserDefaults standardUserDefaults] objectForKey:@"languageForTTS"]];
-    [utter setRate:0.1f];
+    [utter setRate:ttsSpeed];
     if (!self.synthesizer) {
         self.synthesizer = [AVSpeechSynthesizer new];
     }
@@ -380,7 +386,7 @@
         NSString *imageText = [NSString stringWithFormat:@"%@", [speakArray objectAtIndex:speechNumber]];
         AVSpeechUtterance* utter = [[AVSpeechUtterance alloc] initWithString:imageText];
         utter.voice = [AVSpeechSynthesisVoice voiceWithLanguage:[[NSUserDefaults standardUserDefaults] objectForKey:@"languageForTTS"]];
-        [utter setRate:0.2f];
+        [utter setRate:ttsSpeed];
         if (!self.synthesizer) {
             self.synthesizer = [AVSpeechSynthesizer new];
         }
@@ -392,7 +398,7 @@
 //        dispatch_after(countdownTime, dispatch_get_main_queue(), ^(void){
             AVSpeechUtterance* utter = [[AVSpeechUtterance alloc] initWithString:@""];
             utter.voice = [AVSpeechSynthesisVoice voiceWithLanguage:[[NSUserDefaults standardUserDefaults] objectForKey:@"languageForTTS"]];
-            [utter setRate:0.2f];
+            [utter setRate:ttsSpeed];
             if (!self.synthesizer) {
                 self.synthesizer = [AVSpeechSynthesizer new];
             }

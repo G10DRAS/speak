@@ -71,6 +71,15 @@
                                     <outlet property="delegate" destination="Hb5-Gl-zTd" id="Ca5-OJ-hFs"/>
                                 </connections>
                             </pickerView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AHi-OA-SeR">
+                                <rect key="frame" x="142" y="514" width="37" height="37"/>
+                                <state key="normal" image="languages.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="languageSelection:" destination="Hb5-Gl-zTd" eventType="touchUpInside" id="D6g-mb-BmR"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="7bu-hM-56L" secondAttribute="trailing" constant="12" id="9LJ-Uy-HB5"/>
@@ -131,8 +140,29 @@
                     <view key="view" contentMode="scaleToFill" id="OIN-JE-OAs">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.7681931975138121" green="0.7681931975138121" blue="0.7681931975138121" alpha="1" colorSpace="calibratedRGB"/>
+                        <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="IXk-St-J9O">
+                                <rect key="frame" x="56" y="180" width="208" height="29"/>
+                                <segments>
+                                    <segment title="Fast"/>
+                                    <segment title="Medium"/>
+                                    <segment title="Slow"/>
+                                </segments>
+                                <connections>
+                                    <action selector="indexChanged:" destination="3RI-4s-SX5" eventType="valueChanged" id="aWp-bF-Skv"/>
+                                </connections>
+                            </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Speech Speed:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ppa-se-8DT">
+                                <rect key="frame" x="104" y="133" width="118" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                     </view>
+                    <connections>
+                        <outlet property="ttsSpeed" destination="IXk-St-J9O" id="d24-50-B58"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rgo-XS-qtO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

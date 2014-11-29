@@ -34,6 +34,7 @@ static NSTimeInterval const AutoScrollDuration = 3.0f;
     int speechNumber;
     NSData *compressedImageData;
     Mixpanel *mixpanel;
+    float ttsSpeed;
 }
 @property (nonatomic, strong) IBOutlet UIScrollView *scrollView;
 

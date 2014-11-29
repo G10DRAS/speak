@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SettingsViewController : UIViewController
+@interface SettingsViewController : UIViewController {
+    
+}
+
+@property (weak, nonatomic) IBOutlet UISegmentedControl *ttsSpeed;
+- (IBAction)indexChanged:(UISegmentedControl *)sender;
 
 @end
