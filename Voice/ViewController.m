@@ -50,6 +50,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ImagesArray"];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ImageText"];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"accessToken"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"speedForTTS"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 
     
