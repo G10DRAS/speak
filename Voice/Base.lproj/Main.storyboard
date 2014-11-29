@@ -120,6 +120,24 @@
             </objects>
             <point key="canvasLocation" x="750" y="1015"/>
         </scene>
+        <!--Settings View Controller-->
+        <scene sceneID="77q-2T-mg9">
+            <objects>
+                <viewController id="3RI-4s-SX5" customClass="SettingsViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="To5-hO-qHP"/>
+                        <viewControllerLayoutGuide type="bottom" id="fHR-Vc-Ycs"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="OIN-JE-OAs">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rgo-XS-qtO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1204" y="1011"/>
+        </scene>
         <!--Talk View Controller-->
         <scene sceneID="DAK-b4-tCY">
             <objects>
@@ -132,17 +150,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cAE-tC-d62">
-                                <rect key="frame" x="8" y="128" width="127" height="127"/>
-                                <state key="normal" image="play.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="playButtonPressed:" destination="NjP-4X-2fU" eventType="touchUpInside" id="CyE-Px-rLo"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H4w-y2-9nU">
-                                <rect key="frame" x="170" y="115" width="130" height="130"/>
+                                <rect key="frame" x="117" y="365" width="86" height="86"/>
                                 <state key="normal" image="pause.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -151,11 +160,28 @@
                                 </connections>
                             </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AMX-ov-jKx">
-                                <rect key="frame" x="85" y="226" width="150" height="150"/>
                                 <connections>
                                     <outlet property="delegate" destination="NjP-4X-2fU" id="9Ys-yS-TjG"/>
                                 </connections>
                             </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cAE-tC-d62">
+                                <rect key="frame" x="16" y="365" width="86" height="86"/>
+                                <state key="normal" image="play.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="playButtonPressed:" destination="NjP-4X-2fU" eventType="touchUpInside" id="CyE-Px-rLo"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ADq-9C-bwZ">
+                                <rect key="frame" x="218" y="365" width="86" height="86"/>
+                                <state key="normal" image="replay.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="pauseButtonPressed:" destination="NjP-4X-2fU" eventType="touchUpInside" id="2No-No-VMS"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.24815169570000001" green="0.75910434299999996" blue="0.78607302300000004" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -189,9 +215,10 @@
     <resources>
         <image name="help.png" width="37" height="37"/>
         <image name="languages.png" width="37" height="37"/>
-        <image name="pause.png" width="128" height="128"/>
+        <image name="pause.png" width="256" height="256"/>
         <image name="photo.png" width="250" height="250"/>
-        <image name="play.png" width="128" height="128"/>
+        <image name="play.png" width="256" height="256"/>
+        <image name="replay.png" width="193" height="198"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
