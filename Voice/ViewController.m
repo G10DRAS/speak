@@ -680,6 +680,10 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     UIViewController *myNext = [self.storyboard instantiateViewControllerWithIdentifier:@"TutorialView"];
     [self.navigationController pushViewController:myNext animated:YES];
 }
+- (IBAction)settingsSelected:(id)sender {
+    UIViewController *myNext = [self.storyboard instantiateViewControllerWithIdentifier:@"SettingsView"];
+    [self.navigationController pushViewController:myNext animated:YES];
+}
 /*---------------------------------
  EXTRA STUFF
  ------------------------------- */
