@@ -331,9 +331,11 @@
     }
 }
 - (void) playSpeech {
-    [self.synthesizer continueSpeaking];
-    NSLog(@"Played");
-    speechPaused = NO;
+    if (speechPaused == YES) {
+        [self.synthesizer continueSpeaking];
+        NSLog(@"Played");
+        speechPaused = NO;
+    }
 }
 - (void) playPauseToggle {
     if (speechPaused == NO) {

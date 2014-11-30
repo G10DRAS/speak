@@ -55,13 +55,13 @@
                                     <action selector="languageSelection:" destination="Hb5-Gl-zTd" eventType="touchUpInside" id="FEO-2v-LGG"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AHi-OA-SeR">
-                                <rect key="frame" x="135" y="507" width="50" height="50"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AHi-OA-SeR">
+                                <rect key="frame" x="130" y="509" width="47" height="47"/>
                                 <state key="normal" image="settings.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="languageSelection:" destination="Hb5-Gl-zTd" eventType="touchUpInside" id="D6g-mb-BmR"/>
+                                    <segue destination="3RI-4s-SX5" kind="push" id="MAu-0P-WRk"/>
                                 </connections>
                             </button>
                             <pickerView hidden="YES" alpha="0.80000001192092896" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O8O-G4-uMr">
@@ -84,8 +84,10 @@
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="7bu-hM-56L" secondAttribute="trailing" constant="12" id="9LJ-Uy-HB5"/>
                             <constraint firstItem="Y85-ow-wKJ" firstAttribute="top" secondItem="O8O-G4-uMr" secondAttribute="bottom" id="B0s-Bq-WEw"/>
+                            <constraint firstAttribute="centerX" secondItem="AHi-OA-SeR" secondAttribute="centerX" id="EJk-8I-dPb"/>
                             <constraint firstItem="O8O-G4-uMr" firstAttribute="leading" secondItem="T0R-jV-Ezx" secondAttribute="leadingMargin" constant="-16" id="F95-wn-WRP"/>
                             <constraint firstAttribute="centerX" secondItem="99q-Y8-nBA" secondAttribute="centerX" id="He6-Sd-Q50"/>
+                            <constraint firstItem="Y85-ow-wKJ" firstAttribute="top" secondItem="AHi-OA-SeR" secondAttribute="bottom" constant="12" id="Iqg-Ba-scb"/>
                             <constraint firstAttribute="centerY" secondItem="99q-Y8-nBA" secondAttribute="centerY" id="LBS-iP-vOu"/>
                             <constraint firstItem="X5x-Vb-4J6" firstAttribute="leading" secondItem="T0R-jV-Ezx" secondAttribute="leadingMargin" constant="-16" id="T8H-BN-KKx"/>
                             <constraint firstItem="Y85-ow-wKJ" firstAttribute="top" secondItem="3aZ-nW-DAQ" secondAttribute="bottom" constant="17" id="hdM-Dh-7GX"/>

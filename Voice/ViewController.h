@@ -52,6 +52,7 @@ static NSString* theOCRText;
 
 - (IBAction)helpPressed:(id)sender;
 - (IBAction)languageSelection:(id)sender;
+//- (IBAction)settingsSelected:(id)sender;
 
 
 @property (nonatomic, strong) TalkViewController *talkView;
