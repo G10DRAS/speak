@@ -41,17 +41,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     screenWidth = screenRect.size.width;
     screenHeight = screenRect.size.height;
 
-    
-    // Clear NSUserDefaults
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"en-US"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"en"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"languageForTTS"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"languageForOCR"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ImagesArray"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ImageText"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"accessToken"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"speedForTTS"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+
 
     
     // Initialize Langauges for LanguagePicker
@@ -540,12 +530,15 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
         // POST request to Google Drive
         NSData *file1Data = [[NSData alloc] initWithContentsOfFile:imagePath];
         NSString *url = [NSString stringWithFormat:@"https://www.googleapis.com/upload/drive/v2/files?uploadType=media&convert=true&ocr=true&ocrLanguage=%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"languageForOCR"]];
+        
+        NSLog(@"URL TO CHECK: %@",url);
 
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:url]];
         
         // Headers
         [request setValue:[NSString stringWithFormat:@"%llu", size] forHTTPHeaderField:@"Content-length"];
         [request setValue:[NSString stringWithFormat:@"Bearer %@", hardCodedToken] forHTTPHeaderField:@"Authorization"];
+
         [request setValue:@"image/png" forHTTPHeaderField:@"Content-Type"];
         
         NSMutableData *body = [NSMutableData data];
@@ -610,13 +603,13 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     
     NSLog(@"%@",[[NSString alloc] initWithData:oResponseData encoding:NSUTF8StringEncoding]);
     
-    NSMutableURLRequest *deleteRequest = [[NSMutableURLRequest alloc] init];
-    [deleteRequest setHTTPMethod:@"DELETE"];
-    [deleteRequest setURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://www.googleapis.com/drive/v2/files/%@", imageFileID]]];
-    [deleteRequest setValue:[NSString stringWithFormat:@"Bearer %@", hardCodedToken] forHTTPHeaderField:@"Authorization"];
-    
-    NSData *theResponseData;
-    theResponseData = [NSURLConnection sendSynchronousRequest:deleteRequest returningResponse:&responseCode error:&error];
+//    NSMutableURLRequest *deleteRequest = [[NSMutableURLRequest alloc] init];
+//    [deleteRequest setHTTPMethod:@"DELETE"];
+//    [deleteRequest setURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://www.googleapis.com/drive/v2/files/%@", imageFileID]]];
+//    [deleteRequest setValue:[NSString stringWithFormat:@"Bearer %@", hardCodedToken] forHTTPHeaderField:@"Authorization"];
+//    
+//    NSData *theResponseData;
+//    theResponseData = [NSURLConnection sendSynchronousRequest:deleteRequest returningResponse:&responseCode error:&error];
     
     [self stopLoading];
     [self moveToTalkView];
@@ -741,8 +734,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     
     if([[dateFormatter dateFromString:morningStart] compare:[dateFormatter dateFromString:resultTime]] == NSOrderedDescending || [[dateFormatter dateFromString:morningEnd] compare:[dateFormatter dateFromString:resultTime]] == NSOrderedAscending) {
         time = @"day";
-    }
-    if([[dateFormatter dateFromString:nightStart] compare:[dateFormatter dateFromString:resultTime]] == NSOrderedDescending || [[dateFormatter dateFromString:nightEnd] compare:[dateFormatter dateFromString:resultTime]] == NSOrderedAscending) {
+    } else if([[dateFormatter dateFromString:nightStart] compare:[dateFormatter dateFromString:resultTime]] == NSOrderedDescending || [[dateFormatter dateFromString:nightEnd] compare:[dateFormatter dateFromString:resultTime]] == NSOrderedAscending) {
         time = @"night";
     }
     NSLog(@"%@",time);

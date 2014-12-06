@@ -42,6 +42,18 @@
     if (error) {
         // Do some error handling
     }
+    
+    
+    // Clear NSUserDefaults
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"en-US"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"en"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"languageForTTS"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"languageForOCR"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ImagesArray"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ImageText"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"accessToken"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"speedForTTS"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 
     // Override point for customization after application launch.
     return YES;

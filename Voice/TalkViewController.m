@@ -562,13 +562,13 @@
     
     NSLog(@"%@",[[NSString alloc] initWithData:oResponseData encoding:NSUTF8StringEncoding]);
     
-    NSMutableURLRequest *deleteRequest = [[NSMutableURLRequest alloc] init];
-    [deleteRequest setHTTPMethod:@"DELETE"];
-    [deleteRequest setURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://www.googleapis.com/drive/v2/files/%@", imageFileID]]];
-    [deleteRequest setValue:[NSString stringWithFormat:@"Bearer %@", theToken] forHTTPHeaderField:@"Authorization"];
-    
-    NSData *theResponseData;
-    theResponseData = [NSURLConnection sendSynchronousRequest:deleteRequest returningResponse:&responseCode error:&error];
+//    NSMutableURLRequest *deleteRequest = [[NSMutableURLRequest alloc] init];
+//    [deleteRequest setHTTPMethod:@"DELETE"];
+//    [deleteRequest setURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://www.googleapis.com/drive/v2/files/%@", imageFileID]]];
+//    [deleteRequest setValue:[NSString stringWithFormat:@"Bearer %@", theToken] forHTTPHeaderField:@"Authorization"];
+//    
+//    NSData *theResponseData;
+//    theResponseData = [NSURLConnection sendSynchronousRequest:deleteRequest returningResponse:&responseCode error:&error];
     
     [speakArray addObject:actualText];
     
