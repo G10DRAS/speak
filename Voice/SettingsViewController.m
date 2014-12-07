@@ -40,11 +40,7 @@
     UIImage *image = [UIImage imageNamed:@"nav_bg.png"];
     [self.navigationController.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
     
-    
-    
-    
-    
-    
+        
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"speedForTTS"] == nil) {
                 [ttsSpeed setSelectedSegmentIndex:1];
     } else if ([[NSUserDefaults standardUserDefaults] floatForKey:@"speedForTTS"] == 0.2f) {

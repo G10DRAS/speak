@@ -42,6 +42,8 @@
     self.scrollView.delegate = self;
     [self.view addSubview:self.scrollView];
     
+    isSkipping = NO;
+    
     
     NSMutableArray *images = [NSMutableArray arrayWithCapacity:[imageArray count]];
     
@@ -98,7 +100,7 @@
     }
     
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"speedForTTS"] == nil) {
-        [[NSUserDefaults standardUserDefaults] setFloat:0.2f forKey:@"speedForTTS"];
+        [[NSUserDefaults standardUserDefaults] setFloat:0.1f forKey:@"speedForTTS"];
     }
     
     ttsSpeed = [[NSUserDefaults standardUserDefaults] floatForKey:@"speedForTTS"];
@@ -159,6 +161,7 @@
 
     
     [self startTalking];
+    self.pageLabel.text = [NSString stringWithFormat:@"Page %i", speechNumber];
     
     NSLog(@"imageArray Count: %d", (int)[imageArray count]);
 }
@@ -216,6 +219,7 @@
     }
     self.synthesizer.delegate = self;
     [self.synthesizer speakUtterance:utter];
+    self.pageLabel.text = [NSString stringWithFormat:@"Page %i", speechNumber];
 }
 
 - (void) pauseSpeech {
@@ -251,9 +255,9 @@
 //        [talked speakUtterance:utterance];
 //        [talked stopSpeakingAtBoundary:AVSpeechBoundaryImmediate];
     }
-    _text = nil;
 }
 - (void) restartSpeech {
+    isSkipping = YES;
     AVSpeechSynthesizer *talked = self.synthesizer;
     if([talked isSpeaking]) {
         [talked stopSpeakingAtBoundary:AVSpeechBoundaryImmediate];
@@ -262,6 +266,7 @@
         [talked stopSpeakingAtBoundary:AVSpeechBoundaryImmediate];
     }
     speechNumber = 1;
+    self.pageLabel.text = [NSString stringWithFormat:@"Page %i", speechNumber];
     [self startTalking];
 }
 
@@ -277,14 +282,54 @@
     [self restartSpeech];
 }
 
+- (IBAction)nextButtonPressed:(id)sender {
+    isSkipping = YES;
+    [self stopSpeech];
+    if (speechNumber < [speakArray count]) {
+        speechNumber += 1;
+        self.pageLabel.text = [NSString stringWithFormat:@"Page %i", speechNumber];
+        [self startTalking];
+    } else {
+        self.pageLabel.text = [NSString stringWithFormat:@"Page %i", speechNumber];
+        [self startTalking];
+    }
+}
+
+- (IBAction)prevButtonPressed:(id)sender {
+    isSkipping = YES;
+    [self stopSpeech];
+    if (speechNumber > 1) {
+        speechNumber -= 1;
+        self.pageLabel.text = [NSString stringWithFormat:@"Page %i", speechNumber];
+        [self startTalking];
+    } else {
+        [self restartSpeech];
+    }
+}
+
 
 /*---------------------------------
  AVSPEECHSYNTHESIZER DELEGATE METHODS
  ------------------------------- */
+- (void) startTalking2 {
+    NSString *imageText = [NSString stringWithFormat:@"%@", [speakArray objectAtIndex:(speechNumber-1)]];
+    AVSpeechUtterance* utter = [[AVSpeechUtterance alloc] initWithString:imageText];
+    utter.voice = [AVSpeechSynthesisVoice voiceWithLanguage:[[NSUserDefaults standardUserDefaults] objectForKey:@"languageForTTS"]];
+    [utter setRate:ttsSpeed];
+    if (!self.synthesizer) {
+        self.synthesizer = [AVSpeechSynthesizer new];
+    }
+    self.synthesizer.delegate = self;
+    [self.synthesizer speakUtterance:utter];
+}
+
 - (void)speechSynthesizer:(AVSpeechSynthesizer *)synthesizer didFinishSpeechUtterance:(AVSpeechUtterance *)utterance {
     if ([speakArray count] > speechNumber) {
+        if (!isSkipping) {
+            speechNumber += 1;
+        }
         speechPaused = NO;
-        NSString *imageText = [NSString stringWithFormat:@"%@", [speakArray objectAtIndex:speechNumber]];
+        NSString *imageText = [NSString stringWithFormat:@"%@", [speakArray objectAtIndex:(speechNumber-1)]];
         AVSpeechUtterance* utter = [[AVSpeechUtterance alloc] initWithString:imageText];
         utter.voice = [AVSpeechSynthesisVoice voiceWithLanguage:[[NSUserDefaults standardUserDefaults] objectForKey:@"languageForTTS"]];
         [utter setRate:ttsSpeed];
@@ -293,8 +338,10 @@
         }
         self.synthesizer.delegate = self;
         [self.synthesizer speakUtterance:utter];
-        speechNumber++;
+        self.pageLabel.text = [NSString stringWithFormat:@"Page %i", speechNumber];
+        isSkipping = NO;
     } else {
+        if (imageArray.count != speakArray.count) {
 //        dispatch_time_t countdownTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC));
 //        dispatch_after(countdownTime, dispatch_get_main_queue(), ^(void){
             AVSpeechUtterance* utter = [[AVSpeechUtterance alloc] initWithString:@""];
@@ -306,6 +353,7 @@
             self.synthesizer.delegate = self;
             [self.synthesizer speakUtterance:utter];
 //        });
+        }
     }
 }
 

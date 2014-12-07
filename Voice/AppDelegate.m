@@ -43,7 +43,6 @@
         // Do some error handling
     }
     
-    
     // Clear NSUserDefaults
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"en-US"];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"en"];
@@ -54,6 +53,10 @@
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"accessToken"];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"speedForTTS"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    
+    [mixpanel track:@"App Opened"];
 
     // Override point for customization after application launch.
     return YES;

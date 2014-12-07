@@ -22,6 +22,7 @@ static NSTimeInterval const AutoScrollDuration = 3.0f;
     BOOL speechPaused;
     BOOL alreadyStartedTalking;
     BOOL compressingImage;
+    BOOL isSkipping;
     NSMutableArray *imageArray;
     NSMutableArray *speakArray;
     NSString *imagePath;
@@ -37,11 +38,14 @@ static NSTimeInterval const AutoScrollDuration = 3.0f;
     float ttsSpeed;
 }
 @property (nonatomic, strong) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UILabel *pageLabel;
 
 @property (strong, nonatomic) NSString *text;
 
 - (IBAction)playButtonPressed:(id)sender;
 - (IBAction)pauseButtonPressed:(id)sender;
 - (IBAction)restartButtonPressed:(id)sender;
+- (IBAction)nextButtonPressed:(id)sender;
+- (IBAction)prevButtonPressed:(id)sender;
 
 @end
