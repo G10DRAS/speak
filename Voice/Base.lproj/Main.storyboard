@@ -46,17 +46,12 @@
                                     <action selector="helpPressed:" destination="Hb5-Gl-zTd" eventType="touchUpInside" id="AOA-t1-Yht"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7bu-hM-56L">
-                                <rect key="frame" x="255" y="514" width="37" height="37"/>
-                                <state key="normal" image="languages.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="languageSelection:" destination="Hb5-Gl-zTd" eventType="touchUpInside" id="FEO-2v-LGG"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AHi-OA-SeR">
-                                <rect key="frame" x="130" y="509" width="47" height="47"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AHi-OA-SeR">
+                                <rect key="frame" x="250" y="509" width="47" height="47"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="47" id="Sjs-SO-wJu"/>
+                                    <constraint firstAttribute="width" constant="47" id="ZhP-tr-yhL"/>
+                                </constraints>
                                 <state key="normal" image="settings.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -82,18 +77,16 @@
                             </pickerView>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="7bu-hM-56L" secondAttribute="trailing" constant="12" id="9LJ-Uy-HB5"/>
+                            <constraint firstItem="Y85-ow-wKJ" firstAttribute="top" secondItem="AHi-OA-SeR" secondAttribute="bottom" constant="12" id="842-NY-mPs"/>
                             <constraint firstItem="Y85-ow-wKJ" firstAttribute="top" secondItem="O8O-G4-uMr" secondAttribute="bottom" id="B0s-Bq-WEw"/>
-                            <constraint firstAttribute="centerX" secondItem="AHi-OA-SeR" secondAttribute="centerX" id="EJk-8I-dPb"/>
                             <constraint firstItem="O8O-G4-uMr" firstAttribute="leading" secondItem="T0R-jV-Ezx" secondAttribute="leadingMargin" constant="-16" id="F95-wn-WRP"/>
                             <constraint firstAttribute="centerX" secondItem="99q-Y8-nBA" secondAttribute="centerX" id="He6-Sd-Q50"/>
-                            <constraint firstItem="Y85-ow-wKJ" firstAttribute="top" secondItem="AHi-OA-SeR" secondAttribute="bottom" constant="12" id="Iqg-Ba-scb"/>
                             <constraint firstAttribute="centerY" secondItem="99q-Y8-nBA" secondAttribute="centerY" id="LBS-iP-vOu"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="AHi-OA-SeR" secondAttribute="trailing" constant="7" id="PBK-vn-4Rn"/>
                             <constraint firstItem="X5x-Vb-4J6" firstAttribute="leading" secondItem="T0R-jV-Ezx" secondAttribute="leadingMargin" constant="-16" id="T8H-BN-KKx"/>
                             <constraint firstItem="Y85-ow-wKJ" firstAttribute="top" secondItem="3aZ-nW-DAQ" secondAttribute="bottom" constant="17" id="hdM-Dh-7GX"/>
                             <constraint firstItem="3aZ-nW-DAQ" firstAttribute="leading" secondItem="T0R-jV-Ezx" secondAttribute="leadingMargin" constant="9" id="nry-fn-qIa"/>
                             <constraint firstAttribute="trailingMargin" secondItem="X5x-Vb-4J6" secondAttribute="trailing" constant="-16" id="qNh-Mu-Z9f"/>
-                            <constraint firstItem="Y85-ow-wKJ" firstAttribute="top" secondItem="7bu-hM-56L" secondAttribute="bottom" constant="17" id="sZi-NS-kgD"/>
                             <constraint firstItem="Y85-ow-wKJ" firstAttribute="top" secondItem="X5x-Vb-4J6" secondAttribute="bottom" id="u2g-MM-uqe"/>
                             <constraint firstAttribute="trailingMargin" secondItem="O8O-G4-uMr" secondAttribute="trailing" constant="-16" id="yxN-KA-a7F"/>
                         </constraints>
@@ -143,7 +136,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="IXk-St-J9O">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="IXk-St-J9O">
                                 <rect key="frame" x="56" y="180" width="208" height="29"/>
                                 <segments>
                                     <segment title="Fast"/>
@@ -155,15 +148,9 @@
                                     <action selector="indexChanged:" destination="3RI-4s-SX5" eventType="valueChanged" id="aWp-bF-Skv"/>
                                 </connections>
                             </segmentedControl>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Speech Speed:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ppa-se-8DT">
-                                <rect key="frame" x="104" y="133" width="118" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Language:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wo4-ym-N1x">
-                                <rect key="frame" x="122" y="273" width="81" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Set the Speech Speed:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ppa-se-8DT">
+                                <rect key="frame" x="49" y="133" width="223" height="21"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="22"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -173,6 +160,12 @@
                             </pickerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="IXk-St-J9O" secondAttribute="centerX" id="4k9-JW-KzG"/>
+                            <constraint firstItem="IXk-St-J9O" firstAttribute="top" secondItem="ppa-se-8DT" secondAttribute="bottom" constant="26" id="OMZ-0C-efg"/>
+                            <constraint firstAttribute="centerX" secondItem="ppa-se-8DT" secondAttribute="centerX" id="bRK-tV-8Ib"/>
+                            <constraint firstItem="ppa-se-8DT" firstAttribute="top" secondItem="To5-hO-qHP" secondAttribute="bottom" constant="113" id="miu-sB-Odb"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="90D-Se-KsQ"/>
                     <connections>
@@ -235,7 +228,7 @@
                                 </connections>
                             </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" delaysContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AMX-ov-jKx">
-                                <rect key="frame" x="29" y="70" width="263" height="263"/>
+                                <rect key="frame" x="60" y="70" width="200" height="263"/>
                                 <connections>
                                     <outlet property="delegate" destination="NjP-4X-2fU" id="9Ys-yS-TjG"/>
                                 </connections>
@@ -243,13 +236,13 @@
                         </subviews>
                         <color key="backgroundColor" red="0.24815169570000001" green="0.75910434299999996" blue="0.78607302300000004" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="AMX-ov-jKx" firstAttribute="leading" secondItem="UCK-gI-fAS" secondAttribute="leadingMargin" constant="13" id="1sY-Ow-zdn"/>
                             <constraint firstAttribute="centerX" secondItem="H4w-y2-9nU" secondAttribute="centerX" id="Fln-aW-rMs"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="AMX-ov-jKx" secondAttribute="trailing" constant="12" id="JpD-rT-qAM"/>
                             <constraint firstItem="kPb-8b-euu" firstAttribute="top" secondItem="H4w-y2-9nU" secondAttribute="bottom" constant="20" id="LW3-LI-Y0s"/>
                             <constraint firstItem="cAE-tC-d62" firstAttribute="leading" secondItem="UCK-gI-fAS" secondAttribute="leadingMargin" id="N2d-XX-8bQ"/>
                             <constraint firstItem="kPb-8b-euu" firstAttribute="top" secondItem="ADq-9C-bwZ" secondAttribute="bottom" constant="20" id="VAu-C4-THQ"/>
                             <constraint firstItem="ADq-9C-bwZ" firstAttribute="trailing" secondItem="UCK-gI-fAS" secondAttribute="trailingMargin" id="VjX-xD-AAD"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="AMX-ov-jKx" secondAttribute="trailing" constant="44" id="ZF8-bc-g6X"/>
+                            <constraint firstItem="AMX-ov-jKx" firstAttribute="leading" secondItem="UCK-gI-fAS" secondAttribute="leadingMargin" constant="44" id="Zez-f8-UTD"/>
                             <constraint firstItem="AMX-ov-jKx" firstAttribute="top" secondItem="Q1n-7P-AeW" secondAttribute="bottom" constant="50" id="igE-8y-qsg"/>
                             <constraint firstItem="kPb-8b-euu" firstAttribute="top" secondItem="cAE-tC-d62" secondAttribute="bottom" constant="20" id="wIB-BR-6Nx"/>
                         </constraints>
@@ -283,7 +276,6 @@
     </scenes>
     <resources>
         <image name="help.png" width="37" height="37"/>
-        <image name="languages.png" width="37" height="37"/>
         <image name="pause.png" width="256" height="256"/>
         <image name="photo.png" width="250" height="250"/>
         <image name="play.png" width="256" height="256"/>

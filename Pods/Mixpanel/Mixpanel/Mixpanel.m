@@ -435,7 +435,7 @@ static Mixpanel *sharedInstance = nil;
     }
     // default to sending the object's description
     NSString *s = [obj description];
-    NSLog(@"%@ warning: property values should be valid json types. got: %@. coercing to: %@", self, [obj class], s);
+    MixpanelLog(@"%@ warning: property values should be valid json types.", self);
     return s;
 }
 

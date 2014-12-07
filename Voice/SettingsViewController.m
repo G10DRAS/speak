@@ -16,6 +16,35 @@
 @synthesize ttsSpeed;
 
 - (void)viewDidLoad {
+    
+    // Nav Bar UI Stuff
+    [[self navigationController] setNavigationBarHidden:NO animated:YES];
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:26.0f];;
+    label.textAlignment = NSTextAlignmentCenter;
+    label.textColor = [UIColor whiteColor]; // change this color
+    
+    self.navigationItem.titleView = label;
+    label.text = NSLocalizedString(@"Voice - Settings", @"");
+    [label sizeToFit];
+    
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
+                                                  forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    self.navigationController.navigationBar.translucent = YES;
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+
+    
+    UIImage *image = [UIImage imageNamed:@"nav_bg.png"];
+    [self.navigationController.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
+    
+    
+    
+    
+    
+    
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"speedForTTS"] == nil) {
                 [ttsSpeed setSelectedSegmentIndex:1];
     } else if ([[NSUserDefaults standardUserDefaults] floatForKey:@"speedForTTS"] == 0.2f) {
