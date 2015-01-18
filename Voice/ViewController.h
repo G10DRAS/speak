@@ -12,7 +12,9 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "ELCImagePickerHeader.h"
 #import "Mixpanel.h"
+#import "IPDFCameraViewController.h"
 #import <AVFoundation/AVFoundation.h>
+
 
 
 static NSString* hardCodedToken;
@@ -47,6 +49,9 @@ static NSString* theOCRText;
 @property (strong, nonatomic) IBOutlet UIPickerView *picker;
 @property (strong, nonatomic) IBOutlet UIPickerView *languagePicker;
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
+
+@property (weak, nonatomic) IBOutlet IPDFCameraViewController *cameraViewController;
+
 
 @property (strong, nonatomic) UIAlertView *alertView;
 

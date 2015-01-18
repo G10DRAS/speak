@@ -75,6 +75,10 @@
                                     <outlet property="delegate" destination="Hb5-Gl-zTd" id="Ca5-OJ-hFs"/>
                                 </connections>
                             </pickerView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bK8-29-emF" customClass="IPDFCameraViewController">
+                                <rect key="frame" x="0.0" y="64" width="320" height="129"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <constraints>
                             <constraint firstItem="Y85-ow-wKJ" firstAttribute="top" secondItem="AHi-OA-SeR" secondAttribute="bottom" constant="12" id="842-NY-mPs"/>

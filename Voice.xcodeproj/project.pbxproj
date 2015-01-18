@@ -56,6 +56,7 @@
 		385CFA3919842FAF00CF9563 /* SBJson4Writer.m in Sources */ = {isa = PBXBuildFile; fileRef = 385CFA1C19842FAF00CF9563 /* SBJson4Writer.m */; };
 		385CFA3C1984309A00CF9563 /* TalkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 385CFA3B1984309A00CF9563 /* TalkViewController.m */; };
 		385CFA3E1984346200CF9563 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 385CFA3D1984346200CF9563 /* MobileCoreServices.framework */; };
+		38631E8F1A6B879000DBA653 /* IPDFCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38631E8E1A6B879000DBA653 /* IPDFCameraViewController.m */; };
 		388A457C199D409800ECA0A3 /* ELCAlbumPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 388A4566199D409800ECA0A3 /* ELCAlbumPickerController.m */; };
 		388A457D199D409800ECA0A3 /* ELCAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 388A4568199D409800ECA0A3 /* ELCAsset.m */; };
 		388A457E199D409800ECA0A3 /* ELCAssetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 388A456A199D409800ECA0A3 /* ELCAssetCell.m */; };
@@ -184,6 +185,8 @@
 		385CFA3A1984309A00CF9563 /* TalkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TalkViewController.h; sourceTree = "<group>"; };
 		385CFA3B1984309A00CF9563 /* TalkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TalkViewController.m; sourceTree = "<group>"; };
 		385CFA3D1984346200CF9563 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		38631E8D1A6B879000DBA653 /* IPDFCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPDFCameraViewController.h; sourceTree = "<group>"; };
+		38631E8E1A6B879000DBA653 /* IPDFCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPDFCameraViewController.m; sourceTree = "<group>"; };
 		388A4565199D409800ECA0A3 /* ELCAlbumPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAlbumPickerController.h; sourceTree = "<group>"; };
 		388A4566199D409800ECA0A3 /* ELCAlbumPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCAlbumPickerController.m; sourceTree = "<group>"; };
 		388A4567199D409800ECA0A3 /* ELCAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAsset.h; sourceTree = "<group>"; };
@@ -350,6 +353,7 @@
 				385CFA3B1984309A00CF9563 /* TalkViewController.m */,
 				38E8CDC11984826000FAA465 /* TutorialViewController.h */,
 				38E8CDC21984826000FAA465 /* TutorialViewController.m */,
+				38631E901A6B879600DBA653 /* Camera */,
 				385CF9E019842B4F00CF9563 /* Images.xcassets */,
 				385CF9D319842B4F00CF9563 /* Supporting Files */,
 			);
@@ -455,6 +459,15 @@
 			path = JSON;
 			sourceTree = "<group>";
 		};
+		38631E901A6B879600DBA653 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				38631E8D1A6B879000DBA653 /* IPDFCameraViewController.h */,
+				38631E8E1A6B879000DBA653 /* IPDFCameraViewController.m */,
+			);
+			name = Camera;
+			sourceTree = "<group>";
+		};
 		388A4564199D409800ECA0A3 /* ELCImagePicker */ = {
 			isa = PBXGroup;
 			children = (
@@ -554,6 +567,7 @@
 				TargetAttributes = {
 					385CF9CF19842B4F00CF9563 = {
 						CreatedOnToolsVersion = 6.0;
+						DevelopmentTeam = GQ254GL522;
 					};
 					385CF9E519842B4F00CF9563 = {
 						CreatedOnToolsVersion = 6.0;
@@ -713,6 +727,7 @@
 				385CF9DC19842B4F00CF9563 /* ViewController.m in Sources */,
 				388A457C199D409800ECA0A3 /* ELCAlbumPickerController.m in Sources */,
 				385CFA3619842FAF00CF9563 /* SBJson4StreamTokeniser.m in Sources */,
+				38631E8F1A6B879000DBA653 /* IPDFCameraViewController.m in Sources */,
 				385CFA3919842FAF00CF9563 /* SBJson4Writer.m in Sources */,
 				385CFA3519842FAF00CF9563 /* SBJson4StreamParserState.m in Sources */,
 				388A457D199D409800ECA0A3 /* ELCAsset.m in Sources */,
@@ -840,6 +855,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Applications/Xcode6-Beta2.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include",

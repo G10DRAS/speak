@@ -36,6 +36,10 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 
     self.imageView.image = nil;
     
+    // Get the Camera Ready
+    [self.cameraViewController setupCameraView];
+    [self.cameraViewController setEnableBorderDetection:YES];
+    
     // Get the iphone's screen height and width
     screenRect = [[UIScreen mainScreen] bounds];
     screenWidth = screenRect.size.width;
@@ -114,6 +118,11 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+- (void)viewDidAppear:(BOOL)animated
+{
+    [self.cameraViewController start];
+}
+
 
 /*---------------------------------
  SELECT THE OCR LANGUAGE
@@ -435,7 +444,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     // Scale the image
     UIImage *myScaledImage = [self imageWithImage:self.imageView.image scaledToSize:CGSizeMake(self.imageView.image.size.width * .3, self.imageView.image.size.height * .3)];
     self.imageView.image = myScaledImage;
-    
+
     // Create path for image.
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     imagePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"image.png"];
@@ -771,6 +780,8 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     UIGraphicsEndImageContext();
     return newImage;
 }
+
+
 
 /*
  GET WHETHER THE TIME IS DAY OR NIGHT
