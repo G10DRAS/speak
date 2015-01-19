@@ -395,14 +395,6 @@
     
     return [CIFilter filterWithName:@"CIColorControls" keysAndValues:kCIInputImageKey, sharpen, @"inputBrightness", [NSNumber numberWithFloat:0.0], @"inputContrast", [NSNumber numberWithFloat:1.14], @"inputSaturation", [NSNumber numberWithFloat:0.0], nil].outputImage;
 }
-- (CIImage *)filteredImageUsingBlackFilterOnImage:(CIImage *)image
-{
-    //    CIImage *blackAndWhite = [CIFilter filterWithName:@"CIColorControls" keysAndValues:kCIInputImageKey, image, @"inputBrightness", [NSNumber numberWithFloat:0.1], @"inputContrast", [NSNumber numberWithFloat:2.0], @"inputSaturation", [NSNumber numberWithFloat:0.0], nil].outputImage;
-    
-    return [CIFilter filterWithName:@"CIExposureAdjust" keysAndValues:kCIInputImageKey, image, @"inputEV", [NSNumber numberWithFloat:0.7], nil].outputImage;
-}
-
-
 - (CIImage *)filteredImageUsingContrastFilterOnImage:(CIImage *)image
 {
     return [CIFilter filterWithName:@"CIColorControls" withInputParameters:@{@"inputContrast":@(1.1),kCIInputImageKey:image}].outputImage;
@@ -479,5 +471,4 @@ BOOL rectangleDetectionConfidenceHighEnough(float confidence)
 {
     return (confidence > 1.0);
 }
-
 @end
