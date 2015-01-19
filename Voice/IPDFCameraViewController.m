@@ -34,8 +34,6 @@
     GLKView *_glkView;
     
     BOOL _isStopped;
-    BOOL isMade;
-    float lastRectHeight;
     
     CGFloat _imageDetectionConfidence;
     NSTimer *_borderDetectTimeKeeper;
@@ -43,7 +41,6 @@
     CIRectangleFeature *_borderDetectLastRectangleFeature;
     
     BOOL _isCapturing;
-    CIImage *overlay;
 }
 
 - (void)awakeFromNib
@@ -98,7 +95,6 @@
     if (!device) return;
     
     _imageDetectionConfidence = 0.0;
-    isMade = false;
     
     AVCaptureSession *session = [[AVCaptureSession alloc] init];
     self.captureSession = session;
@@ -183,22 +179,25 @@
         
         if (_borderDetectLastRectangleFeature)
         {
+            image = [self drawHighlightOverlayForPoints:image topLeft:_borderDetectLastRectangleFeature.topLeft topRight:_borderDetectLastRectangleFeature.topRight bottomLeft:_borderDetectLastRectangleFeature.bottomLeft bottomRight:_borderDetectLastRectangleFeature.bottomRight];
             _imageDetectionConfidence += .5;
             
-            if (isMade == false) {
-                image = [self drawHighlightOverlayForPoints:image topLeft:_borderDetectLastRectangleFeature.topLeft topRight:_borderDetectLastRectangleFeature.topRight bottomLeft:_borderDetectLastRectangleFeature.bottomLeft bottomRight:_borderDetectLastRectangleFeature.bottomRight];
-                lastRectHeight = _borderDetectLastRectangleFeature.bounds.size.height;
-            } else {
-                if (_borderDetectLastRectangleFeature.bounds.size.height == lastRectHeight) {
-                    [self moveHighligtToCorrectSpot:image topLeft:_borderDetectLastRectangleFeature.topLeft topRight:_borderDetectLastRectangleFeature.topRight bottomLeft:_borderDetectLastRectangleFeature.bottomLeft bottomRight:_borderDetectLastRectangleFeature.bottomRight];
-                    NSLog(@"Transitioned");
-                } else {
-                    image = [self drawHighlightOverlayForPoints:image topLeft:_borderDetectLastRectangleFeature.topLeft topRight:_borderDetectLastRectangleFeature.topRight bottomLeft:_borderDetectLastRectangleFeature.bottomLeft bottomRight:_borderDetectLastRectangleFeature.bottomRight];
-                    lastRectHeight = _borderDetectLastRectangleFeature.bounds.size.height;
-                }
+            NSLog(@"Confidence: %f", _imageDetectionConfidence);
+            if (_imageDetectionConfidence == 40) {
+                [self captureImageWithCompletionHander:^(id data)
+                 {
+                     UIImage *image = ([data isKindOfClass:[NSData class]]) ? [UIImage imageWithData:data] : data;
+                     UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+                     dispatch_time_t countdownTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC));
+                     dispatch_after(countdownTime, dispatch_get_main_queue(), ^(void){
+                         _imageDetectionConfidence = 0.0f;
+                     });
+                     
+                 }];
             }
         }
-        else {
+        else
+        {
             _imageDetectionConfidence = 0.0f;
         }
     }
@@ -219,29 +218,11 @@
 
 - (CIImage *)drawHighlightOverlayForPoints:(CIImage *)image topLeft:(CGPoint)topLeft topRight:(CGPoint)topRight bottomLeft:(CGPoint)bottomLeft bottomRight:(CGPoint)bottomRight
 {
-    overlay = [CIImage imageWithColor:[CIColor colorWithRed:0 green:5 blue:20 alpha:0.4]];
+    CIImage *overlay = [CIImage imageWithColor:[CIColor colorWithRed:0 green:5 blue:20 alpha:0.4]];
     overlay = [overlay imageByCroppingToRect:image.extent];
-    [UIView animateWithDuration:0.03
-                          delay:0.0
-                        options:UIViewAnimationOptionCurveLinear
-                     animations:^{
-                         overlay = [overlay imageByApplyingFilter:@"CIPerspectiveTransformWithExtent" withInputParameters:@{@"inputExtent":[CIVector vectorWithCGRect:image.extent],@"inputTopLeft":[CIVector vectorWithCGPoint:topLeft],@"inputTopRight":[CIVector vectorWithCGPoint:topRight],@"inputBottomLeft":[CIVector vectorWithCGPoint:bottomLeft],@"inputBottomRight":[CIVector vectorWithCGPoint:bottomRight]}];
-                     }completion:^(BOOL finished){
-                         [UIView setAnimationRepeatCount:-1];
-                     }];    isMade = true;
-    return [overlay imageByCompositingOverImage:image];
-}
-
--(void) moveHighligtToCorrectSpot:(CIImage *)image topLeft:(CGPoint)topLeft topRight:(CGPoint)topRight bottomLeft:(CGPoint)bottomLeft bottomRight:(CGPoint)bottomRight {
+    overlay = [overlay imageByApplyingFilter:@"CIPerspectiveTransformWithExtent" withInputParameters:@{@"inputExtent":[CIVector vectorWithCGRect:image.extent],@"inputTopLeft":[CIVector vectorWithCGPoint:topLeft],@"inputTopRight":[CIVector vectorWithCGPoint:topRight],@"inputBottomLeft":[CIVector vectorWithCGPoint:bottomLeft],@"inputBottomRight":[CIVector vectorWithCGPoint:bottomRight]}];
     
-    [UIView animateWithDuration:0.03
-                          delay:0.0
-                        options:UIViewAnimationOptionCurveLinear
-                     animations:^{
-                         overlay = [overlay imageByApplyingFilter:@"CIPerspectiveTransformWithExtent" withInputParameters:@{@"inputExtent":[CIVector vectorWithCGRect:image.extent],@"inputTopLeft":[CIVector vectorWithCGPoint:topLeft],@"inputTopRight":[CIVector vectorWithCGPoint:topRight],@"inputBottomLeft":[CIVector vectorWithCGPoint:bottomLeft],@"inputBottomRight":[CIVector vectorWithCGPoint:bottomRight]}];
-                     }completion:^(BOOL finished){
-                         [UIView setAnimationRepeatCount:-1];
-                     }];
+    return [overlay imageByCompositingOverImage:image];
 }
 
 - (void)start
@@ -476,7 +457,7 @@
             biggestRectangle = rect;
         }
     }
-    //    NSLog(@"Current Half Perimeter Value: %f", halfPerimiterValue);
+    NSLog(@"Current Half Perimeter Value: %f", halfPerimiterValue);
     
     if (halfPerimiterValue < 600) {
         return nil;
@@ -487,7 +468,7 @@
 
 BOOL rectangleDetectionConfidenceHighEnough(float confidence)
 {
-    return (confidence > 2.0);
+    return (confidence > 1.0);
 }
 
 @end
