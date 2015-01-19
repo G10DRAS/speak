@@ -391,8 +391,17 @@
 
 - (CIImage *)filteredImageUsingEnhanceFilterOnImage:(CIImage *)image
 {
-    return [CIFilter filterWithName:@"CIColorControls" keysAndValues:kCIInputImageKey, image, @"inputBrightness", [NSNumber numberWithFloat:0.0], @"inputContrast", [NSNumber numberWithFloat:1.14], @"inputSaturation", [NSNumber numberWithFloat:0.0], nil].outputImage;
+    CIImage *sharpen = [CIFilter filterWithName:@"CISharpenLuminance" keysAndValues:kCIInputImageKey, image, @"inputSharpness", [NSNumber numberWithFloat:0.4], nil].outputImage;
+    
+    return [CIFilter filterWithName:@"CIColorControls" keysAndValues:kCIInputImageKey, sharpen, @"inputBrightness", [NSNumber numberWithFloat:0.0], @"inputContrast", [NSNumber numberWithFloat:1.14], @"inputSaturation", [NSNumber numberWithFloat:0.0], nil].outputImage;
 }
+- (CIImage *)filteredImageUsingBlackFilterOnImage:(CIImage *)image
+{
+    //    CIImage *blackAndWhite = [CIFilter filterWithName:@"CIColorControls" keysAndValues:kCIInputImageKey, image, @"inputBrightness", [NSNumber numberWithFloat:0.1], @"inputContrast", [NSNumber numberWithFloat:2.0], @"inputSaturation", [NSNumber numberWithFloat:0.0], nil].outputImage;
+    
+    return [CIFilter filterWithName:@"CIExposureAdjust" keysAndValues:kCIInputImageKey, image, @"inputEV", [NSNumber numberWithFloat:0.7], nil].outputImage;
+}
+
 
 - (CIImage *)filteredImageUsingContrastFilterOnImage:(CIImage *)image
 {
