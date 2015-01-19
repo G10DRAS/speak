@@ -94,12 +94,15 @@
 //    btn.layer.cornerRadius = 10;
 //    btn.layer.borderColor = [[UIColor whiteColor] CGColor];
     
+    
     intro.skipButton = nil;
     intro.showSkipButtonOnlyOnLastPage = TRUE;
     
     [intro setDelegate:self];
     
     [intro showInView:self.view animateDuration:0.5];
+    
+    
 }
 
 - (void)introDidFinish:(EAIntroView *)introView {

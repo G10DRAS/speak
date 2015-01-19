@@ -34,13 +34,16 @@
     GLKView *_glkView;
     
     BOOL _isStopped;
+    BOOL isMade;
+    float lastRectHeight;
     
-    CGFloat _imageDedectionConfidence;
+    CGFloat _imageDetectionConfidence;
     NSTimer *_borderDetectTimeKeeper;
     BOOL _borderDetectFrame;
     CIRectangleFeature *_borderDetectLastRectangleFeature;
     
     BOOL _isCapturing;
+    CIImage *overlay;
 }
 
 - (void)awakeFromNib
@@ -94,7 +97,8 @@
     AVCaptureDevice *device = [possibleDevices firstObject];
     if (!device) return;
     
-    _imageDedectionConfidence = 0.0;
+    _imageDetectionConfidence = 0.0;
+    isMade = false;
     
     AVCaptureSession *session = [[AVCaptureSession alloc] init];
     self.captureSession = session;
@@ -146,9 +150,9 @@
     
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
-    {
-        [viewWithBlurredBackground removeFromSuperview];
-    });
+                   {
+                       [viewWithBlurredBackground removeFromSuperview];
+                   });
 }
 
 -(void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection
@@ -179,13 +183,23 @@
         
         if (_borderDetectLastRectangleFeature)
         {
-            _imageDedectionConfidence += .5;
+            _imageDetectionConfidence += .5;
             
-            image = [self drawHighlightOverlayForPoints:image topLeft:_borderDetectLastRectangleFeature.topLeft topRight:_borderDetectLastRectangleFeature.topRight bottomLeft:_borderDetectLastRectangleFeature.bottomLeft bottomRight:_borderDetectLastRectangleFeature.bottomRight];
+            if (isMade == false) {
+                image = [self drawHighlightOverlayForPoints:image topLeft:_borderDetectLastRectangleFeature.topLeft topRight:_borderDetectLastRectangleFeature.topRight bottomLeft:_borderDetectLastRectangleFeature.bottomLeft bottomRight:_borderDetectLastRectangleFeature.bottomRight];
+                lastRectHeight = _borderDetectLastRectangleFeature.bounds.size.height;
+            } else {
+                if (_borderDetectLastRectangleFeature.bounds.size.height == lastRectHeight) {
+                    [self moveHighligtToCorrectSpot:image topLeft:_borderDetectLastRectangleFeature.topLeft topRight:_borderDetectLastRectangleFeature.topRight bottomLeft:_borderDetectLastRectangleFeature.bottomLeft bottomRight:_borderDetectLastRectangleFeature.bottomRight];
+                    NSLog(@"Transitioned");
+                } else {
+                    image = [self drawHighlightOverlayForPoints:image topLeft:_borderDetectLastRectangleFeature.topLeft topRight:_borderDetectLastRectangleFeature.topRight bottomLeft:_borderDetectLastRectangleFeature.bottomLeft bottomRight:_borderDetectLastRectangleFeature.bottomRight];
+                    lastRectHeight = _borderDetectLastRectangleFeature.bounds.size.height;
+                }
+            }
         }
-        else
-        {
-            _imageDedectionConfidence = 0.0f;
+        else {
+            _imageDetectionConfidence = 0.0f;
         }
     }
     
@@ -205,11 +219,29 @@
 
 - (CIImage *)drawHighlightOverlayForPoints:(CIImage *)image topLeft:(CGPoint)topLeft topRight:(CGPoint)topRight bottomLeft:(CGPoint)bottomLeft bottomRight:(CGPoint)bottomRight
 {
-    CIImage *overlay = [CIImage imageWithColor:[CIColor colorWithRed:0 green:5 blue:20 alpha:0.4]];
+    overlay = [CIImage imageWithColor:[CIColor colorWithRed:0 green:5 blue:20 alpha:0.4]];
     overlay = [overlay imageByCroppingToRect:image.extent];
-    overlay = [overlay imageByApplyingFilter:@"CIPerspectiveTransformWithExtent" withInputParameters:@{@"inputExtent":[CIVector vectorWithCGRect:image.extent],@"inputTopLeft":[CIVector vectorWithCGPoint:topLeft],@"inputTopRight":[CIVector vectorWithCGPoint:topRight],@"inputBottomLeft":[CIVector vectorWithCGPoint:bottomLeft],@"inputBottomRight":[CIVector vectorWithCGPoint:bottomRight]}];
-    
+    [UIView animateWithDuration:0.03
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveLinear
+                     animations:^{
+                         overlay = [overlay imageByApplyingFilter:@"CIPerspectiveTransformWithExtent" withInputParameters:@{@"inputExtent":[CIVector vectorWithCGRect:image.extent],@"inputTopLeft":[CIVector vectorWithCGPoint:topLeft],@"inputTopRight":[CIVector vectorWithCGPoint:topRight],@"inputBottomLeft":[CIVector vectorWithCGPoint:bottomLeft],@"inputBottomRight":[CIVector vectorWithCGPoint:bottomRight]}];
+                     }completion:^(BOOL finished){
+                         [UIView setAnimationRepeatCount:-1];
+                     }];    isMade = true;
     return [overlay imageByCompositingOverImage:image];
+}
+
+-(void) moveHighligtToCorrectSpot:(CIImage *)image topLeft:(CGPoint)topLeft topRight:(CGPoint)topRight bottomLeft:(CGPoint)bottomLeft bottomRight:(CGPoint)bottomRight {
+    
+    [UIView animateWithDuration:0.03
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveLinear
+                     animations:^{
+                         overlay = [overlay imageByApplyingFilter:@"CIPerspectiveTransformWithExtent" withInputParameters:@{@"inputExtent":[CIVector vectorWithCGRect:image.extent],@"inputTopLeft":[CIVector vectorWithCGPoint:topLeft],@"inputTopRight":[CIVector vectorWithCGPoint:topRight],@"inputBottomLeft":[CIVector vectorWithCGPoint:bottomLeft],@"inputBottomRight":[CIVector vectorWithCGPoint:bottomRight]}];
+                     }completion:^(BOOL finished){
+                         [UIView setAnimationRepeatCount:-1];
+                     }];
 }
 
 - (void)start
@@ -295,12 +327,12 @@
     __weak typeof(self) weakSelf = self;
     
     [weakSelf hideGLKView:YES completion:^
-    {
-        [weakSelf hideGLKView:NO completion:^
-        {
-            [weakSelf hideGLKView:YES completion:nil];
-        }];
-    }];
+     {
+         [weakSelf hideGLKView:NO completion:^
+          {
+              [weakSelf hideGLKView:YES completion:nil];
+          }];
+     }];
     
     _isCapturing = YES;
     
@@ -335,7 +367,7 @@
                  enhancedImage = [self filteredImageUsingContrastFilterOnImage:enhancedImage];
              }
              
-             if (weakSelf.isBorderDetectionEnabled && rectangleDetectionConfidenceHighEnough(_imageDedectionConfidence))
+             if (weakSelf.isBorderDetectionEnabled && rectangleDetectionConfidenceHighEnough(_imageDetectionConfidence))
              {
                  CIRectangleFeature *rectangleFeature = [self biggestRectangleInRectangles:[[self highAccuracyRectangleDetector] featuresInImage:enhancedImage]];
                  
@@ -366,14 +398,14 @@
 - (void)hideGLKView:(BOOL)hidden completion:(void(^)())completion
 {
     [UIView animateWithDuration:0.1 animations:^
-    {
-        _glkView.alpha = (hidden) ? 0.0 : 1.0;
-    }
-    completion:^(BOOL finished)
-    {
-        if (!completion) return;
-        completion();
-    }];
+     {
+         _glkView.alpha = (hidden) ? 0.0 : 1.0;
+     }
+                     completion:^(BOOL finished)
+     {
+         if (!completion) return;
+         completion();
+     }];
 }
 
 - (CIImage *)filteredImageUsingEnhanceFilterOnImage:(CIImage *)image
@@ -401,9 +433,9 @@
     static CIDetector *detector = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^
-    {
-          detector = [CIDetector detectorOfType:CIDetectorTypeRectangle context:nil options:@{CIDetectorAccuracy : CIDetectorAccuracyLow,CIDetectorTracking : @(YES)}];
-    });
+                  {
+                      detector = [CIDetector detectorOfType:CIDetectorTypeRectangle context:nil options:@{CIDetectorAccuracy : CIDetectorAccuracyLow,CIDetectorTracking : @(YES)}];
+                  });
     return detector;
 }
 
@@ -412,9 +444,9 @@
     static CIDetector *detector = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^
-    {
-        detector = [CIDetector detectorOfType:CIDetectorTypeRectangle context:nil options:@{CIDetectorAccuracy : CIDetectorAccuracyHigh}];
-    });
+                  {
+                      detector = [CIDetector detectorOfType:CIDetectorTypeRectangle context:nil options:@{CIDetectorAccuracy : CIDetectorAccuracyHigh}];
+                  });
     return detector;
 }
 
@@ -444,13 +476,18 @@
             biggestRectangle = rect;
         }
     }
+    //    NSLog(@"Current Half Perimeter Value: %f", halfPerimiterValue);
     
-    return biggestRectangle;
+    if (halfPerimiterValue < 600) {
+        return nil;
+    } else {
+        return biggestRectangle;
+    }
 }
 
 BOOL rectangleDetectionConfidenceHighEnough(float confidence)
 {
-    return (confidence > 1.0);
+    return (confidence > 2.0);
 }
 
 @end

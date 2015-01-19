@@ -26,6 +26,7 @@
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="99q-Y8-nBA">
                                 <rect key="frame" x="72" y="196" width="176" height="176"/>
+                                <accessibility key="accessibilityConfiguration" label="Camera Button"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="176" id="asB-eG-Gn1"/>
                                     <constraint firstAttribute="height" constant="176" id="cqG-3K-1Yu"/>
