@@ -77,9 +77,9 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     isAuthenticating = YES;
     
     // Some UI stuff
-    self.view.backgroundColor = [UIColor clearColor];
-    UIImage *myImage = [UIImage imageNamed:@"background"];
-    [self.view setBackgroundColor:[UIColor colorWithPatternImage:myImage]];
+//    self.view.backgroundColor = [UIColor clearColor];
+//    UIImage *myImage = [UIImage imageNamed:@"background"];
+//    [self.view setBackgroundColor:[UIColor colorWithPatternImage:myImage]];
     
     
     // Nav Bar UI Stuff
@@ -272,6 +272,42 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 /*---------------------------------
  GET THE PHOTO(S) FROM USER
  ------------------------------- */
+
+- (IBAction)focusGesture:(UITapGestureRecognizer *)sender
+{
+    if (sender.state == UIGestureRecognizerStateRecognized)
+    {
+        CGPoint location = [sender locationInView:self.camView];
+        
+        [self focusIndicatorAnimateToPoint:location];
+        
+        [self.camView focusAtPoint:location completionHandler:^
+         {
+             [self focusIndicatorAnimateToPoint:location];
+         }];
+    }
+}
+- (void)focusIndicatorAnimateToPoint:(CGPoint)targetPoint
+{
+    [self.focusIndication setCenter:targetPoint];
+    self.focusIndication.alpha = 0.0;
+    self.focusIndication.hidden = NO;
+    
+    [UIView animateWithDuration:0.4 animations:^
+     {
+         self.focusIndication.alpha = 1.0;
+     }
+                     completion:^(BOOL finished)
+     {
+         [UIView animateWithDuration:0.4 animations:^
+          {
+              self.focusIndication.alpha = 0.0;
+          }];
+     }];
+}
+
+
+
 - (IBAction)takePhoto:(id)sender {
     [mixpanel track:@"Take Photo Button Pressed"];
 

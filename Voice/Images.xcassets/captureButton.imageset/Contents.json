@@ -1,0 +1,36 @@
+{
+  "images" : [
+    {
+      "idiom" : "iphone",
+      "scale" : "1x",
+      "filename" : "capture@2x-1.png"
+    },
+    {
+      "idiom" : "iphone",
+      "scale" : "2x",
+      "filename" : "capture@2x.png"
+    },
+    {
+      "idiom" : "iphone",
+      "filename" : "capture-6-1.png",
+      "subtype" : "retina4",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "iphone",
+      "scale" : "3x",
+      "filename" : "capture-6p.png"
+    },
+    {
+      "idiom" : "iphone",
+      "filename" : "capture-6.png",
+      "unassigned" : true,
+      "subtype" : "retina4",
+      "scale" : "2x"
+    }
+  ],
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  }
+}

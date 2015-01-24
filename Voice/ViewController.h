@@ -50,6 +50,11 @@ static NSString* theOCRText;
 @property (strong, nonatomic) IBOutlet UIPickerView *languagePicker;
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
 
+@property (weak, nonatomic) IBOutlet UIImageView *focusIndication;
+- (IBAction)focusRecognized:(id)sender;
+- (IBAction)captureClicked:(id)sender;
+
+
 @property (weak, nonatomic) IBOutlet IPDFCameraViewController *camView;
 
 
