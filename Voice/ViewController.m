@@ -65,9 +65,10 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     // Get the time of day
     [self timeOfDay];
     
-    // Set the done button and the imageNumber to invisible initially
+    // Set the done button and the imageNumber to invisible initially, imageLibrary should be yes
     self.imageNumber.alpha = 0.0;
     self.doneButton.alpha = 0.0;
+    self.imageLibrary.alpha = 1.0;
     
     
     // Getting a new Access Token each time user opens the app
@@ -106,10 +107,16 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     // Custom Image for Back Button on NavBar
     [self.navigationItem setHidesBackButton:YES animated:YES];
     UIButton *leftButton1 = [UIButton buttonWithType:UIButtonTypeCustom];
-    [leftButton1 setImage:[UIImage imageNamed:@"settings.png"] forState:UIControlStateNormal];
+    [leftButton1 setImage:[UIImage imageNamed:@"settings"] forState:UIControlStateNormal];
     leftButton1.frame = CGRectMake(0, 0, 30, 30);
     [leftButton1 addTarget:self action:@selector(moveToSettings) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton1];
+    
+    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [rightButton setImage:[UIImage imageNamed:@"flash"] forState:UIControlStateNormal];
+    rightButton.frame = CGRectMake(0, 0, 30, 30);
+    [rightButton addTarget:self action:@selector(torchToggle) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     
     // NavBar is transparent
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
@@ -321,6 +328,11 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
           }];
      }];
 }
+- (void)torchToggle {
+    BOOL enable = !self.camView.isTorchEnabled;
+    self.camView.enableTorch = enable;
+}
+
 
 
 /*---------------------------------
@@ -337,6 +349,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
          if (self.imageNumber.alpha != 1.0) {
              self.imageNumber.alpha = 1.0;
              self.doneButton.alpha = 1.0;
+             self.imageLibrary.alpha = 0.0;
          }
          self.imageNumber.text = [NSString stringWithFormat:@"%i", (int)[tempImages count]];
     }];
@@ -369,6 +382,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
         [UIImagePNGRepresentation(self.imageView.image) writeToFile:imagePath atomically:YES];
         NSLog(@"First Image's Path: %@", imagePath);
         
+        // Start Processing
         [self finishedPickingImage];
     } else {
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ImagesArray"];
@@ -376,15 +390,25 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     }
 }
 
-
-
-
-- (IBAction)takePhoto:(id)sender {
-    [mixpanel track:@"Take Photo Button Pressed"];
-
+- (IBAction)imageLibraryClicked:(id)sender {
+    [mixpanel track:@"Image Selection" properties:@{
+                                                    @"Method": @"Photo Library",
+                                                    }];
     
+    // clear the array of images
+    ELCImagePickerController *elcPicker = [[ELCImagePickerController alloc] initImagePicker];
     
+    elcPicker.maximumImagesCount = 10;
+    elcPicker.returnsOriginalImage =YES; //Only return the fullScreenImage, not the fullResolutionImage
+    elcPicker.imagePickerDelegate = self;
+    elcPicker.onOrder = YES;
+    [self presentViewController:elcPicker animated:YES completion:nil];
 }
+
+-(IBAction)doneButtonClicked:(id)sender {
+    [self readyToRecognize];
+}
+
 - (void) chooseWhichCamAction:(id)sender {
     [toolBar removeFromSuperview];
     self.picker.hidden = YES;

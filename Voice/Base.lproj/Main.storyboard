@@ -42,16 +42,28 @@
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W36-dc-UEl">
                                 <rect key="frame" x="246" y="495" width="65" height="65"/>
-                                <state key="normal" image="next">
+                                <state key="normal" title="Start Processing" image="next">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="doneButtonClicked:" destination="Hb5-Gl-zTd" eventType="touchUpInside" id="NUN-2f-8zQ"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HOw-Jf-b0l">
-                                <rect key="frame" x="226" y="509" width="35" height="36"/>
+                                <rect key="frame" x="213" y="509" width="48" height="36"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="47"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e2z-qw-EvT">
+                                <rect key="frame" x="254" y="502" width="50" height="50"/>
+                                <state key="normal" title="Pick From Image Library" image="imageLibrary">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="imageLibraryClicked:" destination="Hb5-Gl-zTd" eventType="touchUpInside" id="RQr-k1-XLn"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </view>
                     <navigationItem key="navigationItem" id="DPN-Vn-hhu">
@@ -62,6 +74,7 @@
                         <outlet property="camView" destination="bK8-29-emF" id="bya-hY-MAs"/>
                         <outlet property="doneButton" destination="W36-dc-UEl" id="rpP-mb-yFe"/>
                         <outlet property="focusIndication" destination="RnK-OF-F21" id="xxa-a7-gXk"/>
+                        <outlet property="imageLibrary" destination="e2z-qw-EvT" id="o1b-r1-niH"/>
                         <outlet property="imageNumber" destination="HOw-Jf-b0l" id="zLj-Jr-OOy"/>
                     </connections>
                 </viewController>
@@ -279,6 +292,7 @@
         <image name="captureButton" width="89" height="90"/>
         <image name="focusIndicator" width="89" height="90"/>
         <image name="forward.png" width="50" height="50"/>
+        <image name="imageLibrary" width="100" height="100"/>
         <image name="next" width="100" height="100"/>
         <image name="pause.png" width="256" height="256"/>
         <image name="play.png" width="256" height="256"/>
