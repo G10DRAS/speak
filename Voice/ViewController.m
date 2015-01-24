@@ -77,20 +77,20 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     isAuthenticating = YES;
     
     // Some UI stuff
-//    self.view.backgroundColor = [UIColor clearColor];
-//    UIImage *myImage = [UIImage imageNamed:@"background"];
-//    [self.view setBackgroundColor:[UIColor colorWithPatternImage:myImage]];
+    self.view.backgroundColor = [UIColor clearColor];
+    UIImage *myImage = [UIImage imageNamed:@"background"];
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:myImage]];
     
     
     // Nav Bar UI Stuff
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
     [self.navigationItem setHidesBackButton:YES animated:YES];
     
-//    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
-//    label.backgroundColor = [UIColor clearColor];
-//    label.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:26.0f];;
-//    label.textAlignment = NSTextAlignmentCenter;
-//    label.textColor = [UIColor whiteColor]; // change this color
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:26.0f];;
+    label.textAlignment = NSTextAlignmentCenter;
+    label.textColor = [UIColor whiteColor]; // change this color
     
     self.navigationItem.titleView = label;
     label.text = NSLocalizedString(@"Voice", @"");
@@ -101,18 +101,23 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     UIButton *leftButton1 = [UIButton buttonWithType:UIButtonTypeCustom];
     [leftButton1 setImage:[UIImage imageNamed:@"settings.png"] forState:UIControlStateNormal];
     leftButton1.frame = CGRectMake(0, 0, 30, 30);
-    [leftButton1 addTarget:self action:@selector(moveToAccountView) forControlEvents:UIControlEventTouchUpInside];
+    [leftButton1 addTarget:self action:@selector(moveToSettings) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton1];
     
-    
+    // NavBar is transparent
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
+                                                  forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    self.navigationController.navigationBar.translucent = YES;
+
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
                                                   forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = YES;
     
-    UIImage *image = [UIImage imageNamed:@"nav_bg.png"];
-    [self.navigationController.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
+//    UIImage *image = [UIImage imageNamed:@"nav_bg.png"];
+//    [self.navigationController.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
 
     [super viewDidLoad];
 
@@ -333,6 +338,30 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
         [imgs addObject:imageData];
     }
     [[NSUserDefaults standardUserDefaults] setObject:imgs forKey:@"ImagesArray"];
+    
+    
+    
+    
+    if ([tempImages count] != 0) {
+        self.imageView.image = [tempImages objectAtIndex:0];
+        
+        // Scale the image
+        UIImage *myScaledImage = [self imageWithImage:self.imageView.image scaledToSize:CGSizeMake(self.imageView.image.size.width * .5, self.imageView.image.size.height * .5)];
+        self.imageView.image = myScaledImage;
+        
+        // Create path for image.
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        imagePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"image.png"];
+        
+        // Save image to disk.
+        [UIImagePNGRepresentation(self.imageView.image) writeToFile:imagePath atomically:YES];
+        NSLog(@"First Image's Path: %@", imagePath);
+        
+        [self finishedPickingImage];
+    } else {
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ImagesArray"];
+        [tempImages removeAllObjects];
+    }
 }
 
 
@@ -388,11 +417,11 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
         [self presentViewController:elcPicker animated:YES completion:nil];
     } else {
         // make sure to turn on the flash
-        if ([time isEqualToString:@"night"]) {
-            [self turnTorchOn:YES];
-        } else if ([time isEqualToString:@"day"]) {
-            [self turnTorchOn:NO];
-        }
+//        if ([time isEqualToString:@"night"]) {
+//            [self turnTorchOn:YES];
+//        } else if ([time isEqualToString:@"day"]) {
+//            [self turnTorchOn:NO];
+//        }
 
         // clear the array of images
         UIImagePickerController* imagePicker = [[UIImagePickerController alloc] init];
@@ -478,7 +507,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     [picker dismissViewControllerAnimated:YES completion:nil];
     
     // make sure to turn off the flash
-    [self turnTorchOn:NO];
+//    [self turnTorchOn:NO];
 
     
     self.imageView.image = [info objectForKey:UIImagePickerControllerOriginalImage];
@@ -711,12 +740,12 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     UIViewController *myNext = [self.storyboard instantiateViewControllerWithIdentifier:@"TalkView"];
     [self.navigationController pushViewController:myNext animated:YES];
 }
-- (IBAction)helpPressed:(id)sender {
-    UIViewController *myNext = [self.storyboard instantiateViewControllerWithIdentifier:@"TutorialView"];
+-(void) moveToSettings {
+    UIViewController *myNext = [self.storyboard instantiateViewControllerWithIdentifier:@"SettingsView"];
     [self.navigationController pushViewController:myNext animated:YES];
 }
-- (IBAction)settingsSelected:(id)sender {
-    UIViewController *myNext = [self.storyboard instantiateViewControllerWithIdentifier:@"SettingsView"];
+- (IBAction)helpPressed:(id)sender {
+    UIViewController *myNext = [self.storyboard instantiateViewControllerWithIdentifier:@"TutorialView"];
     [self.navigationController pushViewController:myNext animated:YES];
 }
 /*---------------------------------

@@ -18,19 +18,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AHi-OA-SeR">
-                                <rect key="frame" x="250" y="509" width="47" height="47"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="47" id="Sjs-SO-wJu"/>
-                                    <constraint firstAttribute="width" constant="47" id="ZhP-tr-yhL"/>
-                                </constraints>
-                                <state key="normal" image="settings.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="settingsSelected:" destination="Hb5-Gl-zTd" eventType="touchUpInside" id="gBh-zj-TsR"/>
-                                </connections>
-                            </button>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bK8-29-emF" customClass="IPDFCameraViewController">
                                 <rect key="frame" x="0.0" y="64" width="320" height="430"/>
                                 <subviews>
@@ -54,10 +41,6 @@
                                 </connections>
                             </view>
                         </subviews>
-                        <constraints>
-                            <constraint firstItem="Y85-ow-wKJ" firstAttribute="top" secondItem="AHi-OA-SeR" secondAttribute="bottom" constant="12" id="842-NY-mPs"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="AHi-OA-SeR" secondAttribute="trailing" constant="7" id="PBK-vn-4Rn"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="DPN-Vn-hhu">
                         <barButtonItem key="backBarButtonItem" title=" " id="xe9-rO-DqD"/>
@@ -285,7 +268,6 @@
         <image name="pause.png" width="256" height="256"/>
         <image name="play.png" width="256" height="256"/>
         <image name="replay.png" width="193" height="198"/>
-        <image name="settings.png" width="40" height="40"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
