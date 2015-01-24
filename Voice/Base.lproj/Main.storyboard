@@ -43,8 +43,8 @@
                                             <action selector="captureClicked:" destination="Hb5-Gl-zTd" eventType="touchUpInside" id="Qnr-M1-5YA"/>
                                         </connections>
                                     </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="focusIndicator" translatesAutoresizingMaskIntoConstraints="NO" id="RnK-OF-F21">
-                                        <rect key="frame" x="108" y="87" width="104" height="102"/>
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="focusIndicator" translatesAutoresizingMaskIntoConstraints="NO" id="RnK-OF-F21">
+                                        <rect key="frame" x="120" y="111" width="80" height="78"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.24705883860588074" green="0.92549026012420654" blue="0.83137261867523193" alpha="1" colorSpace="deviceRGB"/>

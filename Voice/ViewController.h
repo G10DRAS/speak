@@ -38,6 +38,7 @@ static NSString* theOCRText;
     Mixpanel *mixpanel;
     NSString *time;
     UIToolbar *toolBar;
+    NSMutableArray *tempImages;
     
     CGRect screenRect;
     CGFloat screenWidth;

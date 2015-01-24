@@ -86,15 +86,25 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
     [self.navigationItem setHidesBackButton:YES animated:YES];
     
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
-    label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:26.0f];;
-    label.textAlignment = NSTextAlignmentCenter;
-    label.textColor = [UIColor whiteColor]; // change this color
+//    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
+//    label.backgroundColor = [UIColor clearColor];
+//    label.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:26.0f];;
+//    label.textAlignment = NSTextAlignmentCenter;
+//    label.textColor = [UIColor whiteColor]; // change this color
     
     self.navigationItem.titleView = label;
     label.text = NSLocalizedString(@"Voice", @"");
     [label sizeToFit];
+    
+    // Custom Image for Back Button on NavBar
+    [self.navigationItem setHidesBackButton:YES animated:YES];
+    UIButton *leftButton1 = [UIButton buttonWithType:UIButtonTypeCustom];
+    [leftButton1 setImage:[UIImage imageNamed:@"settings.png"] forState:UIControlStateNormal];
+    leftButton1.frame = CGRectMake(0, 0, 30, 30);
+    [leftButton1 addTarget:self action:@selector(moveToAccountView) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton1];
+    
+    
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
                                                   forBarMetrics:UIBarMetricsDefault];
@@ -268,27 +278,21 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 //
 //}
 
-
 /*---------------------------------
- GET THE PHOTO(S) FROM USER
+ CAMERA METHODS
  ------------------------------- */
 
-- (IBAction)focusGesture:(UITapGestureRecognizer *)sender
-{
-    if (sender.state == UIGestureRecognizerStateRecognized)
-    {
+- (IBAction)focusRecognized:(UITapGestureRecognizer *)sender {
+    if (sender.state == UIGestureRecognizerStateRecognized) {
         CGPoint location = [sender locationInView:self.camView];
-        
         [self focusIndicatorAnimateToPoint:location];
-        
         [self.camView focusAtPoint:location completionHandler:^
          {
              [self focusIndicatorAnimateToPoint:location];
          }];
     }
 }
-- (void)focusIndicatorAnimateToPoint:(CGPoint)targetPoint
-{
+- (void)focusIndicatorAnimateToPoint:(CGPoint)targetPoint {
     [self.focusIndication setCenter:targetPoint];
     self.focusIndication.alpha = 0.0;
     self.focusIndication.hidden = NO;
@@ -305,6 +309,32 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
           }];
      }];
 }
+
+
+/*---------------------------------
+ GET THE PHOTO(S) FROM USER
+ ------------------------------- */
+
+- (IBAction)captureClicked:(id)sender
+{
+    [self.camView captureImageWithCompletionHander:^(id data)
+     {
+         UIImage *image = ([data isKindOfClass:[NSData class]]) ? [UIImage imageWithData:data] : data;
+         tempImages = [[NSMutableArray alloc] init];
+         [tempImages addObject:image];
+    }];
+}
+
+- (void) readyToRecognize { // done button clicked
+    
+    NSMutableArray *imgs = [[NSMutableArray alloc] init];
+    for (int i = 0; i < [tempImages count]; i++) {
+        NSData *imageData = UIImagePNGRepresentation([tempImages objectAtIndex:i]);
+        [imgs addObject:imageData];
+    }
+    [[NSUserDefaults standardUserDefaults] setObject:imgs forKey:@"ImagesArray"];
+}
+
 
 
 
