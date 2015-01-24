@@ -54,6 +54,9 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ImagesArray"];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ImageText"];
 
+    // Initialize some arrays
+    tempImages = [[NSMutableArray alloc] init];
+    
     
     // If no language selected, defualt is english
     [[NSUserDefaults standardUserDefaults] setObject:@"en-US" forKey:@"languageForTTS"];
@@ -61,6 +64,10 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     
     // Get the time of day
     [self timeOfDay];
+    
+    // Set the done button and the imageNumber to invisible initially
+    self.imageNumber.alpha = 0.0;
+    self.doneButton.alpha = 0.0;
     
     
     // Getting a new Access Token each time user opens the app
@@ -325,8 +332,13 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     [self.camView captureImageWithCompletionHander:^(id data)
      {
          UIImage *image = ([data isKindOfClass:[NSData class]]) ? [UIImage imageWithData:data] : data;
-         tempImages = [[NSMutableArray alloc] init];
          [tempImages addObject:image];
+         
+         if (self.imageNumber.alpha != 1.0) {
+             self.imageNumber.alpha = 1.0;
+             self.doneButton.alpha = 1.0;
+         }
+         self.imageNumber.text = [NSString stringWithFormat:@"%i", (int)[tempImages count]];
     }];
 }
 
@@ -346,7 +358,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
         self.imageView.image = [tempImages objectAtIndex:0];
         
         // Scale the image
-        UIImage *myScaledImage = [self imageWithImage:self.imageView.image scaledToSize:CGSizeMake(self.imageView.image.size.width * .5, self.imageView.image.size.height * .5)];
+        UIImage *myScaledImage = [self imageWithImage:self.imageView.image scaledToSize:CGSizeMake(self.imageView.image.size.width * .3, self.imageView.image.size.height * .3)];
         self.imageView.image = myScaledImage;
         
         // Create path for image.
