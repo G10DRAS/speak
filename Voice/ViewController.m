@@ -62,10 +62,6 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     // Get the time of day
     [self timeOfDay];
     
-    // Initialize Data for UIPickerView
-    _pickerData = @[@"Camera", @"Photos Library"];
-    self.picker.dataSource = self;
-    self.picker.delegate = self;
     
     // Getting a new Access Token each time user opens the app
     NSString *data = [NSString stringWithFormat:@"&client_id=949987337109-637mnc7ajesdiuthjdubmtkjnsgjrvud.apps.googleusercontent.com&client_secret=XatsSRPBJvS-8vqUd5-wuTKA&refresh_token=1/42-VzBRsbaSf1uO4IpD89pWL9EpJrAAJfsWBBQHZPYg&grant_type=refresh_token"];
@@ -279,20 +275,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 - (IBAction)takePhoto:(id)sender {
     [mixpanel track:@"Take Photo Button Pressed"];
 
-    [UIView transitionWithView:self.picker
-                      duration:0.4
-                       options:UIViewAnimationOptionTransitionCrossDissolve
-                    animations:NULL
-                    completion:NULL];
     
-    self.picker.hidden = NO;
-    
-    toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, self.picker.frame.origin.y-10, screenWidth, 44)];
-    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:self action:@selector(chooseWhichCamAction:)];
-    doneButton.tintColor=[UIColor darkGrayColor];
-    [toolBar setItems:[NSArray arrayWithObjects:doneButton, nil]];
-    
-    [self.view addSubview:toolBar];
     
 }
 - (void) chooseWhichCamAction:(id)sender {
@@ -456,78 +439,6 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     NSLog(@"Only Image's Path: %@", imagePath);
     
     [self finishedPickingImage];
-}
-
-//
-//
-// The Options/Language Picker Delegate Methods
-//
-//
-
-// For the previous version with language picker
-//// The number of columns of data
-//- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
-//    return 1;
-//}
-//// The number of rows of data
-//- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-//    return ( pickerView == self.picker ? _pickerData.count: _languagePickerData.count);
-//}
-//// The data to return for the row and component (column) that's being passed in
-//- (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-//    return ( pickerView == self.picker ? _pickerData[row]: _languagePickerData[row]);
-//}
-//
-//- (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component {
-//    NSAttributedString *attString;
-//    if (pickerView == self.picker) {
-//        attString = [[NSAttributedString alloc] initWithString:[_pickerData objectAtIndex:row] attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
-//    } else {
-//        attString = [[NSAttributedString alloc] initWithString:[_languagePickerData objectAtIndex:row] attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
-//    }
-//    return attString;
-//}
-//// Catpure the picker view selection
-//- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-//    if (pickerView == self.picker) {
-//        pickerRowName = [NSString stringWithFormat:@"%@", [_pickerData objectAtIndex:row]];
-//    } else {
-//        pickerRowName = [NSString stringWithFormat:@"%@", [_languagePickerData objectAtIndex:row]];
-//    }
-//    NSLog(@"What was picked: %@", pickerRowName);
-//}
-
-
-// The number of columns of data
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
-{
-    return 1;
-}
-
-// The number of rows of data
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
-{
-    return _pickerData.count;
-}
-
-// The data to return for the row and component (column) that's being passed in
-- (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
-{
-    return _pickerData[row];
-}
-
-- (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component
-{
-    NSAttributedString *attString = [[NSAttributedString alloc] initWithString:[_pickerData objectAtIndex:row] attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
-    
-    return attString;
-}
-
-// Catpure the picker view selection
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
-{
-    pickerRowName = [NSString stringWithFormat:@"%@", [_pickerData objectAtIndex:row]];
-    NSLog(@"%@", pickerRowName);
 }
 
 /*---------------------------------

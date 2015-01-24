@@ -60,22 +60,6 @@
                                     <action selector="settingsSelected:" destination="Hb5-Gl-zTd" eventType="touchUpInside" id="gBh-zj-TsR"/>
                                 </connections>
                             </button>
-                            <pickerView hidden="YES" alpha="0.80000001192092896" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O8O-G4-uMr">
-                                <rect key="frame" x="0.0" y="406" width="320" height="162"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="Hb5-Gl-zTd" id="VWw-sM-Bt6"/>
-                                    <outlet property="delegate" destination="Hb5-Gl-zTd" id="ttz-HB-pmD"/>
-                                </connections>
-                            </pickerView>
-                            <pickerView hidden="YES" alpha="0.80000001192092896" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X5x-Vb-4J6">
-                                <rect key="frame" x="0.0" y="406" width="320" height="162"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="Hb5-Gl-zTd" id="APW-DJ-fVY"/>
-                                    <outlet property="delegate" destination="Hb5-Gl-zTd" id="Ca5-OJ-hFs"/>
-                                </connections>
-                            </pickerView>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bK8-29-emF" customClass="IPDFCameraViewController">
                                 <rect key="frame" x="0.0" y="64" width="320" height="129"/>
                                 <color key="backgroundColor" red="0.21208385539999999" green="0.80291400089999998" blue="0.811722736" alpha="0.68999999999999995" colorSpace="calibratedRGB"/>
@@ -83,17 +67,11 @@
                         </subviews>
                         <constraints>
                             <constraint firstItem="Y85-ow-wKJ" firstAttribute="top" secondItem="AHi-OA-SeR" secondAttribute="bottom" constant="12" id="842-NY-mPs"/>
-                            <constraint firstItem="Y85-ow-wKJ" firstAttribute="top" secondItem="O8O-G4-uMr" secondAttribute="bottom" id="B0s-Bq-WEw"/>
-                            <constraint firstItem="O8O-G4-uMr" firstAttribute="leading" secondItem="T0R-jV-Ezx" secondAttribute="leadingMargin" constant="-16" id="F95-wn-WRP"/>
                             <constraint firstAttribute="centerX" secondItem="99q-Y8-nBA" secondAttribute="centerX" id="He6-Sd-Q50"/>
                             <constraint firstAttribute="centerY" secondItem="99q-Y8-nBA" secondAttribute="centerY" id="LBS-iP-vOu"/>
                             <constraint firstAttribute="trailingMargin" secondItem="AHi-OA-SeR" secondAttribute="trailing" constant="7" id="PBK-vn-4Rn"/>
-                            <constraint firstItem="X5x-Vb-4J6" firstAttribute="leading" secondItem="T0R-jV-Ezx" secondAttribute="leadingMargin" constant="-16" id="T8H-BN-KKx"/>
                             <constraint firstItem="Y85-ow-wKJ" firstAttribute="top" secondItem="3aZ-nW-DAQ" secondAttribute="bottom" constant="17" id="hdM-Dh-7GX"/>
                             <constraint firstItem="3aZ-nW-DAQ" firstAttribute="leading" secondItem="T0R-jV-Ezx" secondAttribute="leadingMargin" constant="9" id="nry-fn-qIa"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="X5x-Vb-4J6" secondAttribute="trailing" constant="-16" id="qNh-Mu-Z9f"/>
-                            <constraint firstItem="Y85-ow-wKJ" firstAttribute="top" secondItem="X5x-Vb-4J6" secondAttribute="bottom" id="u2g-MM-uqe"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="O8O-G4-uMr" secondAttribute="trailing" constant="-16" id="yxN-KA-a7F"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="DPN-Vn-hhu">
@@ -103,8 +81,6 @@
                     <connections>
                         <outlet property="camView" destination="bK8-29-emF" id="bya-hY-MAs"/>
                         <outlet property="imageView" destination="X4M-QS-PtK" id="2AI-U3-xvo"/>
-                        <outlet property="languagePicker" destination="X5x-Vb-4J6" id="tRq-mJ-mik"/>
-                        <outlet property="picker" destination="O8O-G4-uMr" id="Pmk-Li-pq7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="540-0g-bYO" userLabel="First Responder" sceneMemberID="firstResponder"/>
