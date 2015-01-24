@@ -68,6 +68,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     // Set the done button and the imageNumber to invisible initially, imageLibrary should be yes
     self.imageNumber.alpha = 0.0;
     self.doneButton.alpha = 0.0;
+    self.clearButton.alpha = 0.0;
     self.imageLibrary.alpha = 1.0;
     
     
@@ -347,9 +348,13 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
          [tempImages addObject:image];
          
          if (self.imageNumber.alpha != 1.0) {
-             self.imageNumber.alpha = 1.0;
-             self.doneButton.alpha = 1.0;
-             self.imageLibrary.alpha = 0.0;
+             [UIView animateWithDuration:0.4 animations:^
+              {
+                  self.imageNumber.alpha = 1.0;
+                  self.doneButton.alpha = 1.0;
+                  self.clearButton.alpha = 1.0;
+                  self.imageLibrary.alpha = 0.0;
+              }];
          }
          self.imageNumber.text = [NSString stringWithFormat:@"%i", (int)[tempImages count]];
     }];
@@ -407,6 +412,19 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 
 -(IBAction)doneButtonClicked:(id)sender {
     [self readyToRecognize];
+}
+-(IBAction)clearButtonClicked:(id)sender {
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ImagesArray"];
+    [tempImages removeAllObjects];
+
+    // Reset the UI
+    [UIView animateWithDuration:0.4 animations:^
+     {
+         self.imageNumber.alpha = 0.0;
+         self.doneButton.alpha = 0.0;
+         self.clearButton.alpha = 0.0;
+         self.imageLibrary.alpha = 1.0;
+     }];
 }
 
 - (void) chooseWhichCamAction:(id)sender {

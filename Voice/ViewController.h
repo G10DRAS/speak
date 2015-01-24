@@ -53,8 +53,11 @@ static NSString* theOCRText;
 
 @property (strong, nonatomic) IBOutlet UIButton *imageLibrary;
 @property (strong, nonatomic) IBOutlet UIButton *doneButton;
+@property (strong, nonatomic) IBOutlet UIButton *clearButton;
 - (IBAction)imageLibraryClicked:(id)sender;
 - (IBAction)doneButtonClicked:(id)sender;
+- (IBAction)clearButtonClicked:(id)sender;
+
 
 @property (weak, nonatomic) IBOutlet UILabel *imageNumber;
 @property (weak, nonatomic) IBOutlet UIImageView *focusIndication;
