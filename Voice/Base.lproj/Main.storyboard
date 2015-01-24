@@ -24,29 +24,6 @@
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="85"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="99q-Y8-nBA">
-                                <rect key="frame" x="72" y="196" width="176" height="176"/>
-                                <accessibility key="accessibilityConfiguration" label="Camera Button"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="176" id="asB-eG-Gn1"/>
-                                    <constraint firstAttribute="height" constant="176" id="cqG-3K-1Yu"/>
-                                </constraints>
-                                <state key="normal" image="photo.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="takePhoto:" destination="Hb5-Gl-zTd" eventType="touchUpInside" id="RqD-Yo-Fgm"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3aZ-nW-DAQ">
-                                <rect key="frame" x="25" y="514" width="37" height="37"/>
-                                <state key="normal" image="help.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="helpPressed:" destination="Hb5-Gl-zTd" eventType="touchUpInside" id="AOA-t1-Yht"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AHi-OA-SeR">
                                 <rect key="frame" x="250" y="509" width="47" height="47"/>
                                 <constraints>
@@ -61,17 +38,13 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bK8-29-emF" customClass="IPDFCameraViewController">
-                                <rect key="frame" x="0.0" y="64" width="320" height="129"/>
-                                <color key="backgroundColor" red="0.21208385539999999" green="0.80291400089999998" blue="0.811722736" alpha="0.68999999999999995" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="430"/>
+                                <color key="backgroundColor" red="0.24705883860588074" green="0.92549026012420654" blue="0.83137261867523193" alpha="1" colorSpace="deviceRGB"/>
                             </view>
                         </subviews>
                         <constraints>
                             <constraint firstItem="Y85-ow-wKJ" firstAttribute="top" secondItem="AHi-OA-SeR" secondAttribute="bottom" constant="12" id="842-NY-mPs"/>
-                            <constraint firstAttribute="centerX" secondItem="99q-Y8-nBA" secondAttribute="centerX" id="He6-Sd-Q50"/>
-                            <constraint firstAttribute="centerY" secondItem="99q-Y8-nBA" secondAttribute="centerY" id="LBS-iP-vOu"/>
                             <constraint firstAttribute="trailingMargin" secondItem="AHi-OA-SeR" secondAttribute="trailing" constant="7" id="PBK-vn-4Rn"/>
-                            <constraint firstItem="Y85-ow-wKJ" firstAttribute="top" secondItem="3aZ-nW-DAQ" secondAttribute="bottom" constant="17" id="hdM-Dh-7GX"/>
-                            <constraint firstItem="3aZ-nW-DAQ" firstAttribute="leading" secondItem="T0R-jV-Ezx" secondAttribute="leadingMargin" constant="9" id="nry-fn-qIa"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="DPN-Vn-hhu">
@@ -290,9 +263,7 @@
     <resources>
         <image name="backward.png" width="50" height="50"/>
         <image name="forward.png" width="50" height="50"/>
-        <image name="help.png" width="37" height="37"/>
         <image name="pause.png" width="256" height="256"/>
-        <image name="photo.png" width="250" height="250"/>
         <image name="play.png" width="256" height="256"/>
         <image name="replay.png" width="193" height="198"/>
         <image name="settings.png" width="40" height="40"/>
