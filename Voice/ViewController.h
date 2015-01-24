@@ -50,7 +50,7 @@ static NSString* theOCRText;
 @property (strong, nonatomic) IBOutlet UIPickerView *languagePicker;
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
 
-@property (weak, nonatomic) IBOutlet IPDFCameraViewController *cameraViewController;
+@property (weak, nonatomic) IBOutlet IPDFCameraViewController *camView;
 
 
 @property (strong, nonatomic) UIAlertView *alertView;

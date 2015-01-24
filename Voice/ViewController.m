@@ -37,8 +37,8 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     self.imageView.image = nil;
     
     // Get the Camera Ready
-    [self.cameraViewController setupCameraView];
-    [self.cameraViewController setEnableBorderDetection:YES];
+    [self.camView setupCameraView];
+    [self.camView setEnableBorderDetection:YES];
     
     // Get the iphone's screen height and width
     screenRect = [[UIScreen mainScreen] bounds];
@@ -108,7 +108,6 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     UIImage *image = [UIImage imageNamed:@"nav_bg.png"];
     [self.navigationController.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
 
-
     [super viewDidLoad];
 
     self.imageView.image = [UIImage imageNamed:nil];
@@ -120,7 +119,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 }
 - (void)viewDidAppear:(BOOL)animated
 {
-    [self.cameraViewController start];
+    [self.camView start];
 }
 
 
