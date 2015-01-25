@@ -18,28 +18,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bK8-29-emF" customClass="IPDFCameraViewController">
-                                <rect key="frame" x="0.0" y="64" width="320" height="430"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cvI-zm-Pfw">
-                                        <rect key="frame" x="125" y="339" width="71" height="71"/>
-                                        <state key="normal" image="captureButton">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="captureClicked:" destination="Hb5-Gl-zTd" eventType="touchUpInside" id="Qnr-M1-5YA"/>
-                                        </connections>
-                                    </button>
-                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="focusIndicator" translatesAutoresizingMaskIntoConstraints="NO" id="RnK-OF-F21">
-                                        <rect key="frame" x="120" y="111" width="80" height="78"/>
-                                    </imageView>
-                                </subviews>
-                                <color key="backgroundColor" red="0.74975857270000001" green="0.80565634789999996" blue="0.811722736" alpha="1" colorSpace="calibratedRGB"/>
-                                <gestureRecognizers/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cvI-zm-Pfw">
+                                <rect key="frame" x="130" y="499" width="60" height="60"/>
+                                <accessibility key="accessibilityConfiguration" hint="Tap To Take a Photo" label="Photo Capture Button"/>
+                                <state key="normal" image="captureButton">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
-                                    <outletCollection property="gestureRecognizers" destination="tcY-X1-Tyq" appends="YES" id="88s-Nk-jSW"/>
+                                    <action selector="captureClicked:" destination="Hb5-Gl-zTd" eventType="touchUpInside" id="Qnr-M1-5YA"/>
                                 </connections>
-                            </view>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e2z-qw-EvT">
                                 <rect key="frame" x="251" y="502" width="54" height="54"/>
                                 <state key="normal" image="imageLibrary">
@@ -50,7 +38,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W36-dc-UEl">
-                                <rect key="frame" x="246" y="494" width="65" height="65"/>
+                                <rect key="frame" x="262" y="508" width="42" height="42"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="1"/>
                                 <state key="normal" image="next">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -60,8 +48,8 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HOw-Jf-b0l">
-                                <rect key="frame" x="207" y="508" width="65" height="36"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="47"/>
+                                <rect key="frame" x="216" y="509" width="65" height="36"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="47"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -75,13 +63,27 @@
                                     <action selector="clearButtonClicked:" destination="Hb5-Gl-zTd" eventType="touchUpInside" id="9oT-cK-iLU"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bK8-29-emF" customClass="IPDFCameraViewController">
+                                <rect key="frame" x="0.0" y="64" width="320" height="430"/>
+                                <subviews>
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="focusIndicator" translatesAutoresizingMaskIntoConstraints="NO" id="RnK-OF-F21">
+                                        <rect key="frame" x="120" y="111" width="80" height="78"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="auto" translatesAutoresizingMaskIntoConstraints="NO" id="lXG-EU-n1v">
+                                        <rect key="frame" x="114" y="383" width="92" height="31"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="manual" translatesAutoresizingMaskIntoConstraints="NO" id="RXR-0K-Th1">
+                                        <rect key="frame" x="114" y="383" width="92" height="31"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.74975857270000001" green="0.80565634789999996" blue="0.811722736" alpha="1" colorSpace="calibratedRGB"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="tcY-X1-Tyq" appends="YES" id="88s-Nk-jSW"/>
+                                </connections>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.1529411765" green="0.59215686270000001" blue="0.73725490199999999" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="bK8-29-emF" firstAttribute="leading" secondItem="T0R-jV-Ezx" secondAttribute="leadingMargin" constant="-16" id="d2m-rH-hmb"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="bK8-29-emF" secondAttribute="trailing" constant="-16" id="dTk-Bs-zZg"/>
-                            <constraint firstItem="bK8-29-emF" firstAttribute="top" secondItem="FrQ-gu-LYv" secondAttribute="bottom" id="dad-d4-Fpk"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="DPN-Vn-hhu">
                         <barButtonItem key="backBarButtonItem" title=" " id="xe9-rO-DqD"/>
@@ -306,12 +308,14 @@
         </scene>
     </scenes>
     <resources>
+        <image name="auto" width="300" height="100"/>
         <image name="backward.png" width="50" height="50"/>
         <image name="cancel" width="163" height="162"/>
         <image name="captureButton" width="89" height="90"/>
         <image name="focusIndicator" width="89" height="90"/>
         <image name="forward.png" width="50" height="50"/>
         <image name="imageLibrary" width="100" height="100"/>
+        <image name="manual" width="300" height="100"/>
         <image name="next" width="100" height="100"/>
         <image name="pause.png" width="256" height="256"/>
         <image name="play.png" width="256" height="256"/>
