@@ -71,6 +71,9 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     self.clearButton.alpha = 0.0;
     self.imageLibrary.alpha = 1.0;
     
+    self.manual.alpha = 1.0;
+    self.captureButton.alpha = 0.0;
+    
     
     // Getting a new Access Token each time user opens the app
     NSString *data = [NSString stringWithFormat:@"&client_id=949987337109-637mnc7ajesdiuthjdubmtkjnsgjrvud.apps.googleusercontent.com&client_secret=XatsSRPBJvS-8vqUd5-wuTKA&refresh_token=1/42-VzBRsbaSf1uO4IpD89pWL9EpJrAAJfsWBBQHZPYg&grant_type=refresh_token"];
@@ -124,16 +127,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
                                                   forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = YES;
-
     
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
-                                                  forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBar.shadowImage = [UIImage new];
-    self.navigationController.navigationBar.translucent = YES;
-    
-//    UIImage *image = [UIImage imageNamed:@"nav_bg.png"];
-//    [self.navigationController.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
-
     [super viewDidLoad];
 
     self.imageView.image = [UIImage imageNamed:nil];
@@ -333,6 +327,20 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     BOOL enable = !self.camView.isTorchEnabled;
     self.camView.enableTorch = enable;
 }
+-(IBAction)cropToggle:(id)sender {
+    BOOL enable = !self.camView.isBorderDetectionEnabled;
+    [self changeButton:sender targetTitle:(enable) ? @"CROP On" : @"CROP Off" toStateEnabled:enable];
+    self.camView.enableBorderDetection = enable;
+}
+-(IBAction)switchFilters:(id)sender {
+    [self.camView setCameraViewType:(self.camView.cameraViewType == IPDFCameraViewTypeBlackAndWhite) ? IPDFCameraViewTypeNormal : IPDFCameraViewTypeBlackAndWhite];
+}
+
+- (void)changeButton:(UIButton *)button targetTitle:(NSString *)title toStateEnabled:(BOOL)enabled
+{
+    [button setTitle:title forState:UIControlStateNormal];
+    [button setTitleColor:(enabled) ? [UIColor colorWithRed:1 green:0.81 blue:0 alpha:1] : [UIColor whiteColor] forState:UIControlStateNormal];
+}
 
 
 
@@ -359,7 +367,11 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
          self.imageNumber.text = [NSString stringWithFormat:@"%i", (int)[tempImages count]];
     }];
 }
-
+- (IBAction)manualSelected:(id)sender
+{
+    self.manual.alpha = 0.0;
+    self.captureButton.alpha = 1.0;
+}
 - (void) readyToRecognize { // done button clicked
     
     NSMutableArray *imgs = [[NSMutableArray alloc] init];

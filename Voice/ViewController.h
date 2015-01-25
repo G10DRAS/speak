@@ -58,16 +58,18 @@ static NSString* theOCRText;
 - (IBAction)doneButtonClicked:(id)sender;
 - (IBAction)clearButtonClicked:(id)sender;
 
-
 @property (weak, nonatomic) IBOutlet UILabel *imageNumber;
 @property (weak, nonatomic) IBOutlet UIImageView *focusIndication;
 - (IBAction)focusRecognized:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UIButton *manual;
+@property (weak, nonatomic) IBOutlet UIButton *captureButton;
 - (IBAction)captureClicked:(id)sender;
-
-
+- (IBAction)manualSelected:(id)sender;
+- (IBAction)cropToggle:(id)sender;
+- (IBAction)switchFilters:(id)sender;
 
 @property (weak, nonatomic) IBOutlet IPDFCameraViewController *camView;
-
 
 @property (strong, nonatomic) UIAlertView *alertView;
 
