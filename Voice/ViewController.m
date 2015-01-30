@@ -34,7 +34,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     
     mixpanel = [Mixpanel sharedInstance];
 
-    self.imageView.image = nil;
+//    self.imageView.image = nil;
     
     // Get the Camera Ready
     [self.camView setupCameraView];
@@ -369,8 +369,13 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 }
 - (IBAction)manualSelected:(id)sender
 {
-    self.manual.alpha = 0.0;
-    self.captureButton.alpha = 1.0;
+    if (self.imageNumber.alpha != 1.0) {
+        [UIView animateWithDuration:0.4 animations:^
+         {
+             self.manual.alpha = 0.0;
+             self.captureButton.alpha = 1.0;
+         }];
+    }
 }
 - (void) readyToRecognize { // done button clicked
     
@@ -420,6 +425,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     elcPicker.imagePickerDelegate = self;
     elcPicker.onOrder = YES;
     [self presentViewController:elcPicker animated:YES completion:nil];
+    
 }
 
 -(IBAction)doneButtonClicked:(id)sender {
@@ -439,66 +445,6 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
      }];
 }
 
-- (void) chooseWhichCamAction:(id)sender {
-    [toolBar removeFromSuperview];
-    self.picker.hidden = YES;
-    [self.picker resignFirstResponder];
-    if ([pickerRowName isEqualToString:@"Camera"]) {
-        
-        [mixpanel track:@"Image Selection" properties:@{
-                                                    @"Method": @"Camera",
-                                                    }];
-
-        
-        // make sure to turn on the flash
-//        if ([time isEqualToString:@"night"]) {
-//            [self turnTorchOn:YES];
-//        } else if ([time isEqualToString:@"day"]) {
-//            [self turnTorchOn:NO];
-//        }
-
-        // clear the array of images
-        UIImagePickerController* imagePicker = [[UIImagePickerController alloc] init];
-        
-        imagePicker.sourceType = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] ? UIImagePickerControllerSourceTypeCamera :  UIImagePickerControllerSourceTypePhotoLibrary;
-        imagePicker.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeImage];
-        imagePicker.allowsEditing = NO;
-        imagePicker.delegate = self;
-        [self presentViewController:imagePicker animated:YES completion:nil];
-    }
-    else if ([pickerRowName isEqualToString:@"Photos Library"]) {
-        
-        [mixpanel track:@"Image Selection" properties:@{
-                                                        @"Method": @"Photo Library",
-                                                        }];
-
-        
-        // clear the array of images
-        ELCImagePickerController *elcPicker = [[ELCImagePickerController alloc] initImagePicker];
-        
-        elcPicker.maximumImagesCount = 10;
-        elcPicker.returnsOriginalImage =YES; //Only return the fullScreenImage, not the fullResolutionImage
-        elcPicker.imagePickerDelegate = self;
-        elcPicker.onOrder = YES;
-        [self presentViewController:elcPicker animated:YES completion:nil];
-    } else {
-        // make sure to turn on the flash
-//        if ([time isEqualToString:@"night"]) {
-//            [self turnTorchOn:YES];
-//        } else if ([time isEqualToString:@"day"]) {
-//            [self turnTorchOn:NO];
-//        }
-
-        // clear the array of images
-        UIImagePickerController* imagePicker = [[UIImagePickerController alloc] init];
-        imagePicker.sourceType = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] ? UIImagePickerControllerSourceTypeCamera :  UIImagePickerControllerSourceTypePhotoLibrary;
-        imagePicker.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeImage];
-        imagePicker.allowsEditing = NO;
-        imagePicker.delegate = self;
-        [self presentViewController:imagePicker animated:YES completion:nil];
-    }
-    pickerRowName = nil;
-}
 //
 //
 // Image Picker Delegate Methods

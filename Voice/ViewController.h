@@ -11,6 +11,11 @@
 #import "TutorialViewController.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "ELCImagePickerHeader.h"
+#import "ELCImagePickerHeader.h"
+
+#import "DLFPhotosPickerViewController.h"
+#import "DLFPhotoCell.h"
+
 #import "Mixpanel.h"
 #import "IPDFCameraViewController.h"
 #import <AVFoundation/AVFoundation.h>
@@ -24,7 +29,7 @@ static NSString* theOCRText;
 
 @class TalkViewController;
 
-@interface ViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIAlertViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate, ELCImagePickerControllerDelegate> {
+@interface ViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIAlertViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate, ELCImagePickerControllerDelegate, DLFPhotosPickerViewControllerDelegate> {
     NSMutableData *receivedData;
     BOOL isAuthenticating;
     NSString *imagePath;
@@ -47,8 +52,8 @@ static NSString* theOCRText;
 
 + (NSString*)globalToken;
 
-@property (strong, nonatomic) IBOutlet UIPickerView *picker;
-@property (strong, nonatomic) IBOutlet UIPickerView *languagePicker;
+//@property (strong, nonatomic) IBOutlet UIPickerView *picker;
+//@property (strong, nonatomic) IBOutlet UIPickerView *languagePicker;
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
 
 @property (strong, nonatomic) IBOutlet UIButton *imageLibrary;
@@ -73,13 +78,13 @@ static NSString* theOCRText;
 
 @property (strong, nonatomic) UIAlertView *alertView;
 
-- (IBAction)helpPressed:(id)sender;
-- (IBAction)languageSelection:(id)sender;
-- (IBAction)settingsSelected:(id)sender;
+//- (IBAction)helpPressed:(id)sender;
+//- (IBAction)languageSelection:(id)sender;
+//- (IBAction)settingsSelected:(id)sender;
 
 
 @property (nonatomic, strong) TalkViewController *talkView;
 
-- (IBAction)takePhoto:(id)sender;
+//- (IBAction)takePhoto:(id)sender;
 
 @end
