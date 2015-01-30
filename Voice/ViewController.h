@@ -13,14 +13,9 @@
 #import "ELCImagePickerHeader.h"
 #import "ELCImagePickerHeader.h"
 
-#import "DLFPhotosPickerViewController.h"
-#import "DLFPhotoCell.h"
-
 #import "Mixpanel.h"
 #import "IPDFCameraViewController.h"
 #import <AVFoundation/AVFoundation.h>
-
-
 
 static NSString* hardCodedToken;
 static NSString* theOCRText;
@@ -29,7 +24,7 @@ static NSString* theOCRText;
 
 @class TalkViewController;
 
-@interface ViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIAlertViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate, ELCImagePickerControllerDelegate, DLFPhotosPickerViewControllerDelegate> {
+@interface ViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIAlertViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate, ELCImagePickerControllerDelegate> {
     NSMutableData *receivedData;
     BOOL isAuthenticating;
     NSString *imagePath;
@@ -68,9 +63,12 @@ static NSString* theOCRText;
 - (IBAction)focusRecognized:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UIButton *manual;
+@property (weak, nonatomic) IBOutlet UIButton *autoButton;
 @property (weak, nonatomic) IBOutlet UIButton *captureButton;
 - (IBAction)captureClicked:(id)sender;
 - (IBAction)manualSelected:(id)sender;
+- (IBAction)autoSelected:(id)sender;
+
 - (IBAction)cropToggle:(id)sender;
 - (IBAction)switchFilters:(id)sender;
 

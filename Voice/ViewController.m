@@ -72,6 +72,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     self.imageLibrary.alpha = 1.0;
     
     self.manual.alpha = 1.0;
+    self.autoButton.alpha = 0.0;
     self.captureButton.alpha = 0.0;
     
     
@@ -369,11 +370,23 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 }
 - (IBAction)manualSelected:(id)sender
 {
-    if (self.imageNumber.alpha != 1.0) {
+    if (self.autoButton.alpha != 1.0) {
         [UIView animateWithDuration:0.4 animations:^
          {
              self.manual.alpha = 0.0;
              self.captureButton.alpha = 1.0;
+             self.autoButton.alpha = 1.0;
+         }];
+    }
+}
+- (IBAction)autoSelected:(id)sender
+{
+    if (self.manual.alpha != 1.0) {
+        [UIView animateWithDuration:0.4 animations:^
+         {
+             self.manual.alpha = 1.0;
+             self.captureButton.alpha = 0.0;
+             self.autoButton.alpha = 0.0;
          }];
     }
 }

@@ -22,8 +22,8 @@
                                 <rect key="frame" x="120" y="479" width="81" height="81"/>
                                 <accessibility key="accessibilityConfiguration" hint="Double Tap To Take a Photo" label="Photo Capture Button"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="81" id="Vct-kF-33F"/>
-                                    <constraint firstAttribute="width" constant="81" id="yOu-bQ-dsH"/>
+                                    <constraint firstAttribute="width" constant="81" id="BKo-gG-sOW"/>
+                                    <constraint firstAttribute="height" constant="81" id="v37-S2-6kf"/>
                                 </constraints>
                                 <state key="normal" image="captureButton">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -93,22 +93,8 @@
                                     <outletCollection property="gestureRecognizers" destination="tcY-X1-Tyq" appends="YES" id="88s-Nk-jSW"/>
                                 </connections>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TX4-ub-WjC">
-                                <rect key="frame" x="99" y="508" width="123" height="41"/>
-                                <accessibility key="accessibilityConfiguration" hint="App is currently taking pictures automatically. Double tap to manually take photos." label=""/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="123" id="HtG-QR-TXz"/>
-                                    <constraint firstAttribute="height" constant="41" id="YaJ-55-KXC"/>
-                                </constraints>
-                                <state key="normal" image="manual">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="manualSelected:" destination="Hb5-Gl-zTd" eventType="touchUpInside" id="GGU-X3-5mm"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xqr-yh-xH5">
-                                <rect key="frame" x="65" y="462" width="49" height="30"/>
+                                <rect key="frame" x="16" y="462" width="49" height="30"/>
                                 <accessibility key="accessibilityConfiguration" hint="Double tap to change filters" label="Filter"/>
                                 <state key="normal" title="FILTER">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -119,7 +105,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CO0-8y-mHq">
-                                <rect key="frame" x="186" y="462" width="70" height="30"/>
+                                <rect key="frame" x="234" y="462" width="70" height="30"/>
                                 <accessibility key="accessibilityConfiguration" hint="Double Tap to toggle the auto-crop feature" label="">
                                     <accessibilityTraits key="traits" none="YES" staticText="YES"/>
                                 </accessibility>
@@ -142,13 +128,44 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TX4-ub-WjC">
+                                <rect key="frame" x="99" y="508" width="123" height="41"/>
+                                <accessibility key="accessibilityConfiguration" hint="App is currently taking pictures automatically. Double tap to manually take photos." label=""/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="123" id="HtG-QR-TXz"/>
+                                    <constraint firstAttribute="height" constant="41" id="YaJ-55-KXC"/>
+                                </constraints>
+                                <state key="normal" image="manual">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="manualSelected:" destination="Hb5-Gl-zTd" eventType="touchUpInside" id="GGU-X3-5mm"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ngi-fp-J1S">
+                                <rect key="frame" x="111" y="452" width="99" height="33"/>
+                                <accessibility key="accessibilityConfiguration" hint="App is currently taking pictures automatically. Double tap to manually take photos." label=""/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="33" id="JwK-RW-VXB"/>
+                                    <constraint firstAttribute="width" constant="99" id="ZhT-GJ-Ba4"/>
+                                </constraints>
+                                <state key="normal" image="auto">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="autoSelected:" destination="Hb5-Gl-zTd" eventType="touchUpInside" id="uWq-61-Nd0"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.1529411765" green="0.59215686270000001" blue="0.73725490199999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="TX4-ub-WjC" secondAttribute="centerX" id="0D3-wH-pGa"/>
                             <constraint firstItem="Nl5-PE-Y2j" firstAttribute="leading" secondItem="T0R-jV-Ezx" secondAttribute="leadingMargin" id="1E0-FL-HiC"/>
+                            <constraint firstItem="CO0-8y-mHq" firstAttribute="trailing" secondItem="T0R-jV-Ezx" secondAttribute="trailingMargin" id="1Y3-eQ-MCp"/>
                             <constraint firstAttribute="centerX" secondItem="cvI-zm-Pfw" secondAttribute="centerX" id="4pS-TY-ZUW"/>
+                            <constraint firstItem="cvI-zm-Pfw" firstAttribute="top" secondItem="bK8-29-emF" secondAttribute="bottom" constant="35" id="6Fw-20-X5p"/>
                             <constraint firstItem="bK8-29-emF" firstAttribute="leading" secondItem="T0R-jV-Ezx" secondAttribute="leadingMargin" constant="-16" id="85W-qF-YtK"/>
+                            <constraint firstItem="xqr-yh-xH5" firstAttribute="leading" secondItem="T0R-jV-Ezx" secondAttribute="leadingMargin" id="DeY-AL-EoB"/>
                             <constraint firstItem="Y85-ow-wKJ" firstAttribute="top" secondItem="HOw-Jf-b0l" secondAttribute="bottom" constant="22" id="E44-ZE-LJN"/>
                             <constraint firstItem="Y85-ow-wKJ" firstAttribute="top" secondItem="e2z-qw-EvT" secondAttribute="bottom" constant="12" id="Gy8-ux-PdE"/>
                             <constraint firstAttribute="trailingMargin" secondItem="bK8-29-emF" secondAttribute="trailing" constant="-16" id="NGk-hh-kMh"/>
@@ -156,15 +173,15 @@
                             <constraint firstItem="Y85-ow-wKJ" firstAttribute="top" secondItem="cvI-zm-Pfw" secondAttribute="bottom" constant="8" id="QsY-Qg-y77"/>
                             <constraint firstItem="W36-dc-UEl" firstAttribute="trailing" secondItem="T0R-jV-Ezx" secondAttribute="trailingMargin" id="Tfs-GA-lwC"/>
                             <constraint firstItem="Y85-ow-wKJ" firstAttribute="top" secondItem="xqr-yh-xH5" secondAttribute="bottom" constant="76" id="Ts8-Fz-ohg"/>
-                            <constraint firstItem="cvI-zm-Pfw" firstAttribute="top" secondItem="bK8-29-emF" secondAttribute="bottom" constant="35" id="V3T-z0-jSn"/>
                             <constraint firstItem="bK8-29-emF" firstAttribute="top" secondItem="FrQ-gu-LYv" secondAttribute="bottom" id="VXu-iU-z3X"/>
                             <constraint firstItem="Y85-ow-wKJ" firstAttribute="top" secondItem="Nl5-PE-Y2j" secondAttribute="bottom" constant="20" id="bTA-xi-SuD"/>
                             <constraint firstAttribute="trailingMargin" secondItem="e2z-qw-EvT" secondAttribute="trailing" constant="-1" id="eMb-yW-kde"/>
                             <constraint firstItem="Y85-ow-wKJ" firstAttribute="top" secondItem="TX4-ub-WjC" secondAttribute="bottom" constant="19" id="ePf-GK-tBQ"/>
-                            <constraint firstItem="xqr-yh-xH5" firstAttribute="leading" secondItem="T0R-jV-Ezx" secondAttribute="leadingMargin" constant="49" id="elt-ZT-SpT"/>
+                            <constraint firstItem="TX4-ub-WjC" firstAttribute="top" secondItem="ngi-fp-J1S" secondAttribute="bottom" constant="23" id="hza-xA-hwp"/>
+                            <constraint firstAttribute="centerX" secondItem="ngi-fp-J1S" secondAttribute="centerX" id="ifG-AW-YS6"/>
                             <constraint firstItem="Y85-ow-wKJ" firstAttribute="top" secondItem="W36-dc-UEl" secondAttribute="bottom" constant="18" id="lbY-YG-RXN"/>
                             <constraint firstItem="CO0-8y-mHq" firstAttribute="top" secondItem="bK8-29-emF" secondAttribute="bottom" constant="18" id="mxi-e5-cl2"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="CO0-8y-mHq" secondAttribute="trailing" constant="48" id="sup-hK-TS2"/>
+                            <constraint firstItem="ngi-fp-J1S" firstAttribute="top" secondItem="bK8-29-emF" secondAttribute="bottom" constant="8" id="u0H-OV-Dww"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="DPN-Vn-hhu">
@@ -172,6 +189,7 @@
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="autoButton" destination="ngi-fp-J1S" id="xKH-bf-FC9"/>
                         <outlet property="camView" destination="bK8-29-emF" id="bya-hY-MAs"/>
                         <outlet property="captureButton" destination="cvI-zm-Pfw" id="59a-Ar-dGw"/>
                         <outlet property="clearButton" destination="Nl5-PE-Y2j" id="Hc6-lT-HiQ"/>
@@ -393,6 +411,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="auto" width="300" height="100"/>
         <image name="backward.png" width="50" height="50"/>
         <image name="cancel" width="163" height="162"/>
         <image name="captureButton" width="89" height="90"/>
