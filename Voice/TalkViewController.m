@@ -59,9 +59,7 @@
 //        workingFrame.origin.x = workingFrame.origin.x + workingFrame.size.width;
 //    }
     
-    for (UIView *v in [_scrollView subviews]) {
-        [v removeFromSuperview];
-    }
+    [self.scrollView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
     CGRect workingFrame = CGRectMake (0,0,self.scrollView.frame.size.width,self.scrollView.frame.size.height);
     workingFrame.origin.x = 0;
@@ -469,13 +467,13 @@
     
     NSLog(@"%@",[[NSString alloc] initWithData:oResponseData encoding:NSUTF8StringEncoding]);
     
-//    NSMutableURLRequest *deleteRequest = [[NSMutableURLRequest alloc] init];
-//    [deleteRequest setHTTPMethod:@"DELETE"];
-//    [deleteRequest setURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://www.googleapis.com/drive/v2/files/%@", imageFileID]]];
-//    [deleteRequest setValue:[NSString stringWithFormat:@"Bearer %@", theToken] forHTTPHeaderField:@"Authorization"];
-//    
-//    NSData *theResponseData;
-//    theResponseData = [NSURLConnection sendSynchronousRequest:deleteRequest returningResponse:&responseCode error:&error];
+    NSMutableURLRequest *deleteRequest = [[NSMutableURLRequest alloc] init];
+    [deleteRequest setHTTPMethod:@"DELETE"];
+    [deleteRequest setURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://www.googleapis.com/drive/v2/files/%@", imageFileID]]];
+    [deleteRequest setValue:[NSString stringWithFormat:@"Bearer %@", theToken] forHTTPHeaderField:@"Authorization"];
+    
+    NSData *theResponseData;
+    theResponseData = [NSURLConnection sendSynchronousRequest:deleteRequest returningResponse:&responseCode error:&error];
     
     [speakArray addObject:actualText];
     [mixpanel track:@"Image Converted to Text"];
@@ -521,6 +519,9 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
+    //clear the images
+    [self.scrollView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    
     if (self.isMovingFromParentViewController || self.isBeingDismissed) {
         // Stop the TTS
         AVSpeechSynthesizer *talked = self.synthesizer;
@@ -554,7 +555,10 @@
     
     [imageArray removeAllObjects];
     [speakArray removeAllObjects];
-
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ImagesArray"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ImageText"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"TemporaryImages"];
+    [self clearTmpDirectory];
 }
 
 /*---------------------------------
@@ -683,6 +687,13 @@
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return newImage;
+}
+- (void)clearTmpDirectory
+{
+    NSArray* tmpDirectory = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:NSTemporaryDirectory() error:NULL];
+    for (NSString *file in tmpDirectory) {
+        [[NSFileManager defaultManager] removeItemAtPath:[NSString stringWithFormat:@"%@%@", NSTemporaryDirectory(), file] error:NULL];
+    }
 }
 
 
