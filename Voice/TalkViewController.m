@@ -126,7 +126,7 @@
     
     // Some UI stuff
     self.view.backgroundColor = [UIColor clearColor];
-    UIImage *myImage = [UIImage imageNamed:@"player"];
+    UIImage *myImage = [UIImage imageNamed:@"background"];
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:myImage]];
     
     
