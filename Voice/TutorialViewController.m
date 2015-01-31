@@ -1,6 +1,6 @@
 //
 //  TutorialViewController.m
-//  Her
+//  Voice
 //
 //  Created by Shalin Shah on 7/18/14.
 //  Copyright (c) 2014 Shalin Shah. All rights reserved.
@@ -88,7 +88,7 @@
     
 //    UIButton *btn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 //    [btn setFrame:CGRectMake((320-230)/2, [UIScreen mainScreen].bounds.size.height - 60, 230, 40)];
-//    [btn setTitle:@"SKIP NOW" forState:UIControlStateNormal];
+//    [btn setTitle:@"Skip" forState:UIControlStateNormal];
 //    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 //    btn.layer.borderWidth = 2.0f;
 //    btn.layer.cornerRadius = 10;

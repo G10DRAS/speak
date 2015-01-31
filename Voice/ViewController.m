@@ -58,7 +58,8 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     // Initialize some stuff
     tempImages = [[NSMutableArray alloc] init];
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"IsAuto"];
-    
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
     
     // If no language selected, defualt is english
     [[NSUserDefaults standardUserDefaults] setObject:@"en-US" forKey:@"languageForTTS"];
@@ -381,6 +382,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
          }];
     }
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"IsAuto"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 - (IBAction)autoSelected:(id)sender
 {
@@ -393,6 +395,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
          }];
     }
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"IsAuto"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 - (void) readyToRecognize { // done button clicked
     
