@@ -117,12 +117,14 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     UIButton *leftButton1 = [UIButton buttonWithType:UIButtonTypeCustom];
     [leftButton1 setImage:[UIImage imageNamed:@"settings"] forState:UIControlStateNormal];
     leftButton1.frame = CGRectMake(0, 0, 30, 30);
+    leftButton1.accessibilityHint = @"Double-tap to go to the settings menu";
     [leftButton1 addTarget:self action:@selector(moveToSettings) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton1];
     
     UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [rightButton setImage:[UIImage imageNamed:@"flash"] forState:UIControlStateNormal];
     rightButton.frame = CGRectMake(0, 0, 30, 30);
+    leftButton1.accessibilityHint = @"Double-tap to go toggle the camera's flash";
     [rightButton addTarget:self action:@selector(torchToggle) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     
@@ -338,14 +340,10 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 -(IBAction)switchFilters:(id)sender {
     [self.camView setCameraViewType:(self.camView.cameraViewType == IPDFCameraViewTypeBlackAndWhite) ? IPDFCameraViewTypeNormal : IPDFCameraViewTypeBlackAndWhite];
 }
-
-- (void)changeButton:(UIButton *)button targetTitle:(NSString *)title toStateEnabled:(BOOL)enabled
-{
+- (void)changeButton:(UIButton *)button targetTitle:(NSString *)title toStateEnabled:(BOOL)enabled{
     [button setTitle:title forState:UIControlStateNormal];
     [button setTitleColor:(enabled) ? [UIColor colorWithRed:1 green:0.81 blue:0 alpha:1] : [UIColor whiteColor] forState:UIControlStateNormal];
 }
-
-
 
 /*---------------------------------
  GET THE PHOTO(S) FROM USER

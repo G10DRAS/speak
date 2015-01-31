@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		380550F31A7CAC660099C7D3 /* badge_light.png in Resources */ = {isa = PBXBuildFile; fileRef = 380550F21A7CAC660099C7D3 /* badge_light.png */; };
 		382931D419AFBE86003EC833 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 382931D219AFBE6B003EC833 /* libxml2.dylib */; };
 		38435A741984703500AB58F6 /* AppIcon29x29.png in Resources */ = {isa = PBXBuildFile; fileRef = 38435A641984703500AB58F6 /* AppIcon29x29.png */; };
 		38435A751984703500AB58F6 /* AppIcon29x29@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38435A651984703500AB58F6 /* AppIcon29x29@2x.png */; };
@@ -116,6 +117,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		380550F21A7CAC660099C7D3 /* badge_light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = badge_light.png; sourceTree = "<group>"; };
 		382931D219AFBE6B003EC833 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		38435A641984703500AB58F6 /* AppIcon29x29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon29x29.png; sourceTree = "<group>"; };
 		38435A651984703500AB58F6 /* AppIcon29x29@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon29x29@2x.png"; sourceTree = "<group>"; };
@@ -390,6 +392,7 @@
 		385CF9F619842FAF00CF9563 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				380550F21A7CAC660099C7D3 /* badge_light.png */,
 				38A8EB6B1A3474460065D0C9 /* 1-6.png */,
 				38A8EB6C1A3474460065D0C9 /* 1-6p.png */,
 				38A8EB6D1A3474460065D0C9 /* 1-568h@2x.png */,
@@ -628,6 +631,7 @@
 				38A8EB9E1A3474460065D0C9 /* launch-6p.png in Resources */,
 				385CFA3019842FAF00CF9563 /* speak@2x.png in Resources */,
 				38A8EB9C1A3474460065D0C9 /* 6@2x.png in Resources */,
+				380550F31A7CAC660099C7D3 /* badge_light.png in Resources */,
 				38A8EB951A3474460065D0C9 /* 5-6.png in Resources */,
 				385A902E1984B274008F6FA1 /* help@2x.png in Resources */,
 				38A8EB881A3474460065D0C9 /* 1@2x.png in Resources */,

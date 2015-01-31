@@ -27,7 +27,7 @@
     label.textColor = [UIColor whiteColor]; // change this color
     
     self.navigationItem.titleView = label;
-    label.text = NSLocalizedString(@"Voice - Settings", @"");
+    label.text = NSLocalizedString(@"Settings", @"");
     [label sizeToFit];
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
@@ -39,7 +39,6 @@
     UIImage *image = [UIImage imageNamed:@"nav_bg.png"];
     [self.navigationController.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
     
-        
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"speedForTTS"] == nil) {
                 [ttsSpeed setSelectedSegmentIndex:1];
     } else if ([[NSUserDefaults standardUserDefaults] floatForKey:@"speedForTTS"] == 0.2f) {

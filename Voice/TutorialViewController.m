@@ -39,43 +39,50 @@
 }
 - (void)showIntroWithCrossDissolve {
     EAIntroPage *page1 = [EAIntroPage page];
-    page1.title = nil;
+    page1.title = @"You take a picture and Voice reads it to you.";
     page1.desc = nil;
+    page1.titleColor = [UIColor clearColor];
     page1.titleIconView = nil;
     UIImage *bg1 = [UIImage imageNamed:@"slide1"];
+
     page1.bgImage = bg1;
     
     EAIntroPage *page2 = [EAIntroPage page];
-    page2.title = nil;
+    page2.title = @"Take a picture of anything with words.";
     page2.desc = nil;
+    page2.titleColor = [UIColor clearColor];
     page2.titleIconView = nil;
     UIImage *bg2 = [UIImage imageNamed:@"slide2"];
     page2.bgImage = bg2;
     
     EAIntroPage *page3 = [EAIntroPage page];
-    page3.title = nil;
+    page3.title = @"Voice processes and reads the text.";
     page3.desc = nil;
+    page3.titleColor = [UIColor clearColor];
     page3.titleIconView = nil;
     UIImage *bg3 = [UIImage imageNamed:@"slide3"];
     page3.bgImage = bg3;
 
     EAIntroPage *page4 = [EAIntroPage page];
-    page4.title = nil;
+    page4.title = @"Multiple pictures can be read one by one.";
     page4.desc = nil;
+    page4.titleColor = [UIColor clearColor];
     page4.titleIconView = nil;
     UIImage *bg4 = [UIImage imageNamed:@"slide4"];
     page4.bgImage = bg4;
     
     EAIntroPage *page5 = [EAIntroPage page];
-    page5.title = nil;
+    page5.title = @"Point the camera at the text to auto-capture";
     page5.desc = nil;
+    page5.titleColor = [UIColor clearColor];
     page5.titleIconView = nil;
     UIImage *bg5 = [UIImage imageNamed:@"slide5"];
     page5.bgImage = bg5;
     
     EAIntroPage *page6 = [EAIntroPage page];
-    page6.title = nil;
+    page6.title = @"Welcome to Voice.";
     page6.desc = nil;
+    page6.titleColor = [UIColor clearColor];
     page6.titleIconView = nil;
     UIImage *bg6 = [UIImage imageNamed:@"slide6"];
     page6.bgImage = bg6;
@@ -86,16 +93,19 @@
     
     intro.pageControlY = 40.0f;
     
-//    UIButton *btn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-//    [btn setFrame:CGRectMake((320-230)/2, [UIScreen mainScreen].bounds.size.height - 60, 230, 40)];
-//    [btn setTitle:@"Skip" forState:UIControlStateNormal];
-//    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//    btn.layer.borderWidth = 2.0f;
-//    btn.layer.cornerRadius = 10;
-//    btn.layer.borderColor = [[UIColor whiteColor] CGColor];
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    
+    [btn setFrame:CGRectMake((self.view.frame.size.width/2)-115, [UIScreen mainScreen].bounds.size.height - 60, 230, 40)];
+    [btn setTitle:@"CONTINUE" forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    btn.layer.borderWidth = 2.0f;
+    btn.layer.cornerRadius = 10;
+    btn.layer.borderColor = [[UIColor whiteColor] CGColor];
+    btn.accessibilityLabel = @"continue";
+    btn.accessibilityHint = @"double-tap to start using voice";
     
     
-    intro.skipButton = nil;
+    intro.skipButton = btn;
     intro.showSkipButtonOnlyOnLastPage = TRUE;
     
     [intro setDelegate:self];
