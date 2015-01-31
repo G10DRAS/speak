@@ -149,17 +149,11 @@
                                                   forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = YES;
-    
-    UIImage *image = [UIImage imageNamed:@"nav_bg.png"];
-    [self.navigationController.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
 
-    
-    
 //    compressingImage = YES;
     
 //    NSLog(@"speakArray: %@", speakArray);
 
-    
     [self startTalking];
     self.pageLabel.text = [NSString stringWithFormat:@"Page %i", speechNumber];
     
@@ -168,8 +162,6 @@
 
 
 // ScrollView
-
-
 - (void) scrollViewInit {
     CGRect workingFrame = self.scrollView.frame;
     workingFrame.origin.x = 0;
