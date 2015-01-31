@@ -78,13 +78,6 @@ static NSString* theOCRText;
 
 @property (strong, nonatomic) UIAlertView *alertView;
 
-//- (IBAction)helpPressed:(id)sender;
-//- (IBAction)languageSelection:(id)sender;
-//- (IBAction)settingsSelected:(id)sender;
-
-
 @property (nonatomic, strong) TalkViewController *talkView;
-
-//- (IBAction)takePhoto:(id)sender;
 
 @end

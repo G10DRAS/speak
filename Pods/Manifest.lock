@@ -1,10 +1,12 @@
 PODS:
-  - Mixpanel (2.5.4)
+  - Mixpanel (2.7.1):
+    - Mixpanel/MPCategoryHelpers (= 2.7.1)
+  - Mixpanel/MPCategoryHelpers (2.7.1)
 
 DEPENDENCIES:
   - Mixpanel
 
 SPEC CHECKSUMS:
-  Mixpanel: 87167a0b0a74f11f0ee3787f291357494730617c
+  Mixpanel: 57314e0e7c0a63a6471618a41002da3e1408532c
 
-COCOAPODS: 0.33.1
+COCOAPODS: 0.35.0
