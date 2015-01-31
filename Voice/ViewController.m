@@ -342,7 +342,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 }
 - (void)changeButton:(UIButton *)button targetTitle:(NSString *)title toStateEnabled:(BOOL)enabled{
     [button setTitle:title forState:UIControlStateNormal];
-    [button setTitleColor:(enabled) ? [UIColor colorWithRed:1 green:0.81 blue:0 alpha:1] : [UIColor whiteColor] forState:UIControlStateNormal];
+    [button setTitleColor:(enabled) ? [UIColor colorWithRed:1 green:1 blue:1 alpha:1] : [UIColor whiteColor] forState:UIControlStateNormal];
 }
 
 /*---------------------------------

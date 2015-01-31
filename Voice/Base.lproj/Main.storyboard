@@ -347,13 +347,13 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="Credits" footerTitle="Voice 3.0 - Made with ♥ by Shalin Shah" id="Ebl-Kk-6mT">
                                 <cells>
-                                    <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="gqM-8N-zi0">
+                                    <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="65" id="gqM-8N-zi0">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gqM-8N-zi0" id="M9l-ka-Tsn">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="badge_light.png" translatesAutoresizingMaskIntoConstraints="NO" id="83q-u0-vIc">
-                                                    <rect key="frame" x="105" y="4" width="111" height="36"/>
+                                                    <rect key="frame" x="105" y="14" width="111" height="36"/>
                                                 </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
