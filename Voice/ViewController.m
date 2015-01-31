@@ -145,7 +145,6 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     [self.camView start];
 }
 
-
 /*---------------------------------
  SELECT THE OCR LANGUAGE
  ------------------------------- */
@@ -397,8 +396,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 }
 - (void) readyToRecognize { // done button clicked
     
-    NSMutableArray *imgs = [[NSMutableArray alloc] init];
-    imgs = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"ImagesArray"]];
+    NSMutableArray *imgs = [[NSMutableArray alloc] initWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"TemporaryImages"]];
 //    for (int i = 0; i < [tempImages count]; i++) {
 //        NSData *imageData = UIImagePNGRepresentation([tempImages objectAtIndex:i]);
 //        [imgs addObject:imageData];
@@ -406,10 +404,12 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     [[NSUserDefaults standardUserDefaults] setObject:imgs forKey:@"ImagesArray"];
     
     
-    
+    tempImages = [[NSMutableArray alloc]
+                  initWithArray:[[NSUserDefaults standardUserDefaults]
+                                 objectForKey:@"TemporaryImages"]];
     
     if ([tempImages count] != 0) {
-        self.imageView.image = [tempImages objectAtIndex:0];
+        self.imageView.image = [UIImage imageWithData:[tempImages objectAtIndex:0]];
         
         // Scale the image
         UIImage *myScaledImage = [self imageWithImage:self.imageView.image scaledToSize:CGSizeMake(self.imageView.image.size.width * .3, self.imageView.image.size.height * .3)];
@@ -424,8 +424,9 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
         NSLog(@"First Image's Path: %@", imagePath);
         
         // Start Processing
-        [self finishedPickingImage];
+        [self recognizePhoto];
     } else {
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ImagesArray"];
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ImagesArray"];
         [tempImages removeAllObjects];
     }
@@ -521,12 +522,11 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
         [UIImagePNGRepresentation(self.imageView.image) writeToFile:imagePath atomically:YES];
         NSLog(@"First Image's Path: %@", imagePath);
         
-        [self finishedPickingImage];
+        [self recognizePhoto];
     } else {
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ImagesArray"];
         [images removeAllObjects];
     }
-
 }
 
 - (void)elcImagePickerControllerDidCancel:(ELCImagePickerController *)picker
@@ -534,59 +534,12 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-// If image taken from camera within the app
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-{
-    [picker dismissViewControllerAnimated:YES completion:nil];
-    
-    // make sure to turn off the flash
-//    [self turnTorchOn:NO];
-
-    
-    self.imageView.image = [info objectForKey:UIImagePickerControllerOriginalImage];
-    
-    // Add IMG to the array
-    NSMutableArray *imgs = [[NSMutableArray alloc] init];
-    NSData *imageData = UIImagePNGRepresentation(self.imageView.image);
-    [imgs addObject:imageData];
-    [[NSUserDefaults standardUserDefaults] setObject:imgs forKey:@"ImagesArray"];
-
-    // Scale the image
-    UIImage *myScaledImage = [self imageWithImage:self.imageView.image scaledToSize:CGSizeMake(self.imageView.image.size.width * .3, self.imageView.image.size.height * .3)];
-    self.imageView.image = myScaledImage;
-
-    // Create path for image.
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    imagePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"image.png"];
-    
-    // Save image to disk.
-    NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
-    if ([mediaType isEqualToString:@"public.image"]){
-        [UIImagePNGRepresentation(self.imageView.image) writeToFile:imagePath atomically:YES];
-    }
-    NSLog(@"Only Image's Path: %@", imagePath);
-    
-    [self finishedPickingImage];
-}
-
 /*---------------------------------
  PROCESS THE PHOTO (OCR)
  ------------------------------- */
-- (void) finishedPickingImage {
-    NSLog(@"finished picking the image");
-    [self recognizePhoto];
-}
 - (void)recognizePhoto {
-    if (self.imageView.image == nil) {
-        UIAlertView *alertView = [[UIAlertView alloc]
-                                  initWithTitle:@"Take A Picture"
-                                  message:@"You have to take a picture first before we can start reading it to you."
-                                  delegate:self
-                                  cancelButtonTitle:@"OK"
-                                  otherButtonTitles:nil];
-        [alertView show];
-    } else {
-        
+        [self startLoading];
+    
         NSMutableArray *sizeArray = [[NSMutableArray alloc] init];
         NSMutableArray *imageArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"ImagesArray"]];
         
@@ -599,7 +552,6 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
             
             // Get the image size
             unsigned long long size = [[NSFileManager defaultManager] attributesOfItemAtPath:imagePathSize error:nil].fileSize;
-            NSLog(@"Sizes: %llu", size);
             [sizeArray addObject:[NSString stringWithFormat:@"%llu",size]];
             
             // Delete the image afterwards
@@ -622,9 +574,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
                                                @"Image Count": recogNum,
                                                @"Date of Recognition" : recogDate,
                                                }];
-        
-        [self startLoading];
-        
+    
         unsigned long long size = [[NSFileManager defaultManager] attributesOfItemAtPath:imagePath error:nil].fileSize;
         NSLog(@"Size %llu", size);
         
@@ -650,7 +600,6 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
         NSURLConnection *theConnection;
         theConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
         receivedData = [[NSMutableData alloc] init];
-    }
 }
 - (void) getFile{
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
