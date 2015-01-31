@@ -55,8 +55,9 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ImageText"];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"TemporaryImages"];
     
-    // Initialize some arrays
+    // Initialize some stuff
     tempImages = [[NSMutableArray alloc] init];
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"IsAuto"];
     
     
     // If no language selected, defualt is english
@@ -380,6 +381,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
              self.autoButton.alpha = 1.0;
          }];
     }
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"IsAuto"];
 }
 - (IBAction)autoSelected:(id)sender
 {
@@ -391,6 +393,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
              self.autoButton.alpha = 0.0;
          }];
     }
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"IsAuto"];
 }
 - (void) readyToRecognize { // done button clicked
     

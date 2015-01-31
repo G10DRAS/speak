@@ -1,13 +1,12 @@
 //
 //  IPDFCameraViewController.h
-//  InstaPDF
+//  Voice
 //
-//  Created by Maximilian Mackh on 06/01/15.
-//  Copyright (c) 2015 mackh ag. All rights reserved.
+//  Created by Shalin Shah on 01/17/15.
+//  Copyright (c) 2014 Shalin Shah. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-//#import "ViewController.h"
 
 typedef NS_ENUM(NSInteger,IPDFCameraViewType)
 {
