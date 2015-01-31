@@ -118,11 +118,11 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HOw-Jf-b0l">
-                                <rect key="frame" x="220" y="510" width="55" height="36"/>
+                                <rect key="frame" x="220" y="510" width="55" height="40"/>
                                 <accessibility key="accessibilityConfiguration" hint="This is the number of photos taken currently."/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="36" id="3tr-x1-KUG"/>
                                     <constraint firstAttribute="width" constant="55" id="KD9-J4-yuv"/>
+                                    <constraint firstAttribute="height" constant="40" id="ZrK-g9-ci4"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="47"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -166,7 +166,6 @@
                             <constraint firstItem="cvI-zm-Pfw" firstAttribute="top" secondItem="bK8-29-emF" secondAttribute="bottom" constant="35" id="6Fw-20-X5p"/>
                             <constraint firstItem="bK8-29-emF" firstAttribute="leading" secondItem="T0R-jV-Ezx" secondAttribute="leadingMargin" constant="-16" id="85W-qF-YtK"/>
                             <constraint firstItem="xqr-yh-xH5" firstAttribute="leading" secondItem="T0R-jV-Ezx" secondAttribute="leadingMargin" id="DeY-AL-EoB"/>
-                            <constraint firstItem="Y85-ow-wKJ" firstAttribute="top" secondItem="HOw-Jf-b0l" secondAttribute="bottom" constant="22" id="E44-ZE-LJN"/>
                             <constraint firstItem="Y85-ow-wKJ" firstAttribute="top" secondItem="e2z-qw-EvT" secondAttribute="bottom" constant="12" id="Gy8-ux-PdE"/>
                             <constraint firstAttribute="trailingMargin" secondItem="bK8-29-emF" secondAttribute="trailing" constant="-16" id="NGk-hh-kMh"/>
                             <constraint firstAttribute="trailingMargin" secondItem="HOw-Jf-b0l" secondAttribute="trailing" constant="29" id="PmX-bK-BkP"/>
@@ -175,6 +174,7 @@
                             <constraint firstItem="Y85-ow-wKJ" firstAttribute="top" secondItem="xqr-yh-xH5" secondAttribute="bottom" constant="76" id="Ts8-Fz-ohg"/>
                             <constraint firstItem="bK8-29-emF" firstAttribute="top" secondItem="FrQ-gu-LYv" secondAttribute="bottom" id="VXu-iU-z3X"/>
                             <constraint firstItem="Y85-ow-wKJ" firstAttribute="top" secondItem="Nl5-PE-Y2j" secondAttribute="bottom" constant="20" id="bTA-xi-SuD"/>
+                            <constraint firstItem="Y85-ow-wKJ" firstAttribute="top" secondItem="HOw-Jf-b0l" secondAttribute="bottom" constant="18" id="eM9-XZ-p8G"/>
                             <constraint firstAttribute="trailingMargin" secondItem="e2z-qw-EvT" secondAttribute="trailing" constant="-1" id="eMb-yW-kde"/>
                             <constraint firstItem="Y85-ow-wKJ" firstAttribute="top" secondItem="TX4-ub-WjC" secondAttribute="bottom" constant="19" id="ePf-GK-tBQ"/>
                             <constraint firstItem="TX4-ub-WjC" firstAttribute="top" secondItem="ngi-fp-J1S" secondAttribute="bottom" constant="23" id="hza-xA-hwp"/>

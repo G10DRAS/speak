@@ -53,7 +53,8 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     // Clear some arrays
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ImagesArray"];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ImageText"];
-
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"TemporaryImages"];
+    
     // Initialize some arrays
     tempImages = [[NSMutableArray alloc] init];
     
@@ -351,21 +352,22 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 
 - (IBAction)captureClicked:(id)sender
 {
+    tempImages = [[NSMutableArray alloc]
+                  initWithArray:[[NSUserDefaults standardUserDefaults]
+                                 objectForKey:@"TemporaryImages"]];
+    
     [self.camView captureImageWithCompletionHander:^(id data)
      {
          UIImage *image = ([data isKindOfClass:[NSData class]]) ? [UIImage imageWithData:data] : data;
-         [tempImages addObject:image];
+         NSData *imageData = UIImagePNGRepresentation(image);
+         [tempImages addObject:imageData];
+
+         [[NSUserDefaults standardUserDefaults] setObject:tempImages forKey:@"TemporaryImages"];
+         [[NSUserDefaults standardUserDefaults] synchronize];
+
+         [self updateLabel];
          
-         if (self.imageNumber.alpha != 1.0) {
-             [UIView animateWithDuration:0.4 animations:^
-              {
-                  self.imageNumber.alpha = 1.0;
-                  self.doneButton.alpha = 1.0;
-                  self.clearButton.alpha = 1.0;
-                  self.imageLibrary.alpha = 0.0;
-              }];
-         }
-         self.imageNumber.text = [NSString stringWithFormat:@"%i", (int)[tempImages count]];
+     NSLog(@"%i", (int)[[NSUserDefaults standardUserDefaults] arrayForKey:@"TemporaryImages"].count);
     }];
 }
 - (IBAction)manualSelected:(id)sender
@@ -393,10 +395,11 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 - (void) readyToRecognize { // done button clicked
     
     NSMutableArray *imgs = [[NSMutableArray alloc] init];
-    for (int i = 0; i < [tempImages count]; i++) {
-        NSData *imageData = UIImagePNGRepresentation([tempImages objectAtIndex:i]);
-        [imgs addObject:imageData];
-    }
+    imgs = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"ImagesArray"]];
+//    for (int i = 0; i < [tempImages count]; i++) {
+//        NSData *imageData = UIImagePNGRepresentation([tempImages objectAtIndex:i]);
+//        [imgs addObject:imageData];
+//    }
     [[NSUserDefaults standardUserDefaults] setObject:imgs forKey:@"ImagesArray"];
     
     
@@ -449,6 +452,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     [tempImages removeAllObjects];
 
     // Reset the UI
+    if (self.imageLibrary.alpha != 1.0) {
     [UIView animateWithDuration:0.4 animations:^
      {
          self.imageNumber.alpha = 0.0;
@@ -456,6 +460,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
          self.clearButton.alpha = 0.0;
          self.imageLibrary.alpha = 1.0;
      }];
+    }
 }
 
 //
@@ -793,6 +798,19 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     [mixpanel track:@"Image Upload"];
 
     [loading dismissWithClickedButtonIndex:0 animated:YES];
+}
+- (void) updateLabel {
+    if (self.imageNumber.alpha != 1.0) {
+        [UIView animateWithDuration:0.4 animations:^
+         {
+             self.imageNumber.alpha = 1.0;
+             self.doneButton.alpha = 1.0;
+             self.clearButton.alpha = 1.0;
+             self.imageLibrary.alpha = 0.0;
+         }];
+    }
+    self.imageNumber.text = [NSString stringWithFormat:@"%i",
+                             (int)[[NSUserDefaults standardUserDefaults] arrayForKey:@"TemporaryImages"].count];
 }
 
 + (NSString*)globalToken {

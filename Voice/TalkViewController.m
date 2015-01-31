@@ -330,7 +330,12 @@
         }
         speechPaused = NO;
         NSString *imageText = [NSString stringWithFormat:@"%@", [speakArray objectAtIndex:(speechNumber-1)]];
-        AVSpeechUtterance* utter = [[AVSpeechUtterance alloc] initWithString:imageText];
+        AVSpeechUtterance* utter;
+        if ([imageText isEqualToString:@"________________"]) {
+            utter = [[AVSpeechUtterance alloc] initWithString:@"There were no words detected on this page. I am moving on."];
+        } else {
+            utter = [[AVSpeechUtterance alloc] initWithString:imageText];
+        }
         utter.voice = [AVSpeechSynthesisVoice voiceWithLanguage:[[NSUserDefaults standardUserDefaults] objectForKey:@"languageForTTS"]];
         [utter setRate:ttsSpeed];
         if (!self.synthesizer) {

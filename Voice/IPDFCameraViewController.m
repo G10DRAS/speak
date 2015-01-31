@@ -41,6 +41,7 @@
     CIRectangleFeature *_borderDetectLastRectangleFeature;
     
     BOOL _isCapturing;
+    NSMutableArray *imageArray;
 }
 
 - (void)awakeFromNib
@@ -95,6 +96,7 @@
     if (!device) return;
     
     _imageDetectionConfidence = 0.0;
+    imageArray = [[NSMutableArray alloc] init];
     
     AVCaptureSession *session = [[AVCaptureSession alloc] init];
     self.captureSession = session;
@@ -182,12 +184,24 @@
             image = [self drawHighlightOverlayForPoints:image topLeft:_borderDetectLastRectangleFeature.topLeft topRight:_borderDetectLastRectangleFeature.topRight bottomLeft:_borderDetectLastRectangleFeature.bottomLeft bottomRight:_borderDetectLastRectangleFeature.bottomRight];
             _imageDetectionConfidence += .5;
             
+//            imageArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] arrayForKey:@"TemporaryImages"]];
+            imageArray = [[NSMutableArray alloc]
+             initWithArray:[[NSUserDefaults standardUserDefaults]
+                            objectForKey:@"TemporaryImages"]];
+            
             NSLog(@"Confidence: %f", _imageDetectionConfidence);
             if (_imageDetectionConfidence == 40) {
                 [self captureImageWithCompletionHander:^(id data)
                  {
                      UIImage *image = ([data isKindOfClass:[NSData class]]) ? [UIImage imageWithData:data] : data;
-                     UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+                     NSData *imageData = UIImagePNGRepresentation(image);
+                     [imageArray addObject:imageData];
+                     
+                     [[NSUserDefaults standardUserDefaults] setObject:imageArray forKey:@"TemporaryImages"];
+                     [[NSUserDefaults standardUserDefaults] synchronize];
+                     NSLog(@"%i", (int)[[NSUserDefaults standardUserDefaults] arrayForKey:@"TemporaryImages"].count);
+
+
                      dispatch_time_t countdownTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC));
                      dispatch_after(countdownTime, dispatch_get_main_queue(), ^(void){
                          _imageDetectionConfidence = 0.0f;
