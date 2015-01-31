@@ -30,11 +30,6 @@
     label.text = NSLocalizedString(@"Settings", @"");
     [label sizeToFit];
     
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
-                                                  forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBar.shadowImage = [UIImage new];
-    self.navigationController.navigationBar.translucent = YES;
-    
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"speedForTTS"] == nil) {
                 [ttsSpeed setSelectedSegmentIndex:1];
     } else if ([[NSUserDefaults standardUserDefaults] floatForKey:@"speedForTTS"] == 0.2f) {
@@ -50,9 +45,79 @@
 
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)viewDidAppear:(BOOL)animated {
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
+                                                  forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    self.navigationController.navigationBar.translucent = YES;
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    
+    
+    UIImage *image = [UIImage imageNamed:@"background"];
+    [self.navigationController.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    int intro = 0;
+    int rate = 1;
+    int share = 2;
+    int feedback = 0;
+    
+    NSLog(@"Row: %i", (int)indexPath.row);
+    NSLog(@"Section: %i", (int)indexPath.section);
+
+    if(indexPath.section == 1) {
+        if (intro == indexPath.row) {
+            UIViewController *myNext = [self.storyboard instantiateViewControllerWithIdentifier:@"TutorialView"];
+            [self.navigationController pushViewController:myNext animated:YES];
+        } else if (rate == indexPath.row) {
+            NSURL *url = [[NSURL alloc] initWithString:@"itms://itunes.apple.com/us/app/voice-take-picture-have-it/id903772588?mt=8&uo=4"];
+            [[UIApplication sharedApplication] openURL:url];
+        } else if (share == indexPath.row) {
+            NSString *textToShare = @"Check out Voice - An iOS app that lets you take a picture of anything and reads it to you in a matter of seconds! http://shalinshah.me/voice";
+//            UIImage *imageToShare = [UIImage imageNamed:@"yourImage.png"];
+            NSArray *itemsToShare = @[textToShare];
+            UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:itemsToShare applicationActivities:nil];
+            activityVC.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeCopyToPasteboard, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll]; //or whichever you don't need
+            [self presentViewController:activityVC animated:YES completion:nil];
+        }
+        
+    } else if (indexPath.section == 2){
+        if (feedback == indexPath.row) {
+            MFMailComposeViewController *controller = [[MFMailComposeViewController alloc] init];
+            controller.mailComposeDelegate = self;
+            NSArray *toRecipients = [NSArray arrayWithObjects:@"shalinvs@gmail.com", @"getvoiceios@gmail.com", nil];
+            [controller setToRecipients:toRecipients];
+            [controller setTitle:@"Give Feedback"];
+            [controller setSubject:@"Feedback About Voice"];
+            [controller setMessageBody:@"This is my feedback about Voice:" isHTML:NO];
+            
+            [self presentViewController:controller animated:YES completion:nil];
+        }
+    }
+}
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    switch (result) {
+        case MFMailComposeResultSent:
+            NSLog(@"You sent the email.");
+            break;
+        case MFMailComposeResultSaved:
+            NSLog(@"You saved a draft of this email");
+            break;
+        case MFMailComposeResultCancelled:
+            NSLog(@"You cancelled sending this email.");
+            break;
+        case MFMailComposeResultFailed:
+            NSLog(@"Mail failed:  An error occurred when trying to compose this email");
+            break;
+        default:
+            NSLog(@"An error occurred when trying to compose this email");
+            break;
+    }
+    
+    [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 - (IBAction)indexChanged:(UISegmentedControl *)sender {

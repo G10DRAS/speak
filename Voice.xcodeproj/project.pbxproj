@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		380550F31A7CAC660099C7D3 /* badge_light.png in Resources */ = {isa = PBXBuildFile; fileRef = 380550F21A7CAC660099C7D3 /* badge_light.png */; };
+		380550FC1A7CD6910099C7D3 /* FollowTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 380550FB1A7CD6910099C7D3 /* FollowTableViewController.m */; };
 		382931D419AFBE86003EC833 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 382931D219AFBE6B003EC833 /* libxml2.dylib */; };
 		38435A741984703500AB58F6 /* AppIcon29x29.png in Resources */ = {isa = PBXBuildFile; fileRef = 38435A641984703500AB58F6 /* AppIcon29x29.png */; };
 		38435A751984703500AB58F6 /* AppIcon29x29@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38435A651984703500AB58F6 /* AppIcon29x29@2x.png */; };
@@ -118,6 +119,8 @@
 
 /* Begin PBXFileReference section */
 		380550F21A7CAC660099C7D3 /* badge_light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = badge_light.png; sourceTree = "<group>"; };
+		380550FA1A7CD6910099C7D3 /* FollowTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowTableViewController.h; sourceTree = "<group>"; };
+		380550FB1A7CD6910099C7D3 /* FollowTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowTableViewController.m; sourceTree = "<group>"; };
 		382931D219AFBE6B003EC833 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		38435A641984703500AB58F6 /* AppIcon29x29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon29x29.png; sourceTree = "<group>"; };
 		38435A651984703500AB58F6 /* AppIcon29x29@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon29x29@2x.png"; sourceTree = "<group>"; };
@@ -355,6 +358,8 @@
 				385CFA3B1984309A00CF9563 /* TalkViewController.m */,
 				38E8CDC11984826000FAA465 /* TutorialViewController.h */,
 				38E8CDC21984826000FAA465 /* TutorialViewController.m */,
+				380550FA1A7CD6910099C7D3 /* FollowTableViewController.h */,
+				380550FB1A7CD6910099C7D3 /* FollowTableViewController.m */,
 				38631E901A6B879600DBA653 /* Camera */,
 				385CF9E019842B4F00CF9563 /* Images.xcassets */,
 				385CF9D319842B4F00CF9563 /* Supporting Files */,
@@ -735,6 +740,7 @@
 				385CFA3919842FAF00CF9563 /* SBJson4Writer.m in Sources */,
 				385CFA3519842FAF00CF9563 /* SBJson4StreamParserState.m in Sources */,
 				388A457D199D409800ECA0A3 /* ELCAsset.m in Sources */,
+				380550FC1A7CD6910099C7D3 /* FollowTableViewController.m in Sources */,
 				385CFA3719842FAF00CF9563 /* SBJson4StreamWriter.m in Sources */,
 				385CF9D919842B4F00CF9563 /* AppDelegate.m in Sources */,
 				38E8CDC0198481C100FAA465 /* EAIntroView.m in Sources */,

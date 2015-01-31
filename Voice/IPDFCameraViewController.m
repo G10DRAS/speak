@@ -191,25 +191,7 @@
             
             NSLog(@"Confidence: %f", _imageDetectionConfidence);
             if ([[NSUserDefaults standardUserDefaults] boolForKey:@"IsAuto"]) {
-                if (_imageDetectionConfidence == 40) {
-                    [self captureImageWithCompletionHander:^(id data)
-                     {
-                         UIImage *image = ([data isKindOfClass:[NSData class]]) ? [UIImage imageWithData:data] : data;
-                         NSData *imageData = UIImagePNGRepresentation(image);
-                         [imageArray addObject:imageData];
-                         
-                         [[NSUserDefaults standardUserDefaults] setObject:imageArray forKey:@"TemporaryImages"];
-                         [[NSUserDefaults standardUserDefaults] synchronize];
-                         NSLog(@"%i", (int)[[NSUserDefaults standardUserDefaults] arrayForKey:@"TemporaryImages"].count);
-
-
-                         dispatch_time_t countdownTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC));
-                         dispatch_after(countdownTime, dispatch_get_main_queue(), ^(void){
-                             _imageDetectionConfidence = 0.0f;
-                         });
-                         
-                     }];
-                }
+                [self autoCaptureImage];
             }
         }
         else
@@ -226,7 +208,27 @@
         [_glkView setNeedsDisplay];
     }
 }
-
+-(void) autoCaptureImage{
+    if (_imageDetectionConfidence == 40) {
+        [self captureImageWithCompletionHander:^(id data)
+         {
+             UIImage *image = ([data isKindOfClass:[NSData class]]) ? [UIImage imageWithData:data] : data;
+             NSData *imageData = UIImagePNGRepresentation(image);
+             [imageArray addObject:imageData];
+             
+             [[NSUserDefaults standardUserDefaults] setObject:imageArray forKey:@"TemporaryImages"];
+             [[NSUserDefaults standardUserDefaults] synchronize];
+             NSLog(@"%i", (int)[[NSUserDefaults standardUserDefaults] arrayForKey:@"TemporaryImages"].count);
+             
+             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"shouldUpdateLabel"];
+             
+             dispatch_time_t countdownTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC));
+             dispatch_after(countdownTime, dispatch_get_main_queue(), ^(void){
+                 _imageDetectionConfidence = 0.0f;
+             });
+         }];
+    }
+}
 - (void)enableBorderDetectFrame
 {
     _borderDetectFrame = YES;

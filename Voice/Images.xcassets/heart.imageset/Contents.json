@@ -1,0 +1,29 @@
+{
+  "images" : [
+    {
+      "idiom" : "iphone",
+      "scale" : "1x",
+      "filename" : "Screen Shot 2015-01-31 at 1.15.39 AM.png"
+    },
+    {
+      "idiom" : "iphone",
+      "scale" : "2x",
+      "filename" : "Screen Shot 2015-01-31 at 1.15.39 AM-1.png"
+    },
+    {
+      "idiom" : "iphone",
+      "filename" : "Screen Shot 2015-01-31 at 1.15.39 AM-3.png",
+      "subtype" : "retina4",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "iphone",
+      "scale" : "3x",
+      "filename" : "Screen Shot 2015-01-31 at 1.15.39 AM-2.png"
+    }
+  ],
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  }
+}

@@ -65,8 +65,6 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     [[NSUserDefaults standardUserDefaults] setObject:@"en-US" forKey:@"languageForTTS"];
     [[NSUserDefaults standardUserDefaults] setObject:@"en" forKey:@"languageForOCR"];
     
-    // Get the time of day
-    [self timeOfDay];
     
     // Set the done button and the imageNumber to invisible initially, imageLibrary should be yes
     self.imageNumber.alpha = 0.0;
@@ -133,6 +131,8 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
                                                   forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = YES;
+    
+    labelUpdaterTimer = [NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(updateLabel) userInfo:nil repeats:YES];
     
     [super viewDidLoad];
 
@@ -364,7 +364,8 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
          [[NSUserDefaults standardUserDefaults] setObject:tempImages forKey:@"TemporaryImages"];
          [[NSUserDefaults standardUserDefaults] synchronize];
 
-         [self updateLabel];
+         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"shouldUpdateLabel"];
+
          
      NSLog(@"%i", (int)[[NSUserDefaults standardUserDefaults] arrayForKey:@"TemporaryImages"].count);
     }];
@@ -396,7 +397,8 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 - (void) readyToRecognize { // done button clicked
-    
+    [self prepareToSwitchViews];
+
     NSMutableArray *imgs = [[NSMutableArray alloc] initWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"TemporaryImages"]];
 //    for (int i = 0; i < [tempImages count]; i++) {
 //        NSData *imageData = UIImagePNGRepresentation([tempImages objectAtIndex:i]);
@@ -434,6 +436,8 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 }
 
 - (IBAction)imageLibraryClicked:(id)sender {
+    [self prepareToSwitchViews];
+
     [mixpanel track:@"Image Selection" properties:@{
                                                     @"Method": @"Photo Library",
                                                     }];
@@ -720,15 +724,13 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 
 -(void) moveToTalkView {
     [mixpanel track:@"Image Converted to Text"];
+    [self prepareToSwitchViews];
     UIViewController *myNext = [self.storyboard instantiateViewControllerWithIdentifier:@"TalkView"];
     [self.navigationController pushViewController:myNext animated:YES];
 }
 -(void) moveToSettings {
+    [self prepareToSwitchViews];
     UIViewController *myNext = [self.storyboard instantiateViewControllerWithIdentifier:@"SettingsView"];
-    [self.navigationController pushViewController:myNext animated:YES];
-}
-- (IBAction)helpPressed:(id)sender {
-    UIViewController *myNext = [self.storyboard instantiateViewControllerWithIdentifier:@"TutorialView"];
     [self.navigationController pushViewController:myNext animated:YES];
 }
 /*---------------------------------
@@ -753,17 +755,26 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     [loading dismissWithClickedButtonIndex:0 animated:YES];
 }
 - (void) updateLabel {
-    if (self.imageNumber.alpha != 1.0) {
-        [UIView animateWithDuration:0.4 animations:^
-         {
-             self.imageNumber.alpha = 1.0;
-             self.doneButton.alpha = 1.0;
-             self.clearButton.alpha = 1.0;
-             self.imageLibrary.alpha = 0.0;
-         }];
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"shouldUpdateLabel"] == YES) {
+        if (self.imageNumber.alpha != 1.0) {
+            [UIView animateWithDuration:0.4 animations:^
+             {
+                 self.imageNumber.alpha = 1.0;
+                 self.doneButton.alpha = 1.0;
+                 self.clearButton.alpha = 1.0;
+                 self.imageLibrary.alpha = 0.0;
+             }];
+        }
+        self.imageNumber.text = [NSString stringWithFormat:@"%i",
+                                 (int)[[NSUserDefaults standardUserDefaults] arrayForKey:@"TemporaryImages"].count];
+        
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"shouldUpdateLabel"];
     }
-    self.imageNumber.text = [NSString stringWithFormat:@"%i",
-                             (int)[[NSUserDefaults standardUserDefaults] arrayForKey:@"TemporaryImages"].count];
+}
+
+-(void) prepareToSwitchViews {
+    [self.camView stop];
+    [labelUpdaterTimer invalidate];
 }
 
 + (NSString*)globalToken {
@@ -771,7 +782,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 }
 
 /*
- THIS MAKES THE OCR'S IMAGE READING MORE ACCURATE AND WORK FASTER
+ THIS MAKES THE OCR'S IMAGE PROCESS FASTER THROUGH COMPRESSION
  */
 
 - (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
@@ -781,54 +792,5 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     UIGraphicsEndImageContext();
     return newImage;
 }
-
-
-
-/*
- GET WHETHER THE TIME IS DAY OR NIGHT
- */
--(void)timeOfDay
-{
-    NSDate *currentTime = [NSDate date];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"hh:mm a"];
-    [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
-    NSString *resultTime = [dateFormatter stringFromDate:currentTime];
-
-    NSString *morningStart = [NSString stringWithFormat:@"07:00 AM"];
-    NSString *morningEnd = [NSString stringWithFormat:@"7:59 AM"];
-    NSString *nightStart = [NSString stringWithFormat:@"08:00 PM"];
-    NSString *nightEnd = [NSString stringWithFormat:@"06:59 AM"];
-    NSLog(@"resultTime: %@", resultTime);
-    
-    if([[dateFormatter dateFromString:morningStart] compare:[dateFormatter dateFromString:resultTime]] == NSOrderedDescending || [[dateFormatter dateFromString:morningEnd] compare:[dateFormatter dateFromString:resultTime]] == NSOrderedAscending) {
-        time = @"day";
-    } else if([[dateFormatter dateFromString:nightStart] compare:[dateFormatter dateFromString:resultTime]] == NSOrderedDescending || [[dateFormatter dateFromString:nightEnd] compare:[dateFormatter dateFromString:resultTime]] == NSOrderedAscending) {
-        time = @"night";
-    }
-    NSLog(@"%@",time);
-}
-
-- (void) turnTorchOn: (bool) on {
-    // check if flashlight available
-    Class captureDeviceClass = NSClassFromString(@"AVCaptureDevice");
-    if (captureDeviceClass != nil) {
-        AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
-        if ([device hasTorch] && [device hasFlash]){
-            
-            [device lockForConfiguration:nil];
-            if (on) {
-                [device setTorchMode:AVCaptureTorchModeOn];
-                [device setFlashMode:AVCaptureFlashModeOn];
-                //torchIsOn = YES; //define as a variable/property if you need to know status
-            } else {
-                [device setTorchMode:AVCaptureTorchModeOff];
-                [device setFlashMode:AVCaptureFlashModeOff];
-                //torchIsOn = NO;
-            }
-            [device unlockForConfiguration];
-        }
-    } }
-
 
 @end

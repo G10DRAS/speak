@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
 
-@interface SettingsViewController : UITableViewController {
+@interface SettingsViewController : UITableViewController <MFMailComposeViewControllerDelegate> {
     
 }
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *ttsSpeed;
 - (IBAction)indexChanged:(UISegmentedControl *)sender;
+
 
 @end

@@ -43,6 +43,8 @@ static NSString* theOCRText;
     CGRect screenRect;
     CGFloat screenWidth;
     CGFloat screenHeight;
+    
+    NSTimer *labelUpdaterTimer;
 }
 
 + (NSString*)globalToken;
