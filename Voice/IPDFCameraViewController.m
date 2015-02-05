@@ -190,7 +190,7 @@
                             objectForKey:@"TemporaryImages"]];
             
             NSLog(@"Confidence: %f", _imageDetectionConfidence);
-            if ([[NSUserDefaults standardUserDefaults] boolForKey:@"IsAuto"]) {
+            if ([[NSUserDefaults standardUserDefaults] boolForKey:@"IsAuto"] == TRUE) {
                 [self autoCaptureImage];
             }
         }

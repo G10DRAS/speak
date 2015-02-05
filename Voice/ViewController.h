@@ -24,7 +24,7 @@ static NSString* theOCRText;
 
 @class TalkViewController;
 
-@interface ViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIAlertViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate, ELCImagePickerControllerDelegate> {
+@interface ViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIAlertViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate, ELCImagePickerControllerDelegate, UIPickerViewDataSource> {
     NSMutableData *receivedData;
     BOOL isAuthenticating;
     NSString *imagePath;
@@ -67,6 +67,7 @@ static NSString* theOCRText;
 @property (weak, nonatomic) IBOutlet UIButton *manual;
 @property (weak, nonatomic) IBOutlet UIButton *autoButton;
 @property (weak, nonatomic) IBOutlet UIButton *captureButton;
+@property (weak, nonatomic) IBOutlet UIButton *cropButton;
 - (IBAction)captureClicked:(id)sender;
 - (IBAction)manualSelected:(id)sender;
 - (IBAction)autoSelected:(id)sender;

@@ -51,9 +51,9 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 //    self.languagePicker.delegate = self;
     
     // Clear some arrays
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ImagesArray"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ImageText"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"TemporaryImages"];
+//    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ImagesArray"];
+//    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ImageText"];
+//    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"TemporaryImages"];
     
     // Initialize some stuff
     tempImages = [[NSMutableArray alloc] init];
@@ -132,8 +132,6 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = YES;
     
-    labelUpdaterTimer = [NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(updateLabel) userInfo:nil repeats:YES];
-    
     [super viewDidLoad];
 
     self.imageView.image = [UIImage imageNamed:nil];
@@ -145,7 +143,36 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 }
 - (void)viewDidAppear:(BOOL)animated
 {
+    // Start Cam
+    [self.camView setupCameraView];
+    [self.camView setEnableBorderDetection:YES];
     [self.camView start];
+    
+    // Clear some arrays
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ImagesArray"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ImageText"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"TemporaryImages"];
+    
+    // Initialize some stuff
+    tempImages = [[NSMutableArray alloc] init];
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"IsAuto"];
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    // Timer
+    labelUpdaterTimer = [NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(updateLabel) userInfo:nil repeats:YES];
+    
+    // Set the done button and the imageNumber to invisible initially, imageLibrary should be yes
+    self.imageNumber.alpha = 0.0;
+    self.doneButton.alpha = 0.0;
+    self.clearButton.alpha = 0.0;
+    self.imageLibrary.alpha = 1.0;
+    
+    self.manual.alpha = 1.0;
+    self.autoButton.alpha = 0.0;
+    self.captureButton.alpha = 0.0;
+    self.imageNumber.text = [NSString stringWithFormat:@"0"];
+
 }
 
 /*---------------------------------
@@ -333,9 +360,19 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     self.camView.enableTorch = enable;
 }
 -(IBAction)cropToggle:(id)sender {
-    BOOL enable = !self.camView.isBorderDetectionEnabled;
-    [self changeButton:sender targetTitle:(enable) ? @"CROP On" : @"CROP Off" toStateEnabled:enable];
-    self.camView.enableBorderDetection = enable;
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"IsAuto"] == FALSE) {
+        BOOL enable = !self.camView.isBorderDetectionEnabled;
+        [self changeButton:self.cropButton targetTitle:(enable) ? @"CROP On" : @"CROP Off" toStateEnabled:enable];
+        self.camView.enableBorderDetection = enable;
+    } else {
+        [self.camView stop];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Can't turn off Auto-Crop"
+                                                        message:@"Can't turn off auto-crop while in automatic photo mode. Switch to manual mode to turn off auto-crop."
+                                                       delegate:self
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
 }
 -(IBAction)switchFilters:(id)sender {
     [self.camView setCameraViewType:(self.camView.cameraViewType == IPDFCameraViewTypeBlackAndWhite) ? IPDFCameraViewTypeNormal : IPDFCameraViewTypeBlackAndWhite];
@@ -365,13 +402,14 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
          [[NSUserDefaults standardUserDefaults] synchronize];
 
          [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"shouldUpdateLabel"];
-
          
-     NSLog(@"%i", (int)[[NSUserDefaults standardUserDefaults] arrayForKey:@"TemporaryImages"].count);
+         NSLog(@"%i", (int)[[NSUserDefaults standardUserDefaults] arrayForKey:@"TemporaryImages"].count); // For testing
     }];
 }
 - (IBAction)manualSelected:(id)sender
 {
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"IsAuto"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     if (self.autoButton.alpha != 1.0) {
         [UIView animateWithDuration:0.4 animations:^
          {
@@ -380,11 +418,15 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
              self.autoButton.alpha = 1.0;
          }];
     }
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"IsAuto"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 - (IBAction)autoSelected:(id)sender
 {
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"IsAuto"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    // If not auto-cropping, make it auto-crop
+    if (!self.camView.isBorderDetectionEnabled) {
+        [self cropToggle:nil];
+    }
     if (self.manual.alpha != 1.0) {
         [UIView animateWithDuration:0.4 animations:^
          {
@@ -393,8 +435,6 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
              self.autoButton.alpha = 0.0;
          }];
     }
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"IsAuto"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 - (void) readyToRecognize { // done button clicked
     [self prepareToSwitchViews];
@@ -457,19 +497,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     [self readyToRecognize];
 }
 -(IBAction)clearButtonClicked:(id)sender {
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ImagesArray"];
-    [tempImages removeAllObjects];
-
-    // Reset the UI
-    if (self.imageLibrary.alpha != 1.0) {
-    [UIView animateWithDuration:0.4 animations:^
-     {
-         self.imageNumber.alpha = 0.0;
-         self.doneButton.alpha = 0.0;
-         self.clearButton.alpha = 0.0;
-         self.imageLibrary.alpha = 1.0;
-     }];
-    }
+    [self reset];
 }
 
 //
@@ -736,6 +764,14 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 /*---------------------------------
  EXTRA STUFF
  ------------------------------- */
+// Alert View Delegate
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    // the user clicked OK
+    if (buttonIndex == 0) {
+        [self.camView start];
+    }
+}
+
 -(void)startLoading
 {
     loading = [[UIAlertView alloc]
@@ -777,8 +813,74 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     [labelUpdaterTimer invalidate];
 }
 
+//-(void) reset {
+//    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"TemporaryImages"];
+//    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ImagesArray"];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
+//
+//    [tempImages removeAllObjects];
+//    
+//    // Reset the UI
+//    if (self.imageLibrary.alpha != 1.0) {
+//        [UIView animateWithDuration:0.4 animations:^
+//         {
+//             self.imageNumber.alpha = 0.0;
+//             self.doneButton.alpha = 0.0;
+//             self.clearButton.alpha = 0.0;
+//             self.imageLibrary.alpha = 1.0;
+//         }];
+//    }
+//    
+//    [self clearTmpDirectory];
+//}
+
+-(void) reset {
+    [self.camView stop];
+    [labelUpdaterTimer invalidate];
+    
+    // Start Cam
+    [self.camView setupCameraView];
+    [self.camView setEnableBorderDetection:YES];
+    [self.camView start];
+    
+    // Clear some arrays
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ImagesArray"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ImageText"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"TemporaryImages"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [tempImages removeAllObjects];
+    
+    // Set the done button and the imageNumber to invisible initially, imageLibrary should be yes
+    [UIView animateWithDuration:0.4 animations:^
+     {
+         [self.camView start];
+
+         self.imageNumber.alpha = 0.0;
+         self.doneButton.alpha = 0.0;
+         self.clearButton.alpha = 0.0;
+         self.imageLibrary.alpha = 1.0;
+         
+         self.imageNumber.text = [NSString stringWithFormat:@"0"];
+     }];
+    
+    // Timer
+    labelUpdaterTimer = [NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(updateLabel) userInfo:nil repeats:YES];
+    
+    [self clearTmpDirectory];
+}
+
+
 + (NSString*)globalToken {
     return hardCodedToken;
+}
+
+- (void)clearTmpDirectory
+{
+    NSArray* tmpDirectory = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:NSTemporaryDirectory() error:NULL];
+    for (NSString *file in tmpDirectory) {
+        [[NSFileManager defaultManager] removeItemAtPath:[NSString stringWithFormat:@"%@%@", NSTemporaryDirectory(), file] error:NULL];
+    }
 }
 
 /*

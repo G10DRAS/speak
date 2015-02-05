@@ -558,6 +558,8 @@
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ImagesArray"];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ImageText"];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"TemporaryImages"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
     [self clearTmpDirectory];
 }
 

@@ -193,6 +193,7 @@
                         <outlet property="camView" destination="bK8-29-emF" id="bya-hY-MAs"/>
                         <outlet property="captureButton" destination="Kvu-hU-Hnm" id="hIk-E5-URY"/>
                         <outlet property="clearButton" destination="Nl5-PE-Y2j" id="Hc6-lT-HiQ"/>
+                        <outlet property="cropButton" destination="CO0-8y-mHq" id="uzT-NJ-nnJ"/>
                         <outlet property="doneButton" destination="W36-dc-UEl" id="rpP-mb-yFe"/>
                         <outlet property="focusIndication" destination="RnK-OF-F21" id="xxa-a7-gXk"/>
                         <outlet property="imageLibrary" destination="e2z-qw-EvT" id="o1b-r1-niH"/>
