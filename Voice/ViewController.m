@@ -366,13 +366,18 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
         self.camView.enableBorderDetection = enable;
     } else {
         [self.camView stop];
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Can't turn off Auto-Crop"
-                                                        message:@"Can't turn off auto-crop while in automatic photo mode. Switch to manual mode to turn off auto-crop."
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Can't turn off Crop"
+                                                        message:@"Can't turn off crop while in automatic photo mode. Switch to manual mode to turn off crop."
                                                        delegate:self
                                               cancelButtonTitle:@"OK"
                                               otherButtonTitles:nil];
         [alert show];
     }
+}
+-(void)switchCropDuringTransition {
+        BOOL enable = !self.camView.isBorderDetectionEnabled;
+        [self changeButton:self.cropButton targetTitle:(enable) ? @"CROP On" : @"CROP Off" toStateEnabled:enable];
+        self.camView.enableBorderDetection = enable;
 }
 -(IBAction)switchFilters:(id)sender {
     [self.camView setCameraViewType:(self.camView.cameraViewType == IPDFCameraViewTypeBlackAndWhite) ? IPDFCameraViewTypeNormal : IPDFCameraViewTypeBlackAndWhite];
@@ -394,6 +399,19 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     
     [self.camView captureImageWithCompletionHander:^(id data)
      {
+         
+         [UIView animateWithDuration:0.4 animations:^
+          {
+              self.captureButton.alpha = 0.0;
+          }
+                          completion:^(BOOL finished)
+          {
+              [UIView animateWithDuration:0.4 animations:^
+               {
+                   self.captureButton.alpha = 1.0;
+               }];
+          }];
+
          UIImage *image = ([data isKindOfClass:[NSData class]]) ? [UIImage imageWithData:data] : data;
          NSData *imageData = UIImagePNGRepresentation(image);
          [tempImages addObject:imageData];
@@ -408,6 +426,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 }
 - (IBAction)manualSelected:(id)sender
 {
+    switchToAuto = false;
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"IsAuto"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     if (self.autoButton.alpha != 1.0) {
@@ -425,7 +444,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     [[NSUserDefaults standardUserDefaults] synchronize];
     // If not auto-cropping, make it auto-crop
     if (!self.camView.isBorderDetectionEnabled) {
-        [self cropToggle:nil];
+        [self switchCropDuringTransition];
     }
     if (self.manual.alpha != 1.0) {
         [UIView animateWithDuration:0.4 animations:^
@@ -445,7 +464,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 //        [imgs addObject:imageData];
 //    }
     [[NSUserDefaults standardUserDefaults] setObject:imgs forKey:@"ImagesArray"];
-    
+    [[NSUserDefaults standardUserDefaults] synchronize];
     
     tempImages = [[NSMutableArray alloc]
                   initWithArray:[[NSUserDefaults standardUserDefaults]
@@ -470,7 +489,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
         [self recognizePhoto];
     } else {
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ImagesArray"];
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ImagesArray"];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"TemporaryImages"];
         [tempImages removeAllObjects];
     }
 }
@@ -510,6 +529,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 - (void)elcImagePickerController:(ELCImagePickerController *)picker didFinishPickingMediaWithInfo:(NSArray *)info
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+    [self prepareToSwitchViews];
     
     NSMutableArray *images = [NSMutableArray arrayWithCapacity:[info count]];
     for (NSDictionary *dict in info) {
@@ -539,12 +559,17 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
         [imgs addObject:imageData];
     }
     [[NSUserDefaults standardUserDefaults] setObject:imgs forKey:@"ImagesArray"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
+   tempImages = [[NSMutableArray alloc]
+              initWithArray:[[NSUserDefaults standardUserDefaults]
+                             objectForKey:@"ImagesArray"]];
     
-    if ([images count] != 0) {
-        self.imageView.image = [images objectAtIndex:0];
+    if ([tempImages count] != 0) {
+        self.imageView.image = [UIImage imageWithData:[tempImages objectAtIndex:0]];
         
         // Scale the image
-        UIImage *myScaledImage = [self imageWithImage:self.imageView.image scaledToSize:CGSizeMake(self.imageView.image.size.width * .5, self.imageView.image.size.height * .5)];
+        UIImage *myScaledImage = [self imageWithImage:self.imageView.image scaledToSize:CGSizeMake(self.imageView.image.size.width * .3, self.imageView.image.size.height * .3)];
         self.imageView.image = myScaledImage;
         
         // Create path for image.
@@ -555,10 +580,14 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
         [UIImagePNGRepresentation(self.imageView.image) writeToFile:imagePath atomically:YES];
         NSLog(@"First Image's Path: %@", imagePath);
         
+        // Start Processing
         [self recognizePhoto];
     } else {
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ImagesArray"];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"TemporaryImages"];
+        [tempImages removeAllObjects];
         [images removeAllObjects];
+        [imgs removeAllObjects];
     }
 }
 
@@ -683,6 +712,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     }
     
     [[NSUserDefaults standardUserDefaults] setObject:actualText forKey:@"ImageText"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     
     NSLog(@"%@",[[NSString alloc] initWithData:oResponseData encoding:NSUTF8StringEncoding]);
     

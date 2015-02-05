@@ -27,6 +27,7 @@ static NSString* theOCRText;
 @interface ViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIAlertViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate, ELCImagePickerControllerDelegate, UIPickerViewDataSource> {
     NSMutableData *receivedData;
     BOOL isAuthenticating;
+    BOOL switchToAuto;
     NSString *imagePath;
     NSString *imagePathSize;
     NSString *imageFileID;

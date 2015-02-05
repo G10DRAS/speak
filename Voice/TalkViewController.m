@@ -60,7 +60,7 @@
 //    }
     
     [self.scrollView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    
+
     CGRect workingFrame = CGRectMake (0,0,self.scrollView.frame.size.width,self.scrollView.frame.size.height);
     workingFrame.origin.x = 0;
 
@@ -71,8 +71,7 @@
         // If the image is in Landscape
         UIImage *hi;
         if (image.size.width > image.size.height) {
-//            rotate(image, UIImageOrientationLeft);
-//            UIImage *rotatedImage = [image imageRotatedByDegrees:90.0];
+
             hi = [self imageByRotatingImage:image fromImageOrientation:UIImageOrientationRight];
             NSLog(@"Image is landscape");
         } else {
@@ -163,7 +162,7 @@
 - (void) scrollViewInit {
     CGRect workingFrame = self.scrollView.frame;
     workingFrame.origin.x = 0;
-
+    
     _scrollView.delegate=self;
     
     int i=0;
@@ -321,7 +320,7 @@
         speechPaused = NO;
         NSString *imageText = [NSString stringWithFormat:@"%@", [speakArray objectAtIndex:(speechNumber-1)]];
         AVSpeechUtterance* utter;
-        if ([imageText isEqualToString:@"________________"]) {
+        if ([imageText isEqualToString:@"________________"] || [imageText isEqualToString:@""]) {
             utter = [[AVSpeechUtterance alloc] initWithString:@"There were no words detected on this page. I am moving on."];
         } else {
             utter = [[AVSpeechUtterance alloc] initWithString:imageText];
