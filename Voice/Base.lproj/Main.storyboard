@@ -22,8 +22,8 @@
                                 <rect key="frame" x="251" y="502" width="54" height="54"/>
                                 <accessibility key="accessibilityConfiguration" hint="Double tap to choose photos from photo library" label="Photo Library"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="54" id="MQN-nM-K4m"/>
-                                    <constraint firstAttribute="height" constant="54" id="joJ-F9-Bi5"/>
+                                    <constraint firstAttribute="width" constant="54" id="Ndi-9l-M3N"/>
+                                    <constraint firstAttribute="height" constant="54" id="ULz-MU-ZXU"/>
                                 </constraints>
                                 <state key="normal" image="imageLibrary">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -36,8 +36,8 @@
                                 <rect key="frame" x="262" y="508" width="42" height="42"/>
                                 <accessibility key="accessibilityConfiguration" hint="Double tap to start reading all the photos you have taken" label="Done"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="42" id="heX-KK-luz"/>
-                                    <constraint firstAttribute="height" constant="42" id="ueh-OZ-r2M"/>
+                                    <constraint firstAttribute="height" constant="42" id="3Gp-V7-YVn"/>
+                                    <constraint firstAttribute="width" constant="42" id="vt3-uL-PMn"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="1"/>
                                 <state key="normal" image="next">
@@ -51,8 +51,8 @@
                                 <rect key="frame" x="16" y="510" width="38" height="38"/>
                                 <accessibility key="accessibilityConfiguration" hint="Double-tap to reset all the  taken pictures" label="Reset pictures"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="38" id="Bhl-jM-gcg"/>
-                                    <constraint firstAttribute="width" constant="38" id="uPv-V6-XBC"/>
+                                    <constraint firstAttribute="width" constant="38" id="0Y2-Jn-FIi"/>
+                                    <constraint firstAttribute="height" constant="38" id="oCj-Uk-BRh"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="1"/>
                                 <state key="normal" image="cancel">
@@ -69,47 +69,16 @@
                                         <rect key="frame" x="120" y="111" width="80" height="78"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BMi-JC-msQ"/>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kvu-hU-Hnm">
-                                        <rect key="frame" x="116" y="282" width="89" height="90"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="89" id="03v-GN-vGt"/>
-                                            <constraint firstAttribute="height" constant="90" id="WcJ-ra-tlq"/>
-                                        </constraints>
-                                        <state key="normal" image="captureButton">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="captureClicked:" destination="Hb5-Gl-zTd" eventType="touchUpInside" id="ACh-uY-ZkE"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.74975857270000001" green="0.80565634789999996" blue="0.811722736" alpha="1" colorSpace="calibratedRGB"/>
                                 <accessibility key="accessibilityConfiguration" hint="Double Tap To Focus" label="Camera View Finder">
                                     <bool key="isElement" value="YES"/>
                                 </accessibility>
                                 <gestureRecognizers/>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="Kvu-hU-Hnm" secondAttribute="bottom" constant="8" id="0eK-le-RQd"/>
-                                    <constraint firstAttribute="centerX" secondItem="Kvu-hU-Hnm" secondAttribute="centerX" id="mIa-lG-BY0"/>
-                                </constraints>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="tcY-X1-Tyq" appends="YES" id="88s-Nk-jSW"/>
                                 </connections>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TX4-ub-WjC">
-                                <rect key="frame" x="99" y="508" width="123" height="41"/>
-                                <accessibility key="accessibilityConfiguration" hint="App is currently taking pictures automatically. Double tap to manually take photos." label=""/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="123" id="HtG-QR-TXz"/>
-                                    <constraint firstAttribute="height" constant="41" id="YaJ-55-KXC"/>
-                                </constraints>
-                                <state key="normal" image="manual">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="manualSelected:" destination="Hb5-Gl-zTd" eventType="touchUpInside" id="GGU-X3-5mm"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xqr-yh-xH5">
                                 <rect key="frame" x="65" y="462" width="49" height="30"/>
                                 <accessibility key="accessibilityConfiguration" hint="Double tap to change filters" label="Filter"/>
@@ -134,54 +103,47 @@
                                     <action selector="cropToggle:" destination="Hb5-Gl-zTd" eventType="touchUpInside" id="7ba-GG-c8K"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HOw-Jf-b0l">
-                                <rect key="frame" x="220" y="510" width="55" height="40"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HOw-Jf-b0l">
+                                <rect key="frame" x="220" y="508" width="55" height="40"/>
                                 <accessibility key="accessibilityConfiguration" hint="This is the number of photos taken currently."/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="55" id="KD9-J4-yuv"/>
-                                    <constraint firstAttribute="height" constant="40" id="ZrK-g9-ci4"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="47"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ngi-fp-J1S">
-                                <rect key="frame" x="100" y="508" width="122" height="40"/>
-                                <accessibility key="accessibilityConfiguration" hint="App is currently taking pictures manually. Double tap to automatically take photos." label=""/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kvu-hU-Hnm">
+                                <rect key="frame" x="116" y="478" width="89" height="90"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="122" id="jHN-Hh-tOJ"/>
-                                    <constraint firstAttribute="height" constant="40" id="mX8-9d-iuM"/>
+                                    <constraint firstAttribute="height" constant="90" id="iTQ-na-fmA"/>
+                                    <constraint firstAttribute="width" constant="89" id="xQE-7i-t62"/>
                                 </constraints>
-                                <state key="normal" image="auto">
+                                <state key="normal" image="captureButton">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="autoSelected:" destination="Hb5-Gl-zTd" eventType="touchUpInside" id="uWq-61-Nd0"/>
+                                    <action selector="captureClicked:" destination="Hb5-Gl-zTd" eventType="touchUpInside" id="ACh-uY-ZkE"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.1529411765" green="0.59215686270000001" blue="0.73725490199999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="centerX" secondItem="TX4-ub-WjC" secondAttribute="centerX" id="0D3-wH-pGa"/>
-                            <constraint firstItem="Nl5-PE-Y2j" firstAttribute="leading" secondItem="T0R-jV-Ezx" secondAttribute="leadingMargin" id="1E0-FL-HiC"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="CO0-8y-mHq" secondAttribute="trailing" constant="42" id="4md-Id-CG7"/>
-                            <constraint firstItem="bK8-29-emF" firstAttribute="leading" secondItem="T0R-jV-Ezx" secondAttribute="leadingMargin" constant="-16" id="85W-qF-YtK"/>
-                            <constraint firstItem="Y85-ow-wKJ" firstAttribute="top" secondItem="e2z-qw-EvT" secondAttribute="bottom" constant="12" id="Gy8-ux-PdE"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="bK8-29-emF" secondAttribute="trailing" constant="-16" id="NGk-hh-kMh"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="HOw-Jf-b0l" secondAttribute="trailing" constant="29" id="PmX-bK-BkP"/>
-                            <constraint firstItem="W36-dc-UEl" firstAttribute="trailing" secondItem="T0R-jV-Ezx" secondAttribute="trailingMargin" id="Tfs-GA-lwC"/>
-                            <constraint firstItem="Y85-ow-wKJ" firstAttribute="top" secondItem="xqr-yh-xH5" secondAttribute="bottom" constant="76" id="Ts8-Fz-ohg"/>
-                            <constraint firstItem="bK8-29-emF" firstAttribute="top" secondItem="FrQ-gu-LYv" secondAttribute="bottom" id="VXu-iU-z3X"/>
-                            <constraint firstItem="Y85-ow-wKJ" firstAttribute="top" secondItem="ngi-fp-J1S" secondAttribute="bottom" constant="20" id="WKL-oC-5Gs"/>
-                            <constraint firstItem="Y85-ow-wKJ" firstAttribute="top" secondItem="Nl5-PE-Y2j" secondAttribute="bottom" constant="20" id="bTA-xi-SuD"/>
-                            <constraint firstItem="Y85-ow-wKJ" firstAttribute="top" secondItem="HOw-Jf-b0l" secondAttribute="bottom" constant="18" id="eM9-XZ-p8G"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="e2z-qw-EvT" secondAttribute="trailing" constant="-1" id="eMb-yW-kde"/>
-                            <constraint firstItem="Y85-ow-wKJ" firstAttribute="top" secondItem="TX4-ub-WjC" secondAttribute="bottom" constant="19" id="ePf-GK-tBQ"/>
-                            <constraint firstItem="xqr-yh-xH5" firstAttribute="leading" secondItem="T0R-jV-Ezx" secondAttribute="leadingMargin" constant="49" id="ea8-SB-xRb"/>
-                            <constraint firstItem="Y85-ow-wKJ" firstAttribute="top" secondItem="W36-dc-UEl" secondAttribute="bottom" constant="18" id="lbY-YG-RXN"/>
-                            <constraint firstItem="CO0-8y-mHq" firstAttribute="top" secondItem="bK8-29-emF" secondAttribute="bottom" constant="18" id="mxi-e5-cl2"/>
-                            <constraint firstAttribute="centerX" secondItem="ngi-fp-J1S" secondAttribute="centerX" id="peb-w9-L6W"/>
-                            <constraint firstItem="ngi-fp-J1S" firstAttribute="top" secondItem="bK8-29-emF" secondAttribute="bottom" constant="64" id="ubh-1d-yhK"/>
+                            <constraint firstItem="bK8-29-emF" firstAttribute="top" secondItem="FrQ-gu-LYv" secondAttribute="bottom" id="0BP-Rn-SDs"/>
+                            <constraint firstItem="Y85-ow-wKJ" firstAttribute="top" secondItem="xqr-yh-xH5" secondAttribute="bottom" constant="76" id="9kF-Or-43d"/>
+                            <constraint firstItem="Y85-ow-wKJ" firstAttribute="top" secondItem="Nl5-PE-Y2j" secondAttribute="bottom" constant="20" id="ATS-mf-c61"/>
+                            <constraint firstItem="bK8-29-emF" firstAttribute="leading" secondItem="T0R-jV-Ezx" secondAttribute="leadingMargin" constant="-16" id="C9O-qz-7dt"/>
+                            <constraint firstItem="Y85-ow-wKJ" firstAttribute="top" secondItem="e2z-qw-EvT" secondAttribute="bottom" constant="12" id="JkE-HP-bfE"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="CO0-8y-mHq" secondAttribute="trailing" constant="42" id="LqR-4X-yHa"/>
+                            <constraint firstItem="CO0-8y-mHq" firstAttribute="top" secondItem="bK8-29-emF" secondAttribute="bottom" constant="18" id="Lr5-we-aSD"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="bK8-29-emF" secondAttribute="trailing" constant="-16" id="NHE-7D-DiA"/>
+                            <constraint firstItem="Y85-ow-wKJ" firstAttribute="top" secondItem="Kvu-hU-Hnm" secondAttribute="bottom" id="TbQ-M7-mGn"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="HOw-Jf-b0l" secondAttribute="trailing" constant="29" id="VgF-FJ-LWF"/>
+                            <constraint firstItem="Y85-ow-wKJ" firstAttribute="top" secondItem="W36-dc-UEl" secondAttribute="bottom" constant="18" id="aQx-Et-BZY"/>
+                            <constraint firstAttribute="centerX" secondItem="Kvu-hU-Hnm" secondAttribute="centerX" id="i6q-g0-rMe"/>
+                            <constraint firstItem="xqr-yh-xH5" firstAttribute="leading" secondItem="T0R-jV-Ezx" secondAttribute="leadingMargin" constant="49" id="iP4-J2-2v9"/>
+                            <constraint firstItem="W36-dc-UEl" firstAttribute="trailing" secondItem="T0R-jV-Ezx" secondAttribute="trailingMargin" id="qAk-pn-DCf"/>
+                            <constraint firstItem="e2z-qw-EvT" firstAttribute="top" secondItem="CO0-8y-mHq" secondAttribute="bottom" constant="10" id="rIM-4D-I7i"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="e2z-qw-EvT" secondAttribute="trailing" constant="-1" id="sam-pZ-i6D"/>
+                            <constraint firstItem="Y85-ow-wKJ" firstAttribute="top" secondItem="HOw-Jf-b0l" secondAttribute="bottom" constant="20" id="tyy-S5-pyt"/>
+                            <constraint firstItem="Nl5-PE-Y2j" firstAttribute="leading" secondItem="T0R-jV-Ezx" secondAttribute="leadingMargin" id="vQr-rP-6yL"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="DPN-Vn-hhu">
@@ -189,7 +151,6 @@
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
-                        <outlet property="autoButton" destination="ngi-fp-J1S" id="xKH-bf-FC9"/>
                         <outlet property="camView" destination="bK8-29-emF" id="bya-hY-MAs"/>
                         <outlet property="captureButton" destination="Kvu-hU-Hnm" id="hIk-E5-URY"/>
                         <outlet property="clearButton" destination="Nl5-PE-Y2j" id="Hc6-lT-HiQ"/>
@@ -199,7 +160,6 @@
                         <outlet property="imageLibrary" destination="e2z-qw-EvT" id="o1b-r1-niH"/>
                         <outlet property="imageNumber" destination="HOw-Jf-b0l" id="zLj-Jr-OOy"/>
                         <outlet property="imageView" destination="BMi-JC-msQ" id="EbM-9w-G6Z"/>
-                        <outlet property="manual" destination="TX4-ub-WjC" id="uTD-2c-nA4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="540-0g-bYO" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -396,7 +356,7 @@
                     </tableView>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <connections>
-                        <outlet property="autoSwitch" destination="wTJ-O8-4gn" id="41W-Zw-jxU"/>
+                        <outlet property="autoSwitch" destination="HKO-Cq-Ysr" id="x99-0e-Rpi"/>
                         <outlet property="ttsSpeed" destination="Odg-JL-JWl" id="7Uc-5x-S2h"/>
                     </connections>
                 </tableViewController>
@@ -522,6 +482,7 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H4w-y2-9nU">
                                 <rect key="frame" x="117" y="424" width="86" height="86"/>
+                                <accessibility key="accessibilityConfiguration" label="Pause"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="86" id="9zZ-7W-xuC"/>
                                     <constraint firstAttribute="width" constant="86" id="nRV-QT-h2T"/>
@@ -535,6 +496,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cAE-tC-d62">
                                 <rect key="frame" x="16" y="424" width="86" height="86"/>
+                                <accessibility key="accessibilityConfiguration" label="Play"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="86" id="ObX-pz-eYT"/>
                                     <constraint firstAttribute="width" constant="86" id="i9B-QZ-7Z5"/>
@@ -548,6 +510,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ADq-9C-bwZ">
                                 <rect key="frame" x="218" y="424" width="86" height="86"/>
+                                <accessibility key="accessibilityConfiguration" label="Restart From Page 1"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="86" id="v92-Cy-NOu"/>
                                     <constraint firstAttribute="width" constant="86" id="zQn-Ob-M3R"/>
@@ -640,7 +603,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="auto" width="300" height="100"/>
         <image name="backward.png" width="50" height="50"/>
         <image name="badge_light.png" width="114" height="36"/>
         <image name="cancel" width="163" height="162"/>
@@ -649,7 +611,6 @@
         <image name="forward.png" width="50" height="50"/>
         <image name="heart" width="219" height="156"/>
         <image name="imageLibrary" width="100" height="100"/>
-        <image name="manual" width="300" height="100"/>
         <image name="next" width="100" height="100"/>
         <image name="pause.png" width="256" height="256"/>
         <image name="play.png" width="256" height="256"/>

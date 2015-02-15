@@ -57,9 +57,6 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     
     // Initialize some stuff
     tempImages = [[NSMutableArray alloc] init];
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"IsAuto"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-
     
     // If no language selected, defualt is english
     [[NSUserDefaults standardUserDefaults] setObject:@"en-US" forKey:@"languageForTTS"];
@@ -71,10 +68,6 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     self.doneButton.alpha = 0.0;
     self.clearButton.alpha = 0.0;
     self.imageLibrary.alpha = 1.0;
-    
-    self.manual.alpha = 1.0;
-    self.autoButton.alpha = 0.0;
-    self.captureButton.alpha = 0.0;
     
     
     // Getting a new Access Token each time user opens the app
@@ -135,6 +128,8 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     [super viewDidLoad];
 
     self.imageView.image = [UIImage imageNamed:nil];
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 - (void)didReceiveMemoryWarning
 {
@@ -167,9 +162,6 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     self.clearButton.alpha = 0.0;
     self.imageLibrary.alpha = 1.0;
     
-    self.manual.alpha = 1.0;
-    self.autoButton.alpha = 0.0;
-    self.captureButton.alpha = 0.0;
     self.imageNumber.text = [NSString stringWithFormat:@"0"];
     
     
@@ -178,9 +170,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
         
         [UIView animateWithDuration:0.4 animations:^
          {
-             self.manual.alpha = 0.0;
              self.captureButton.alpha = 1.0;
-             self.autoButton.alpha = 1.0;
          }];
 
     } else if ([[NSUserDefaults standardUserDefaults] boolForKey:@"IsAuto"] == TRUE) {
@@ -190,11 +180,10 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
         }
         [UIView animateWithDuration:0.4 animations:^
          {
-             self.manual.alpha = 1.0;
              self.captureButton.alpha = 0.0;
-             self.autoButton.alpha = 0.0;
          }];
     }
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 /*---------------------------------

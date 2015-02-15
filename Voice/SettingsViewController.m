@@ -13,7 +13,7 @@
 @end
 
 @implementation SettingsViewController
-@synthesize ttsSpeed;
+@synthesize ttsSpeed, autoSwitch;
 
 - (void)viewDidLoad {
     
@@ -41,12 +41,12 @@
     }
     
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"IsAuto"] == FALSE) {
-        [self.autoSwitch setOn:NO animated:YES];
+        autoSwitch.on = NO;
     } else if ([[NSUserDefaults standardUserDefaults] boolForKey:@"IsAuto"] == TRUE) {
-        [self.autoSwitch setOn:YES animated:YES];
+        autoSwitch.on = YES;
     }
     
-    [self.autoSwitch addTarget:self
+    [                                                                                                                                                                                                                                                                                                                                                                       autoSwitch addTarget:self
                       action:@selector(stateChanged:) forControlEvents:UIControlEventValueChanged];
     
     
@@ -86,7 +86,7 @@
     NSLog(@"Row: %i", (int)indexPath.row);
     NSLog(@"Section: %i", (int)indexPath.section);
 
-    if(indexPath.section == 1) {
+    if(indexPath.section == 2) {
         if (intro == indexPath.row) {
             UIViewController *myNext = [self.storyboard instantiateViewControllerWithIdentifier:@"TutorialView"];
             [self.navigationController pushViewController:myNext animated:YES];
@@ -102,7 +102,7 @@
             [self presentViewController:activityVC animated:YES completion:nil];
         }
         
-    } else if (indexPath.section == 2){
+    } else if (indexPath.section == 3){
         if (feedback == indexPath.row) {
             MFMailComposeViewController *controller = [[MFMailComposeViewController alloc] init];
             controller.mailComposeDelegate = self;
