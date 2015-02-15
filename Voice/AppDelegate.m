@@ -55,8 +55,11 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
-    
     [mixpanel track:@"App Opened"];
+    
+    // Set image capture mode to manual
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"IsAuto"];
+
 
     // Override point for customization after application launch.
     return YES;

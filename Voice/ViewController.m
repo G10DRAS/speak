@@ -155,7 +155,6 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     
     // Initialize some stuff
     tempImages = [[NSMutableArray alloc] init];
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"IsAuto"];
     
     [[NSUserDefaults standardUserDefaults] synchronize];
     
@@ -172,7 +171,30 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     self.autoButton.alpha = 0.0;
     self.captureButton.alpha = 0.0;
     self.imageNumber.text = [NSString stringWithFormat:@"0"];
+    
+    
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"IsAuto"] == FALSE) {
+        switchToAuto = false;
+        
+        [UIView animateWithDuration:0.4 animations:^
+         {
+             self.manual.alpha = 0.0;
+             self.captureButton.alpha = 1.0;
+             self.autoButton.alpha = 1.0;
+         }];
 
+    } else if ([[NSUserDefaults standardUserDefaults] boolForKey:@"IsAuto"] == TRUE) {
+        // If not auto-cropping, make it auto-crop
+        if (!self.camView.isBorderDetectionEnabled) {
+            [self switchCropDuringTransition];
+        }
+        [UIView animateWithDuration:0.4 animations:^
+         {
+             self.manual.alpha = 1.0;
+             self.captureButton.alpha = 0.0;
+             self.autoButton.alpha = 0.0;
+         }];
+    }
 }
 
 /*---------------------------------

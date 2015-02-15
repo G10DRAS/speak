@@ -40,6 +40,16 @@
                 [ttsSpeed setSelectedSegmentIndex:2];
     }
     
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"IsAuto"] == FALSE) {
+        [self.autoSwitch setOn:NO animated:YES];
+    } else if ([[NSUserDefaults standardUserDefaults] boolForKey:@"IsAuto"] == TRUE) {
+        [self.autoSwitch setOn:YES animated:YES];
+    }
+    
+    [self.autoSwitch addTarget:self
+                      action:@selector(stateChanged:) forControlEvents:UIControlEventValueChanged];
+    
+    
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
@@ -55,6 +65,16 @@
     
     UIImage *image = [UIImage imageNamed:@"background"];
     [self.navigationController.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
+}
+
+- (void)stateChanged:(UISwitch *)switchState
+{
+    if ([switchState isOn]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"IsAuto"];
+    } else {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"IsAuto"];
+    }
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
