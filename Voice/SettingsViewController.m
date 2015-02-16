@@ -41,15 +41,11 @@
     }
     
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"IsAuto"] == FALSE) {
-        autoSwitch.on = NO;
+        [autoSwitch setOn:NO animated:YES];
     } else if ([[NSUserDefaults standardUserDefaults] boolForKey:@"IsAuto"] == TRUE) {
-        autoSwitch.on = YES;
+        [autoSwitch setOn:YES animated:YES];
     }
-    
-    [                                                                                                                                                                                                                                                                                                                                                                       autoSwitch addTarget:self
-                      action:@selector(stateChanged:) forControlEvents:UIControlEventValueChanged];
-    
-    
+
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
@@ -67,9 +63,8 @@
     [self.navigationController.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
 }
 
-- (void)stateChanged:(UISwitch *)switchState
-{
-    if ([switchState isOn]) {
+- (IBAction)toggled:(id)sender {
+    if (autoSwitch.on) {
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"IsAuto"];
     } else {
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"IsAuto"];

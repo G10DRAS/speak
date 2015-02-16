@@ -226,22 +226,26 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Mode" id="evQ-KB-xaZ">
+                            <tableViewSection headerTitle="Mode" id="RQt-Jv-Jf4">
                                 <cells>
-                                    <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Credits" rowHeight="65" id="T1d-ww-J9L">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="75" id="iL5-Y1-c7c">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="T1d-ww-J9L" id="wTJ-O8-4gn">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="iL5-Y1-c7c" id="raV-sF-l17">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="gVA-e6-NwR">
+                                                    <rect key="frame" x="263" y="21" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="toggled:" destination="XRA-GO-3c8" eventType="valueChanged" id="7q0-M6-hw8"/>
+                                                    </connections>
+                                                </switch>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" fixedFrame="YES" text="Automatic Mode" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U16-ou-YHN">
-                                                    <rect key="frame" x="22" y="1" width="166" height="64"/>
+                                                    <rect key="frame" x="18" y="5" width="166" height="64"/>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
                                                     <color key="textColor" red="0.1529411765" green="0.59215686270000001" blue="0.73725490199999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="HKO-Cq-Ysr">
-                                                    <rect key="frame" x="222" y="17" width="51" height="31"/>
-                                                </switch>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -356,7 +360,7 @@
                     </tableView>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <connections>
-                        <outlet property="autoSwitch" destination="HKO-Cq-Ysr" id="x99-0e-Rpi"/>
+                        <outlet property="autoSwitch" destination="gVA-e6-NwR" id="PcM-fR-mtb"/>
                         <outlet property="ttsSpeed" destination="Odg-JL-JWl" id="7Uc-5x-S2h"/>
                     </connections>
                 </tableViewController>

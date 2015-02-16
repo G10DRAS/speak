@@ -138,6 +138,9 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 }
 - (void)viewDidAppear:(BOOL)animated
 {
+    // Auto or Manual
+    [self autoOrManual];
+    
     // Start Cam
     [self.camView setupCameraView];
     [self.camView setEnableBorderDetection:YES];
@@ -164,25 +167,6 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     
     self.imageNumber.text = [NSString stringWithFormat:@"0"];
     
-    
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"IsAuto"] == FALSE) {
-        switchToAuto = false;
-        
-        [UIView animateWithDuration:0.4 animations:^
-         {
-             self.captureButton.alpha = 1.0;
-         }];
-
-    } else if ([[NSUserDefaults standardUserDefaults] boolForKey:@"IsAuto"] == TRUE) {
-        // If not auto-cropping, make it auto-crop
-        if (!self.camView.isBorderDetectionEnabled) {
-            [self switchCropDuringTransition];
-        }
-        [UIView animateWithDuration:0.4 animations:^
-         {
-             self.captureButton.alpha = 0.0;
-         }];
-    }
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -435,34 +419,23 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
          NSLog(@"%i", (int)[[NSUserDefaults standardUserDefaults] arrayForKey:@"TemporaryImages"].count); // For testing
     }];
 }
-- (IBAction)manualSelected:(id)sender
-{
-    switchToAuto = false;
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"IsAuto"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    if (self.autoButton.alpha != 1.0) {
+-(void) autoOrManual {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"IsAuto"] == FALSE) {
+        switchToAuto = false;
+        
         [UIView animateWithDuration:0.4 animations:^
          {
-             self.manual.alpha = 0.0;
              self.captureButton.alpha = 1.0;
-             self.autoButton.alpha = 1.0;
          }];
-    }
-}
-- (IBAction)autoSelected:(id)sender
-{
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"IsAuto"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    // If not auto-cropping, make it auto-crop
-    if (!self.camView.isBorderDetectionEnabled) {
-        [self switchCropDuringTransition];
-    }
-    if (self.manual.alpha != 1.0) {
+        
+    } else if ([[NSUserDefaults standardUserDefaults] boolForKey:@"IsAuto"] == TRUE) {
+        // If not auto-cropping, make it auto-crop
+        if (!self.camView.isBorderDetectionEnabled) {
+            [self switchCropDuringTransition];
+        }
         [UIView animateWithDuration:0.4 animations:^
          {
-             self.manual.alpha = 1.0;
              self.captureButton.alpha = 0.0;
-             self.autoButton.alpha = 0.0;
          }];
     }
 }

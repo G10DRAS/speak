@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *ttsSpeed;
 - (IBAction)indexChanged:(UISegmentedControl *)sender;
 
-@property (strong, nonatomic) IBOutlet UISwitch *autoSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *autoSwitch;
+- (IBAction)toggled:(UISwitch *)sender;
 
 @end
