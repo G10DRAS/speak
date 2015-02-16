@@ -14,7 +14,9 @@ typedef NS_ENUM(NSInteger,IPDFCameraViewType)
     IPDFCameraViewTypeNormal
 };
 
-@interface IPDFCameraViewController : UIView
+@interface IPDFCameraViewController : UIView {
+    BOOL camStopped;
+}
 
 - (void)setupCameraView;
 

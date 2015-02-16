@@ -135,6 +135,7 @@
     }
     
     [session commitConfiguration];
+    camStopped = YES;
 }
 
 - (void)setCameraViewType:(IPDFCameraViewType)cameraViewType
@@ -245,17 +246,21 @@
 
 - (void)start
 {
-    _isStopped = NO;
-    
-    [self.captureSession startRunning];
-    
-    _borderDetectTimeKeeper = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(enableBorderDetectFrame) userInfo:nil repeats:YES];
-    
-    [self hideGLKView:NO completion:nil];
+    if (camStopped == YES) {
+        _isStopped = NO;
+        
+        [self.captureSession startRunning];
+        
+        _borderDetectTimeKeeper = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(enableBorderDetectFrame) userInfo:nil repeats:YES];
+        
+        [self hideGLKView:NO completion:nil];
+        camStopped = NO;
+    }
 }
 
 - (void)stop
 {
+    if (camStopped == NO) {
     _isStopped = YES;
     
     [self.captureSession stopRunning];
@@ -263,6 +268,8 @@
     [_borderDetectTimeKeeper invalidate];
     
     [self hideGLKView:YES completion:nil];
+    camStopped = YES;
+    }
 }
 
 - (void)setEnableTorch:(BOOL)enableTorch
