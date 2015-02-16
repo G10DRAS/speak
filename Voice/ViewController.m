@@ -115,6 +115,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [rightButton setImage:[UIImage imageNamed:@"flash"] forState:UIControlStateNormal];
     rightButton.frame = CGRectMake(0, 0, 30, 30);
+    
     leftButton1.accessibilityHint = @"Double-tap to go toggle the camera's flash";
     [rightButton addTarget:self action:@selector(torchToggle) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
@@ -359,6 +360,10 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
         BOOL enable = !self.camView.isBorderDetectionEnabled;
         [self changeButton:self.cropButton targetTitle:(enable) ? @"CROP On" : @"CROP Off" toStateEnabled:enable];
         self.camView.enableBorderDetection = enable;
+        // Set the accessibility text for the crop button
+        self.cropButton.accessibilityLabel = [NSString stringWithFormat:@"%@", self.cropButton.titleLabel.text];
+        self.cropButton.accessibilityHint = @"Double tap to turn off or on";
+        
     } else {
         [self.camView stop];
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Can't turn off Crop"
@@ -372,6 +377,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 -(void)switchCropDuringTransition {
         BOOL enable = !self.camView.isBorderDetectionEnabled;
         [self changeButton:self.cropButton targetTitle:(enable) ? @"CROP On" : @"CROP Off" toStateEnabled:enable];
+    
         self.camView.enableBorderDetection = enable;
 }
 -(IBAction)switchFilters:(id)sender {
