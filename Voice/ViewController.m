@@ -50,13 +50,6 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 //    self.languagePicker.dataSource = self;
 //    self.languagePicker.delegate = self;
     
-    // Clear some arrays
-//    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ImagesArray"];
-//    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ImageText"];
-//    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"TemporaryImages"];
-    
-    // Initialize some stuff
-    tempImages = [[NSMutableArray alloc] init];
     
     // If no language selected, defualt is english
     [[NSUserDefaults standardUserDefaults] setObject:@"en-US" forKey:@"languageForTTS"];
@@ -127,6 +120,17 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     self.navigationController.navigationBar.translucent = YES;
     
     [super viewDidLoad];
+    
+    // Clear some arrays
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ImagesArray"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ImageText"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"TemporaryImages"];
+    
+    // Initialize some stuff
+    tempImages = [[NSMutableArray alloc] init];
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
 
     self.imageView.image = [UIImage imageNamed:nil];
     
@@ -146,17 +150,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     [self.camView setupCameraView];
     [self.camView setEnableBorderDetection:YES];
     [self.camView start];
-    
-    // Clear some arrays
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ImagesArray"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ImageText"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"TemporaryImages"];
-    
-    // Initialize some stuff
-    tempImages = [[NSMutableArray alloc] init];
-    
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
+        
     // Timer
     labelUpdaterTimer = [NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(updateLabel) userInfo:nil repeats:YES];
     
@@ -448,7 +442,6 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     }
 }
 - (void) readyToRecognize { // done button clicked
-    [self prepareToSwitchViews];
 
     NSMutableArray *imgs = [[NSMutableArray alloc] initWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"TemporaryImages"]];
 //    for (int i = 0; i < [tempImages count]; i++) {
@@ -516,12 +509,10 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 // Image Picker Delegate Methods
 //
 //
-
-// If mult. images picked from photos library
 - (void)elcImagePickerController:(ELCImagePickerController *)picker didFinishPickingMediaWithInfo:(NSArray *)info
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
     [self prepareToSwitchViews];
+    [self dismissViewControllerAnimated:YES completion:nil];
     
     NSMutableArray *images = [NSMutableArray arrayWithCapacity:[info count]];
     for (NSDictionary *dict in info) {
@@ -551,36 +542,23 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
         [imgs addObject:imageData];
     }
     [[NSUserDefaults standardUserDefaults] setObject:imgs forKey:@"ImagesArray"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-
-   tempImages = [[NSMutableArray alloc]
-              initWithArray:[[NSUserDefaults standardUserDefaults]
-                             objectForKey:@"ImagesArray"]];
     
-    if ([tempImages count] != 0) {
-        self.imageView.image = [UIImage imageWithData:[tempImages objectAtIndex:0]];
-        
-        // Scale the image
-        UIImage *myScaledImage = [self imageWithImage:self.imageView.image scaledToSize:CGSizeMake(self.imageView.image.size.width * .3, self.imageView.image.size.height * .3)];
-        self.imageView.image = myScaledImage;
-        
-        // Create path for image.
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        imagePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"image.png"];
-        
-        // Save image to disk.
-        [UIImagePNGRepresentation(self.imageView.image) writeToFile:imagePath atomically:YES];
-        NSLog(@"First Image's Path: %@", imagePath);
-        
-        // Start Processing
-        [self recognizePhoto];
-    } else {
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ImagesArray"];
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"TemporaryImages"];
-        [tempImages removeAllObjects];
-        [images removeAllObjects];
-        [imgs removeAllObjects];
-    }
+    self.imageView.image = [images objectAtIndex:0];
+    
+    // Scale the image
+    UIImage *myScaledImage = [self imageWithImage:self.imageView.image scaledToSize:CGSizeMake(self.imageView.image.size.width * .4166, self.imageView.image.size.height * .4166)]; // .4166 is also 5/12
+    self.imageView.image = myScaledImage;
+    
+    // Create path for image.
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    imagePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"image.png"];
+    
+    // Save image to disk.
+    [UIImagePNGRepresentation(self.imageView.image) writeToFile:imagePath atomically:YES];
+    NSLog(@"First Image's Path: %@", imagePath);
+    
+    // Start Processing
+    [self recognizePhoto];
 }
 
 - (void)elcImagePickerControllerDidCancel:(ELCImagePickerController *)picker
@@ -796,18 +774,14 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 
 -(void)startLoading
 {
-    loading = [[UIAlertView alloc]
-               initWithTitle:@"Processing Image..."
-               message:nil
-               delegate:self
-               cancelButtonTitle:nil
-               otherButtonTitles:nil];
+    [self.camView stop];
+    loading = [[UIAlertView alloc] initWithTitle:@"Processing Image..." message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
     [loading show];
     
     [mixpanel timeEvent:@"Image Upload"];
-    
 }
 -(void)stopLoading {
+    [self.camView start];
     [mixpanel track:@"Image Upload"];
 
     [loading dismissWithClickedButtonIndex:0 animated:YES];
@@ -834,27 +808,6 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     [self.camView stop];
     [labelUpdaterTimer invalidate];
 }
-
-//-(void) reset {
-//    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"TemporaryImages"];
-//    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ImagesArray"];
-//    [[NSUserDefaults standardUserDefaults] synchronize];
-//
-//    [tempImages removeAllObjects];
-//    
-//    // Reset the UI
-//    if (self.imageLibrary.alpha != 1.0) {
-//        [UIView animateWithDuration:0.4 animations:^
-//         {
-//             self.imageNumber.alpha = 0.0;
-//             self.doneButton.alpha = 0.0;
-//             self.clearButton.alpha = 0.0;
-//             self.imageLibrary.alpha = 1.0;
-//         }];
-//    }
-//    
-//    [self clearTmpDirectory];
-//}
 
 -(void) reset {
     [self.camView stop];
