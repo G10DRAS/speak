@@ -755,15 +755,13 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 -(void) moveToTalkView {
     [mixpanel track:@"Image Converted to Text"];
     [self prepareToSwitchViews];
-    
-    TalkViewController *talk = [[TalkViewController alloc] init];
-    [self.navigationController pushViewController:talk animated:YES];
+    UIViewController *myNext = [self.storyboard instantiateViewControllerWithIdentifier:@"TalkView"];
+    [self.navigationController pushViewController:myNext animated:YES];
 }
 -(void) moveToSettings {
     [self prepareToSwitchViews];
-    
-    SettingsViewController *settings = [[SettingsViewController alloc] init];
-    [self.navigationController pushViewController:settings animated:YES];
+    UIViewController *myNext = [self.storyboard instantiateViewControllerWithIdentifier:@"SettingsView"];
+    [self.navigationController pushViewController:myNext animated:YES];
 }
 /*---------------------------------
  EXTRA STUFF

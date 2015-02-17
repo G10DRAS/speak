@@ -45,13 +45,7 @@
     } else if ([[NSUserDefaults standardUserDefaults] boolForKey:@"IsAuto"] == TRUE) {
         [autoSwitch setOn:YES animated:YES];
     }
-
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
-
-}
-
--(void)viewDidAppear:(BOOL)animated {
+    
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
                                                   forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
@@ -61,6 +55,14 @@
     
     UIImage *image = [UIImage imageNamed:@"background"];
     [self.navigationController.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
+
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    
 }
 
 - (IBAction)toggled:(id)sender {

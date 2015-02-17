@@ -23,6 +23,9 @@
     [Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];
 
     if ([[NSUserDefaults standardUserDefaults] integerForKey:@"isFirstTimeInt"] == 20) {
+        // Set image capture mode to manual
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"IsAuto"];
+
         ViewController *mainView = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"MainView"];
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:mainView];
         self.window.rootViewController = navController;
@@ -51,15 +54,11 @@
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ImagesArray"];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ImageText"];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"accessToken"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"speedForTTS"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     [mixpanel track:@"App Opened"];
     
-    // Set image capture mode to manual
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"IsAuto"];
-
 
     // Override point for customization after application launch.
     return YES;
