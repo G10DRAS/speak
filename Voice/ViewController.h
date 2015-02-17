@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "TalkViewController.h"
+#import "SettingsViewController.h"
 #import "TutorialViewController.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "ELCImagePickerHeader.h"
@@ -16,6 +17,7 @@
 #import "Mixpanel.h"
 #import "IPDFCameraViewController.h"
 #import <AVFoundation/AVFoundation.h>
+
 
 static NSString* hardCodedToken;
 static NSString* theOCRText;
@@ -28,6 +30,9 @@ static NSString* theOCRText;
     NSMutableData *receivedData;
     BOOL isAuthenticating;
     BOOL switchToAuto;
+    
+    BOOL willSpeak;
+
     NSString *imagePath;
     NSString *imagePathSize;
     NSString *imageFileID;

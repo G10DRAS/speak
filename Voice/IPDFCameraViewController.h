@@ -16,13 +16,14 @@ typedef NS_ENUM(NSInteger,IPDFCameraViewType)
 };
 
 @interface IPDFCameraViewController : UIView <AVSpeechSynthesizerDelegate> {
-    BOOL camStopped;
 }
 
 - (void)setupCameraView;
 
 - (void)start;
 - (void)stop;
+
+@property BOOL camStopped;
 
 @property (nonatomic, strong) AVSpeechSynthesizer *synthesizer;
 

@@ -44,6 +44,8 @@
     NSMutableArray *imageArray;
 }
 
+@synthesize camStopped;
+
 - (void)awakeFromNib
 {
     [super awakeFromNib];
@@ -264,7 +266,7 @@
 
 - (void)start
 {
-    if (camStopped == YES) {
+    if (camStopped) {
         _isStopped = NO;
         
         [self.captureSession startRunning];
@@ -278,7 +280,6 @@
 
 - (void)stop
 {
-    if (camStopped == NO) {
     _isStopped = YES;
     
     [self.captureSession stopRunning];
@@ -287,7 +288,6 @@
     
     [self hideGLKView:YES completion:nil];
     camStopped = YES;
-    }
 }
 
 - (void)setEnableTorch:(BOOL)enableTorch

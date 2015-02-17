@@ -36,14 +36,17 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 
 //    self.imageView.image = nil;
     
-    // Get the Camera Ready
+    // Start Cam
     [self.camView setupCameraView];
     [self.camView setEnableBorderDetection:YES];
+    [self.camView start];
     
     // Get the iphone's screen height and width
     screenRect = [[UIScreen mainScreen] bounds];
     screenWidth = screenRect.size.width;
     screenHeight = screenRect.size.height;
+    
+    willSpeak = NO;
 
     // Initialize Langauges for LanguagePicker
 //    _languagePickerData = @[@"Arabic (Saudi Arabia)", @"Chinese (China)", @"Chinese (Hong Kong)", @"Chinese (Taiwan)", @"Czech (Czech Republic)", @"Danish (Denmark)", @"Dutch (Belgium)", @"Dutch (Netherlands)", @"English (Australia)", @"English (Ireland)", @"English (South Africa)", @"English (UK)", @"English (USA)", @"Finnish (Finland)", @"French (Canada)", @"French (France)", @"German (Germany)", @"Greek (Greece)", @"Hindi (India)", @"Hungarian (Hungary)", @"Indonesian (Indonesia)", @"Italian (Italy)", @"Japanese (Japan)", @"Korean (South Korea)", @"Norwegian (Norway)", @"Polish (Poland)", @"Portuguese (Brazil)", @"Portuguese (Portugal)", @"Romanian (Romania)", @"Russian (Russia)", @"Slovak (Slovakia)", @"Spanish (Mexico)", @"Spanish (Spain)", @"Swedish (Sweden)", @"Thai (Thailand)", @"Turkish (Turkey)"];
@@ -146,11 +149,6 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     // Auto or Manual
     [self autoOrManual];
     
-    // Start Cam
-    [self.camView setupCameraView];
-    [self.camView setEnableBorderDetection:YES];
-    [self.camView start];
-        
     // Timer
     labelUpdaterTimer = [NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(updateLabel) userInfo:nil repeats:YES];
     
@@ -163,6 +161,10 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     self.imageNumber.text = [NSString stringWithFormat:@"0"];
     
     [[NSUserDefaults standardUserDefaults] synchronize];
+}
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.camView stop];
 }
 
 /*---------------------------------
@@ -753,13 +755,15 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 -(void) moveToTalkView {
     [mixpanel track:@"Image Converted to Text"];
     [self prepareToSwitchViews];
-    UIViewController *myNext = [self.storyboard instantiateViewControllerWithIdentifier:@"TalkView"];
-    [self.navigationController pushViewController:myNext animated:YES];
+    
+    TalkViewController *talk = [[TalkViewController alloc] init];
+    [self.navigationController pushViewController:talk animated:YES];
 }
 -(void) moveToSettings {
     [self prepareToSwitchViews];
-    UIViewController *myNext = [self.storyboard instantiateViewControllerWithIdentifier:@"SettingsView"];
-    [self.navigationController pushViewController:myNext animated:YES];
+    
+    SettingsViewController *settings = [[SettingsViewController alloc] init];
+    [self.navigationController pushViewController:settings animated:YES];
 }
 /*---------------------------------
  EXTRA STUFF
@@ -768,20 +772,23 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
     // the user clicked OK
     if (buttonIndex == 0) {
-        [self.camView start];
+        if (!willSpeak) {
+            [self.camView start];
+        }
     }
 }
 
 -(void)startLoading
 {
     [self.camView stop];
+    
+    willSpeak = YES;
     loading = [[UIAlertView alloc] initWithTitle:@"Processing Image..." message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
     [loading show];
     
     [mixpanel timeEvent:@"Image Upload"];
 }
 -(void)stopLoading {
-    [self.camView start];
     [mixpanel track:@"Image Upload"];
 
     [loading dismissWithClickedButtonIndex:0 animated:YES];
@@ -829,8 +836,6 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     // Set the done button and the imageNumber to invisible initially, imageLibrary should be yes
     [UIView animateWithDuration:0.4 animations:^
      {
-         [self.camView start];
-
          self.imageNumber.alpha = 0.0;
          self.doneButton.alpha = 0.0;
          self.clearButton.alpha = 0.0;

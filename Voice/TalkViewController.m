@@ -39,6 +39,7 @@
     imageArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"ImagesArray"]];
     [speakArray addObject:[[NSUserDefaults standardUserDefaults] objectForKey:@"ImageText"]];
     
+    
     self.scrollView.delegate = self;
     [self.view addSubview:self.scrollView];
     
