@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+@import AVFoundation;
 
 typedef NS_ENUM(NSInteger,IPDFCameraViewType)
 {
@@ -14,7 +15,7 @@ typedef NS_ENUM(NSInteger,IPDFCameraViewType)
     IPDFCameraViewTypeNormal
 };
 
-@interface IPDFCameraViewController : UIView {
+@interface IPDFCameraViewController : UIView <AVSpeechSynthesizerDelegate> {
     BOOL camStopped;
 }
 
@@ -22,6 +23,8 @@ typedef NS_ENUM(NSInteger,IPDFCameraViewType)
 
 - (void)start;
 - (void)stop;
+
+@property (nonatomic, strong) AVSpeechSynthesizer *synthesizer;
 
 @property (nonatomic,assign,getter=isBorderDetectionEnabled) BOOL enableBorderDetection;
 @property (nonatomic,assign,getter=isTorchEnabled) BOOL enableTorch;

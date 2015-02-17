@@ -194,6 +194,9 @@
             if ([[NSUserDefaults standardUserDefaults] boolForKey:@"IsAuto"] == TRUE) {
                 [self autoCaptureImage];
             }
+            
+            [self giveFieldOfViewReport];
+
         }
         else
         {
@@ -209,8 +212,21 @@
         [_glkView setNeedsDisplay];
     }
 }
+-(void) giveFieldOfViewReport{
+    if (_imageDetectionConfidence == 25) {
+        AVSpeechUtterance* utter = [[AVSpeechUtterance alloc] initWithString:@"4 corners detected."];
+        utter.voice = [AVSpeechSynthesisVoice voiceWithLanguage:@"en-US"];
+        [utter setRate:0.2f];
+        if (!self.synthesizer) {
+            self.synthesizer = [AVSpeechSynthesizer new];
+        }
+        self.synthesizer.delegate = self;
+        [self.synthesizer speakUtterance:utter];
+    }
+}
+
 -(void) autoCaptureImage{
-    if (_imageDetectionConfidence == 40) {
+    if (_imageDetectionConfidence == 50) {
         [self captureImageWithCompletionHander:^(id data)
          {
              UIImage *image = ([data isKindOfClass:[NSData class]]) ? [UIImage imageWithData:data] : data;

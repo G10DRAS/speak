@@ -357,12 +357,14 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 }
 -(IBAction)cropToggle:(id)sender {
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"IsAuto"] == FALSE) {
+        
+        // Set the accessibility text for the crop button
+        self.cropButton.accessibilityLabel = [NSString stringWithFormat:@"%@", self.cropButton.titleLabel.text];
+        self.cropButton.accessibilityHint = @"Double tap to toggle";
+
         BOOL enable = !self.camView.isBorderDetectionEnabled;
         [self changeButton:self.cropButton targetTitle:(enable) ? @"CROP On" : @"CROP Off" toStateEnabled:enable];
         self.camView.enableBorderDetection = enable;
-        // Set the accessibility text for the crop button
-        self.cropButton.accessibilityLabel = [NSString stringWithFormat:@"%@", self.cropButton.titleLabel.text];
-        self.cropButton.accessibilityHint = @"Double tap to turn off or on";
         
     } else {
         [self.camView stop];
