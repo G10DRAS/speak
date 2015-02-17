@@ -359,7 +359,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"IsAuto"] == FALSE) {
         
         // Set the accessibility text for the crop button
-        self.cropButton.accessibilityLabel = [NSString stringWithFormat:@"%@", self.cropButton.titleLabel.text];
+        self.cropButton.accessibilityLabel = [NSString stringWithFormat:@"Crop %s", !self.camView.isBorderDetectionEnabled ? "On" : "Off"];
         self.cropButton.accessibilityHint = @"Double tap to toggle";
 
         BOOL enable = !self.camView.isBorderDetectionEnabled;
