@@ -26,13 +26,16 @@ static NSString* theOCRText;
 
 @class TalkViewController;
 
-@interface ViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIAlertViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate, ELCImagePickerControllerDelegate, UIPickerViewDataSource> {
+@interface ViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIAlertViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate, ELCImagePickerControllerDelegate> { // UIPickerViewDataSource
     NSMutableData *receivedData;
     BOOL isAuthenticating;
     BOOL switchToAuto;
     
     BOOL willSpeak;
-
+    
+    // FOR SETTINGS BUTTON
+    UIButton *rightButton;
+    
     NSString *imagePath;
     NSString *imagePathSize;
     NSString *imageFileID;
@@ -75,8 +78,7 @@ static NSString* theOCRText;
 @property (weak, nonatomic) IBOutlet UIButton *captureButton;
 @property (weak, nonatomic) IBOutlet UIButton *cropButton;
 - (IBAction)captureClicked:(id)sender;
-- (IBAction)manualSelected:(id)sender;
-- (IBAction)autoSelected:(id)sender;
+
 
 - (IBAction)cropToggle:(id)sender;
 - (IBAction)switchFilters:(id)sender;

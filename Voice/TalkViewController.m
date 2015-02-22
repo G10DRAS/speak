@@ -39,6 +39,9 @@
     imageArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"ImagesArray"]];
     [speakArray addObject:[[NSUserDefaults standardUserDefaults] objectForKey:@"ImageText"]];
     
+    speechPaused = NO;
+    imageNumber = 1;
+    speechNumber = 1;
     
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"speedForTTS"] == nil) {
         [[NSUserDefaults standardUserDefaults] setFloat:0.1f forKey:@"speedForTTS"];
@@ -110,11 +113,6 @@
         [self becomeFirstResponder];
     }
 
-    
-    speechPaused = NO;
-    imageNumber = 1;
-    speechNumber = 1;
-    
     // Some UI stuff
     self.view.backgroundColor = [UIColor clearColor];
     UIImage *myImage = [UIImage imageNamed:@"background"];

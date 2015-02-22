@@ -245,8 +245,6 @@
              dispatch_after(countdownTime, dispatch_get_main_queue(), ^(void){
                  _imageDetectionConfidence = 0.0f;
              });
-             // just an extra precaution so the camView is not accidentally off
-             [self start];
          }];
     }
 }

@@ -36,18 +36,11 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 
 //    self.imageView.image = nil;
     
-    // Start Cam
-    [self.camView setupCameraView];
-    [self.camView setEnableBorderDetection:YES];
-    [self.camView start];
-    
     // Get the iphone's screen height and width
     screenRect = [[UIScreen mainScreen] bounds];
     screenWidth = screenRect.size.width;
     screenHeight = screenRect.size.height;
     
-    willSpeak = NO;
-
     // Initialize Langauges for LanguagePicker
 //    _languagePickerData = @[@"Arabic (Saudi Arabia)", @"Chinese (China)", @"Chinese (Hong Kong)", @"Chinese (Taiwan)", @"Czech (Czech Republic)", @"Danish (Denmark)", @"Dutch (Belgium)", @"Dutch (Netherlands)", @"English (Australia)", @"English (Ireland)", @"English (South Africa)", @"English (UK)", @"English (USA)", @"Finnish (Finland)", @"French (Canada)", @"French (France)", @"German (Germany)", @"Greek (Greece)", @"Hindi (India)", @"Hungarian (Hungary)", @"Indonesian (Indonesia)", @"Italian (Italy)", @"Japanese (Japan)", @"Korean (South Korea)", @"Norwegian (Norway)", @"Polish (Poland)", @"Portuguese (Brazil)", @"Portuguese (Portugal)", @"Romanian (Romania)", @"Russian (Russia)", @"Slovak (Slovakia)", @"Spanish (Mexico)", @"Spanish (Spain)", @"Swedish (Sweden)", @"Thai (Thailand)", @"Turkish (Turkey)"];
 //    self.languagePicker.dataSource = self;
@@ -108,11 +101,11 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     [leftButton1 addTarget:self action:@selector(moveToSettings) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton1];
     
-    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [rightButton setImage:[UIImage imageNamed:@"flash"] forState:UIControlStateNormal];
     rightButton.frame = CGRectMake(0, 0, 30, 30);
     
-    leftButton1.accessibilityHint = @"Double-tap to go toggle the camera's flash";
+    rightButton.accessibilityLabel = [NSString stringWithFormat:@"Flash %s", self.camView.isTorchEnabled ? "On" : "Off"];
     [rightButton addTarget:self action:@selector(torchToggle) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     
@@ -146,6 +139,13 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 }
 - (void)viewDidAppear:(BOOL)animated
 {
+    willSpeak = NO;
+    
+    // Start Cam
+    [self.camView setupCameraView];
+    [self.camView setEnableBorderDetection:YES];
+    [self.camView start];
+    
     // Auto or Manual
     [self autoOrManual];
     
@@ -165,6 +165,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self.camView stop];
+    
 }
 
 /*---------------------------------
@@ -350,6 +351,9 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 - (void)torchToggle {
     BOOL enable = !self.camView.isTorchEnabled;
     self.camView.enableTorch = enable;
+    
+    rightButton.accessibilityLabel = [NSString stringWithFormat:@"Flash %s", self.camView.isTorchEnabled ? "On" : "Off"];
+
 }
 -(IBAction)cropToggle:(id)sender {
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"IsAuto"] == FALSE) {
@@ -810,12 +814,12 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 }
 
 -(void) prepareToSwitchViews {
-    [self.camView stop];
     [labelUpdaterTimer invalidate];
 }
 
 -(void) reset {
     [self.camView stop];
+    
     [labelUpdaterTimer invalidate];
     
     // Start Cam
