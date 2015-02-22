@@ -40,6 +40,20 @@
     [speakArray addObject:[[NSUserDefaults standardUserDefaults] objectForKey:@"ImageText"]];
     
     
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"speedForTTS"] == nil) {
+        [[NSUserDefaults standardUserDefaults] setFloat:0.1f forKey:@"speedForTTS"];
+    }
+    
+    ttsSpeed = [[NSUserDefaults standardUserDefaults] floatForKey:@"speedForTTS"];
+    
+    [self startTalking];
+
+    
+    
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    
+    
     self.scrollView.delegate = self;
     [self.view addSubview:self.scrollView];
     
@@ -48,23 +62,11 @@
     
     NSMutableArray *images = [NSMutableArray arrayWithCapacity:[imageArray count]];
     
-//    for (int i = 0; i < [imageArray count]; i++) {
-//        UIImage* image = [UIImage imageWithData:[imageArray objectAtIndex:i]];
-//        [images addObject:image];
-//        
-//        UIImageView *imageview = [[UIImageView alloc] initWithImage:image];
-//        [imageview setContentMode:UIViewContentModeScaleAspectFit];
-//        imageview.frame = workingFrame;
-//        
-//        [self.scrollView addSubview: imageview];
-//        workingFrame.origin.x = workingFrame.origin.x + workingFrame.size.width;
-//    }
-    
     [self.scrollView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-
+    
     CGRect workingFrame = CGRectMake (0,0,self.scrollView.frame.size.width,self.scrollView.frame.size.height);
     workingFrame.origin.x = 0;
-
+    
     
     for (int i = 0; i < [imageArray count]; i++) {
         UIImage *image = [UIImage imageWithData:[imageArray objectAtIndex:i]];
@@ -72,14 +74,14 @@
         // If the image is in Landscape
         UIImage *hi;
         if (image.size.width > image.size.height) {
-
+            
             hi = [self imageByRotatingImage:image fromImageOrientation:UIImageOrientationRight];
             NSLog(@"Image is landscape");
         } else {
             hi = [UIImage imageWithData:[imageArray objectAtIndex:i]];
             NSLog(@"Image is portrait");
         }
-
+        
         [images addObject:hi];
         
         UIImageView *imageview = [[UIImageView alloc] initWithImage:hi];
@@ -94,22 +96,13 @@
         } else {
             NSLog(@"Image is now portrait");
         }
+        
+    }
 
-    }
-    
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"speedForTTS"] == nil) {
-        [[NSUserDefaults standardUserDefaults] setFloat:0.1f forKey:@"speedForTTS"];
-    }
-    
-    ttsSpeed = [[NSUserDefaults standardUserDefaults] floatForKey:@"speedForTTS"];
     
     [_scrollView setPagingEnabled:YES];
     [_scrollView setContentSize:CGSizeMake(workingFrame.origin.x, workingFrame.size.height)];
-    
-    
-    
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
     
     
     [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
@@ -148,15 +141,28 @@
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = YES;
 
-//    compressingImage = YES;
-    
-//    NSLog(@"speakArray: %@", speakArray);
-
-    [self startTalking];
     self.pageLabel.text = [NSString stringWithFormat:@"Page %i", speechNumber];
     
     NSLog(@"imageArray Count: %d", (int)[imageArray count]);
 }
+
+
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    if ([imageArray count] > imageNumber) {
+        [self fetchTextFromImage:[imageArray objectAtIndex:imageNumber]];
+    }
+    
+}
+
+
+
+
+
+
+
 
 
 // ScrollView
@@ -185,15 +191,6 @@
     }
     [self.scrollView setPagingEnabled:YES];
     [self.scrollView setContentSize:CGSizeMake(workingFrame.origin.x, workingFrame.size.height)];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    if ([imageArray count] > imageNumber) {
-        [self fetchTextFromImage:[imageArray objectAtIndex:imageNumber]];
-    }
-
 }
 
 - (void) startTalking {
