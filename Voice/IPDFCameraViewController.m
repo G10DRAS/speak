@@ -14,6 +14,7 @@
 #import <CoreImage/CoreImage.h>
 #import <ImageIO/ImageIO.h>
 #import <GLKit/GLKit.h>
+#import "ViewController.h"
 
 @interface IPDFCameraViewController () <AVCaptureVideoDataOutputSampleBufferDelegate>
 
@@ -92,6 +93,10 @@
 - (void)setupCameraView
 {
     [self createGLKView];
+    
+//    ViewController *mainVC = [[ViewController alloc] init];
+    [self performSelectorInBackground:@selector(runPercentageLoop) withObject:nil];
+    
     
     NSArray *possibleDevices = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
     AVCaptureDevice *device = [possibleDevices firstObject];
@@ -184,13 +189,13 @@
         
         if (_borderDetectLastRectangleFeature)
         {
-            if (_imageDetectionConfidence > 25 && _imageDetectionConfidence < 30) {
+            if (_imageDetectionConfidence > 25.0f && _imageDetectionConfidence < 30.0f) {
 
             image = [self drawHighlightOverlayForPoints:image topLeft:_borderDetectLastRectangleFeature.topLeft topRight:_borderDetectLastRectangleFeature.topRight bottomLeft:_borderDetectLastRectangleFeature.bottomLeft bottomRight:_borderDetectLastRectangleFeature.bottomRight];
                 
             }
             
-            _imageDetectionConfidence += .5;
+            _imageDetectionConfidence += .5f;
             
             // For auto-capturing the images
             imageArray = [[NSMutableArray alloc]
@@ -220,7 +225,7 @@
     }
 }
 -(void) giveFieldOfViewReport{
-    if (_imageDetectionConfidence == 25) {
+    if (_imageDetectionConfidence == 25.0f) {
         AVSpeechUtterance* utter = [[AVSpeechUtterance alloc] initWithString:@"4 corners detected."];
         utter.voice = [AVSpeechSynthesisVoice voiceWithLanguage:@"en-US"];
         [utter setRate:0.2f];
@@ -233,7 +238,7 @@
 }
 
 -(void) autoCaptureImage{
-    if (_imageDetectionConfidence == 30) {
+    if (_imageDetectionConfidence == 30.0f) {
         [self captureImageWithCompletionHander:^(id data)
          {
              UIImage *image = ([data isKindOfClass:[NSData class]]) ? [UIImage imageWithData:data] : data;
@@ -517,4 +522,26 @@ BOOL rectangleDetectionConfidenceHighEnough(float confidence)
 {
     return (confidence > 1.0);
 }
+
+
+// Progress Bar
+
+- (void)runPercentageLoop
+{
+    ViewController *mainVC = [[ViewController alloc] init];
+
+    while (_imageDetectionConfidence <= 200.0f)
+    {
+        [NSThread sleepForTimeInterval:0.1];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [mainVC.navigationController setSGProgressPercentage:_imageDetectionConfidence];
+        });
+        if(_imageDetectionConfidence >= 30.0f)
+        {
+            return;
+        }
+    }
+}
+
+
 @end

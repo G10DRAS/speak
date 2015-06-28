@@ -321,6 +321,28 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
  CAMERA METHODS
  ------------------------------- */
 
+
+//// Progress Bar
+//
+//- (void)runPercentageLoop
+//{
+//    float percentage = 0;
+//    while (percentage <= 200)
+//    {
+//        NSLog(@"%f", percentage);
+//        [NSThread sleepForTimeInterval:0.1];
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [self.navigationController setSGProgressPercentage:percentage];
+//        });
+//        if(percentage >= 100.0)
+//        {
+//            return;
+//        }
+//        
+//        percentage = percentage + (arc4random() % 3);
+//    }
+//}
+
 - (IBAction)focusRecognized:(UITapGestureRecognizer *)sender {
     if (sender.state == UIGestureRecognizerStateRecognized) {
         CGPoint location = [sender locationInView:self.camView];

@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UINavigationController+SGProgress.h"
+
 @import AVFoundation;
 
 typedef NS_ENUM(NSInteger,IPDFCameraViewType)
