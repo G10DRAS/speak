@@ -327,7 +327,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 
 - (void)runPercentageLoop
 {
-    while (self.camView._imageDetectionConfidence <= 200.0f)
+    while (self.camView._imageDetectionConfidence <= 2000.0f)
     {
         [NSThread sleepForTimeInterval:0.1];
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -335,7 +335,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
         });
         if(self.camView._imageDetectionConfidence >= 30.0f)
         {
-            return;
+//                [self.navigationController setSGProgressPercentage:0];
         }
     }
 }

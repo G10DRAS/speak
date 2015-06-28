@@ -266,7 +266,8 @@ CGFloat const SGProgressBarHeight = 2.5;
 		progressView.progress = percentage / 100.f;
 
 	} completion:^(BOOL finished) {
-		if (percentage >= 100)
+        // changed to 400% bc I dont want the progress bar to be removed from superview
+		if (percentage > 400)
 		{
 			[UIView animateWithDuration:0.5 animations:^{
 				progressView.alpha = 0;

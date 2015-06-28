@@ -39,6 +39,5 @@ typedef NS_ENUM(NSInteger,IPDFCameraViewType)
 
 - (void)captureImageWithCompletionHander:(void(^)(id data))completionHandler;
 -(void)autoCaptureImage;
-//- (void)runPercentageLoop;
 
 @end

@@ -14,7 +14,6 @@
 #import <CoreImage/CoreImage.h>
 #import <ImageIO/ImageIO.h>
 #import <GLKit/GLKit.h>
-//#import "ViewController.h"
 
 @interface IPDFCameraViewController () <AVCaptureVideoDataOutputSampleBufferDelegate>
 
@@ -521,26 +520,5 @@ BOOL rectangleDetectionConfidenceHighEnough(float confidence)
 {
     return (confidence > 1.0);
 }
-
-
-// Progress Bar
-
-//- (void)runPercentageLoop
-//{
-//    ViewController *mainVC = [[ViewController alloc] init];
-//
-//    while (_imageDetectionConfidence <= 200.0f)
-//    {
-//        [NSThread sleepForTimeInterval:0.1];
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            [mainVC.navigationController setSGProgressPercentage:_imageDetectionConfidence];
-//        });
-//        if(_imageDetectionConfidence >= 30.0f)
-//        {
-//            return;
-//        }
-//    }
-//}
-
 
 @end
