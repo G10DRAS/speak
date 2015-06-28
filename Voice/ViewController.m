@@ -29,6 +29,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 
 - (void)viewDidLoad
 {
+    [self performSelectorInBackground:@selector(runPercentageLoop) withObject:nil];
     
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:NO];
     
@@ -323,25 +324,21 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 
 
 //// Progress Bar
-//
-//- (void)runPercentageLoop
-//{
-//    float percentage = 0;
-//    while (percentage <= 200)
-//    {
-//        NSLog(@"%f", percentage);
-//        [NSThread sleepForTimeInterval:0.1];
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            [self.navigationController setSGProgressPercentage:percentage];
-//        });
-//        if(percentage >= 100.0)
-//        {
-//            return;
-//        }
-//        
-//        percentage = percentage + (arc4random() % 3);
-//    }
-//}
+
+- (void)runPercentageLoop
+{
+    while (self.camView._imageDetectionConfidence <= 200.0f)
+    {
+        [NSThread sleepForTimeInterval:0.1];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.navigationController setSGProgressPercentage:((self.camView._imageDetectionConfidence/30)*100)];
+        });
+        if(self.camView._imageDetectionConfidence >= 30.0f)
+        {
+            return;
+        }
+    }
+}
 
 - (IBAction)focusRecognized:(UITapGestureRecognizer *)sender {
     if (sender.state == UIGestureRecognizerStateRecognized) {

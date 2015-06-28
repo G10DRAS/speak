@@ -14,7 +14,7 @@
 #import <CoreImage/CoreImage.h>
 #import <ImageIO/ImageIO.h>
 #import <GLKit/GLKit.h>
-#import "ViewController.h"
+//#import "ViewController.h"
 
 @interface IPDFCameraViewController () <AVCaptureVideoDataOutputSampleBufferDelegate>
 
@@ -36,7 +36,6 @@
     
     BOOL _isStopped;
     
-    CGFloat _imageDetectionConfidence;
     NSTimer *_borderDetectTimeKeeper;
     BOOL _borderDetectFrame;
     CIRectangleFeature *_borderDetectLastRectangleFeature;
@@ -44,7 +43,7 @@
     BOOL _isCapturing;
     NSMutableArray *imageArray;
 }
-
+@synthesize _imageDetectionConfidence;
 @synthesize camStopped;
 
 - (void)awakeFromNib
@@ -95,14 +94,14 @@
     [self createGLKView];
     
 //    ViewController *mainVC = [[ViewController alloc] init];
-    [self performSelectorInBackground:@selector(runPercentageLoop) withObject:nil];
+//    [self performSelectorInBackground:@selector(runPercentageLoop) withObject:nil];
     
     
     NSArray *possibleDevices = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
     AVCaptureDevice *device = [possibleDevices firstObject];
     if (!device) return;
     
-    _imageDetectionConfidence = 0.0;
+    _imageDetectionConfidence = 0.0f;
     imageArray = [[NSMutableArray alloc] init];
     
     AVCaptureSession *session = [[AVCaptureSession alloc] init];
@@ -526,22 +525,22 @@ BOOL rectangleDetectionConfidenceHighEnough(float confidence)
 
 // Progress Bar
 
-- (void)runPercentageLoop
-{
-    ViewController *mainVC = [[ViewController alloc] init];
-
-    while (_imageDetectionConfidence <= 200.0f)
-    {
-        [NSThread sleepForTimeInterval:0.1];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [mainVC.navigationController setSGProgressPercentage:_imageDetectionConfidence];
-        });
-        if(_imageDetectionConfidence >= 30.0f)
-        {
-            return;
-        }
-    }
-}
+//- (void)runPercentageLoop
+//{
+//    ViewController *mainVC = [[ViewController alloc] init];
+//
+//    while (_imageDetectionConfidence <= 200.0f)
+//    {
+//        [NSThread sleepForTimeInterval:0.1];
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [mainVC.navigationController setSGProgressPercentage:_imageDetectionConfidence];
+//        });
+//        if(_imageDetectionConfidence >= 30.0f)
+//        {
+//            return;
+//        }
+//    }
+//}
 
 
 @end

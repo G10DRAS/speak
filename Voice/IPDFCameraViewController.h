@@ -33,10 +33,12 @@ typedef NS_ENUM(NSInteger,IPDFCameraViewType)
 @property (nonatomic,assign,getter=isTorchEnabled) BOOL enableTorch;
 
 @property (nonatomic,assign) IPDFCameraViewType cameraViewType;
+@property (nonatomic, readwrite) CGFloat _imageDetectionConfidence;
 
 - (void)focusAtPoint:(CGPoint)point completionHandler:(void(^)())completionHandler;
 
 - (void)captureImageWithCompletionHander:(void(^)(id data))completionHandler;
 -(void)autoCaptureImage;
+//- (void)runPercentageLoop;
 
 @end
