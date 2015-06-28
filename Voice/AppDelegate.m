@@ -30,9 +30,21 @@
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:mainView];
         self.window.rootViewController = navController;
     } else {
-        TutorialViewController *tutView = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"TutorialView"];
-        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:tutView];
+        // Since no one likes the tutorial, might as well remove it. So I am going to make it so the main view is always ViewController
+        
+        // Set image capture mode to manual
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"IsAuto"];
+        
+        ViewController *mainView = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"MainView"];
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:mainView];
         self.window.rootViewController = navController;
+
+        
+        // Instantiate the tutorial view
+        
+        //        TutorialViewController *tutView = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"TutorialView"];
+        //        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:tutView];
+        //        self.window.rootViewController = navController;
     }
     
     NSError *error = NULL;

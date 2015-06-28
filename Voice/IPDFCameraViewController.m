@@ -184,7 +184,12 @@
         
         if (_borderDetectLastRectangleFeature)
         {
+            if (_imageDetectionConfidence > 25 && _imageDetectionConfidence < 30) {
+
             image = [self drawHighlightOverlayForPoints:image topLeft:_borderDetectLastRectangleFeature.topLeft topRight:_borderDetectLastRectangleFeature.topRight bottomLeft:_borderDetectLastRectangleFeature.bottomLeft bottomRight:_borderDetectLastRectangleFeature.bottomRight];
+                
+            }
+            
             _imageDetectionConfidence += .5;
             
             // For auto-capturing the images
@@ -228,7 +233,7 @@
 }
 
 -(void) autoCaptureImage{
-    if (_imageDetectionConfidence == 50) {
+    if (_imageDetectionConfidence == 30) {
         [self captureImageWithCompletionHander:^(id data)
          {
              UIImage *image = ([data isKindOfClass:[NSData class]]) ? [UIImage imageWithData:data] : data;

@@ -168,7 +168,7 @@
     CGRect workingFrame = self.scrollView.frame;
     workingFrame.origin.x = 0;
     
-    _scrollView.delegate=self;
+    _scrollView.delegate = self;
     
     int i=0;
     for ( NSString *image in imageArray)
