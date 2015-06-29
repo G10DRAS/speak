@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
 
-@interface SettingsViewController : UITableViewController <MFMailComposeViewControllerDelegate> {
+@interface SettingsViewController : UITableViewController <MFMailComposeViewControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate> {
     
 }
 
@@ -18,5 +18,8 @@
 
 @property (weak, nonatomic) IBOutlet UISwitch *autoSwitch;
 - (IBAction)toggled:(UISwitch *)sender;
+
+@property (strong, nonatomic) IBOutlet UIPickerView *languagePicker;
+
 
 @end

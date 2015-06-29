@@ -8,12 +8,15 @@
 
 #import "ViewController.h"
 #import "SBJson4.h"
+#import "UINavigationController+SGProgress.h"
+#import "SGProgressView.h"
 
 @interface ViewController ()
 
 @end
 
 @implementation ViewController
+
 
 int const maxImagePixelsAmount = 3200000; // 3.2 MP
 
@@ -331,13 +334,19 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     {
         [NSThread sleepForTimeInterval:0.1];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.navigationController setSGProgressPercentage:((self.camView._imageDetectionConfidence/30)*100)];
+            [self.navigationController setSGProgressPercentage:((self.camView._imageDetectionConfidence/30)*100)
+                                                  andTintColor:[UIColor colorWithRed:255/255.0f green:256/255.0f blue:255/255.0f alpha:1.0f]];
         });
         if(self.camView._imageDetectionConfidence >= 30.0f)
         {
 //                [self.navigationController setSGProgressPercentage:0];
         }
     }
+}
+
+- (void)cancelPercentageLoop
+{
+    [self.navigationController cancelSGProgress];
 }
 
 - (IBAction)focusRecognized:(UITapGestureRecognizer *)sender {
@@ -834,6 +843,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 
 -(void) prepareToSwitchViews {
     [labelUpdaterTimer invalidate];
+    [self cancelPercentageLoop];
 }
 
 -(void) reset {

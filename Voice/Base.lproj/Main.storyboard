@@ -252,6 +252,22 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="Language" id="H7q-kb-qNW">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="75" id="uis-1w-Nth">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uis-1w-Nth" id="0DX-RF-z4k">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cfb-rB-OJ2">
+                                                    <rect key="frame" x="0.0" y="-44" width="320" height="162"/>
+                                                </pickerView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                             <tableViewSection headerTitle="Voice" id="9fp-l7-wZx">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ShowIntro" textLabel="FeO-56-GVG" rowHeight="65" style="IBUITableViewCellStyleDefault" id="0cH-bY-Ogn">
@@ -362,6 +378,7 @@
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <connections>
                         <outlet property="autoSwitch" destination="gVA-e6-NwR" id="PcM-fR-mtb"/>
+                        <outlet property="languagePicker" destination="cfb-rB-OJ2" id="ghj-d1-aVL"/>
                         <outlet property="ttsSpeed" destination="Odg-JL-JWl" id="7Uc-5x-S2h"/>
                     </connections>
                 </tableViewController>

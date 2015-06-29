@@ -26,7 +26,7 @@ static NSString* theOCRText;
 
 @class TalkViewController;
 
-@interface ViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIAlertViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate, ELCImagePickerControllerDelegate> { // UIPickerViewDataSource
+@interface ViewController : UIViewController <UINavigationControllerDelegate, UIAlertViewDelegate, ELCImagePickerControllerDelegate> {
     NSMutableData *receivedData;
     BOOL isAuthenticating;
     BOOL switchToAuto;
