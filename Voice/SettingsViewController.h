@@ -22,13 +22,13 @@
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *ttsSpeed;
 - (IBAction)indexChanged:(UISegmentedControl *)sender;
-- (IBAction)showLanguagePicker:(id)sender;
-@property (strong, nonatomic) IBOutlet UIButton *languagePickerButton;
+//- (IBAction)showLanguagePicker:(id)sender;
+//@property (strong, nonatomic) IBOutlet UIButton *languagePickerButton;
 
 @property (weak, nonatomic) IBOutlet UISwitch *autoSwitch;
 - (IBAction)toggled:(UISwitch *)sender;
 
-@property (strong, nonatomic) IBOutlet UIPickerView *languagePicker;
+//@property (strong, nonatomic) IBOutlet UIPickerView *languagePicker;
 
 
 @end

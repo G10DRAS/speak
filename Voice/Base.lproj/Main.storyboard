@@ -258,19 +258,6 @@
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uis-1w-Nth" id="0DX-RF-z4k">
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cBM-RH-dHd">
-                                                    <rect key="frame" x="16" y="15" width="311" height="44"/>
-                                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
-                                                    <state key="normal" title="Language Picker">
-                                                        <color key="titleColor" red="0.1529411765" green="0.59215686270000001" blue="0.73725490199999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="showLanguagePicker:" destination="XRA-GO-3c8" eventType="touchUpInside" id="QxN-sS-VU9"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
                                         </tableViewCellContentView>
                                         <connections>
                                             <segue destination="hqS-qg-nSG" kind="push" id="lrW-Ed-iRB"/>
@@ -388,7 +375,6 @@
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <connections>
                         <outlet property="autoSwitch" destination="gVA-e6-NwR" id="PcM-fR-mtb"/>
-                        <outlet property="languagePickerButton" destination="cBM-RH-dHd" id="9br-vi-hbC"/>
                         <outlet property="ttsSpeed" destination="Odg-JL-JWl" id="7Uc-5x-S2h"/>
                     </connections>
                 </tableViewController>
@@ -512,33 +498,29 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="58" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="zlZ-j3-66c">
-                                <rect key="frame" x="0.0" y="130" width="320" height="438"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="58" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="zlZ-j3-66c">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="58" id="WHR-1o-442">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="checkmark" indentationWidth="10" rowHeight="58" id="WHR-1o-442">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WHR-1o-442" id="IgO-zv-zMF">
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="English" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cr9-fE-QxE">
-                                                    <rect key="frame" x="30" y="8" width="261" height="41"/>
-                                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
-                                    <outlet property="dataSource" destination="hqS-qg-nSG" id="Pfh-jc-N4C"/>
-                                    <outlet property="delegate" destination="hqS-qg-nSG" id="eyg-uv-SSh"/>
+                                    <outlet property="dataSource" destination="hqS-qg-nSG" id="vZU-Yu-H3X"/>
+                                    <outlet property="delegate" destination="hqS-qg-nSG" id="Lnn-zy-HXO"/>
                                 </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="zlZ-j3-66c" secondAttribute="trailing" constant="-16" id="guv-cq-3cD"/>
+                            <constraint firstItem="zlZ-j3-66c" firstAttribute="leading" secondItem="hAt-vb-yVu" secondAttribute="leadingMargin" constant="-16" id="lhJ-b9-wgU"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="jle-gZ-U62"/>
                 </viewController>
