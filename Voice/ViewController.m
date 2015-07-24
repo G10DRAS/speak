@@ -52,8 +52,8 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     
     
     // If no language selected, defualt is english
-    [[NSUserDefaults standardUserDefaults] setObject:@"en-US" forKey:@"languageForTTS"];
-    [[NSUserDefaults standardUserDefaults] setObject:@"en" forKey:@"languageForOCR"];
+    [[NSUserDefaults standardUserDefaults] setObject:@"hi-IN" forKey:@"languageForTTS"];
+    [[NSUserDefaults standardUserDefaults] setObject:@"hi" forKey:@"languageForOCR"];
     
     
     // Set the done button and the imageNumber to invisible initially, imageLibrary should be yes
@@ -580,7 +580,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     self.imageView.image = [images objectAtIndex:0];
     
     // Scale the image
-    UIImage *myScaledImage = [self imageWithImage:self.imageView.image scaledToSize:CGSizeMake(self.imageView.image.size.width * .4166, self.imageView.image.size.height * .4166)]; // .4166 is also 5/12
+    UIImage *myScaledImage = [self imageWithImage:self.imageView.image scaledToSize:CGSizeMake(self.imageView.image.size.width * .8, self.imageView.image.size.height * .8)]; // .8 is also 80% of the image's original quality
     self.imageView.image = myScaledImage;
     
     // Create path for image.
@@ -719,14 +719,14 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     NSLog(@"%@",[[NSString alloc] initWithData:oResponseData encoding:NSUTF8StringEncoding]);
-    
-    NSMutableURLRequest *deleteRequest = [[NSMutableURLRequest alloc] init];
-    [deleteRequest setHTTPMethod:@"DELETE"];
-    [deleteRequest setURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://www.googleapis.com/drive/v2/files/%@", imageFileID]]];
-    [deleteRequest setValue:[NSString stringWithFormat:@"Bearer %@", hardCodedToken] forHTTPHeaderField:@"Authorization"];
-    
-    NSData *theResponseData;
-    theResponseData = [NSURLConnection sendSynchronousRequest:deleteRequest returningResponse:&responseCode error:&error];
+//    
+//    NSMutableURLRequest *deleteRequest = [[NSMutableURLRequest alloc] init];
+//    [deleteRequest setHTTPMethod:@"DELETE"];
+//    [deleteRequest setURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://www.googleapis.com/drive/v2/files/%@", imageFileID]]];
+//    [deleteRequest setValue:[NSString stringWithFormat:@"Bearer %@", hardCodedToken] forHTTPHeaderField:@"Authorization"];
+//    
+//    NSData *theResponseData;
+//    theResponseData = [NSURLConnection sendSynchronousRequest:deleteRequest returningResponse:&responseCode error:&error];
     
     [self stopLoading];
     [self moveToTalkView];
