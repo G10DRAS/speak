@@ -51,6 +51,7 @@
 		38BAE48D1B3FCC480079250F /* SGProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38BAE48A1B3FCC480079250F /* SGProgressView.m */; };
 		38BAE48E1B3FCC480079250F /* UINavigationController+SGProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 38BAE48C1B3FCC480079250F /* UINavigationController+SGProgress.m */; };
 		38C21E191A11F3340017BA6E /* nav_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 38C21E181A11F3340017BA6E /* nav_bg.png */; };
+		38E5D8AD1B62002400D9886D /* LanguageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E5D8AC1B62002400D9886D /* LanguageTableViewController.m */; };
 		38E8CDBF198481C100FAA465 /* EAIntroPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E8CDBC198481C100FAA465 /* EAIntroPage.m */; };
 		38E8CDC0198481C100FAA465 /* EAIntroView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E8CDBE198481C100FAA465 /* EAIntroView.m */; };
 		38E8CDC31984826000FAA465 /* TutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E8CDC21984826000FAA465 /* TutorialViewController.m */; };
@@ -147,6 +148,8 @@
 		38BAE48C1B3FCC480079250F /* UINavigationController+SGProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+SGProgress.m"; sourceTree = "<group>"; };
 		38C21E181A11F3340017BA6E /* nav_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav_bg.png; sourceTree = "<group>"; };
 		38CF2DC019BD0ACF002FCF26 /* libPods-Voice-Mixpanel.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-Voice-Mixpanel.a"; path = "Pods/build/Debug-iphoneos/libPods-Voice-Mixpanel.a"; sourceTree = "<group>"; };
+		38E5D8AB1B62002400D9886D /* LanguageTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LanguageTableViewController.h; sourceTree = "<group>"; };
+		38E5D8AC1B62002400D9886D /* LanguageTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LanguageTableViewController.m; sourceTree = "<group>"; };
 		38E8CDBB198481C100FAA465 /* EAIntroPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAIntroPage.h; sourceTree = "<group>"; };
 		38E8CDBC198481C100FAA465 /* EAIntroPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAIntroPage.m; sourceTree = "<group>"; };
 		38E8CDBD198481C100FAA465 /* EAIntroView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAIntroView.h; sourceTree = "<group>"; };
@@ -237,6 +240,8 @@
 				385CFA3B1984309A00CF9563 /* TalkViewController.m */,
 				38E8CDC11984826000FAA465 /* TutorialViewController.h */,
 				38E8CDC21984826000FAA465 /* TutorialViewController.m */,
+				38E5D8AB1B62002400D9886D /* LanguageTableViewController.h */,
+				38E5D8AC1B62002400D9886D /* LanguageTableViewController.m */,
 				380550FA1A7CD6910099C7D3 /* FollowTableViewController.h */,
 				380550FB1A7CD6910099C7D3 /* FollowTableViewController.m */,
 				38631E901A6B879600DBA653 /* Camera */,
@@ -540,6 +545,7 @@
 				388A457C199D409800ECA0A3 /* ELCAlbumPickerController.m in Sources */,
 				38BAE48E1B3FCC480079250F /* UINavigationController+SGProgress.m in Sources */,
 				385CFA3619842FAF00CF9563 /* SBJson4StreamTokeniser.m in Sources */,
+				38E5D8AD1B62002400D9886D /* LanguageTableViewController.m in Sources */,
 				38631E8F1A6B879000DBA653 /* IPDFCameraViewController.m in Sources */,
 				385CFA3919842FAF00CF9563 /* SBJson4Writer.m in Sources */,
 				385CFA3519842FAF00CF9563 /* SBJson4StreamParserState.m in Sources */,

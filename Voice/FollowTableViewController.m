@@ -32,10 +32,10 @@
                                                   forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = YES;
-    self.navigationController.navigationBar.tintColor = [UIColor grayColor];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
-//    UIImage *image = [UIImage imageNamed:@"background"];
-//    [self.navigationController.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
+    UIImage *image = [UIImage imageNamed:@"background"];
+    [self.navigationController.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
     
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -52,7 +52,7 @@
     int facebook = 3;
     
         if (website == indexPath.row) {
-            NSURL *url = [[NSURL alloc] initWithString:@"http://wwww.shalinshah.me/voice"];
+            NSURL *url = [[NSURL alloc] initWithString:@"http://www.shalinshah.me/voice"];
             [[UIApplication sharedApplication] openURL:url];
         } else if (twitter == indexPath.row) {
             NSURL *url = [[NSURL alloc] initWithString:@"https://twitter.com/getvoiceios"];
