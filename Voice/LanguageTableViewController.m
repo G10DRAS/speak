@@ -17,6 +17,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    //    self.languagePicker.dataSource = self;
+    //    self.languagePicker.delegate = self;
+    
+    
     tableData = [NSArray arrayWithObjects:@"Arabic (Saudi Arabia)", @"Chinese (China)", @"Chinese (Hong Kong)", @"Chinese (Taiwan)", @"Czech (Czech Republic)", @"Danish (Denmark)", @"Dutch (Belgium)", @"Dutch (Netherlands)", @"English (Australia)", @"English (Ireland)", @"English (South Africa)", @"English (UK)", @"English (USA)", @"Finnish (Finland)", @"French (Canada)", @"French (France)", @"German (Germany)", @"Greek (Greece)", @"Hindi (India)", @"Hungarian (Hungary)", @"Indonesian (Indonesia)", @"Italian (Italy)", @"Japanese (Japan)", @"Korean (South Korea)", @"Norwegian (Norway)", @"Polish (Poland)", @"Portuguese (Brazil)", @"Portuguese (Portugal)", @"Romanian (Romania)", @"Russian (Russia)", @"Slovak (Slovakia)", @"Spanish (Mexico)", @"Spanish (Spain)", @"Swedish (Sweden)", @"Thai (Thailand)", @"Turkish (Turkey)", nil];
 }
 
@@ -170,6 +174,7 @@
     NSLog(@"%@", languageForTTS);
     [[NSUserDefaults standardUserDefaults] setObject:languageForTTS forKey:@"languageForTTS"];
     [[NSUserDefaults standardUserDefaults] setObject:languageForOCR forKey:@"languageForOCR"];
+    [[NSUserDefaults standardUserDefaults] setInteger:[indexPath row] forKey:@"numberOfSelection"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
 }
@@ -181,6 +186,10 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+//    [tableView selectRowAtIndexPath:[[NSUserDefaults standardUserDefaults] objectForKey:@"numberOfSelection"]
+//                           animated:NO
+//                     scrollPosition:UITableViewScrollPositionTop];
+    
     static NSString *simpleTableIdentifier = @"Languages";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
@@ -191,7 +200,7 @@
     
     cell.textLabel.font = [UIFont fontWithName:@"Avernir Next Regular" size:17];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.selectionStyle = UITableViewCellAccessoryCheckmark;
+    
 
     
     cell.textLabel.text = [tableData objectAtIndex:indexPath.row];

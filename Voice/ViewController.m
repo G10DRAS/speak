@@ -45,15 +45,14 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     screenWidth = screenRect.size.width;
     screenHeight = screenRect.size.height;
     
-    // Initialize Langauges for LanguagePicker
-//    _languagePickerData = @[@"Arabic (Saudi Arabia)", @"Chinese (China)", @"Chinese (Hong Kong)", @"Chinese (Taiwan)", @"Czech (Czech Republic)", @"Danish (Denmark)", @"Dutch (Belgium)", @"Dutch (Netherlands)", @"English (Australia)", @"English (Ireland)", @"English (South Africa)", @"English (UK)", @"English (USA)", @"Finnish (Finland)", @"French (Canada)", @"French (France)", @"German (Germany)", @"Greek (Greece)", @"Hindi (India)", @"Hungarian (Hungary)", @"Indonesian (Indonesia)", @"Italian (Italy)", @"Japanese (Japan)", @"Korean (South Korea)", @"Norwegian (Norway)", @"Polish (Poland)", @"Portuguese (Brazil)", @"Portuguese (Portugal)", @"Romanian (Romania)", @"Russian (Russia)", @"Slovak (Slovakia)", @"Spanish (Mexico)", @"Spanish (Spain)", @"Swedish (Sweden)", @"Thai (Thailand)", @"Turkish (Turkey)"];
-//    self.languagePicker.dataSource = self;
-//    self.languagePicker.delegate = self;
-    
-    
     // If no language selected, defualt is english
-    [[NSUserDefaults standardUserDefaults] setObject:@"hi-IN" forKey:@"languageForTTS"];
-    [[NSUserDefaults standardUserDefaults] setObject:@"hi" forKey:@"languageForOCR"];
+    NSObject *ocr = [[NSUserDefaults standardUserDefaults] objectForKey:@"languageForOCR"];
+    NSObject *tts = [[NSUserDefaults standardUserDefaults] objectForKey:@"languageForTTS"];
+
+    if(ocr == nil || tts == nil){
+        [[NSUserDefaults standardUserDefaults] setObject:@"en-US" forKey:@"languageForTTS"];
+        [[NSUserDefaults standardUserDefaults] setObject:@"en" forKey:@"languageForOCR"];
+    }
     
     
     // Set the done button and the imageNumber to invisible initially, imageLibrary should be yes
@@ -171,155 +170,6 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     [self.camView stop];
     
 }
-
-/*---------------------------------
- SELECT THE OCR LANGUAGE
- ------------------------------- */
-
-//- (IBAction)languageSelection:(id)sender {
-//    [UIView transitionWithView:self.languagePicker
-//                      duration:0.4
-//                       options:UIViewAnimationOptionTransitionCrossDissolve
-//                    animations:NULL
-//                    completion:NULL];
-//    
-//    self.languagePicker.hidden = NO;
-//    
-//    toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, self.languagePicker.frame.origin.y-10, screenWidth, 44)];
-//    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:self action:@selector(whichLanguage:)];
-//    doneButton.tintColor=[UIColor darkGrayColor];
-//    [toolBar setItems:[NSArray arrayWithObjects:doneButton, nil]];
-//    
-//    [self.view addSubview:toolBar];
-//
-//}
-//
-//- (void) whichLanguage:(id)sender {
-//    [toolBar removeFromSuperview];
-//    self.languagePicker.hidden = YES;
-//    [self.languagePicker resignFirstResponder];
-//    
-//    NSString *languageForOCR;
-//    NSString *languageForTTS;
-//    
-//    if ([pickerRowName isEqualToString:@"Arabic (Saudi Arabia)"]) {
-//        languageForOCR = @"ar";
-//        languageForTTS = @"ar-SA";
-//    } else if ([pickerRowName isEqualToString:@"Chinese (China)"]) {
-//        languageForOCR = @"zh";
-//        languageForTTS = @"zh-CN";
-//    } else if ([pickerRowName isEqualToString:@"Chinese (Hong Kong)"]) {
-//        languageForOCR = @"zh";
-//        languageForTTS = @"zh-HK";
-//    } else if ([pickerRowName isEqualToString:@"Chinese (Taiwan)"]) {
-//        languageForOCR = @"zh";
-//        languageForTTS = @"zh-TW";
-//    } else if ([pickerRowName isEqualToString:@"Czech (Czech Republic)"]) {
-//        languageForOCR = @"cs";
-//        languageForTTS = @"cs-CZ";
-//    } else if ([pickerRowName isEqualToString:@"Danish (Denmark)"]) {
-//        languageForOCR = @"da";
-//        languageForTTS = @"da-DK";
-//    } else if ([pickerRowName isEqualToString:@"Dutch (Belgium)"]) {
-//        languageForOCR = @"nl";
-//        languageForTTS = @"nl-BE";
-//    } else if ([pickerRowName isEqualToString:@"Dutch (Netherlands)"]) {
-//        languageForOCR = @"nl";
-//        languageForTTS = @"nl-NL";
-//    } else if ([pickerRowName isEqualToString:@"English (Australia)"]) {
-//        languageForOCR = @"en";
-//        languageForTTS = @"en-AU";
-//    } else if ([pickerRowName isEqualToString:@"English (Ireland)"]) {
-//        languageForOCR = @"en";
-//        languageForTTS = @"en-IE";
-//    } else if ([pickerRowName isEqualToString:@"English (South Africa)"]) {
-//        languageForOCR = @"en";
-//        languageForTTS = @"en-ZA";
-//    } else if ([pickerRowName isEqualToString:@"English (UK)"]) {
-//        languageForOCR = @"en";
-//        languageForTTS = @"en-GB";
-//    } else if ([pickerRowName isEqualToString:@"English (USA)"]) {
-//        languageForOCR = @"en";
-//        languageForTTS = @"en-US";
-//    } else if ([pickerRowName isEqualToString:@"Finnish (Finland)"]) {
-//        languageForOCR = @"fi";
-//        languageForTTS = @"fi-FI";
-//    } else if ([pickerRowName isEqualToString:@"French (Canada)"]) {
-//        languageForOCR = @"fr";
-//        languageForTTS = @"fr-CA";
-//    } else if ([pickerRowName isEqualToString:@"French (France)"]) {
-//        languageForOCR = @"fr";
-//        languageForTTS = @"fr-FR";
-//    } else if ([pickerRowName isEqualToString:@"German (Germany)"]) {
-//        languageForOCR = @"de";
-//        languageForTTS = @"de-DE";
-//    } else if ([pickerRowName isEqualToString:@"Greek (Greece)"]) {
-//        languageForOCR = @"el";
-//        languageForTTS = @"el-GR";
-//    } else if ([pickerRowName isEqualToString:@"Hindi (India)"]) {
-//        languageForOCR = @"hi";
-//        languageForTTS = @"hi-IN";
-//    } else if ([pickerRowName isEqualToString:@"Hungarian (Hungary)"]) {
-//        languageForOCR = @"hu";
-//        languageForTTS = @"hu-HU";
-//    } else if ([pickerRowName isEqualToString:@"Indonesian (Indonesia)"]) {
-//        languageForOCR = @"id";
-//        languageForTTS = @"id-ID";
-//    } else if ([pickerRowName isEqualToString:@"Italian (Italy)"]) {
-//        languageForOCR = @"it";
-//        languageForTTS = @"it-IT";
-//    } else if ([pickerRowName isEqualToString:@"Japanese (Japan)"]) {
-//        languageForOCR = @"ja";
-//        languageForTTS = @"ja-JP";
-//    } else if ([pickerRowName isEqualToString:@"Korean (South Korea)"]) {
-//        languageForOCR = @"ko";
-//        languageForTTS = @"ko-KR";
-//    } else if ([pickerRowName isEqualToString:@"Norwegian (Norway)"]) {
-//        languageForOCR = @"no";
-//        languageForTTS = @"no-NO";
-//    } else if ([pickerRowName isEqualToString:@"Polish (Poland)"]) {
-//        languageForOCR = @"pl";
-//        languageForTTS = @"pl-PL";
-//    } else if ([pickerRowName isEqualToString:@"Portuguese (Brazil)"]) {
-//        languageForOCR = @"pt";
-//        languageForTTS = @"pt-BR";
-//    } else if ([pickerRowName isEqualToString:@"Portuguese (Portugal)"]) {
-//        languageForOCR = @"pt";
-//        languageForTTS = @"pt-PT";
-//    } else if ([pickerRowName isEqualToString:@"Romanian (Romania)"]) {
-//        languageForOCR = @"ro";
-//        languageForTTS = @"ro-RO";
-//    } else if ([pickerRowName isEqualToString:@"Russian (Russia)"]) {
-//        languageForOCR = @"ru";
-//        languageForTTS = @"ru-RU";
-//    } else if ([pickerRowName isEqualToString:@"Slovak (Slovakia)"]) {
-//        languageForOCR = @"sk";
-//        languageForTTS = @"sk-SK";
-//    } else if ([pickerRowName isEqualToString:@"Spanish (Mexico)"]) {
-//        languageForOCR = @"es";
-//        languageForTTS = @"es-MX";
-//    } else if ([pickerRowName isEqualToString:@"Spanish (Spain)"]) {
-//        languageForOCR = @"es";
-//        languageForTTS = @"es-ES";
-//    } else if ([pickerRowName isEqualToString:@"Swedish (Sweden)"]) {
-//        languageForOCR = @"sv";
-//        languageForTTS = @"sv-SE";
-//    } else if ([pickerRowName isEqualToString:@"Thai (Thailand)"]) {
-//        languageForOCR = @"th";
-//        languageForTTS = @"th-TH";
-//    } else if ([pickerRowName isEqualToString:@"Turkish (Turkey)"]) {
-//        languageForOCR = @"tr";
-//        languageForTTS = @"tr-TR";
-//    } else {
-//        languageForOCR = @"en";
-//        languageForTTS = @"en-US";
-//    }
-//    NSLog(@"%@", languageForOCR);
-//    NSLog(@"%@", languageForTTS);
-//    [[NSUserDefaults standardUserDefaults] setObject:languageForTTS forKey:@"languageForTTS"];
-//    [[NSUserDefaults standardUserDefaults] setObject:languageForOCR forKey:@"languageForOCR"];
-//
-//}
 
 /*---------------------------------
  CAMERA METHODS
@@ -719,14 +569,14 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     NSLog(@"%@",[[NSString alloc] initWithData:oResponseData encoding:NSUTF8StringEncoding]);
-//    
-//    NSMutableURLRequest *deleteRequest = [[NSMutableURLRequest alloc] init];
-//    [deleteRequest setHTTPMethod:@"DELETE"];
-//    [deleteRequest setURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://www.googleapis.com/drive/v2/files/%@", imageFileID]]];
-//    [deleteRequest setValue:[NSString stringWithFormat:@"Bearer %@", hardCodedToken] forHTTPHeaderField:@"Authorization"];
-//    
-//    NSData *theResponseData;
-//    theResponseData = [NSURLConnection sendSynchronousRequest:deleteRequest returningResponse:&responseCode error:&error];
+    
+    NSMutableURLRequest *deleteRequest = [[NSMutableURLRequest alloc] init];
+    [deleteRequest setHTTPMethod:@"DELETE"];
+    [deleteRequest setURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://www.googleapis.com/drive/v2/files/%@", imageFileID]]];
+    [deleteRequest setValue:[NSString stringWithFormat:@"Bearer %@", hardCodedToken] forHTTPHeaderField:@"Authorization"];
+    
+    NSData *theResponseData;
+    theResponseData = [NSURLConnection sendSynchronousRequest:deleteRequest returningResponse:&responseCode error:&error];
     
     [self stopLoading];
     [self moveToTalkView];
