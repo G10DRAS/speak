@@ -10,6 +10,9 @@
 
 @interface LanguageTableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
     NSArray *tableData;
+    NSIndexPath* checkedIndexPath;
 }
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, retain) NSIndexPath* checkedIndexPath;
 
 @end

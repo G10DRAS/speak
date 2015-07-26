@@ -17,8 +17,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //    self.languagePicker.dataSource = self;
-    //    self.languagePicker.delegate = self;
+        self.tableView.dataSource = self;
+        self.tableView.delegate = self;
     
     
     tableData = [NSArray arrayWithObjects:@"Arabic (Saudi Arabia)", @"Chinese (China)", @"Chinese (Hong Kong)", @"Chinese (Taiwan)", @"Czech (Czech Republic)", @"Danish (Denmark)", @"Dutch (Belgium)", @"Dutch (Netherlands)", @"English (Australia)", @"English (Ireland)", @"English (South Africa)", @"English (UK)", @"English (USA)", @"Finnish (Finland)", @"French (Canada)", @"French (France)", @"German (Germany)", @"Greek (Greece)", @"Hindi (India)", @"Hungarian (Hungary)", @"Indonesian (Indonesia)", @"Italian (Italy)", @"Japanese (Japan)", @"Korean (South Korea)", @"Norwegian (Norway)", @"Polish (Poland)", @"Portuguese (Brazil)", @"Portuguese (Portugal)", @"Romanian (Romania)", @"Russian (Russia)", @"Slovak (Slovakia)", @"Spanish (Mexico)", @"Spanish (Spain)", @"Swedish (Sweden)", @"Thai (Thailand)", @"Turkish (Turkey)", nil];
@@ -31,32 +31,57 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
-    return 1;
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [tableData count];
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    for (int i = 0; i<tableData.count;i++)
-    {
-        if(i!=[indexPath row])
-        {
-            cell = [tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
-            cell.accessoryType = UITableViewCellAccessoryNone;
-        }
-    }
-    cell = [tableView cellForRowAtIndexPath:indexPath];
+    static NSString *simpleTableIdentifier = @"Languages";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
     
-    if (cell.accessoryType == UITableViewCellAccessoryNone) {
+    //Pre-check lang that was already chosen
+    
+    
+    if([self.checkedIndexPath isEqual:indexPath] || indexPath.row == [[NSUserDefaults standardUserDefaults] integerForKey:@"numberOfSelection"])
+    {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        
-    } else {
+    }
+    else
+    {
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
     
+    
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
+    }
+    cell.textLabel.font = [UIFont fontWithName:@"Avernir Next Regular" size:17];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    cell.textLabel.text = [tableData objectAtIndex:indexPath.row];
+    
+    return cell;
+}
 
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Uncheck the previous checked row
+    if(self.checkedIndexPath)
+    {
+        UITableViewCell* uncheckCell = [tableView
+                                        cellForRowAtIndexPath:self.checkedIndexPath];
+        uncheckCell.accessoryType = UITableViewCellAccessoryNone;
+    }
+    UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+    cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    self.checkedIndexPath = indexPath;
+    
+    
     NSString *languageForOCR;
     NSString *languageForTTS;
     
@@ -177,34 +202,6 @@
     [[NSUserDefaults standardUserDefaults] setInteger:[indexPath row] forKey:@"numberOfSelection"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return [tableData count];
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-//    [tableView selectRowAtIndexPath:[[NSUserDefaults standardUserDefaults] objectForKey:@"numberOfSelection"]
-//                           animated:NO
-//                     scrollPosition:UITableViewScrollPositionTop];
-    
-    static NSString *simpleTableIdentifier = @"Languages";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
-    
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
-    }
-    
-    cell.textLabel.font = [UIFont fontWithName:@"Avernir Next Regular" size:17];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-
-    
-    cell.textLabel.text = [tableData objectAtIndex:indexPath.row];
-    return cell;
 }
 
 @end

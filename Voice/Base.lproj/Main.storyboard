@@ -506,11 +506,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="58" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="zlZ-j3-66c">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="58" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="zlZ-j3-66c">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="checkmark" indentationWidth="10" rowHeight="58" id="WHR-1o-442">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="58" id="WHR-1o-442">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WHR-1o-442" id="IgO-zv-zMF">
@@ -519,18 +519,23 @@
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
-                                    <outlet property="dataSource" destination="hqS-qg-nSG" id="vZU-Yu-H3X"/>
-                                    <outlet property="delegate" destination="hqS-qg-nSG" id="Lnn-zy-HXO"/>
+                                    <outlet property="dataSource" destination="hqS-qg-nSG" id="m4R-4Y-oiv"/>
+                                    <outlet property="delegate" destination="hqS-qg-nSG" id="5YO-uA-4Km"/>
                                 </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="ABj-xA-DkR" firstAttribute="top" secondItem="zlZ-j3-66c" secondAttribute="bottom" id="W7f-ic-spX"/>
                             <constraint firstAttribute="trailingMargin" secondItem="zlZ-j3-66c" secondAttribute="trailing" constant="-16" id="guv-cq-3cD"/>
                             <constraint firstItem="zlZ-j3-66c" firstAttribute="leading" secondItem="hAt-vb-yVu" secondAttribute="leadingMargin" constant="-16" id="lhJ-b9-wgU"/>
+                            <constraint firstItem="zlZ-j3-66c" firstAttribute="top" secondItem="hAt-vb-yVu" secondAttribute="topMargin" id="qO5-tR-yU5"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="jle-gZ-U62"/>
+                    <connections>
+                        <outlet property="tableView" destination="zlZ-j3-66c" id="WW3-oM-Aw9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5ci-Pe-EWX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
