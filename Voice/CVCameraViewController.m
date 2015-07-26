@@ -188,7 +188,7 @@
         
         if (_borderDetectLastRectangleFeature)
         {
-            if (_imageDetectionConfidence > 25.0f && _imageDetectionConfidence < 30.0f) {
+            if (_imageDetectionConfidence > 20.0f && _imageDetectionConfidence < 30.0f) {
 
             image = [self drawHighlightOverlayForPoints:image topLeft:_borderDetectLastRectangleFeature.topLeft topRight:_borderDetectLastRectangleFeature.topRight bottomLeft:_borderDetectLastRectangleFeature.bottomLeft bottomRight:_borderDetectLastRectangleFeature.bottomRight];
                 
@@ -224,7 +224,7 @@
     }
 }
 -(void) giveFieldOfViewReport{
-    if (_imageDetectionConfidence == 25.0f) {
+    if (_imageDetectionConfidence == 20.0f) {
         AVSpeechUtterance* utter = [[AVSpeechUtterance alloc] initWithString:@"4 corners detected."];
         utter.voice = [AVSpeechSynthesisVoice voiceWithLanguage:@"en-US"];
         [utter setRate:0.2f];
