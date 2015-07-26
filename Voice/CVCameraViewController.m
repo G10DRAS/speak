@@ -1,12 +1,12 @@
 //
-//  IPDFCameraViewController.m
+//  CVCameraViewController.m
 //  Voice
 //
 //  Created by Shalin Shah on 01/17/15.
 //  Copyright (c) 2014 Shalin Shah. All rights reserved.
 //
 
-#import "IPDFCameraViewController.h"
+#import "CVCameraViewController.h"
 
 #import <AVFoundation/AVFoundation.h>
 #import <CoreMedia/CoreMedia.h>
@@ -15,7 +15,7 @@
 #import <ImageIO/ImageIO.h>
 #import <GLKit/GLKit.h>
 
-@interface IPDFCameraViewController () <AVCaptureVideoDataOutputSampleBufferDelegate>
+@interface CVCameraViewController () <AVCaptureVideoDataOutputSampleBufferDelegate>
 
 @property (nonatomic,strong) AVCaptureSession *captureSession;
 @property (nonatomic,strong) AVCaptureDevice *captureDevice;
@@ -27,7 +27,7 @@
 
 @end
 
-@implementation IPDFCameraViewController
+@implementation CVCameraViewController
 {
     CIContext *_coreImageContext;
     GLuint _renderBuffer;
@@ -143,7 +143,7 @@
     camStopped = YES;
 }
 
-- (void)setCameraViewType:(IPDFCameraViewType)cameraViewType
+- (void)setCameraViewType:(CVCameraViewType)cameraViewType
 {
     UIBlurEffect * effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
     UIVisualEffectView *viewWithBlurredBackground =[[UIVisualEffectView alloc] initWithEffect:effect];
@@ -168,7 +168,7 @@
     
     CIImage *image = [CIImage imageWithCVPixelBuffer:pixelBuffer];
     
-    if (self.cameraViewType != IPDFCameraViewTypeNormal)
+    if (self.cameraViewType != CVCameraViewTypeNormal)
     {
         image = [self filteredImageUsingEnhanceFilterOnImage:image];
     }
@@ -384,11 +384,11 @@
      {
          NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageSampleBuffer];
          
-         if (weakSelf.cameraViewType == IPDFCameraViewTypeBlackAndWhite || weakSelf.isBorderDetectionEnabled)
+         if (weakSelf.cameraViewType == CVCameraViewTypeBlackAndWhite || weakSelf.isBorderDetectionEnabled)
          {
              CIImage *enhancedImage = [CIImage imageWithData:imageData];
              
-             if (weakSelf.cameraViewType == IPDFCameraViewTypeBlackAndWhite)
+             if (weakSelf.cameraViewType == CVCameraViewTypeBlackAndWhite)
              {
                  enhancedImage = [self filteredImageUsingEnhanceFilterOnImage:enhancedImage];
              }

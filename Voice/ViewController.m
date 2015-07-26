@@ -261,7 +261,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
         self.camView.enableBorderDetection = enable;
 }
 -(IBAction)switchFilters:(id)sender {
-    [self.camView setCameraViewType:(self.camView.cameraViewType == IPDFCameraViewTypeBlackAndWhite) ? IPDFCameraViewTypeNormal : IPDFCameraViewTypeBlackAndWhite];
+    [self.camView setCameraViewType:(self.camView.cameraViewType == CVCameraViewTypeBlackAndWhite) ? CVCameraViewTypeNormal : CVCameraViewTypeBlackAndWhite];
 }
 - (void)changeButton:(UIButton *)button targetTitle:(NSString *)title toStateEnabled:(BOOL)enabled{
     [button setTitle:title forState:UIControlStateNormal];

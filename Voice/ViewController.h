@@ -15,7 +15,7 @@
 #import "ELCImagePickerHeader.h"
 
 #import "Mixpanel.h"
-#import "IPDFCameraViewController.h"
+#import "CVCameraViewController.h"
 #import <AVFoundation/AVFoundation.h>
 
 
@@ -83,7 +83,7 @@ static NSString* theOCRText;
 - (IBAction)cropToggle:(id)sender;
 - (IBAction)switchFilters:(id)sender;
 
-@property (weak, nonatomic) IBOutlet IPDFCameraViewController *camView;
+@property (weak, nonatomic) IBOutlet CVCameraViewController *camView;
 
 @property (strong, nonatomic) UIAlertView *alertView;
 

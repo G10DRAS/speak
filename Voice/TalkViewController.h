@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ViewController.h"
 #import <Mixpanel/Mixpanel.h>
-#import "IPDFCameraViewController.h"
+#import "CVCameraViewController.h"
 
 #define ASSET_BY_SCREEN_HEIGHT(regular, longScreen) (([[UIScreen mainScreen] bounds].size.height <= 480.0) ? regular : longScreen)
 #define IMAGE_WIDTH 320

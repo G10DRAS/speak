@@ -1,5 +1,5 @@
 //
-//  IPDFCameraViewController.h
+//  CVCameraViewController.h
 //  Voice
 //
 //  Created by Shalin Shah on 01/17/15.
@@ -11,13 +11,13 @@
 
 @import AVFoundation;
 
-typedef NS_ENUM(NSInteger,IPDFCameraViewType)
+typedef NS_ENUM(NSInteger,CVCameraViewType)
 {
-    IPDFCameraViewTypeBlackAndWhite,
-    IPDFCameraViewTypeNormal
+    CVCameraViewTypeBlackAndWhite,
+    CVCameraViewTypeNormal
 };
 
-@interface IPDFCameraViewController : UIView <AVSpeechSynthesizerDelegate> {
+@interface CVCameraViewController : UIView <AVSpeechSynthesizerDelegate> {
 }
 
 - (void)setupCameraView;
@@ -32,7 +32,7 @@ typedef NS_ENUM(NSInteger,IPDFCameraViewType)
 @property (nonatomic,assign,getter=isBorderDetectionEnabled) BOOL enableBorderDetection;
 @property (nonatomic,assign,getter=isTorchEnabled) BOOL enableTorch;
 
-@property (nonatomic,assign) IPDFCameraViewType cameraViewType;
+@property (nonatomic,assign) CVCameraViewType cameraViewType;
 @property (nonatomic, readwrite) CGFloat _imageDetectionConfidence;
 
 - (void)focusAtPoint:(CGPoint)point completionHandler:(void(^)())completionHandler;
