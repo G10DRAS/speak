@@ -55,6 +55,7 @@
 		38E8CDBF198481C100FAA465 /* EAIntroPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E8CDBC198481C100FAA465 /* EAIntroPage.m */; };
 		38E8CDC0198481C100FAA465 /* EAIntroView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E8CDBE198481C100FAA465 /* EAIntroView.m */; };
 		38E8CDC31984826000FAA465 /* TutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E8CDC21984826000FAA465 /* TutorialViewController.m */; };
+		38F6510F1B648A9600EB29DE /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38F6510E1B648A9600EB29DE /* AudioToolbox.framework */; };
 		D7B013562AE2461093433FEF /* libPods-Voice.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C5BFE464AC3F4581BB89398C /* libPods-Voice.a */; };
 /* End PBXBuildFile section */
 
@@ -156,6 +157,7 @@
 		38E8CDBE198481C100FAA465 /* EAIntroView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAIntroView.m; sourceTree = "<group>"; };
 		38E8CDC11984826000FAA465 /* TutorialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialViewController.h; sourceTree = "<group>"; };
 		38E8CDC21984826000FAA465 /* TutorialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialViewController.m; sourceTree = "<group>"; };
+		38F6510E1B648A9600EB29DE /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		602FD7655A7F4809A6A9568E /* Pods-Voice.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Voice.xcconfig"; path = "Pods/Pods-Voice.xcconfig"; sourceTree = "<group>"; };
 		C5BFE464AC3F4581BB89398C /* libPods-Voice.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Voice.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -165,6 +167,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38F6510F1B648A9600EB29DE /* AudioToolbox.framework in Frameworks */,
 				38487FF419BD23460016EE5E /* SystemConfiguration.framework in Frameworks */,
 				38487FF319BD23330016EE5E /* CoreTelephony.framework in Frameworks */,
 				38487FF219BD21900016EE5E /* libicucore.dylib in Frameworks */,
@@ -187,6 +190,7 @@
 		3026B96E677F43728105778B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				38F6510E1B648A9600EB29DE /* AudioToolbox.framework */,
 				38487FF119BD21900016EE5E /* libicucore.dylib */,
 				38487FEF19BD21770016EE5E /* Foundation.framework */,
 				38487FED19BD21720016EE5E /* Security.framework */,

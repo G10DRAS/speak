@@ -14,6 +14,7 @@
 #import <CoreImage/CoreImage.h>
 #import <ImageIO/ImageIO.h>
 #import <GLKit/GLKit.h>
+#import <AudioToolbox/AudioServices.h>
 
 @interface CVCameraViewController () <AVCaptureVideoDataOutputSampleBufferDelegate>
 
@@ -232,6 +233,8 @@
         }
         self.synthesizer.delegate = self;
         [self.synthesizer speakUtterance:utter];
+        
+        AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
     }
 }
 
