@@ -614,7 +614,7 @@
  ------------------------------- */
 
 -(void) makePDF {
-    [self setupPDFDocumentNamed:@"VoiceText" Width:850 Height:1100];
+    [self setupPDFDocumentNamed:@"VoiceText" Width:850 Height:4100];
     
     [self beginPDFPage];
     
