@@ -19,7 +19,7 @@ static NSInteger const MaxSuggestions = 8;
 static NSTimeInterval const AutoScrollDuration = 3.0f;
 
 
-@interface TalkViewController : UIViewController <UIScrollViewDelegate> {
+@interface TalkViewController : UIViewController <UIScrollViewDelegate, UIDocumentInteractionControllerDelegate> {
     BOOL speechPaused;
     BOOL alreadyStartedTalking;
     BOOL compressingImage;
@@ -37,9 +37,14 @@ static NSTimeInterval const AutoScrollDuration = 3.0f;
     NSData *compressedImageData;
     Mixpanel *mixpanel;
     float ttsSpeed;
+    
+    CGSize _pageSize;
 }
 @property (nonatomic, strong) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UILabel *pageLabel;
+
+@property (strong, nonatomic) UIDocumentInteractionController* docController;
+
 
 @property (strong, nonatomic) NSString *text;
 
@@ -48,5 +53,6 @@ static NSTimeInterval const AutoScrollDuration = 3.0f;
 - (IBAction)restartButtonPressed:(id)sender;
 - (IBAction)nextButtonPressed:(id)sender;
 - (IBAction)prevButtonPressed:(id)sender;
+- (IBAction)shareButton:(id)sender;
 
 @end
