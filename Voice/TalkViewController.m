@@ -75,32 +75,20 @@
     
     for (int i = 0; i < [imageArray count]; i++) {
         UIImage *image = [UIImage imageWithData:[imageArray objectAtIndex:i]];
+        [images addObject:image];
         
-        // If the image is in Landscape
-        UIImage *hi;
-        if (image.size.width > image.size.height) {
-            
-            hi = [self imageByRotatingImage:image fromImageOrientation:UIImageOrientationRight];
-            NSLog(@"Image is landscape");
-        } else {
-            hi = [UIImage imageWithData:[imageArray objectAtIndex:i]];
-            NSLog(@"Image is portrait");
-        }
-        
-        [images addObject:hi];
-        
-        UIImageView *imageview = [[UIImageView alloc] initWithImage:hi];
+        UIImageView *imageview = [[UIImageView alloc] initWithImage:image];
         [imageview setContentMode:UIViewContentModeScaleAspectFit];
         imageview.frame = workingFrame;
         
         [_scrollView addSubview:imageview];
         workingFrame.origin.x = workingFrame.origin.x + workingFrame.size.width;
         
-        if (hi.size.width > hi.size.height) {
-            NSLog(@"Image is now landscape");
-        } else {
-            NSLog(@"Image is now portrait");
-        }
+//        if (image.size.width > image.size.height) {
+//            NSLog(@"Image is now landscape");
+//        } else {
+//            NSLog(@"Image is now portrait");
+//        }
         
     }
 
