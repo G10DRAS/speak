@@ -45,6 +45,10 @@
     imageNumber = 1;
     speechNumber = 1;
     
+    didShareImage = FALSE;
+    didSharePDF = FALSE;
+    didShareText = FALSE;
+    
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"speedForTTS"] == nil) {
         [[NSUserDefaults standardUserDefaults] setFloat:0.1f forKey:@"speedForTTS"];
     }
@@ -548,26 +552,64 @@
 
 - (IBAction)shareButton:(id)sender {
     {
-//        NSString *textToShare = @"";
-//        for (int i = 0; i < [imageArray count]; i++) {
-//            textToShare = [textToShare stringByAppendingString:[NSString stringWithFormat:@"\n\n %@", [speakArray objectAtIndex:i]]];
-//        }
-//        UIImage *tempImage = [UIImage imageWithData:[imageArray objectAtIndex:0]];
-//        
-//        NSArray *objectsToShare = @[textToShare, tempImage];
-        
-        
-        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"What do you want to export as?" message:@"What do you want to export this Voice text as? You can export as the image only, the text only, or a PDF with the recognized text and image." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+        // optional - add more buttons:
+        [alert addButtonWithTitle:@"PDF"];
+        [alert addButtonWithTitle:@"Text"];
+        [alert addButtonWithTitle:@"Image"];
+        [alert show];
+        [alert setTag:12];
+    }
+}
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    if ([alertView tag] == 12) {
+        if (buttonIndex == 0) {     // and they clicked OK.
+        } else if (buttonIndex == 1) {
+            [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"ExportAs"]; // pdf
+            [self share];
+        } else if (buttonIndex == 2) {
+            [[NSUserDefaults standardUserDefaults] setInteger:2 forKey:@"ExportAs"]; // txt
+            [self share];
+        } else if (buttonIndex == 3) {
+            [[NSUserDefaults standardUserDefaults] setInteger:3 forKey:@"ExportAs"]; // png
+            [self share];
+        }
+    }
+}
+-(void) share {
+    if ([[NSUserDefaults standardUserDefaults] integerForKey:@"ExportAs"] == 1) { // pdf
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
         NSString *documentsDirectory = [paths objectAtIndex:0];
         NSString *pdfPath = [documentsDirectory stringByAppendingPathComponent:@"VoiceText.pdf"];
-        NSURL *url = [NSURL fileURLWithPath:pdfPath];
-        
-        [self makePDF];
-        
+        if (!didSharePDF) {
+            [self makePDF];
+        }
         self.docController = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:pdfPath]];
         [self.docController presentOptionsMenuFromRect:self.view.bounds inView:self.view animated:YES];
-
+    } else if ([[NSUserDefaults standardUserDefaults] integerForKey:@"ExportAs"] == 2) {
+        if (!didShareText) {
+            for (int i = 0; i < [imageArray count]; i++) { // text
+                stringToShare = [stringToShare stringByAppendingString:[NSString stringWithFormat:@"\n\n %@", [speakArray objectAtIndex:i]]];
+            }
+        }
+        NSArray *objectsToShare = @[stringToShare];
+        
+        UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:objectsToShare applicationActivities:nil];
+        [self presentViewController:activityViewController animated:YES completion:nil];
+        
+    } else if ([[NSUserDefaults standardUserDefaults] integerForKey:@"ExportAs"] == 3) { // image
+        if (!didShareImage) {
+            imageToShare = [UIImage imageWithData:[imageArray objectAtIndex:0]];
+        }
+        // Create path.
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"VoiceImage.png"];
+        
+        // Save image.
+        [UIImagePNGRepresentation(imageToShare) writeToFile:filePath atomically:YES];
+        
+        self.docController = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:filePath]];
+        [self.docController presentOptionsMenuFromRect:self.view.bounds inView:self.view animated:YES];
     }
 }
 
