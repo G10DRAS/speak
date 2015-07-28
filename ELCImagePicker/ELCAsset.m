@@ -7,6 +7,7 @@
 
 #import "ELCAsset.h"
 #import "ELCAssetTablePicker.h"
+@import CoreLocation;
 
 @implementation ELCAsset
 
@@ -23,7 +24,9 @@
 		self.asset = asset;
         _selected = NO;
     }
-	return self;	
+	return self;
+    
+
 }
 
 - (void)toggleSelection
@@ -34,6 +37,14 @@
 - (void)setSelected:(BOOL)selected
 {
     if (selected) {
+        NSDate *date = [self.asset valueForProperty:ALAssetPropertyDate];
+        NSString *orientation = [self.asset valueForProperty:ALAssetPropertyOrientation];
+        NSString *type = [self.asset valueForProperty:ALAssetPropertyType];
+        CLLocation *location = [self.asset valueForProperty:ALAssetPropertyLocation];
+
+        self.asset.accessibilityLabel = [NSString stringWithFormat:@"%@. %@. %@. %@.", type, orientation, date, location];
+        
+
         if ([_parent respondsToSelector:@selector(shouldSelectAsset:)]) {
             if (![_parent shouldSelectAsset:self]) {
                 return;
