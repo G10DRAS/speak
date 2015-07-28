@@ -17,7 +17,6 @@
 
 @implementation ViewController
 
-
 int const maxImagePixelsAmount = 3200000; // 3.2 MP
 
 
@@ -32,9 +31,6 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 
 - (void)viewDidLoad
 {
-    
-    
-    
     [Appirater setDaysUntilPrompt:5];
     [Appirater setUsesUntilPrompt:5];
     [Appirater setSignificantEventsUntilPrompt:-1];
@@ -62,14 +58,6 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
         [[NSUserDefaults standardUserDefaults] setObject:@"en-US" forKey:@"languageForTTS"];
         [[NSUserDefaults standardUserDefaults] setObject:@"en" forKey:@"languageForOCR"];
     }
-    
-    
-    // Set the done button and the imageNumber to invisible initially, imageLibrary should be yes
-    self.imageNumber.alpha = 0.0;
-    self.doneButton.alpha = 0.0;
-    self.clearButton.alpha = 0.0;
-    self.imageLibrary.alpha = 1.0;
-    
     
     // Getting a new Access Token each time user opens the app
     NSString *data = [NSString stringWithFormat:@"&client_id=949987337109-637mnc7ajesdiuthjdubmtkjnsgjrvud.apps.googleusercontent.com&client_secret=XatsSRPBJvS-8vqUd5-wuTKA&refresh_token=1/42-VzBRsbaSf1uO4IpD89pWL9EpJrAAJfsWBBQHZPYg&grant_type=refresh_token"];
@@ -121,6 +109,10 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     [rightButton addTarget:self action:@selector(torchToggle) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     
+    filterType = YES; // YES is B&W and NO is Regular
+    self.filterButton.accessibilityLabel = [NSString stringWithFormat:@"Filter %s", filterType ? "Black and White" : "Regular"];
+
+    
     // NavBar is transparent
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
                                                   forBarMetrics:UIBarMetricsDefault];
@@ -143,41 +135,41 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     self.imageView.image = [UIImage imageNamed:nil];
     
     [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    
+    static dispatch_once_t once;
+    dispatch_once(&once, ^ {
+        willSpeak = NO;
+        
+        // Start Cam
+        [self.camView setupCameraView];
+        [self.camView setEnableBorderDetection:YES];
+        
+        // Auto or Manual
+        [self autoOrManual];
+        
+        // Timer
+        labelUpdaterTimer = [NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(updateLabel) userInfo:nil repeats:YES];
+        
+        // Set the done button and the imageNumber to invisible initially, imageLibrary should be yes
+        self.imageNumber.alpha = 0.0;
+        self.doneButton.alpha = 0.0;
+        self.clearButton.alpha = 0.0;
+        self.imageLibrary.alpha = 1.0;
+        
+        self.imageNumber.text = [NSString stringWithFormat:@"0"];
+    });
 }
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (void)viewDidAppear:(BOOL)animated
-{
-    willSpeak = NO;
-    
-    // Start Cam
-    [self.camView setupCameraView];
-    [self.camView setEnableBorderDetection:YES];
+- (void)viewDidAppear:(BOOL)animated{
     [self.camView start];
-    
-    // Auto or Manual
-    [self autoOrManual];
-    
-    // Timer
-    labelUpdaterTimer = [NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(updateLabel) userInfo:nil repeats:YES];
-    
-    // Set the done button and the imageNumber to invisible initially, imageLibrary should be yes
-    self.imageNumber.alpha = 0.0;
-    self.doneButton.alpha = 0.0;
-    self.clearButton.alpha = 0.0;
-    self.imageLibrary.alpha = 1.0;
-    
-    self.imageNumber.text = [NSString stringWithFormat:@"0"];
-    
-    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 - (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
     [self.camView stop];
-    
 }
 
 /*---------------------------------
@@ -271,6 +263,8 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 }
 -(IBAction)switchFilters:(id)sender {
     [self.camView setCameraViewType:(self.camView.cameraViewType == CVCameraViewTypeBlackAndWhite) ? CVCameraViewTypeNormal : CVCameraViewTypeBlackAndWhite];
+    filterType = !filterType;
+    self.filterButton.accessibilityLabel = [NSString stringWithFormat:@"Filter %s", filterType ? "Black and White" : "Regular"];
 }
 - (void)changeButton:(UIButton *)button targetTitle:(NSString *)title toStateEnabled:(BOOL)enabled{
     [button setTitle:title forState:UIControlStateNormal];

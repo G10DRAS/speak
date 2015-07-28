@@ -34,6 +34,8 @@ static NSString* theOCRText;
     
     BOOL willSpeak;
     
+    BOOL filterType; // YES is B&W and NO is Regular
+    
     // FOR SETTINGS BUTTON
     UIButton *rightButton;
     
@@ -73,6 +75,7 @@ static NSString* theOCRText;
 @property (weak, nonatomic) IBOutlet UILabel *imageNumber;
 @property (weak, nonatomic) IBOutlet UIImageView *focusIndication;
 - (IBAction)focusRecognized:(id)sender;
+@property (strong, nonatomic) IBOutlet UIButton *filterButton;
 
 @property (weak, nonatomic) IBOutlet UIButton *manual;
 @property (weak, nonatomic) IBOutlet UIButton *autoButton;
