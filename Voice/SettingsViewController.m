@@ -151,7 +151,7 @@
             [controller setToRecipients:toRecipients];
             [controller setTitle:@"Give Feedback"];
             [controller setSubject:@"Feedback About Voice"];
-            [controller setMessageBody:[NSString stringWithFormat:@"This is my feedback about Voice: %@", deviceSpecs]
+            [controller setMessageBody:[NSString stringWithFormat:@"This is my feedback about Voice: \n\n\n\n\n\n\n\n\n -- \n %@", deviceSpecs]
                                 isHTML:NO];
             
             

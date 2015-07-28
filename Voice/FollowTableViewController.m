@@ -48,11 +48,15 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     int website = 1;
-    int twitter = 2;
-    int facebook = 3;
+    int blog = 2;
+    int twitter = 3;
+    int facebook = 4;
     
         if (website == indexPath.row) {
-            NSURL *url = [[NSURL alloc] initWithString:@"http://www.shalinshah.me/voice"];
+            NSURL *url = [[NSURL alloc] initWithString:@"http://www.shalinshah.me/voice/"];
+            [[UIApplication sharedApplication] openURL:url];
+        } else if (blog == indexPath.row) {
+            NSURL *url = [[NSURL alloc] initWithString:@"https://www.shalinshah.me/voice/blog/"];
             [[UIApplication sharedApplication] openURL:url];
         } else if (twitter == indexPath.row) {
             NSURL *url = [[NSURL alloc] initWithString:@"https://twitter.com/getvoiceios"];
