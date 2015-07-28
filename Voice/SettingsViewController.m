@@ -7,6 +7,7 @@
 //
 
 #import "SettingsViewController.h"
+#import <sys/utsname.h>
 
 @interface SettingsViewController ()
 
@@ -65,6 +66,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
+    mixpanel = [Mixpanel sharedInstance];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -126,7 +128,6 @@
         if (feedback == indexPath.row) {
             // Device/OS Info
             UIDevice *currentDevice = [UIDevice currentDevice];
-            NSString *model = [currentDevice model];
             NSString *systemVersion = [currentDevice systemVersion];
             // Laguage Info
             NSArray *languageArray = [NSLocale preferredLanguages];
@@ -141,8 +142,8 @@
             NSObject *tts = [[NSUserDefaults standardUserDefaults] objectForKey:@"languageForTTS"];
             // Put it together
             NSString *deviceSpecs =
-            [NSString stringWithFormat:@"Version: %@ \n Device: %@ (%@) \n Language: %@ \n Country: %@ \n OCR Lang: %@ \n TTS Lang: %@ \n Network: %@ \n",
-             appVersion, model, systemVersion, language, country, ocr, tts, [self newtworkType]];
+            [NSString stringWithFormat:@"Version: %@ \n Device: %@ (%@) \n Language: %@ \n Country: %@ \n OCR Lang: %@ \n TTS Lang: %@ \n Network: %@ \n Mixpanel ID: %@",
+             appVersion, [self deviceModel], systemVersion, language, country, ocr, tts, [self newtworkType], [mixpanel distinctId]];
             
             
             MFMailComposeViewController *controller = [[MFMailComposeViewController alloc] init];
@@ -154,9 +155,7 @@
             [controller setMessageBody:[NSString stringWithFormat:@"This is my feedback about Voice: \n\n\n\n\n\n\n\n\n -- \n %@", deviceSpecs]
                                 isHTML:NO];
             
-            
-            
-            [self presentViewController:controller animated:YES completion:nil];
+            [self presentViewController:controller animated:YES completion:^{[mixpanel track:@"Email Sent"];}];
         }
     }
 }
@@ -234,6 +233,13 @@
         default:
             return @"Nothing Found";
     }
+}
+- (NSString *)deviceModel
+{
+    struct utsname systemInfo;
+    uname(&systemInfo);
+    
+    return [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
 }
 
 @end

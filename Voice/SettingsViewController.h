@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
+#import "Mixpanel.h"
 
 @interface SettingsViewController : UITableViewController <MFMailComposeViewControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate> {
     CGRect screenRect;
     CGFloat screenWidth;
     CGFloat screenHeight;
+    Mixpanel *mixpanel;
 }
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *ttsSpeed;
