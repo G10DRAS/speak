@@ -22,7 +22,7 @@
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:26.0f];;
     label.textAlignment = NSTextAlignmentCenter;
-    label.textColor = [UIColor grayColor]; // change this color
+    label.textColor = [UIColor whiteColor]; // change this color
     
     self.navigationItem.titleView = label;
     label.text = NSLocalizedString(@"Follow Us", @"");
