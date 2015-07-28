@@ -1,10 +1,15 @@
 PODS:
-  - Mixpanel (2.5.4)
+  - Appirater (2.0.5)
+  - Mixpanel (2.8.2):
+    - Mixpanel/Mixpanel (= 2.8.2)
+  - Mixpanel/Mixpanel (2.8.2)
 
 DEPENDENCIES:
+  - Appirater
   - Mixpanel
 
 SPEC CHECKSUMS:
-  Mixpanel: 87167a0b0a74f11f0ee3787f291357494730617c
+  Appirater: e7c0a47fb67ee5041ce8479e6ba960927fb40264
+  Mixpanel: f4d71ac2a306e7cda6ad03d4a2be249a0fd7a967
 
-COCOAPODS: 0.33.1
+COCOAPODS: 0.35.0

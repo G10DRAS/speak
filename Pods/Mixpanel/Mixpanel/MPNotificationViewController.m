@@ -2,16 +2,15 @@
 #error This file must be compiled with ARC. Either turn on ARC for the project or use -fobjc-arc flag on this file.
 #endif
 
-#import "MPNotificationViewController.h"
-
+#import <QuartzCore/QuartzCore.h>
+#import <UIKit/UIKit.h>
+#import "MPCategoryHelpers.h"
+#import "MPLogger.h"
 #import "MPNotification.h"
+#import "MPNotificationViewController.h"
 #import "UIColor+MPColor.h"
 #import "UIImage+MPAverageColor.h"
 #import "UIImage+MPImageEffects.h"
-#import "UIView+MPSnapshotImage.h"
-
-#import <QuartzCore/QuartzCore.h>
-#import <UIKit/UIKit.h>
 
 #define MPNotifHeight 65.0f
 
@@ -24,7 +23,7 @@
 
 @interface ElasticEaseOutAnimation : CAKeyframeAnimation {}
 
-- (id)initWithStartValue:(CGRect)start endValue:(CGRect)end andDuration:(double)duration;
+- (instancetype)initWithStartValue:(CGRect)start endValue:(CGRect)end andDuration:(double)duration NS_DESIGNATED_INITIALIZER;
 
 @end
 
@@ -99,7 +98,7 @@
                 self.imageHeight.constant = image.size.height;
                 self.imageView.image = image;
             } else {
-                NSLog(@"image failed to load from data: %@", self.notification.image);
+                MixpanelError(@"image failed to load from data: %@", self.notification.image);
             }
         }
 
@@ -377,7 +376,6 @@
         for (UIView *subview in window.subviews) {
             if (!subview.hidden && subview.alpha > 0 && subview.frame.size.width > 0 && subview.frame.size.height > 0) {
                 topView = subview;
-                break;
             }
         }
     }
@@ -404,9 +402,9 @@
 
     UIView *topView = [self getTopView];
     if (topView) {
-        
+
         CGRect topFrame;
-        
+
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 80000
         topFrame = topView.frame;
 #elif __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
@@ -473,10 +471,10 @@
         } else {
             duration = 0.0f;
         }
-        
+
         UIView *parentView = self.view.superview;
         CGRect parentFrame;
-        
+
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 80000
         parentFrame = parentView.frame;
 #elif __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
@@ -543,7 +541,7 @@
 
 @implementation MPAlphaMaskView
 
-- (id)initWithCoder:(NSCoder *)aDecoder
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     if(self = [super initWithCoder:aDecoder]) {
         _maskLayer = [GradientMaskLayer layer];
@@ -565,7 +563,7 @@
 
 @implementation MPActionButton
 
-- (id)initWithCoder:(NSCoder *)aDecoder
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
         self.layer.backgroundColor = [UIColor colorWithRed:43.0f/255.0f green:43.0f/255.0f blue:52.0f/255.0f alpha:1.0f].CGColor;
@@ -632,7 +630,7 @@
 
 @implementation CircleLayer
 
-+ (id)layer {
++ (instancetype)layer {
     CircleLayer *cl = (CircleLayer *)[super layer];
     cl.circlePadding = 2.5f;
     return cl;
@@ -702,7 +700,7 @@
 
 @implementation ElasticEaseOutAnimation
 
-- (id)initWithStartValue:(CGRect)start endValue:(CGRect)end andDuration:(double)duration
+- (instancetype)initWithStartValue:(CGRect)start endValue:(CGRect)end andDuration:(double)duration
 {
     if ((self = [super init])) {
         self.duration = duration;

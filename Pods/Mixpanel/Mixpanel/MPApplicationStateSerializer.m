@@ -1,12 +1,13 @@
 //
 // Copyright (c) 2014 Mixpanel. All rights reserved.
 
-#import "MPApplicationStateSerializer.h"
-#import "MPObjectSerializer.h"
-#import "MPClassDescription.h"
-#import "MPObjectSerializerConfig.h"
-#import "MPObjectIdentityProvider.h"
 #import <QuartzCore/QuartzCore.h>
+#import "MPApplicationStateSerializer.h"
+#import "MPClassDescription.h"
+#import "MPLogger.h"
+#import "MPObjectIdentityProvider.h"
+#import "MPObjectSerializer.h"
+#import "MPObjectSerializerConfig.h"
 
 @implementation MPApplicationStateSerializer
 
@@ -15,7 +16,7 @@
     UIApplication *_application;
 }
 
-- (id)initWithApplication:(UIApplication *)application configuration:(MPObjectSerializerConfig *)configuration objectIdentityProvider:(MPObjectIdentityProvider *)objectIdentityProvider
+- (instancetype)initWithApplication:(UIApplication *)application configuration:(MPObjectSerializerConfig *)configuration objectIdentityProvider:(MPObjectIdentityProvider *)objectIdentityProvider
 {
     NSParameterAssert(application != nil);
     NSParameterAssert(configuration != nil);
@@ -38,8 +39,8 @@
         UIGraphicsBeginImageContextWithOptions(window.bounds.size, YES, window.screen.scale);
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
         if ([window respondsToSelector:@selector(drawViewHierarchyInRect:afterScreenUpdates:)]) {
-            if ([window drawViewHierarchyInRect:window.bounds afterScreenUpdates:YES] == NO) {
-                NSLog(@"Unable to get complete screenshot for window at index: %d.", (int)index);
+            if ([window drawViewHierarchyInRect:window.bounds afterScreenUpdates:NO] == NO) {
+                MixpanelError(@"Unable to get complete screenshot for window at index: %d.", (int)index);
             }
         } else {
             [window.layer renderInContext:UIGraphicsGetCurrentContext()];

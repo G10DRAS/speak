@@ -9,6 +9,7 @@
 #import "TutorialViewController.h"
 #import "ViewController.h"
 #import "Mixpanel.h"
+#import "Appirater.h"
 
 @interface AppDelegate ()
             
@@ -21,6 +22,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     [Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];
+    [Appirater setAppId:@"903772588"];
 
     if ([[NSUserDefaults standardUserDefaults] integerForKey:@"isFirstTimeInt"] == 20) {
         // Set image capture mode to manual
@@ -71,6 +73,8 @@
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     [mixpanel track:@"App Opened"];
     
+    [Appirater appLaunched:YES];
+    
 
     // Override point for customization after application launch.
     return YES;
@@ -88,6 +92,7 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    [Appirater appEnteredForeground:YES];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {

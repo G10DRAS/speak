@@ -3,14 +3,13 @@
 
 #import "MPEnumDescription.h"
 
-
 @implementation MPEnumDescription
 
 {
     NSMutableDictionary *_values;
 }
 
-- (id)initWithDictionary:(NSDictionary *)dictionary
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary
 {
     NSParameterAssert(dictionary[@"flag_set"] != nil);
     NSParameterAssert(dictionary[@"base_type"] != nil);

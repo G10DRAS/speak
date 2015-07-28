@@ -1,4 +1,5 @@
 #import <Foundation/Foundation.h>
+
 #import <UIKit/UIKit.h>
 
 @class    MixpanelPeople;
@@ -188,11 +189,11 @@
 
 /*!
  @property
- 
+
  @abstract
  Determines the time, in seconds, that a mini notification will remain on
  the screen before automatically hiding itself.
- 
+
  @discussion
  Defaults to 6.0.
  */
@@ -211,7 +212,7 @@
  */
 @property (atomic, weak) id<MixpanelDelegate> delegate; // allows fine grain control over uploading (optional)
 
-#pragma mark Methods
+#pragma mark Tracking
 
 /*!
  @method
@@ -481,38 +482,38 @@
 
 /*!
  @method
- 
+
  @abstract
  Starts a timer that will be stopped and added as a property when a
  corresponding event is tracked.
- 
+
  @discussion
  This method is intended to be used in advance of events that have
  a duration. For example, if a developer were to track an "Image Upload" event
  she might want to also know how long the upload took. Calling this method
  before the upload code would implicitly cause the <code>track</code>
  call to record its duration.
- 
+
  <pre>
  // begin timing the image upload
  [mixpanel timeEvent:@"Image Upload"];
- 
+
  // upload the image
  [self uploadImageWithSuccessHandler:^{
-    
+
     // track the event
     [mixpanel track:@"Image Upload"];
  }];
  </pre>
- 
+
  @param event   a string, identical to the name of the event that will be tracked
- 
+
  */
 - (void)timeEvent:(NSString *)event;
 
 /*!
  @method
- 
+
  @abstract
  Clears all current event timers.
  */
@@ -542,6 +543,23 @@
 
 /*!
  @method
+ 
+ @abstract
+ Calls flush, then optionally archives and calls a handler when finished.
+ 
+ @discussion
+ When calling <code>flush</code> manually, it is sometimes important to verify
+ that the flush has finished before before further action is taken. This is
+ especially important when the app is in the background and could be suspended
+ at any time if protocol is not followed. Delegate methods like
+ <code>application:didReceiveRemoteNotification:fetchCompletionHandler:</code>
+ are called when an app is brought to the background and require a handler to
+ be called when it finishes.
+ */
+- (void)flushWithCompletion:(void (^)())handler;
+
+/*!
+ @method
 
  @abstract
  Writes current project info, including distinct ID, super properties and pending event
@@ -555,6 +573,42 @@
  though, for example, if you'd like to track app crashes from main.m.
  */
 - (void)archive;
+
+/*!
+ @method
+
+ @abstract
+ Creates a distinct_id alias from alias to original id.
+
+ @discussion
+ This method is used to map an identifer called an alias to the existing Mixpanel
+ distinct id. This causes all events and people requests sent with the alias to be
+ mapped back to the original distinct id. The recommended usage pattern is to call
+ both createAlias: and identify: when the user signs up, and only identify: (with
+ their new user ID) when they log in. This will keep your signup funnels working
+ correctly.
+
+ <pre>
+ // This makes the current ID (an auto-generated GUID)
+ // and 'Alias' interchangeable distinct ids.
+ [mixpanel createAlias:@"Alias"
+    forDistinctID:mixpanel.distinctId];
+
+ // You must call identify if you haven't already
+ // (e.g., when your app launches).
+ [mixpanel identify:mixpanel.distinctId];
+</pre>
+
+@param alias 		the new distinct_id that should represent original
+@param distinctID 	the old distinct_id that alias will be mapped to
+ */
+- (void)createAlias:(NSString *)alias forDistinctID:(NSString *)distinctID;
+
+- (NSString *)libVersion;
+
+
+#if !defined(MIXPANEL_APP_EXTENSION)
+#pragma mark - Mixpanel Surveys
 
 /*!
  @method
@@ -582,6 +636,7 @@
  */
 - (void)showSurvey;
 
+#pragma mark - Mixpanel Notifications
 
 /*!
  @method
@@ -619,6 +674,8 @@
  */
 - (void)showNotification;
 
+#pragma mark - Mixpanel A/B Testing
+
 /*!
  @method
 
@@ -634,7 +691,19 @@
  */
 - (void)joinExperiments;
 
-- (void)createAlias:(NSString *)alias forDistinctID:(NSString *)distinctID;
+/*!
+ @method
+
+ @abstract
+ Join any experiments (A/B tests) that are available for the current user.
+
+ @discussion
+ Same as joinExperiments but will fire the given callback after all experiments
+ have been loaded and applied.
+ */
+- (void)joinExperimentsWithCallback:(void(^)())experimentsLoadedCallback;
+
+#endif
 
 @end
 
@@ -656,12 +725,11 @@
  </pre>
 
  Please note that the core <code>Mixpanel</code> and
- <code>MixpanelPeople</code> classes have separate <code>identify:<code>
- methods. The <code>Mixpanel</code> <code>identify:</code> affects the
+ <code>MixpanelPeople</code> classes share the <code>identify:<code> method.
+ The <code>Mixpanel</code> <code>identify:</code> affects the
  <code>distinct_id</code> property of events sent by <code>track:</code> and
- <code>track:properties:</code>. The <code>MixpanelPeople</code>
- <code>identify:</code> determines which Mixpanel People user record will be
- updated by <code>set:</code>, <code>increment:</code> and other
+ <code>track:properties:</code> and determines which Mixpanel People user
+ record will be updated by <code>set:</code>, <code>increment:</code> and other
  <code>MixpanelPeople</code> methods.
 
  <b>If you are going to set your own distinct IDs for core Mixpanel event

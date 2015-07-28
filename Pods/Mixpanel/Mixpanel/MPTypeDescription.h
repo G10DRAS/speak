@@ -3,10 +3,9 @@
 
 #import <Foundation/Foundation.h>
 
-
 @interface MPTypeDescription : NSObject
 
-- (id)initWithDictionary:(NSDictionary *)dictionary;
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
 @property (nonatomic, readonly) NSString *name;
 

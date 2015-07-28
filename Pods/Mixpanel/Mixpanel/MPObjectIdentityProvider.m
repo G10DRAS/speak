@@ -4,7 +4,6 @@
 #import "MPObjectIdentityProvider.h"
 #import "MPSequenceGenerator.h"
 
-
 @implementation MPObjectIdentityProvider
 
 {
@@ -12,7 +11,7 @@
     MPSequenceGenerator *_sequenceGenerator;
 }
 
-- (id)init
+- (instancetype)init
 {
     self = [super init];
     if (self) {
@@ -25,6 +24,9 @@
 
 - (NSString *)identifierForObject:(id)object
 {
+    if ([object isKindOfClass:[NSString class]]) {
+        return object;
+    }
     NSString *identifier = [_objectToIdentifierMap objectForKey:object];
     if (identifier == nil) {
         identifier = [NSString stringWithFormat:@"$%" PRIi32, [_sequenceGenerator nextValue]];

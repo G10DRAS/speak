@@ -4,6 +4,7 @@
 target "Voice" do
 
 pod 'Mixpanel'
+pod 'Appirater'
 
 end
 

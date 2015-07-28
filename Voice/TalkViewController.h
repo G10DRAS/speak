@@ -42,10 +42,6 @@ static NSTimeInterval const AutoScrollDuration = 3.0f;
     
     UIImage *imageToShare;
     NSString *stringToShare;
-    
-    BOOL didShareText;
-    BOOL didShareImage;
-    BOOL didSharePDF;
 }
 @property (nonatomic, strong) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UILabel *pageLabel;

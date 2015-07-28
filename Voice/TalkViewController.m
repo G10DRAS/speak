@@ -45,9 +45,9 @@
     imageNumber = 1;
     speechNumber = 1;
     
-    didShareImage = FALSE;
-    didSharePDF = FALSE;
-    didShareText = FALSE;
+    
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"didClickShare"];
+
     
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"speedForTTS"] == nil) {
         [[NSUserDefaults standardUserDefaults] setFloat:0.1f forKey:@"speedForTTS"];
@@ -577,38 +577,44 @@
     }
 }
 -(void) share {
+    if([[NSUserDefaults standardUserDefaults] boolForKey:@"didClickShare"] == NO) {
+    // save pdf
+        [self makePDF];
+    // save text
+        stringToShare = @"";
+        for (int i = 0; i < [imageArray count]; i++) {
+            stringToShare = [stringToShare stringByAppendingString:[NSString stringWithFormat:@"\n\n %@", [speakArray objectAtIndex:i]]];
+        }
+        [[NSUserDefaults standardUserDefaults] setObject:stringToShare forKey:@"StringToShare"];
+    // save image
+        imageToShare = [UIImage imageWithData:[imageArray objectAtIndex:0]];
+        // Create path.
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"VoiceImage.png"];
+        // Save image.
+        [UIImagePNGRepresentation(imageToShare) writeToFile:filePath atomically:YES];
+        [[NSUserDefaults standardUserDefaults] setObject:filePath forKey:@"ImageToShare"];
+    // update bool so this doesn't get called again
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"didClickShare"];
+    // synchronize
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+    
     if ([[NSUserDefaults standardUserDefaults] integerForKey:@"ExportAs"] == 1) { // pdf
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
         NSString *documentsDirectory = [paths objectAtIndex:0];
         NSString *pdfPath = [documentsDirectory stringByAppendingPathComponent:@"VoiceText.pdf"];
-        if (!didSharePDF) {
-            [self makePDF];
-        }
+        
         self.docController = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:pdfPath]];
         [self.docController presentOptionsMenuFromRect:self.view.bounds inView:self.view animated:YES];
-    } else if ([[NSUserDefaults standardUserDefaults] integerForKey:@"ExportAs"] == 2) {
-        if (!didShareText) {
-            for (int i = 0; i < [imageArray count]; i++) { // text
-                stringToShare = [stringToShare stringByAppendingString:[NSString stringWithFormat:@"\n\n %@", [speakArray objectAtIndex:i]]];
-            }
-        }
-        NSArray *objectsToShare = @[stringToShare];
+    } else if ([[NSUserDefaults standardUserDefaults] integerForKey:@"ExportAs"] == 2) { // text
+        NSLog(@"%@", [[NSUserDefaults standardUserDefaults] stringForKey:@"StringToShare"]);
+        NSArray *objectsToShare = @[[NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] stringForKey:@"StringToShare"]]];
         
         UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:objectsToShare applicationActivities:nil];
         [self presentViewController:activityViewController animated:YES completion:nil];
-        
     } else if ([[NSUserDefaults standardUserDefaults] integerForKey:@"ExportAs"] == 3) { // image
-        if (!didShareImage) {
-            imageToShare = [UIImage imageWithData:[imageArray objectAtIndex:0]];
-        }
-        // Create path.
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"VoiceImage.png"];
-        
-        // Save image.
-        [UIImagePNGRepresentation(imageToShare) writeToFile:filePath atomically:YES];
-        
-        self.docController = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:filePath]];
+        self.docController = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:[[NSUserDefaults standardUserDefaults] stringForKey:@"ImageToShare"]]];
         [self.docController presentOptionsMenuFromRect:self.view.bounds inView:self.view animated:YES];
     }
 }

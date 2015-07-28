@@ -6,12 +6,13 @@
 //  Copyright (c) 2014 Mixpanel. All rights reserved.
 //
 
-#import "MPVariant.h"
+#import "MPLogger.h"
 #import "MPObjectSelector.h"
 #import "MPSwizzler.h"
-#import "MPValueTransformers.h"
-#import "MPTweakStore.h"
 #import "MPTweak.h"
+#import "MPTweakStore.h"
+#import "MPValueTransformers.h"
+#import "MPVariant.h"
 
 @interface MPVariant ()
 
@@ -37,7 +38,7 @@
 @property (nonatomic, copy) NSHashTable *appliedTo;
 
 + (MPVariantAction *)actionWithJSONObject:(NSDictionary *)object;
-- (id)initWithName:(NSString *)name
+- (instancetype)initWithName:(NSString *)name
                path:(MPObjectSelector *)path
            selector:(SEL)selector
                args:(NSArray *)args
@@ -61,7 +62,7 @@
 @property (nonatomic, strong) MPTweakValue value;
 
 + (MPVariantTweak *)tweakWithJSONObject:(NSDictionary *)object;
-- (id)initWithName:(NSString *)name
+- (instancetype)initWithName:(NSString *)name
           encoding:(NSString *)encoding
              value:(MPTweakValue)value;
 - (void)execute;
@@ -79,25 +80,25 @@
 
     NSNumber *ID = object[@"id"];
     if (!([ID isKindOfClass:[NSNumber class]] && [ID integerValue] > 0)) {
-        NSLog(@"invalid variant id: %@", ID);
+        MixpanelError(@"invalid variant id: %@", ID);
         return nil;
     }
 
     NSNumber *experimentID = object[@"experiment_id"];
     if (!([experimentID isKindOfClass:[NSNumber class]] && [experimentID integerValue] > 0)) {
-        NSLog(@"invalid experiment id: %@", experimentID);
+        MixpanelError(@"invalid experiment id: %@", experimentID);
         return nil;
     }
 
-    NSArray *actions = [object objectForKey:@"actions"];
+    NSArray *actions = object[@"actions"];
     if (![actions isKindOfClass:[NSArray class]]) {
-        NSLog(@"variant requires an array of actions");
+        MixpanelError(@"variant requires an array of actions");
         return nil;
     }
 
-    NSArray *tweaks = [object objectForKey:@"tweaks"];
+    NSArray *tweaks = object[@"tweaks"];
     if (![tweaks isKindOfClass:[NSArray class]]) {
-        NSLog(@"variant requires an array of tweaks");
+        MixpanelError(@"variant requires an array of tweaks");
         return nil;
     }
 
@@ -107,12 +108,12 @@
                                   tweaks:tweaks];
 }
 
-- (id)init
+- (instancetype)init
 {
     return [self initWithID:0 experimentID:0 actions:nil tweaks:nil];
 }
 
-- (id)initWithID:(NSUInteger)ID experimentID:(NSUInteger)experimentID actions:(NSArray *)actions tweaks:(NSArray *)tweaks
+- (instancetype)initWithID:(NSUInteger)ID experimentID:(NSUInteger)experimentID actions:(NSArray *)actions tweaks:(NSArray *)tweaks
 {
     if(self = [super init]) {
         self.ID = ID;
@@ -129,7 +130,7 @@
 
 #pragma mark NSCoding
 
-- (id)initWithCoder:(NSCoder *)aDecoder
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super init]) {
         self.ID = [(NSNumber *)[aDecoder decodeObjectForKey:@"ID"] unsignedLongValue];
@@ -143,11 +144,11 @@
 
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
-    [aCoder encodeObject:[NSNumber numberWithUnsignedLong:_ID] forKey:@"ID"];
-    [aCoder encodeObject:[NSNumber numberWithUnsignedLong:_experimentID] forKey:@"experimentID"];
+    [aCoder encodeObject:@(_ID) forKey:@"ID"];
+    [aCoder encodeObject:@(_experimentID) forKey:@"experimentID"];
     [aCoder encodeObject:_actions forKey:@"actions"];
     [aCoder encodeObject:_tweaks forKey:@"tweaks"];
-    [aCoder encodeObject:[NSNumber numberWithBool:_finished] forKey:@"finished"];
+    [aCoder encodeObject:@(_finished) forKey:@"finished"];
 }
 
 #pragma mark Actions
@@ -274,7 +275,7 @@ static NSMapTable *gettersForSetters;
 /*
  A map of UIViews to UIImages. The UIImage is the original image for each
  view before this VariantAction changed it, so we can quickly switch back
- to it if we need to stop this action. We cache the original for every 
+ to it if we need to stop this action. We cache the original for every
  view we apply to, as they may all have different original images. The view
  is weakly held, so if the view is dealloced for any reason, it will disappear
  from this map along with the cached original image for it.
@@ -297,19 +298,19 @@ static NSMapTable *originalCache;
     // Required parameters
     MPObjectSelector *path = [MPObjectSelector objectSelectorWithString:object[@"path"]];
     if (!path) {
-        NSLog(@"invalid action path: %@", object[@"path"]);
+        MixpanelError(@"invalid action path: %@", object[@"path"]);
         return nil;
     }
 
     SEL selector = NSSelectorFromString(object[@"selector"]);
     if (selector == (SEL)0) {
-        NSLog(@"invalid action selector: %@", object[@"selector"]);
+        MixpanelError(@"invalid action selector: %@", object[@"selector"]);
         return nil;
     }
 
     NSArray *args = object[@"args"];
     if (![args isKindOfClass:[NSArray class]]) {
-        NSLog(@"invalid action arguments: %@", args);
+        MixpanelError(@"invalid action arguments: %@", args);
         return nil;
     }
 
@@ -332,13 +333,13 @@ static NSMapTable *originalCache;
                                  swizzleSelector:swizzleSelector];
 }
 
-- (id)init
+- (instancetype)init
 {
     [NSException raise:@"NotSupported" format:@"Please call initWithName: path: selector: args: original: swizzle: swizzleClass: swizzleSelector:"];
     return nil;
 }
 
-- (id)initWithName:(NSString *)name
+- (instancetype)initWithName:(NSString *)name
                path:(MPObjectSelector *)path
            selector:(SEL)selector
                args:(NSArray *)args
@@ -381,7 +382,7 @@ static NSMapTable *originalCache;
 
 #pragma mark NSCoding
 
-- (id)initWithCoder:(NSCoder *)aDecoder
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super init]) {
         self.name = [aDecoder decodeObjectForKey:@"name"];
@@ -407,7 +408,7 @@ static NSMapTable *originalCache;
     [aCoder encodeObject:_args forKey:@"args"];
     [aCoder encodeObject:_original forKey:@"original"];
 
-    [aCoder encodeObject:[NSNumber numberWithBool:_swizzle] forKey:@"swizzle"];
+    [aCoder encodeObject:@(_swizzle) forKey:@"swizzle"];
     [aCoder encodeObject:NSStringFromClass(_swizzleClass) forKey:@"swizzleClass"];
     [aCoder encodeObject:NSStringFromSelector(_swizzleSelector) forKey:@"swizzleSelector"];
 }
@@ -416,7 +417,6 @@ static NSMapTable *originalCache;
 
 - (void)execute
 {
-    NSLog(@"Executing %@", self);
     // Block to execute on swizzle
     void (^executeBlock)(id, SEL) = ^(id view, SEL command){
 
@@ -444,7 +444,7 @@ static NSMapTable *originalCache;
         dispatch_async(dispatch_get_main_queue(), ^{ executeBlock(view, command);});
     };
 
-    if (self.swizzle) {
+    if (self.swizzle && self.swizzleClass != nil) {
         // Swizzle the method needed to check for this object coming onscreen
         [MPSwizzler swizzleSelector:self.swizzleSelector
                             onClass:self.swizzleClass
@@ -455,11 +455,12 @@ static NSMapTable *originalCache;
 
 - (void)stop
 {
-    NSLog(@"Stopping Action %@ (%p) (%lu to be reverted)", self , self, (unsigned long)[self.appliedTo count]);
-    // Stop this change from applying in future
-    [MPSwizzler unswizzleSelector:self.swizzleSelector
-                          onClass:self.swizzleClass
-                            named:self.name];
+    if (self.swizzle && self.swizzleClass != nil) {
+        // Stop this change from applying in future
+        [MPSwizzler unswizzleSelector:self.swizzleSelector
+                              onClass:self.swizzleClass
+                                named:self.name];
+    }
 
     if (self.original) {
         // Undo the changes with the original values specified in the action
@@ -490,7 +491,6 @@ static NSMapTable *originalCache;
                                                            toLeaf:view];
         for (NSInvocation *invocation in cacheInvocations) {
             if (![originalCache objectForKey:invocation.target]) {
-                NSLog(@"caching original image");
                 // Retrieve the image through a void* and then
                 // __bridge cast to force a retain. If we populated
                 // originalImage directly from getReturnValue, it would
@@ -517,7 +517,6 @@ static NSMapTable *originalCache;
                     break;
                 }
             }
-            NSLog(@"restoring original image");
             [[self class] executeSelector:self.selector withArgs:originalArgs onObjects:@[o]];
             [originalCache removeObjectForKey:o];
         }
@@ -546,7 +545,6 @@ static NSMapTable *originalCache;
 {
     NSMutableArray *invocations = [NSMutableArray array];
     if (objects && [objects count] > 0) {
-        NSLog(@"Invoking on %lu objects", (unsigned long)[objects count]);
         for (NSObject *o in objects) {
             NSMethodSignature *signature = [o methodSignatureForSelector:selector];
             if (signature != nil) {
@@ -557,7 +555,7 @@ static NSMapTable *originalCache;
                     [invocation setSelector:selector];
                     for (NSUInteger i = 0; i < requiredArgs; i++) {
 
-                        NSArray *argTuple = [args objectAtIndex:i];
+                        NSArray *argTuple = args[i];
                         id arg = transformValue(argTuple[0], argTuple[1]);
 
                         // Unpack NSValues to their base types.
@@ -574,22 +572,19 @@ static NSMapTable *originalCache;
                         }
                     }
                     @try {
-                        NSLog(@"Invoking on %p", o);
                         [invocation invokeWithTarget:o];
                     }
                     @catch (NSException *exception) {
-                        NSLog(@"Exception during invocation: %@", exception);
+                        MixpanelError(@"Exception during invocation: %@", exception);
                     }
                     [invocations addObject:invocation];
                 } else {
-                    NSLog(@"Not enough args");
+                    MixpanelError(@"Not enough args");
                 }
             } else {
-                NSLog(@"No method found for %@", NSStringFromSelector(selector));
+                MixpanelError(@"No method found for %@", NSStringFromSelector(selector));
             }
         }
-    } else {
-        NSLog(@"No objects matching pattern");
     }
     return [invocations copy];
 }
@@ -629,19 +624,19 @@ static NSMapTable *originalCache;
     // Required parameters
     NSString *name = object[@"name"];
     if (![name isKindOfClass:[NSString class]]) {
-        NSLog(@"invalid name: %@", name);
+        MixpanelError(@"invalid name: %@", name);
         return nil;
     }
 
     NSString *encoding = object[@"encoding"];
     if (![encoding isKindOfClass:[NSString class]]) {
-        NSLog(@"invalid encoding: %@", encoding);
+        MixpanelError(@"invalid encoding: %@", encoding);
         return nil;
     }
 
     MPTweakValue value = object[@"value"];
     if (value == nil) {
-        NSLog(@"invalid value: %@", value);
+        MixpanelError(@"invalid value: %@", value);
         return nil;
     }
 
@@ -650,14 +645,14 @@ static NSMapTable *originalCache;
                                           value:value];
 }
 
-- (id)init
+- (instancetype)init
 {
     [NSException raise:@"NotSupported" format:@"Please call initWithName:name encoding:encoding value:value"];
     return nil;
 
 }
 
-- (id)initWithName:(NSString *)name
+- (instancetype)initWithName:(NSString *)name
           encoding:(NSString *)encoding
              value:(MPTweakValue)value
 {
@@ -671,7 +666,7 @@ static NSMapTable *originalCache;
 
 #pragma mark NSCoding
 
-- (id)initWithCoder:(NSCoder *)aDecoder
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super init]) {
         self.name = [aDecoder decodeObjectForKey:@"name"];

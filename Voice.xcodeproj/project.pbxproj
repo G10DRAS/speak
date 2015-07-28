@@ -51,6 +51,8 @@
 		38BAE48D1B3FCC480079250F /* SGProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38BAE48A1B3FCC480079250F /* SGProgressView.m */; };
 		38BAE48E1B3FCC480079250F /* UINavigationController+SGProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 38BAE48C1B3FCC480079250F /* UINavigationController+SGProgress.m */; };
 		38C21E191A11F3340017BA6E /* nav_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 38C21E181A11F3340017BA6E /* nav_bg.png */; };
+		38D593A91B66EE1300A761F9 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38487FEB19BD216A0016EE5E /* CFNetwork.framework */; };
+		38D593AB1B66EE2400A761F9 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38D593AA1B66EE2400A761F9 /* StoreKit.framework */; };
 		38E5D8AD1B62002400D9886D /* LanguageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E5D8AC1B62002400D9886D /* LanguageTableViewController.m */; };
 		38E8CDBF198481C100FAA465 /* EAIntroPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E8CDBC198481C100FAA465 /* EAIntroPage.m */; };
 		38E8CDC0198481C100FAA465 /* EAIntroView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E8CDBE198481C100FAA465 /* EAIntroView.m */; };
@@ -149,6 +151,7 @@
 		38BAE48C1B3FCC480079250F /* UINavigationController+SGProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+SGProgress.m"; sourceTree = "<group>"; };
 		38C21E181A11F3340017BA6E /* nav_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav_bg.png; sourceTree = "<group>"; };
 		38CF2DC019BD0ACF002FCF26 /* libPods-Voice-Mixpanel.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-Voice-Mixpanel.a"; path = "Pods/build/Debug-iphoneos/libPods-Voice-Mixpanel.a"; sourceTree = "<group>"; };
+		38D593AA1B66EE2400A761F9 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		38E5D8AB1B62002400D9886D /* LanguageTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LanguageTableViewController.h; sourceTree = "<group>"; };
 		38E5D8AC1B62002400D9886D /* LanguageTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LanguageTableViewController.m; sourceTree = "<group>"; };
 		38E8CDBB198481C100FAA465 /* EAIntroPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAIntroPage.h; sourceTree = "<group>"; };
@@ -158,8 +161,9 @@
 		38E8CDC11984826000FAA465 /* TutorialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialViewController.h; sourceTree = "<group>"; };
 		38E8CDC21984826000FAA465 /* TutorialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialViewController.m; sourceTree = "<group>"; };
 		38F6510E1B648A9600EB29DE /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		602FD7655A7F4809A6A9568E /* Pods-Voice.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Voice.xcconfig"; path = "Pods/Pods-Voice.xcconfig"; sourceTree = "<group>"; };
+		7E0986DDCDF83772A939AC35 /* Pods-Voice.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Voice.release.xcconfig"; path = "Pods/Target Support Files/Pods-Voice/Pods-Voice.release.xcconfig"; sourceTree = "<group>"; };
 		C5BFE464AC3F4581BB89398C /* libPods-Voice.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Voice.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E87D9326EAD3E531E511BE8B /* Pods-Voice.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Voice.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Voice/Pods-Voice.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,8 +171,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				38F6510F1B648A9600EB29DE /* AudioToolbox.framework in Frameworks */,
+				38D593AB1B66EE2400A761F9 /* StoreKit.framework in Frameworks */,
 				38487FF419BD23460016EE5E /* SystemConfiguration.framework in Frameworks */,
+				38D593A91B66EE1300A761F9 /* CFNetwork.framework in Frameworks */,
+				38F6510F1B648A9600EB29DE /* AudioToolbox.framework in Frameworks */,
 				38487FF319BD23330016EE5E /* CoreTelephony.framework in Frameworks */,
 				38487FF219BD21900016EE5E /* libicucore.dylib in Frameworks */,
 				382931D419AFBE86003EC833 /* libxml2.dylib in Frameworks */,
@@ -190,6 +196,7 @@
 		3026B96E677F43728105778B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				38D593AA1B66EE2400A761F9 /* StoreKit.framework */,
 				38F6510E1B648A9600EB29DE /* AudioToolbox.framework */,
 				38487FF119BD21900016EE5E /* libicucore.dylib */,
 				38487FEF19BD21770016EE5E /* Foundation.framework */,
@@ -216,8 +223,8 @@
 				385CFA0D19842FAF00CF9563 /* JSON */,
 				385CF9E919842B4F00CF9563 /* VoiceTests */,
 				385CF9D119842B4F00CF9563 /* Products */,
-				602FD7655A7F4809A6A9568E /* Pods-Voice.xcconfig */,
 				3026B96E677F43728105778B /* Frameworks */,
+				47C70CCCB127C683BFE3130F /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -387,6 +394,15 @@
 			path = "Tutorial Slideshow";
 			sourceTree = "<group>";
 		};
+		47C70CCCB127C683BFE3130F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E87D9326EAD3E531E511BE8B /* Pods-Voice.debug.xcconfig */,
+				7E0986DDCDF83772A939AC35 /* Pods-Voice.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -510,7 +526,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-Voice-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Voice/Pods-Voice-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		82D45BCB756A4EF1B00DAC83 /* Check Pods Manifest.lock */ = {
@@ -599,6 +615,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = (
+					"$(ARCHS_STANDARD)",
+					arm64,
+					armv7s,
+					armv7,
+				);
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -640,6 +662,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = (
+					"$(ARCHS_STANDARD)",
+					arm64,
+					armv7s,
+					armv7,
+				);
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -666,6 +694,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				METAL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -673,9 +702,14 @@
 		};
 		385CF9F119842B4F00CF9563 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 602FD7655A7F4809A6A9568E /* Pods-Voice.xcconfig */;
+			baseConfigurationReference = E87D9326EAD3E531E511BE8B /* Pods-Voice.debug.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
+				ARCHS = (
+					"$(ARCHS_STANDARD)",
+					armv7,
+					armv7s,
+					arm64,
+				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -691,17 +725,27 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 				);
-				OTHER_LDFLAGS = "-ObjC";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"$(inherited)",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Debug;
 		};
 		385CF9F219842B4F00CF9563 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 602FD7655A7F4809A6A9568E /* Pods-Voice.xcconfig */;
+			baseConfigurationReference = 7E0986DDCDF83772A939AC35 /* Pods-Voice.release.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
+				ARCHS = (
+					"$(ARCHS_STANDARD)",
+					armv7,
+					armv7s,
+					arm64,
+				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -717,9 +761,14 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 				);
-				OTHER_LDFLAGS = "-ObjC";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"$(inherited)",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Release;
 		};

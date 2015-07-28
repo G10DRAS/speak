@@ -15,6 +15,7 @@
 #import "ELCImagePickerHeader.h"
 
 #import "Mixpanel.h"
+#import "Appirater.h"
 #import "CVCameraViewController.h"
 #import <AVFoundation/AVFoundation.h>
 

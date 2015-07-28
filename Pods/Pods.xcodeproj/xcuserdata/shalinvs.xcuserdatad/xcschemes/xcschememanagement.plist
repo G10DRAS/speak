@@ -4,6 +4,16 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Appirater.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-Voice-Appirater.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-Voice-Mixpanel.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -17,12 +27,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0187295B277E4C12AF0BDDA9</key>
+		<key>04686C528CD2C3C82678F01D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>724923F33C2B4F62BC16BD9D</key>
+		<key>872A9A174658945ACDAC2F6E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BFAF73F36D3D9A59FC64E212</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EFAC10ED1FDE10E21D5D0C4E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
