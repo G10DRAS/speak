@@ -11,8 +11,6 @@
 #import "SettingsViewController.h"
 #import "TutorialViewController.h"
 #import <MobileCoreServices/MobileCoreServices.h>
-#import "ELCImagePickerHeader.h"
-#import "ELCImagePickerHeader.h"
 #import <CTAssetsPickerController/CTAssetsPickerController.h>
 
 #import "Mixpanel.h"
@@ -28,7 +26,7 @@ static NSString* theOCRText;
 
 @class TalkViewController;
 
-@interface ViewController : UIViewController <UINavigationControllerDelegate, UIAlertViewDelegate, ELCImagePickerControllerDelegate, CTAssetsPickerControllerDelegate> {
+@interface ViewController : UIViewController <UINavigationControllerDelegate, UIAlertViewDelegate, CTAssetsPickerControllerDelegate> {
     NSMutableData *receivedData;
     BOOL isAuthenticating;
     BOOL switchToAuto;

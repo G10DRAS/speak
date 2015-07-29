@@ -377,16 +377,6 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
                                                     @"Method": @"Photo Library",
                                                     }];
     
-    // clear the array of images
-//    ELCImagePickerController *elcPicker = [[ELCImagePickerController alloc] initImagePicker];
-//    
-//    elcPicker.maximumImagesCount = 10;
-//    elcPicker.returnsOriginalImage =YES; //Only return the fullScreenImage, not the fullResolutionImage
-//    elcPicker.imagePickerDelegate = self;
-//    elcPicker.onOrder = YES;
-//    [self presentViewController:elcPicker animated:YES completion:nil];
-    
-    
     // request authorization status
     [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status){
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -467,62 +457,30 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     // Start Processing
     [self recognizePhoto];
 }
-
-- (void)elcImagePickerController:(ELCImagePickerController *)picker didFinishPickingMediaWithInfo:(NSArray *)info
+- (BOOL)assetsPickerController:(CTAssetsPickerController *)picker shouldSelectAsset:(PHAsset *)asset
 {
-    [self prepareToSwitchViews];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    NSInteger max = 10;
     
-    NSMutableArray *images = [NSMutableArray arrayWithCapacity:[info count]];
-    for (NSDictionary *dict in info) {
-        if ([dict objectForKey:UIImagePickerControllerMediaType] == ALAssetTypePhoto){
-            if ([dict objectForKey:UIImagePickerControllerOriginalImage]){
-                UIImage *photo = [dict objectForKey:UIImagePickerControllerOriginalImage];
-                UIImage *image = photo;
-                [images addObject:image];
-            } else {
-                NSLog(@"UIImagePickerControllerReferenceURL = %@", dict);
-            }
-        } else if ([dict objectForKey:UIImagePickerControllerMediaType] == ALAssetTypeVideo){
-            if ([dict objectForKey:UIImagePickerControllerOriginalImage]){
-                UIImage *photo = [dict objectForKey:UIImagePickerControllerOriginalImage];
-                UIImage *image = photo;
-                [images addObject:image];
-            } else {
-                NSLog(@"UIImagePickerControllerReferenceURL = %@", dict);
-            }
-        } else {
-            NSLog(@"Uknown asset type");
-        }
+    // show alert gracefully
+    if (picker.selectedAssets.count >= max)
+    {
+        UIAlertController *alert =
+        [UIAlertController alertControllerWithTitle:@"Attention"
+                                            message:[NSString stringWithFormat:@"Please select not more than %ld assets", (long)max]
+                                     preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *action =
+        [UIAlertAction actionWithTitle:@"OK"
+                                 style:UIAlertActionStyleDefault
+                               handler:nil];
+        
+        [alert addAction:action];
+        
+        [picker presentViewController:alert animated:YES completion:nil];
     }
-    NSMutableArray *imgs = [[NSMutableArray alloc] init];
-    for (int i = 0; i < [images count]; i++) {
-        NSData *imageData = UIImagePNGRepresentation([images objectAtIndex:i]);
-        [imgs addObject:imageData];
-    }
-    [[NSUserDefaults standardUserDefaults] setObject:imgs forKey:@"ImagesArray"];
     
-    self.imageView.image = [images objectAtIndex:0];
-    
-    // Scale the image
-    UIImage *myScaledImage = [self imageWithImage:self.imageView.image scaledToSize:CGSizeMake(self.imageView.image.size.width * .8, self.imageView.image.size.height * .8)]; // .8 is also 80% of the image's original quality
-    self.imageView.image = myScaledImage;
-    
-    // Create path for image.
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    imagePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"image.png"];
-    
-    // Save image to disk.
-    [UIImagePNGRepresentation(self.imageView.image) writeToFile:imagePath atomically:YES];
-    NSLog(@"First Image's Path: %@", imagePath);
-    
-    // Start Processing
-    [self recognizePhoto];
-}
-
-- (void)elcImagePickerControllerDidCancel:(ELCImagePickerController *)picker
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
+    // limit selection to max
+    return (picker.selectedAssets.count < max);
 }
 
 /*---------------------------------
