@@ -27,7 +27,7 @@
     if (self) {
         //Sets a reasonable default bigger then 0 for columns
         //So that we don't have a divide by 0 scenario
-        self.columns = 4;
+        self.columns = 5;
     }
     return self;
 }
@@ -36,7 +36,12 @@
 {
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 	[self.tableView setAllowsSelection:NO];
+    
+    self.assetGroup.isAccessibilityElement = NO;
+    self.elcAssets.isAccessibilityElement = NO;
+    self.isAccessibilityElement = NO;
 
+    
     NSMutableArray *tempArray = [[NSMutableArray alloc] init];
     self.elcAssets = tempArray;
 	

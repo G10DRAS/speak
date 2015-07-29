@@ -41,6 +41,7 @@
         self.maximumImagesCount = 4;
         self.returnsImage = YES;
     }
+    self.isAccessibilityElement = NO;
     return self;
 }
 

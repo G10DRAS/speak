@@ -34,6 +34,9 @@
         
         NSMutableArray *overlayArray = [[NSMutableArray alloc] initWithCapacity:4];
         self.overlayViewArray = overlayArray;
+        
+        self.isAccessibilityElement = YES;
+
 	}
 	return self;
 }

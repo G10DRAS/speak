@@ -13,6 +13,7 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "ELCImagePickerHeader.h"
 #import "ELCImagePickerHeader.h"
+#import <CTAssetsPickerController/CTAssetsPickerController.h>
 
 #import "Mixpanel.h"
 #import "Appirater.h"
@@ -27,7 +28,7 @@ static NSString* theOCRText;
 
 @class TalkViewController;
 
-@interface ViewController : UIViewController <UINavigationControllerDelegate, UIAlertViewDelegate, ELCImagePickerControllerDelegate> {
+@interface ViewController : UIViewController <UINavigationControllerDelegate, UIAlertViewDelegate, ELCImagePickerControllerDelegate, CTAssetsPickerControllerDelegate> {
     NSMutableData *receivedData;
     BOOL isAuthenticating;
     BOOL switchToAuto;
@@ -38,6 +39,9 @@ static NSString* theOCRText;
     
     // FOR SETTINGS BUTTON
     UIButton *rightButton;
+    
+    NSData *tempData;
+    UIImage *im;
     
     NSString *imagePath;
     NSString *imagePathSize;
@@ -63,6 +67,11 @@ static NSString* theOCRText;
 
 //@property (strong, nonatomic) IBOutlet UIPickerView *picker;
 //@property (strong, nonatomic) IBOutlet UIPickerView *languagePicker;
+
+@property (nonatomic, strong) PHImageRequestOptions *requestOptions;
+@property (nonatomic, copy) NSArray *assets;
+
+
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
 
 @property (strong, nonatomic) IBOutlet UIButton *imageLibrary;

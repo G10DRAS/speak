@@ -45,6 +45,14 @@
     imageNumber = 1;
     speechNumber = 1;
     
+    // If no language selected, defualt is english
+    NSObject *ocr = [[NSUserDefaults standardUserDefaults] objectForKey:@"languageForOCR"];
+    NSObject *tts = [[NSUserDefaults standardUserDefaults] objectForKey:@"languageForTTS"];
+    
+    if(ocr == nil || tts == nil){
+        [[NSUserDefaults standardUserDefaults] setObject:@"en-US" forKey:@"languageForTTS"];
+        [[NSUserDefaults standardUserDefaults] setObject:@"en" forKey:@"languageForOCR"];
+    }
     
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"didClickShare"];
 

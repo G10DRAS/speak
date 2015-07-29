@@ -1,15 +1,21 @@
 PODS:
   - Appirater (2.0.5)
+  - CTAssetsPickerController (3.0.0):
+    - PureLayout (~> 2.0.0)
   - Mixpanel (2.8.2):
     - Mixpanel/Mixpanel (= 2.8.2)
   - Mixpanel/Mixpanel (2.8.2)
+  - PureLayout (2.0.6)
 
 DEPENDENCIES:
   - Appirater
+  - CTAssetsPickerController (~> 3.0.0)
   - Mixpanel
 
 SPEC CHECKSUMS:
   Appirater: e7c0a47fb67ee5041ce8479e6ba960927fb40264
+  CTAssetsPickerController: 4f88e226f23fbe67b421cf8b9520ebfb03ab82ff
   Mixpanel: f4d71ac2a306e7cda6ad03d4a2be249a0fd7a967
+  PureLayout: f25f0bb904d5ccfe6e31da3cb869185259f02e0d
 
 COCOAPODS: 0.35.0

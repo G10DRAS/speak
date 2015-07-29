@@ -37,6 +37,10 @@
     
     ALAssetsLibrary *assetLibrary = [[ALAssetsLibrary alloc] init];
     self.library = assetLibrary;
+    
+    self.assetGroups.isAccessibilityElement = NO;
+    self.library.isAccessibilityElement = NO;
+    self.isAccessibilityElement = NO;
 
     // Load Albums into assetGroups
     dispatch_async(dispatch_get_main_queue(), ^

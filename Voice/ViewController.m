@@ -134,9 +134,13 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 
     self.imageView.image = [UIImage imageNamed:nil];
     
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    self.requestOptions = [[PHImageRequestOptions alloc] init];
+    self.requestOptions.resizeMode   = PHImageRequestOptionsResizeModeExact;
+    self.requestOptions.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
+    self.requestOptions.synchronous = true;
     
-    
+    self.assets = [[NSMutableArray alloc] init];
+
     static dispatch_once_t once;
     dispatch_once(&once, ^ {
         willSpeak = NO;
@@ -374,13 +378,29 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
                                                     }];
     
     // clear the array of images
-    ELCImagePickerController *elcPicker = [[ELCImagePickerController alloc] initImagePicker];
+//    ELCImagePickerController *elcPicker = [[ELCImagePickerController alloc] initImagePicker];
+//    
+//    elcPicker.maximumImagesCount = 10;
+//    elcPicker.returnsOriginalImage =YES; //Only return the fullScreenImage, not the fullResolutionImage
+//    elcPicker.imagePickerDelegate = self;
+//    elcPicker.onOrder = YES;
+//    [self presentViewController:elcPicker animated:YES completion:nil];
     
-    elcPicker.maximumImagesCount = 10;
-    elcPicker.returnsOriginalImage =YES; //Only return the fullScreenImage, not the fullResolutionImage
-    elcPicker.imagePickerDelegate = self;
-    elcPicker.onOrder = YES;
-    [self presentViewController:elcPicker animated:YES completion:nil];
+    
+    // request authorization status
+    [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status){
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            // init picker
+            CTAssetsPickerController *picker = [[CTAssetsPickerController alloc] init];
+            
+            // set delegate
+            picker.delegate = self;
+            
+            // present picker
+            [self presentViewController:picker animated:YES completion:nil];
+        });
+    }];
     
 }
 
@@ -396,6 +416,58 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 // Image Picker Delegate Methods
 //
 //
+- (void)assetsPickerController:(CTAssetsPickerController *)picker didFinishPickingAssets:(NSArray *)assets
+{
+    [picker dismissViewControllerAnimated:YES completion:nil];
+
+    self.assets = [NSMutableArray arrayWithArray:assets];
+    PHImageManager *manager = [PHImageManager defaultManager];
+    NSMutableArray *images = [NSMutableArray arrayWithCapacity:[assets count]];
+
+    // assets contains PHAsset objects.
+     __block UIImage *ima;
+
+    for (PHAsset *asset in self.assets) {
+        // Do something with the asset
+        
+        [manager requestImageForAsset:asset
+                           targetSize:PHImageManagerMaximumSize
+                          contentMode:PHImageContentModeDefault
+                              options:self.requestOptions
+                        resultHandler:^void(UIImage *image, NSDictionary *info) {
+                            ima = image;
+                        }];
+        
+        [images addObject:ima];
+    }
+    
+    [self prepareToSwitchViews];
+    
+    NSMutableArray *imgs = [[NSMutableArray alloc] init];
+    for (int i = 0; i < [images count]; i++) {
+        NSData *imageData = UIImagePNGRepresentation([images objectAtIndex:i]);
+        [imgs addObject:imageData];
+    }
+    [[NSUserDefaults standardUserDefaults] setObject:imgs forKey:@"ImagesArray"];
+    
+    self.imageView.image = [images objectAtIndex:0];
+    
+    // Scale the image
+    UIImage *myScaledImage = [self imageWithImage:self.imageView.image scaledToSize:CGSizeMake(self.imageView.image.size.width * .8, self.imageView.image.size.height * .8)]; // .8 is also 80% of the image's original quality
+    self.imageView.image = myScaledImage;
+    
+    // Create path for image.
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    imagePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"image.png"];
+    
+    // Save image to disk.
+    [UIImagePNGRepresentation(self.imageView.image) writeToFile:imagePath atomically:YES];
+    NSLog(@"First Image's Path: %@", imagePath);
+    
+    // Start Processing
+    [self recognizePhoto];
+}
+
 - (void)elcImagePickerController:(ELCImagePickerController *)picker didFinishPickingMediaWithInfo:(NSArray *)info
 {
     [self prepareToSwitchViews];

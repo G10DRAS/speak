@@ -44,6 +44,7 @@
 
         self.asset.accessibilityLabel = [NSString stringWithFormat:@"%@. %@. %@. %@.", type, orientation, date, location];
         
+        
 
         if ([_parent respondsToSelector:@selector(shouldSelectAsset:)]) {
             if (![_parent shouldSelectAsset:self]) {
