@@ -147,12 +147,6 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
         [self.camView setupCameraView];
         [self.camView setEnableBorderDetection:YES];
         
-        // Auto or Manual
-        [self autoOrManual];
-        
-        // Timer
-        labelUpdaterTimer = [NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(updateLabel) userInfo:nil repeats:YES];
-        
         // Set the done button and the imageNumber to invisible initially, imageLibrary should be yes
         self.imageNumber.alpha = 0.0;
         self.doneButton.alpha = 0.0;
@@ -168,9 +162,17 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     // Dispose of any resources that can be recreated.
 }
 - (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
     [self.camView start];
+    
+    // Auto or Manual
+    [self autoOrManual];
+    
+    // Timer
+    labelUpdaterTimer = [NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(updateLabel) userInfo:nil repeats:YES];
 }
 - (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
     [self.camView stop];
 }
 

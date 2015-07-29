@@ -46,21 +46,6 @@
                                     <action selector="doneButtonClicked:" destination="Hb5-Gl-zTd" eventType="touchUpInside" id="NUN-2f-8zQ"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nl5-PE-Y2j">
-                                <rect key="frame" x="16" y="510" width="38" height="38"/>
-                                <accessibility key="accessibilityConfiguration" hint="Double-tap to reset all the currently  taken pictures." label="Reset pictures"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="38" id="0Y2-Jn-FIi"/>
-                                    <constraint firstAttribute="height" constant="38" id="oCj-Uk-BRh"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="1"/>
-                                <state key="normal" image="cancel">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="clearButtonClicked:" destination="Hb5-Gl-zTd" eventType="touchUpInside" id="9oT-cK-iLU"/>
-                                </connections>
-                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bK8-29-emF" customClass="CVCameraViewController">
                                 <rect key="frame" x="0.0" y="64" width="320" height="380"/>
                                 <subviews>
@@ -121,6 +106,21 @@
                                 </state>
                                 <connections>
                                     <action selector="switchFilters:" destination="Hb5-Gl-zTd" eventType="touchUpInside" id="OOI-g1-gpL"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nl5-PE-Y2j">
+                                <rect key="frame" x="16" y="510" width="38" height="38"/>
+                                <accessibility key="accessibilityConfiguration" hint="Double-tap to reset all the currently  taken pictures." label="Reset pictures"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="38" id="0Y2-Jn-FIi"/>
+                                    <constraint firstAttribute="height" constant="38" id="oCj-Uk-BRh"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="1"/>
+                                <state key="normal" image="cancel">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="clearButtonClicked:" destination="Hb5-Gl-zTd" eventType="touchUpInside" id="9oT-cK-iLU"/>
                                 </connections>
                             </button>
                         </subviews>
