@@ -33,6 +33,8 @@ static NSString* theOCRText;
     
     BOOL willSpeak;
     
+    BOOL isImagePicker;
+    
     BOOL filterType; // YES is B&W and NO is Regular
     
     // FOR SETTINGS BUTTON

@@ -42,6 +42,8 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:NO];
     
     mixpanel = [Mixpanel sharedInstance];
+    
+    isImagePicker = NO;
 
 //    self.imageView.image = nil;
     
@@ -134,11 +136,20 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 
     self.imageView.image = [UIImage imageNamed:nil];
     
+    // for image picker
     self.requestOptions = [[PHImageRequestOptions alloc] init];
     self.requestOptions.resizeMode   = PHImageRequestOptionsResizeModeExact;
     self.requestOptions.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
     self.requestOptions.synchronous = true;
     
+    // Set the done button and the imageNumber to invisible initially, imageLibrary should be yes
+    self.imageNumber.alpha = 0.0;
+    self.doneButton.alpha = 0.0;
+    self.clearButton.alpha = 0.0;
+    self.imageLibrary.alpha = 1.0;
+    
+    self.imageNumber.text = [NSString stringWithFormat:@"0"];
+
     static dispatch_once_t once;
     dispatch_once(&once, ^ {
         willSpeak = NO;
@@ -146,14 +157,6 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
         // Start Cam
         [self.camView setupCameraView];
         [self.camView setEnableBorderDetection:YES];
-        
-        // Set the done button and the imageNumber to invisible initially, imageLibrary should be yes
-        self.imageNumber.alpha = 0.0;
-        self.doneButton.alpha = 0.0;
-        self.clearButton.alpha = 0.0;
-        self.imageLibrary.alpha = 1.0;
-        
-        self.imageNumber.text = [NSString stringWithFormat:@"0"];
     });
 }
 - (void)didReceiveMemoryWarning
@@ -163,13 +166,23 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 }
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [self.camView start];
+    if (isImagePicker == NO) {
+        [self.camView start];
+    }
     
     // Auto or Manual
     [self autoOrManual];
     
     // Timer
     labelUpdaterTimer = [NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(updateLabel) userInfo:nil repeats:YES];
+
+    // Set the done button and the imageNumber to invisible initially, imageLibrary should be yes
+    self.imageNumber.alpha = 0.0;
+    self.doneButton.alpha = 0.0;
+    self.clearButton.alpha = 0.0;
+    self.imageLibrary.alpha = 1.0;
+    
+    self.imageNumber.text = [NSString stringWithFormat:@"0"];
 }
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
@@ -412,6 +425,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 //
 - (void)assetsPickerController:(CTAssetsPickerController *)picker didFinishPickingAssets:(NSArray *)assets
 {
+    isImagePicker = YES;
     [picker dismissViewControllerAnimated:YES completion:nil];
 
     PHImageManager *manager = [PHImageManager defaultManager];
