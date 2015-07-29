@@ -139,8 +139,6 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     self.requestOptions.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
     self.requestOptions.synchronous = true;
     
-    self.assets = [[NSMutableArray alloc] init];
-
     static dispatch_once_t once;
     dispatch_once(&once, ^ {
         willSpeak = NO;
@@ -414,14 +412,13 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 {
     [picker dismissViewControllerAnimated:YES completion:nil];
 
-    self.assets = [NSMutableArray arrayWithArray:assets];
     PHImageManager *manager = [PHImageManager defaultManager];
     NSMutableArray *images = [NSMutableArray arrayWithCapacity:[assets count]];
 
     // assets contains PHAsset objects.
      __block UIImage *ima;
 
-    for (PHAsset *asset in self.assets) {
+    for (PHAsset *asset in assets) {
         // Do something with the asset
         
         [manager requestImageForAsset:asset

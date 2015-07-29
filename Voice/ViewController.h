@@ -38,9 +38,6 @@ static NSString* theOCRText;
     // FOR SETTINGS BUTTON
     UIButton *rightButton;
     
-    NSData *tempData;
-    UIImage *im;
-    
     NSString *imagePath;
     NSString *imagePathSize;
     NSString *imageFileID;
@@ -67,7 +64,6 @@ static NSString* theOCRText;
 //@property (strong, nonatomic) IBOutlet UIPickerView *languagePicker;
 
 @property (nonatomic, strong) PHImageRequestOptions *requestOptions;
-@property (nonatomic, copy) NSArray *assets;
 
 
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
