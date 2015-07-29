@@ -387,6 +387,10 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
             // set delegate
             picker.delegate = self;
             
+            // create options for fetching photo only
+            PHFetchOptions *fetchOptions = [PHFetchOptions new];
+            fetchOptions.predicate = [NSPredicate predicateWithFormat:@"mediaType == %d", PHAssetMediaTypeImage];
+            
             // present picker
             [self presentViewController:picker animated:YES completion:nil];
         });
