@@ -144,6 +144,8 @@
     self.pageLabel.text = [NSString stringWithFormat:@"Page %i", speechNumber];
     
     NSLog(@"imageArray Count: %d", (int)[imageArray count]);
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -379,6 +381,7 @@
     NSData *file1Data = [[NSData alloc] initWithContentsOfFile:imagePath];
     NSString *url = [NSString stringWithFormat:@"https://www.googleapis.com/upload/drive/v2/files?uploadType=media&convert=true&ocr=true&ocrLanguage=%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"languageForOCR"]];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:url]];
+    NSLog(@"URL TO CHECK: %@",url);
     
     // Headers
     [request setValue:[NSString stringWithFormat:@"%llu", size] forHTTPHeaderField:@"Content-length"];

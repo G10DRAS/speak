@@ -1,10 +1,11 @@
 //
-//  SGProgressView.h
-//  SGNavigationProgress
+//  SBProgressView.h
+//  Voice
 //
-//  Created by Ben on 19/03/2014.
-//  Copyright (c) 2014 Ben. All rights reserved.
+//  Created by Shalin Shah on 7/29/15.
+//  Copyright (c) 2015 Shalin Shah. All rights reserved.
 //
+
 
 #import <UIKit/UIKit.h>
 

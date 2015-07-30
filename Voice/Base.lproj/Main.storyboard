@@ -172,25 +172,6 @@
             </objects>
             <point key="canvasLocation" x="938" y="359"/>
         </scene>
-        <!--Tutorial View Controller-->
-        <scene sceneID="Hh9-L4-RCw">
-            <objects>
-                <viewController storyboardIdentifier="TutorialView" id="eqI-Eu-fBI" customClass="TutorialViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="rGA-dU-me6"/>
-                        <viewControllerLayoutGuide type="bottom" id="Rfz-bS-U7V"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="BOp-Id-grU">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="AsJ-ty-8hP"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mGC-AW-C5F" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="750" y="1015"/>
-        </scene>
         <!--Settings View Controller-->
         <scene sceneID="Xjs-wI-mJe">
             <objects>
@@ -701,9 +682,6 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="eqI-Eu-fBI" kind="relationship" relationship="rootViewController" id="lLN-qI-SDW"/>
-                    </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="POw-uL-adF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

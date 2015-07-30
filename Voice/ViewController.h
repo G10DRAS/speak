@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "TalkViewController.h"
 #import "SettingsViewController.h"
-#import "TutorialViewController.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <CTAssetsPickerController/CTAssetsPickerController.h>
 

@@ -187,6 +187,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self.camView stop];
+    isImagePicker = NO;
 }
 
 /*---------------------------------

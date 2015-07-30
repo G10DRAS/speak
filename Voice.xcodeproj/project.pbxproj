@@ -36,15 +36,12 @@
 		385CFA3E1984346200CF9563 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 385CFA3D1984346200CF9563 /* MobileCoreServices.framework */; };
 		38631E8F1A6B879000DBA653 /* CVCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38631E8E1A6B879000DBA653 /* CVCameraViewController.m */; };
 		38AF6DF91A29B1FD00DE1A02 /* replay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38AF6DF81A29B1FD00DE1A02 /* replay@2x.png */; };
-		38BAE48D1B3FCC480079250F /* SGProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38BAE48A1B3FCC480079250F /* SGProgressView.m */; };
-		38BAE48E1B3FCC480079250F /* UINavigationController+SGProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 38BAE48C1B3FCC480079250F /* UINavigationController+SGProgress.m */; };
+		38B23F5E1B69A5C700FE00B0 /* SGProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B23F5D1B69A5C700FE00B0 /* SGProgressView.m */; };
+		38B23F611B69A61100FE00B0 /* UINavigationController+SGProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B23F601B69A61100FE00B0 /* UINavigationController+SGProgress.m */; };
 		38C21E191A11F3340017BA6E /* nav_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 38C21E181A11F3340017BA6E /* nav_bg.png */; };
 		38D593A91B66EE1300A761F9 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38487FEB19BD216A0016EE5E /* CFNetwork.framework */; };
 		38D593AB1B66EE2400A761F9 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38D593AA1B66EE2400A761F9 /* StoreKit.framework */; };
 		38E5D8AD1B62002400D9886D /* LanguageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E5D8AC1B62002400D9886D /* LanguageTableViewController.m */; };
-		38E8CDBF198481C100FAA465 /* EAIntroPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E8CDBC198481C100FAA465 /* EAIntroPage.m */; };
-		38E8CDC0198481C100FAA465 /* EAIntroView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E8CDBE198481C100FAA465 /* EAIntroView.m */; };
-		38E8CDC31984826000FAA465 /* TutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E8CDC21984826000FAA465 /* TutorialViewController.m */; };
 		38F6510F1B648A9600EB29DE /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38F6510E1B648A9600EB29DE /* AudioToolbox.framework */; };
 		D7B013562AE2461093433FEF /* libPods-Voice.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C5BFE464AC3F4581BB89398C /* libPods-Voice.a */; };
 /* End PBXBuildFile section */
@@ -111,21 +108,15 @@
 		38631E8D1A6B879000DBA653 /* CVCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVCameraViewController.h; sourceTree = "<group>"; };
 		38631E8E1A6B879000DBA653 /* CVCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CVCameraViewController.m; sourceTree = "<group>"; };
 		38AF6DF81A29B1FD00DE1A02 /* replay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "replay@2x.png"; sourceTree = "<group>"; };
-		38BAE4891B3FCC480079250F /* SGProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGProgressView.h; sourceTree = "<group>"; };
-		38BAE48A1B3FCC480079250F /* SGProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGProgressView.m; sourceTree = "<group>"; };
-		38BAE48B1B3FCC480079250F /* UINavigationController+SGProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+SGProgress.h"; sourceTree = "<group>"; };
-		38BAE48C1B3FCC480079250F /* UINavigationController+SGProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+SGProgress.m"; sourceTree = "<group>"; };
+		38B23F5C1B69A5C700FE00B0 /* SGProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGProgressView.h; sourceTree = "<group>"; };
+		38B23F5D1B69A5C700FE00B0 /* SGProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGProgressView.m; sourceTree = "<group>"; };
+		38B23F5F1B69A61100FE00B0 /* UINavigationController+SGProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+SGProgress.h"; sourceTree = "<group>"; };
+		38B23F601B69A61100FE00B0 /* UINavigationController+SGProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+SGProgress.m"; sourceTree = "<group>"; };
 		38C21E181A11F3340017BA6E /* nav_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav_bg.png; sourceTree = "<group>"; };
 		38CF2DC019BD0ACF002FCF26 /* libPods-Voice-Mixpanel.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-Voice-Mixpanel.a"; path = "Pods/build/Debug-iphoneos/libPods-Voice-Mixpanel.a"; sourceTree = "<group>"; };
 		38D593AA1B66EE2400A761F9 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		38E5D8AB1B62002400D9886D /* LanguageTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LanguageTableViewController.h; sourceTree = "<group>"; };
 		38E5D8AC1B62002400D9886D /* LanguageTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LanguageTableViewController.m; sourceTree = "<group>"; };
-		38E8CDBB198481C100FAA465 /* EAIntroPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAIntroPage.h; sourceTree = "<group>"; };
-		38E8CDBC198481C100FAA465 /* EAIntroPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAIntroPage.m; sourceTree = "<group>"; };
-		38E8CDBD198481C100FAA465 /* EAIntroView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAIntroView.h; sourceTree = "<group>"; };
-		38E8CDBE198481C100FAA465 /* EAIntroView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAIntroView.m; sourceTree = "<group>"; };
-		38E8CDC11984826000FAA465 /* TutorialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialViewController.h; sourceTree = "<group>"; };
-		38E8CDC21984826000FAA465 /* TutorialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialViewController.m; sourceTree = "<group>"; };
 		38F6510E1B648A9600EB29DE /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		7E0986DDCDF83772A939AC35 /* Pods-Voice.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Voice.release.xcconfig"; path = "Pods/Target Support Files/Pods-Voice/Pods-Voice.release.xcconfig"; sourceTree = "<group>"; };
 		C5BFE464AC3F4581BB89398C /* libPods-Voice.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Voice.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -182,9 +173,8 @@
 			children = (
 				382931D219AFBE6B003EC833 /* libxml2.dylib */,
 				385CF9D219842B4F00CF9563 /* Voice */,
+				38B23F3C1B69A52900FE00B0 /* Progress */,
 				385CF9F619842FAF00CF9563 /* Images */,
-				38BAE4881B3FCC480079250F /* UINavigationController+SGProgress */,
-				38E8CDBA198481C100FAA465 /* Tutorial Slideshow */,
 				385CFA0D19842FAF00CF9563 /* JSON */,
 				385CF9E919842B4F00CF9563 /* VoiceTests */,
 				385CF9D119842B4F00CF9563 /* Products */,
@@ -214,8 +204,6 @@
 				385CF9DD19842B4F00CF9563 /* Main.storyboard */,
 				385CFA3A1984309A00CF9563 /* TalkViewController.h */,
 				385CFA3B1984309A00CF9563 /* TalkViewController.m */,
-				38E8CDC11984826000FAA465 /* TutorialViewController.h */,
-				38E8CDC21984826000FAA465 /* TutorialViewController.m */,
 				38E5D8AB1B62002400D9886D /* LanguageTableViewController.h */,
 				38E5D8AC1B62002400D9886D /* LanguageTableViewController.m */,
 				380550FA1A7CD6910099C7D3 /* FollowTableViewController.h */,
@@ -300,26 +288,15 @@
 			name = Camera;
 			sourceTree = "<group>";
 		};
-		38BAE4881B3FCC480079250F /* UINavigationController+SGProgress */ = {
+		38B23F3C1B69A52900FE00B0 /* Progress */ = {
 			isa = PBXGroup;
 			children = (
-				38BAE4891B3FCC480079250F /* SGProgressView.h */,
-				38BAE48A1B3FCC480079250F /* SGProgressView.m */,
-				38BAE48B1B3FCC480079250F /* UINavigationController+SGProgress.h */,
-				38BAE48C1B3FCC480079250F /* UINavigationController+SGProgress.m */,
+				38B23F5C1B69A5C700FE00B0 /* SGProgressView.h */,
+				38B23F5D1B69A5C700FE00B0 /* SGProgressView.m */,
+				38B23F5F1B69A61100FE00B0 /* UINavigationController+SGProgress.h */,
+				38B23F601B69A61100FE00B0 /* UINavigationController+SGProgress.m */,
 			);
-			path = "UINavigationController+SGProgress";
-			sourceTree = "<group>";
-		};
-		38E8CDBA198481C100FAA465 /* Tutorial Slideshow */ = {
-			isa = PBXGroup;
-			children = (
-				38E8CDBB198481C100FAA465 /* EAIntroPage.h */,
-				38E8CDBC198481C100FAA465 /* EAIntroPage.m */,
-				38E8CDBD198481C100FAA465 /* EAIntroView.h */,
-				38E8CDBE198481C100FAA465 /* EAIntroView.m */,
-			);
-			path = "Tutorial Slideshow";
+			name = Progress;
 			sourceTree = "<group>";
 		};
 		47C70CCCB127C683BFE3130F /* Pods */ = {
@@ -474,13 +451,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				38E8CDC31984826000FAA465 /* TutorialViewController.m in Sources */,
+				38B23F611B69A61100FE00B0 /* UINavigationController+SGProgress.m in Sources */,
+				38B23F5E1B69A5C700FE00B0 /* SGProgressView.m in Sources */,
 				385CFA3C1984309A00CF9563 /* TalkViewController.m in Sources */,
-				38BAE48D1B3FCC480079250F /* SGProgressView.m in Sources */,
 				385CFA3419842FAF00CF9563 /* SBJson4StreamParser.m in Sources */,
 				385CFA3819842FAF00CF9563 /* SBJson4StreamWriterState.m in Sources */,
 				385CF9DC19842B4F00CF9563 /* ViewController.m in Sources */,
-				38BAE48E1B3FCC480079250F /* UINavigationController+SGProgress.m in Sources */,
 				385CFA3619842FAF00CF9563 /* SBJson4StreamTokeniser.m in Sources */,
 				38E5D8AD1B62002400D9886D /* LanguageTableViewController.m in Sources */,
 				38631E8F1A6B879000DBA653 /* CVCameraViewController.m in Sources */,
@@ -489,11 +465,9 @@
 				380550FC1A7CD6910099C7D3 /* FollowTableViewController.m in Sources */,
 				385CFA3719842FAF00CF9563 /* SBJson4StreamWriter.m in Sources */,
 				385CF9D919842B4F00CF9563 /* AppDelegate.m in Sources */,
-				38E8CDC0198481C100FAA465 /* EAIntroView.m in Sources */,
 				385CFA3319842FAF00CF9563 /* SBJson4Parser.m in Sources */,
 				38597F2A1A23F26B0057D4E8 /* SettingsViewController.m in Sources */,
 				385CF9D619842B4F00CF9563 /* main.m in Sources */,
-				38E8CDBF198481C100FAA465 /* EAIntroPage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

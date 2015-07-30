@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 Shalin Shah. All rights reserved.
 //
 #import "AppDelegate.h"
-#import "TutorialViewController.h"
 #import "ViewController.h"
 #import "Mixpanel.h"
 #import "Appirater.h"
@@ -24,31 +23,13 @@
     [Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];
     [Appirater setAppId:@"903772588"];
 
-    if ([[NSUserDefaults standardUserDefaults] integerForKey:@"isFirstTimeInt"] == 20) {
-        // Set image capture mode to manual
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"IsAuto"];
+    // Set image capture mode to manual
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"IsAuto"];
 
-        ViewController *mainView = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"MainView"];
-        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:mainView];
-        self.window.rootViewController = navController;
-    } else {
-        // Since no one likes the tutorial, might as well remove it. So I am going to make it so the main view is always ViewController
+    ViewController *mainView = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"MainView"];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:mainView];
+    self.window.rootViewController = navController;
         
-        // Set image capture mode to manual
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"IsAuto"];
-        
-        ViewController *mainView = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"MainView"];
-        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:mainView];
-        self.window.rootViewController = navController;
-
-        
-        // Instantiate the tutorial view
-        
-        //        TutorialViewController *tutView = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"TutorialView"];
-        //        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:tutView];
-        //        self.window.rootViewController = navController;
-    }
-    
     NSError *error = NULL;
     AVAudioSession *session = [AVAudioSession sharedInstance];
     [session setCategory:AVAudioSessionCategoryPlayback error:&error];
