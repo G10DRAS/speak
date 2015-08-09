@@ -661,6 +661,7 @@
  ------------------------------- */
 
 -(void) makePDF {
+    NSLog(@"Creating pdf...");
     
     NSString *textToShare = @"";
     for (int i = 0; i < [imageArray count]; i++) {
