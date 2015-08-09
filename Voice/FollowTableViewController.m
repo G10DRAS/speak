@@ -1,6 +1,6 @@
 //
 //  FollowTableViewController.m
-//  
+//
 //
 //  Created by Shalin Shah on 1/31/15.
 //
@@ -52,19 +52,19 @@
     int twitter = 3;
     int facebook = 4;
     
-        if (website == indexPath.row) {
-            NSURL *url = [[NSURL alloc] initWithString:@"http://www.shalinshah.me/voice/"];
-            [[UIApplication sharedApplication] openURL:url];
-        } else if (blog == indexPath.row) {
-            NSURL *url = [[NSURL alloc] initWithString:@"https://www.shalinshah.me/voice/blog/"];
-            [[UIApplication sharedApplication] openURL:url];
-        } else if (twitter == indexPath.row) {
-            NSURL *url = [[NSURL alloc] initWithString:@"https://twitter.com/getvoiceios"];
-            [[UIApplication sharedApplication] openURL:url];
-        } else if (facebook == indexPath.row) {
-            NSURL *url = [[NSURL alloc] initWithString:@"https://www.facebook.com/getvoiceios"];
-            [[UIApplication sharedApplication] openURL:url];
-        }
+    if (website == indexPath.row) {
+        NSURL *url = [[NSURL alloc] initWithString:@"http://www.shalinshah.me/voice/"];
+        [[UIApplication sharedApplication] openURL:url];
+    } else if (blog == indexPath.row) {
+        NSURL *url = [[NSURL alloc] initWithString:@"https://www.shalinshah.me/voice/blog/"];
+        [[UIApplication sharedApplication] openURL:url];
+    } else if (twitter == indexPath.row) {
+        NSURL *url = [[NSURL alloc] initWithString:@"https://twitter.com/getvoiceios"];
+        [[UIApplication sharedApplication] openURL:url];
+    } else if (facebook == indexPath.row) {
+        NSURL *url = [[NSURL alloc] initWithString:@"https://www.facebook.com/getvoiceios"];
+        [[UIApplication sharedApplication] openURL:url];
+    }
 }
 
 @end

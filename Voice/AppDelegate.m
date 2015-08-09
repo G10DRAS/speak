@@ -11,25 +11,25 @@
 #import "Appirater.h"
 
 @interface AppDelegate ()
-            
+
 
 @end
 
 @implementation AppDelegate
-            
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     [Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];
     [Appirater setAppId:@"903772588"];
-
+    
     // Set image capture mode to manual
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"IsAuto"];
-
+    
     ViewController *mainView = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"MainView"];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:mainView];
     self.window.rootViewController = navController;
-        
+    
     NSError *error = NULL;
     AVAudioSession *session = [AVAudioSession sharedInstance];
     [session setCategory:AVAudioSessionCategoryPlayback error:&error];
@@ -56,7 +56,7 @@
     
     [Appirater appLaunched:YES];
     
-
+    
     // Override point for customization after application launch.
     return YES;
 }

@@ -44,8 +44,8 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     mixpanel = [Mixpanel sharedInstance];
     
     isImagePicker = NO;
-
-//    self.imageView.image = nil;
+    
+    //    self.imageView.image = nil;
     
     // Get the iphone's screen height and width
     screenRect = [[UIScreen mainScreen] bounds];
@@ -55,7 +55,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     // If no language selected, defualt is english
     NSObject *ocr = [[NSUserDefaults standardUserDefaults] objectForKey:@"languageForOCR"];
     NSObject *tts = [[NSUserDefaults standardUserDefaults] objectForKey:@"languageForTTS"];
-
+    
     if(ocr == nil || tts == nil){
         [[NSUserDefaults standardUserDefaults] setObject:@"en-US" forKey:@"languageForTTS"];
         [[NSUserDefaults standardUserDefaults] setObject:@"en" forKey:@"languageForOCR"];
@@ -113,7 +113,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     
     filterType = YES; // YES is B&W and NO is Regular
     self.filterButton.accessibilityLabel = [NSString stringWithFormat:@"Filter %s", filterType ? "Black and White" : "Regular"];
-
+    
     
     // NavBar is transparent
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
@@ -132,8 +132,8 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     tempImages = [[NSMutableArray alloc] init];
     
     [[NSUserDefaults standardUserDefaults] synchronize];
-
-
+    
+    
     self.imageView.image = [UIImage imageNamed:nil];
     
     // for image picker
@@ -149,7 +149,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     self.imageLibrary.alpha = 1.0;
     
     self.imageNumber.text = [NSString stringWithFormat:@"0"];
-
+    
     static dispatch_once_t once;
     dispatch_once(&once, ^ {
         willSpeak = NO;
@@ -175,7 +175,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     
     // Timer
     labelUpdaterTimer = [NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(updateLabel) userInfo:nil repeats:YES];
-
+    
     // Set the done button and the imageNumber to invisible initially, imageLibrary should be yes
     self.imageNumber.alpha = 0.0;
     self.doneButton.alpha = 0.0;
@@ -208,7 +208,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
         });
         if(self.camView._imageDetectionConfidence >= 30.0f)
         {
-//                [self.navigationController setSGProgressPercentage:0];
+            //                [self.navigationController setSGProgressPercentage:0];
         }
     }
 }
@@ -250,7 +250,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     self.camView.enableTorch = enable;
     
     rightButton.accessibilityLabel = [NSString stringWithFormat:@"Flash %s", self.camView.isTorchEnabled ? "On" : "Off"];
-
+    
 }
 -(IBAction)cropToggle:(id)sender {
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"IsAuto"] == FALSE) {
@@ -258,7 +258,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
         // Set the accessibility text for the crop button
         self.cropButton.accessibilityLabel = [NSString stringWithFormat:@"Crop %s", !self.camView.isBorderDetectionEnabled ? "On" : "Off"];
         self.cropButton.accessibilityHint = @"Double tap to toggle";
-
+        
         BOOL enable = !self.camView.isBorderDetectionEnabled;
         [self changeButton:self.cropButton targetTitle:(enable) ? @"CROP On" : @"CROP Off" toStateEnabled:enable];
         self.camView.enableBorderDetection = enable;
@@ -274,10 +274,10 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     }
 }
 -(void)switchCropDuringTransition {
-        BOOL enable = !self.camView.isBorderDetectionEnabled;
-        [self changeButton:self.cropButton targetTitle:(enable) ? @"CROP On" : @"CROP Off" toStateEnabled:enable];
+    BOOL enable = !self.camView.isBorderDetectionEnabled;
+    [self changeButton:self.cropButton targetTitle:(enable) ? @"CROP On" : @"CROP Off" toStateEnabled:enable];
     
-        self.camView.enableBorderDetection = enable;
+    self.camView.enableBorderDetection = enable;
 }
 -(IBAction)switchFilters:(id)sender {
     [self.camView setCameraViewType:(self.camView.cameraViewType == CVCameraViewTypeBlackAndWhite) ? CVCameraViewTypeNormal : CVCameraViewTypeBlackAndWhite];
@@ -313,18 +313,18 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
                    self.captureButton.alpha = 1.0;
                }];
           }];
-
+         
          UIImage *image = ([data isKindOfClass:[NSData class]]) ? [UIImage imageWithData:data] : data;
          NSData *imageData = UIImagePNGRepresentation(image);
          [tempImages addObject:imageData];
-
+         
          [[NSUserDefaults standardUserDefaults] setObject:tempImages forKey:@"TemporaryImages"];
          [[NSUserDefaults standardUserDefaults] synchronize];
-
+         
          [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"shouldUpdateLabel"];
          
          NSLog(@"%i", (int)[[NSUserDefaults standardUserDefaults] arrayForKey:@"TemporaryImages"].count); // For testing
-    }];
+     }];
 }
 -(void) autoOrManual {
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"IsAuto"] == FALSE) {
@@ -347,12 +347,12 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     }
 }
 - (void) readyToRecognize { // done button clicked
-
+    
     NSMutableArray *imgs = [[NSMutableArray alloc] initWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"TemporaryImages"]];
-//    for (int i = 0; i < [tempImages count]; i++) {
-//        NSData *imageData = UIImagePNGRepresentation([tempImages objectAtIndex:i]);
-//        [imgs addObject:imageData];
-//    }
+    //    for (int i = 0; i < [tempImages count]; i++) {
+    //        NSData *imageData = UIImagePNGRepresentation([tempImages objectAtIndex:i]);
+    //        [imgs addObject:imageData];
+    //    }
     [[NSUserDefaults standardUserDefaults] setObject:imgs forKey:@"ImagesArray"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
@@ -386,7 +386,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 
 - (IBAction)imageLibraryClicked:(id)sender {
     [self prepareToSwitchViews];
-
+    
     [mixpanel track:@"Image Selection" properties:@{
                                                     @"Method": @"Photo Library",
                                                     }];
@@ -428,13 +428,13 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 {
     isImagePicker = YES;
     [picker dismissViewControllerAnimated:YES completion:nil];
-
+    
     PHImageManager *manager = [PHImageManager defaultManager];
     NSMutableArray *images = [NSMutableArray arrayWithCapacity:[assets count]];
-
+    
     // assets contains PHAsset objects.
-     __block UIImage *ima;
-
+    __block UIImage *ima;
+    
     for (PHAsset *asset in assets) {
         // Do something with the asset
         
@@ -480,11 +480,10 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
     NSInteger max = 10;
     
     // show alert gracefully
-    if (picker.selectedAssets.count >= max)
-    {
+    if (picker.selectedAssets.count >= max) {
         UIAlertController *alert =
-        [UIAlertController alertControllerWithTitle:@"Attention"
-                                            message:[NSString stringWithFormat:@"Please select not more than %ld assets", (long)max]
+        [UIAlertController alertControllerWithTitle:@"Sorry"
+                                            message:[NSString stringWithFormat:@"Please select only %ld images at a time", (long)max]
                                      preferredStyle:UIAlertControllerStyleAlert];
         
         UIAlertAction *action =
@@ -505,68 +504,68 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
  PROCESS THE PHOTO (OCR)
  ------------------------------- */
 - (void)recognizePhoto {
-        [self startLoading];
+    [self startLoading];
     
-        NSMutableArray *sizeArray = [[NSMutableArray alloc] init];
-        NSMutableArray *imageArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"ImagesArray"]];
-        
-        for (int i = 0; i < [imageArray count]; i++) {
-            // Create path for image.
-            imagePathSize = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:@"image_for_size.png"];
-            
-            // Save image to disk.
-            [[imageArray objectAtIndex:i] writeToFile:imagePathSize atomically:YES];
-            
-            // Get the image size
-            unsigned long long size = [[NSFileManager defaultManager] attributesOfItemAtPath:imagePathSize error:nil].fileSize;
-            [sizeArray addObject:[NSString stringWithFormat:@"%llu",size]];
-            
-            // Delete the image afterwards
-            NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-            NSString *pngFilePath = [docDir stringByAppendingPathComponent:imagePathSize];
-            NSError *error;
-            [[NSFileManager defaultManager] removeItemAtPath:pngFilePath error:&error];
-            
-            // Track the size with MixPanel
-            NSString *mixpanelString = [NSString stringWithFormat:@"%@", [sizeArray objectAtIndex:i]];
-            
-            [mixpanel track:@"Image Sizes" properties:@{
-                                                        @"Size": mixpanelString,
-                                                        }];
-        }
-        NSString *recogNum = [NSString stringWithFormat:@"%i", (int)[imageArray count]];
-        NSString *recogDate = [NSString stringWithFormat:@"%@", [NSDate date]];
-
-        [mixpanel track:@"Recognition" properties:@{
-                                               @"Image Count": recogNum,
-                                               @"Date of Recognition" : recogDate,
-                                               }];
+    NSMutableArray *sizeArray = [[NSMutableArray alloc] init];
+    NSMutableArray *imageArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"ImagesArray"]];
     
-        unsigned long long size = [[NSFileManager defaultManager] attributesOfItemAtPath:imagePath error:nil].fileSize;
-        NSLog(@"Size %llu", size);
+    for (int i = 0; i < [imageArray count]; i++) {
+        // Create path for image.
+        imagePathSize = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:@"image_for_size.png"];
         
-        // POST request to Google Drive
-        NSData *file1Data = [[NSData alloc] initWithContentsOfFile:imagePath];
-        NSString *url = [NSString stringWithFormat:@"https://www.googleapis.com/upload/drive/v2/files?uploadType=media&convert=true&ocr=true&ocrLanguage=%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"languageForOCR"]];
+        // Save image to disk.
+        [[imageArray objectAtIndex:i] writeToFile:imagePathSize atomically:YES];
         
-        NSLog(@"URL TO CHECK: %@",url);
-
-        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:url]];
+        // Get the image size
+        unsigned long long size = [[NSFileManager defaultManager] attributesOfItemAtPath:imagePathSize error:nil].fileSize;
+        [sizeArray addObject:[NSString stringWithFormat:@"%llu",size]];
         
-        // Headers
-        [request setValue:[NSString stringWithFormat:@"%llu", size] forHTTPHeaderField:@"Content-length"];
-        [request setValue:[NSString stringWithFormat:@"Bearer %@", hardCodedToken] forHTTPHeaderField:@"Authorization"];
-
-        [request setValue:@"image/png" forHTTPHeaderField:@"Content-Type"];
+        // Delete the image afterwards
+        NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        NSString *pngFilePath = [docDir stringByAppendingPathComponent:imagePathSize];
+        NSError *error;
+        [[NSFileManager defaultManager] removeItemAtPath:pngFilePath error:&error];
         
-        NSMutableData *body = [NSMutableData data];
-        [body appendData:[NSData dataWithData:file1Data]];
+        // Track the size with MixPanel
+        NSString *mixpanelString = [NSString stringWithFormat:@"%@", [sizeArray objectAtIndex:i]];
         
-        [request setHTTPMethod:@"POST"];
-        [request setHTTPBody:body];
-        NSURLConnection *theConnection;
-        theConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-        receivedData = [[NSMutableData alloc] init];
+        [mixpanel track:@"Image Sizes" properties:@{
+                                                    @"Size": mixpanelString,
+                                                    }];
+    }
+    NSString *recogNum = [NSString stringWithFormat:@"%i", (int)[imageArray count]];
+    NSString *recogDate = [NSString stringWithFormat:@"%@", [NSDate date]];
+    
+    [mixpanel track:@"Recognition" properties:@{
+                                                @"Image Count": recogNum,
+                                                @"Date of Recognition" : recogDate,
+                                                }];
+    
+    unsigned long long size = [[NSFileManager defaultManager] attributesOfItemAtPath:imagePath error:nil].fileSize;
+    NSLog(@"Size %llu", size);
+    
+    // POST request to Google Drive
+    NSData *file1Data = [[NSData alloc] initWithContentsOfFile:imagePath];
+    NSString *url = [NSString stringWithFormat:@"https://www.googleapis.com/upload/drive/v2/files?uploadType=media&convert=true&ocr=true&ocrLanguage=%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"languageForOCR"]];
+    
+    NSLog(@"URL TO CHECK: %@",url);
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:url]];
+    
+    // Headers
+    [request setValue:[NSString stringWithFormat:@"%llu", size] forHTTPHeaderField:@"Content-length"];
+    [request setValue:[NSString stringWithFormat:@"Bearer %@", hardCodedToken] forHTTPHeaderField:@"Authorization"];
+    
+    [request setValue:@"image/png" forHTTPHeaderField:@"Content-Type"];
+    
+    NSMutableData *body = [NSMutableData data];
+    [body appendData:[NSData dataWithData:file1Data]];
+    
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody:body];
+    NSURLConnection *theConnection;
+    theConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    receivedData = [[NSMutableData alloc] init];
 }
 - (void) getFile{
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
@@ -676,7 +675,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
         // post request after uploading the image
         NSLog(@"Uploaded to Google Drive");
         [mixpanel track:@"Image Uploaded to Google Drive"];
-
+        
         [self getFile];
     }
 }
@@ -721,7 +720,7 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 }
 -(void)stopLoading {
     [mixpanel track:@"Image Upload"];
-
+    
     [loading dismissWithClickedButtonIndex:0 animated:YES];
 }
 - (void) updateLabel {

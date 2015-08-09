@@ -93,8 +93,8 @@
 {
     [self createGLKView];
     
-//    ViewController *mainVC = [[ViewController alloc] init];
-//    [self performSelectorInBackground:@selector(runPercentageLoop) withObject:nil];
+    //    ViewController *mainVC = [[ViewController alloc] init];
+    //    [self performSelectorInBackground:@selector(runPercentageLoop) withObject:nil];
     
     
     NSArray *possibleDevices = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
@@ -189,8 +189,8 @@
         if (_borderDetectLastRectangleFeature)
         {
             if (_imageDetectionConfidence > 20.0f && _imageDetectionConfidence < 30.0f) {
-
-            image = [self drawHighlightOverlayForPoints:image topLeft:_borderDetectLastRectangleFeature.topLeft topRight:_borderDetectLastRectangleFeature.topRight bottomLeft:_borderDetectLastRectangleFeature.bottomLeft bottomRight:_borderDetectLastRectangleFeature.bottomRight];
+                
+                image = [self drawHighlightOverlayForPoints:image topLeft:_borderDetectLastRectangleFeature.topLeft topRight:_borderDetectLastRectangleFeature.topRight bottomLeft:_borderDetectLastRectangleFeature.bottomLeft bottomRight:_borderDetectLastRectangleFeature.bottomRight];
                 
             }
             
@@ -198,8 +198,8 @@
             
             // For auto-capturing the images
             imageArray = [[NSMutableArray alloc]
-             initWithArray:[[NSUserDefaults standardUserDefaults]
-                            objectForKey:@"TemporaryImages"]];
+                          initWithArray:[[NSUserDefaults standardUserDefaults]
+                                         objectForKey:@"TemporaryImages"]];
             
             NSLog(@"Confidence: %f", _imageDetectionConfidence);
             if ([[NSUserDefaults standardUserDefaults] boolForKey:@"IsAuto"] == TRUE) {
@@ -207,7 +207,7 @@
             }
             
             [self giveFieldOfViewReport];
-
+            
         }
         else
         {
@@ -355,6 +355,17 @@
 
 - (void)captureImageWithCompletionHander:(void(^)(id data))completionHandler
 {
+    NSString *path  = [[NSBundle mainBundle] pathForResource:@"camera" ofType:@"mp3"];
+    NSURL *pathURL = [NSURL fileURLWithPath : path];
+    
+    SystemSoundID audioEffect;
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef) pathURL, &audioEffect);
+    AudioServicesPlaySystemSound(audioEffect);
+    
+    // call the following function when the sound is no longer used
+    // (must be done AFTER the sound is done playing)
+    AudioServicesDisposeSystemSoundID(audioEffect);
+    
     if (_isCapturing) return;
     
     __weak typeof(self) weakSelf = self;

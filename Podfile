@@ -2,14 +2,14 @@
 # platform :ios, "6.0"
 
 target "Voice" do
-
-pod 'Mixpanel'
-pod 'Appirater'
-pod 'CTAssetsPickerController',  '~> 3.0.0'
-
+    
+    pod 'Mixpanel'
+    pod 'Appirater'
+    pod 'CTAssetsPickerController',  '~> 3.0.0'
+    
 end
 
 target "VoiceTests" do
-
+    
 end
 
