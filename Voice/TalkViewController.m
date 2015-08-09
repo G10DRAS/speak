@@ -668,25 +668,24 @@
         textToShare = [textToShare stringByAppendingString:[NSString stringWithFormat:@"\n\n %@", [speakArray objectAtIndex:i]]];
     }
     UIImage *anImage = [UIImage imageWithData:[imageArray objectAtIndex:0]];
-    CGRect screenRect = [[UIScreen mainScreen] bounds];
-    UIImage *myImg = [self imageWithImage:anImage scaledToSize:CGSizeMake(screenRect.size.width, screenRect.size.height)];
+//    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    UIImage *myImg = [self imageWithImage:anImage scaledToSize:CGSizeMake((anImage.size.width/3)*2, (anImage.size.height/3)*2)];
     
     
-    [self setupPDFDocumentNamed:@"VoiceText" Width:850 Height:4100];
+    [self setupPDFDocumentNamed:@"VoiceText" Width:612 Height:792];
     
     [self beginPDFPage];
     
     
-    CGRect textRect = [self addText:textToShare withFrame:CGRectMake(kPadding, kPadding, 400, 200) fontSize:48.0f];
+    CGRect textRect = [self addText:textToShare withFrame:CGRectMake(kPadding, kPadding, 400, 200) fontSize:15.0f];
     CGRect blueLineRect = [self addLineWithFrame:CGRectMake(kPadding, textRect.origin.y + textRect.size.height + kPadding, _pageSize.width - kPadding*2, 4) withColor:[UIColor blueColor]];
     
     // new page
     [self beginPDFPage];
     
     CGRect imageRect = [self addImage:myImg
-                              atPoint:CGPointMake((_pageSize.width/2)-(anImage.size.width/2), (_pageSize.height/2)-(anImage.size.height/2) + kPadding)];
-    [self addLineWithFrame:CGRectMake(kPadding, imageRect.origin.y + imageRect.size.height + kPadding, _pageSize.width - kPadding*2, 4)
-                 withColor:[UIColor redColor]];
+                              atPoint:CGPointMake(0, kPadding*2)];
+    [self addLineWithFrame:CGRectMake(kPadding, imageRect.origin.y + imageRect.size.height + kPadding, _pageSize.width - kPadding*2, 4) withColor:[UIColor redColor]];
     
     [self finishPDF];
 }

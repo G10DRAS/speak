@@ -19,6 +19,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"ImportantEvent"];
     
     [Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];
     [Appirater setAppId:@"903772588"];
