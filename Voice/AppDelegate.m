@@ -55,6 +55,11 @@
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     [mixpanel track:@"App Opened"];
     
+    [Appirater setDaysUntilPrompt:2];
+    [Appirater setUsesUntilPrompt:5];
+    [Appirater setSignificantEventsUntilPrompt:-1];
+    [Appirater setTimeBeforeReminding:2];
+    [Appirater setDebug:NO];
     [Appirater appLaunched:YES];
     
     

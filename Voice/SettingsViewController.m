@@ -17,7 +17,7 @@
 @synthesize ttsSpeed, autoSwitch;
 
 - (void)viewDidLoad {
-
+    
     // Screen Dimensions
     screenRect = [[UIScreen mainScreen] bounds];
     screenWidth = screenRect.size.width;

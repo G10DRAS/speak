@@ -31,18 +31,12 @@ int const maxImagePixelsAmount = 3200000; // 3.2 MP
 
 - (void)viewDidLoad
 {
-    [Appirater setDaysUntilPrompt:5];
-    [Appirater setUsesUntilPrompt:5];
-    [Appirater setSignificantEventsUntilPrompt:-1];
-    [Appirater setTimeBeforeReminding:2];
-    [Appirater setDebug:YES];
-    
     [self performSelectorInBackground:@selector(runPercentageLoop) withObject:nil];
     
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:NO];
     
     mixpanel = [Mixpanel sharedInstance];
-    
+        
     isImagePicker = NO;
     
     //    self.imageView.image = nil;
