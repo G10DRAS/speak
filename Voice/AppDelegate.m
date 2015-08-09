@@ -9,6 +9,9 @@
 #import "ViewController.h"
 #import "Mixpanel.h"
 #import "Appirater.h"
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
+
 
 @interface AppDelegate ()
 
@@ -23,6 +26,8 @@
     
     [Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];
     [Appirater setAppId:@"903772588"];
+    
+    [Fabric with:@[CrashlyticsKit]];
     
     // Set image capture mode to manual
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"IsAuto"];

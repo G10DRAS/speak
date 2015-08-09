@@ -93,9 +93,8 @@
 //}
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    int intro = 0;
-    int rate = 1;
-    int share = 2;
+    int rate = 0;
+    int share = 1;
     int feedback = 0;
     
     
@@ -109,23 +108,24 @@
     }
     
     if(indexPath.section == 3) {
-        if (intro == indexPath.row) {
-            UIViewController *myNext = [self.storyboard instantiateViewControllerWithIdentifier:@"TutorialView"];
-            [self.navigationController pushViewController:myNext animated:YES];
-        } else if (rate == indexPath.row) {
+        if (rate == indexPath.row) {
             NSURL *url = [[NSURL alloc] initWithString:@"itms://itunes.apple.com/us/app/voice-take-picture-have-it/id903772588?mt=8&uo=4"];
             [[UIApplication sharedApplication] openURL:url];
+            NSLog(@"rate on store");
         } else if (share == indexPath.row) {
+            NSLog(@"share to friends");
             NSString *textToShare = @"Check out Voice - An iOS app that lets you take a picture of anything and reads it to you in a matter of seconds! http://shalinshah.me/voice";
 //            UIImage *imageToShare = [UIImage imageNamed:@"yourImage.png"];
             NSArray *itemsToShare = @[textToShare];
             UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:itemsToShare applicationActivities:nil];
-            activityVC.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeCopyToPasteboard, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll]; //or whichever you don't need
+            activityVC.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll]; //or whichever you don't need
             [self presentViewController:activityVC animated:YES completion:nil];
         }
         
     } else if (indexPath.section == 4){
         if (feedback == indexPath.row) {
+            NSLog(@"give feedback");
+            
             // Device/OS Info
             UIDevice *currentDevice = [UIDevice currentDevice];
             NSString *systemVersion = [currentDevice systemVersion];

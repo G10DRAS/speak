@@ -6,6 +6,8 @@ target "Voice" do
     pod 'Mixpanel'
     pod 'Appirater'
     pod 'CTAssetsPickerController',  '~> 3.0.0'
+    pod 'Fabric'
+    pod 'Crashlytics'
     
 end
 

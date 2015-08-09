@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "AB9B1EA8CB96CD47E94040B3"
+               BlueprintIdentifier = "5F67BDF67A4EFF0126AC33B6"
                BuildableName = "libPods-Voice-PureLayout.a"
                BlueprintName = "Pods-Voice-PureLayout"
                ReferencedContainer = "container:Pods.xcodeproj">

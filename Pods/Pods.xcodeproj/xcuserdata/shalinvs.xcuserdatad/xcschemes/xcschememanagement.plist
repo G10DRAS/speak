@@ -24,6 +24,16 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-Voice-Crashlytics.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-Voice-Fabric.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-Voice-Mixpanel.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -42,37 +52,47 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>062BCB4833EC6D7BEE28106C</key>
+		<key>096FBB1D174876D5117161E3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>43164308367157B5589C2599</key>
+		<key>39CA085169AEF7377566FBE8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4FF0D58DBAEB04D34E540151</key>
+		<key>3C58554AB805A28CD9ADAC70</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8EFA6DDD8BBD95193B6C1531</key>
+		<key>422EC3B74367FB7882CF1098</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>99DCA363672FA2819862FAD8</key>
+		<key>55D5356BA9FF9590030424C9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>AB9B1EA8CB96CD47E94040B3</key>
+		<key>5F67BDF67A4EFF0126AC33B6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FF3920921B89D9AFC99D9FD5</key>
+		<key>7AC40FB4E74A5ECB428F2F61</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8B5689FC895A968297A8F83B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F7BF15A388190C184E77E2E1</key>
 		<dict>
 			<key>primary</key>
 			<true/>

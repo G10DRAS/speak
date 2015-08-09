@@ -188,7 +188,7 @@
         
         if (_borderDetectLastRectangleFeature)
         {
-            if (_imageDetectionConfidence > 20.0f && _imageDetectionConfidence < 30.0f) {
+            if (_imageDetectionConfidence >= 20.0f) {
                 
                 image = [self drawHighlightOverlayForPoints:image topLeft:_borderDetectLastRectangleFeature.topLeft topRight:_borderDetectLastRectangleFeature.topRight bottomLeft:_borderDetectLastRectangleFeature.bottomLeft bottomRight:_borderDetectLastRectangleFeature.bottomRight];
                 

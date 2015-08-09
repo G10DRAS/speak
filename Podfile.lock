@@ -1,7 +1,11 @@
 PODS:
   - Appirater (2.0.5)
+  - Crashlytics (3.1.0)
   - CTAssetsPickerController (3.0.0):
     - PureLayout (~> 2.0.0)
+  - Fabric (1.2.8):
+    - Fabric/Base (= 1.2.8)
+  - Fabric/Base (1.2.8)
   - Mixpanel (2.8.2):
     - Mixpanel/Mixpanel (= 2.8.2)
   - Mixpanel/Mixpanel (2.8.2)
@@ -9,12 +13,16 @@ PODS:
 
 DEPENDENCIES:
   - Appirater
+  - Crashlytics
   - CTAssetsPickerController (~> 3.0.0)
+  - Fabric
   - Mixpanel
 
 SPEC CHECKSUMS:
   Appirater: e7c0a47fb67ee5041ce8479e6ba960927fb40264
+  Crashlytics: 93e2f86363d53c002c6366a9d87e41f2eaee87c3
   CTAssetsPickerController: 4f88e226f23fbe67b421cf8b9520ebfb03ab82ff
+  Fabric: a9eabe53915e9f1db55a84dd2838737928675878
   Mixpanel: f4d71ac2a306e7cda6ad03d4a2be249a0fd7a967
   PureLayout: f25f0bb904d5ccfe6e31da3cb869185259f02e0d
 

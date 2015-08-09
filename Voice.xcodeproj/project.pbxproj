@@ -35,6 +35,7 @@
 		385CFA3C1984309A00CF9563 /* TalkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 385CFA3B1984309A00CF9563 /* TalkViewController.m */; };
 		385CFA3E1984346200CF9563 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 385CFA3D1984346200CF9563 /* MobileCoreServices.framework */; };
 		38631E8F1A6B879000DBA653 /* CVCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38631E8E1A6B879000DBA653 /* CVCameraViewController.m */; };
+		38689F5B1B77CBAA004A7072 /* camera.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 38689F5A1B77CBAA004A7072 /* camera.mp3 */; };
 		38AF6DF91A29B1FD00DE1A02 /* replay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38AF6DF81A29B1FD00DE1A02 /* replay@2x.png */; };
 		38B23F5E1B69A5C700FE00B0 /* SGProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B23F5D1B69A5C700FE00B0 /* SGProgressView.m */; };
 		38B23F611B69A61100FE00B0 /* UINavigationController+SGProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B23F601B69A61100FE00B0 /* UINavigationController+SGProgress.m */; };
@@ -107,6 +108,7 @@
 		385CFA3D1984346200CF9563 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		38631E8D1A6B879000DBA653 /* CVCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVCameraViewController.h; sourceTree = "<group>"; };
 		38631E8E1A6B879000DBA653 /* CVCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CVCameraViewController.m; sourceTree = "<group>"; };
+		38689F5A1B77CBAA004A7072 /* camera.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = camera.mp3; sourceTree = "<group>"; };
 		38AF6DF81A29B1FD00DE1A02 /* replay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "replay@2x.png"; sourceTree = "<group>"; };
 		38B23F5C1B69A5C700FE00B0 /* SGProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGProgressView.h; sourceTree = "<group>"; };
 		38B23F5D1B69A5C700FE00B0 /* SGProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGProgressView.m; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 			children = (
 				382931D219AFBE6B003EC833 /* libxml2.dylib */,
 				385CF9D219842B4F00CF9563 /* Voice */,
+				38689F591B77CBAA004A7072 /* Media */,
 				38B23F3C1B69A52900FE00B0 /* Progress */,
 				385CF9F619842FAF00CF9563 /* Images */,
 				385CFA0D19842FAF00CF9563 /* JSON */,
@@ -288,6 +291,14 @@
 			name = Camera;
 			sourceTree = "<group>";
 		};
+		38689F591B77CBAA004A7072 /* Media */ = {
+			isa = PBXGroup;
+			children = (
+				38689F5A1B77CBAA004A7072 /* camera.mp3 */,
+			);
+			path = Media;
+			sourceTree = "<group>";
+		};
 		38B23F3C1B69A52900FE00B0 /* Progress */ = {
 			isa = PBXGroup;
 			children = (
@@ -320,6 +331,7 @@
 				385CF9CD19842B4F00CF9563 /* Frameworks */,
 				385CF9CE19842B4F00CF9563 /* Resources */,
 				4F1BFAD271F74079B79332DF /* Copy Pods Resources */,
+				38689F581B77C545004A7072 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -394,6 +406,7 @@
 				385CFA2819842FAF00CF9563 /* play@2x.png in Resources */,
 				385CF9DF19842B4F00CF9563 /* Main.storyboard in Resources */,
 				385CFA2019842FAF00CF9563 /* forward@2x.png in Resources */,
+				38689F5B1B77CBAA004A7072 /* camera.mp3 in Resources */,
 				38AF6DF91A29B1FD00DE1A02 /* replay@2x.png in Resources */,
 				38C21E191A11F3340017BA6E /* nav_bg.png in Resources */,
 				380550F31A7CAC660099C7D3 /* badge_light.png in Resources */,
@@ -414,6 +427,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		38689F581B77C545004A7072 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/Fabric.framework/run\" 40e264da4f6c8464123ec83cc824d5865f318be3 2e74bc299e7aaf7e20c9a77ddd1c858cce3a0a2bbc41c92c79d335b0f8d080dd";
+		};
 		4F1BFAD271F74079B79332DF /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
