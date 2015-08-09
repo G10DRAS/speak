@@ -34,7 +34,7 @@
 - (void)viewDidLoad
 {
     mixpanel = [Mixpanel sharedInstance];
-
+    
     speakArray = [[NSMutableArray alloc] init];
     imageArray = [[NSMutableArray alloc] init];
     
@@ -55,7 +55,7 @@
     }
     
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"didClickShare"];
-
+    
     
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"speedForTTS"] == nil) {
         [[NSUserDefaults standardUserDefaults] setFloat:0.1f forKey:@"speedForTTS"];
@@ -64,7 +64,7 @@
     ttsSpeed = [[NSUserDefaults standardUserDefaults] floatForKey:@"speedForTTS"];
     
     [self startTalking];
-
+    
     
     
     [super viewDidLoad];
@@ -96,25 +96,25 @@
         [_scrollView addSubview:imageview];
         workingFrame.origin.x = workingFrame.origin.x + workingFrame.size.width;
         
-//        if (image.size.width > image.size.height) {
-//            NSLog(@"Image is now landscape");
-//        } else {
-//            NSLog(@"Image is now portrait");
-//        }
+        //        if (image.size.width > image.size.height) {
+        //            NSLog(@"Image is now landscape");
+        //        } else {
+        //            NSLog(@"Image is now portrait");
+        //        }
         
     }
-
+    
     
     [_scrollView setPagingEnabled:YES];
     [_scrollView setContentSize:CGSizeMake(workingFrame.origin.x, workingFrame.size.height)];
-
+    
     
     
     [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
     if ([self canBecomeFirstResponder]) {
         [self becomeFirstResponder];
     }
-
+    
     // Some UI stuff
     self.view.backgroundColor = [UIColor clearColor];
     UIImage *myImage = [UIImage imageNamed:@"background"];
@@ -125,7 +125,7 @@
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
     [self.navigationItem setHidesBackButton:NO animated:YES];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-
+    
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:26.0f];;
@@ -140,7 +140,7 @@
                                                   forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = YES;
-
+    
     self.pageLabel.text = [NSString stringWithFormat:@"Page %i", speechNumber];
     
     NSLog(@"imageArray Count: %d", (int)[imageArray count]);
@@ -192,7 +192,7 @@
 
 - (void) startTalking {
     [mixpanel track:@"Image Being Spoken"];
-
+    
     speechPaused = NO;
     NSString *imageText = [NSString stringWithFormat:@"%@", [speakArray objectAtIndex:(speechNumber-1)]];
     AVSpeechUtterance* utter = [[AVSpeechUtterance alloc] initWithString:imageText];
@@ -235,9 +235,9 @@
     AVSpeechSynthesizer *talked = self.synthesizer;
     if([talked isSpeaking]) {
         [talked stopSpeakingAtBoundary:AVSpeechBoundaryImmediate];
-//        AVSpeechUtterance *utterance = [AVSpeechUtterance speechUtteranceWithString:@""];
-//        [talked speakUtterance:utterance];
-//        [talked stopSpeakingAtBoundary:AVSpeechBoundaryImmediate];
+        //        AVSpeechUtterance *utterance = [AVSpeechUtterance speechUtteranceWithString:@""];
+        //        [talked speakUtterance:utterance];
+        //        [talked stopSpeakingAtBoundary:AVSpeechBoundaryImmediate];
     }
 }
 - (void) restartSpeech {
@@ -330,8 +330,8 @@
         isSkipping = NO;
     } else {
         if (imageArray.count != speakArray.count) {
-//        dispatch_time_t countdownTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC));
-//        dispatch_after(countdownTime, dispatch_get_main_queue(), ^(void){
+            //        dispatch_time_t countdownTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC));
+            //        dispatch_after(countdownTime, dispatch_get_main_queue(), ^(void){
             AVSpeechUtterance* utter = [[AVSpeechUtterance alloc] initWithString:@""];
             utter.voice = [AVSpeechSynthesisVoice voiceWithLanguage:[[NSUserDefaults standardUserDefaults] objectForKey:@"languageForTTS"]];
             [utter setRate:ttsSpeed];
@@ -340,7 +340,7 @@
             }
             self.synthesizer.delegate = self;
             [self.synthesizer speakUtterance:utter];
-//        });
+            //        });
         }
     }
 }
@@ -353,9 +353,9 @@
 - (void) fetchTextFromImage: (NSData *)theImage {
     
     UIImage *imageFromData = [UIImage imageWithData:theImage];
-    UIImage *myScaledImage = [self imageWithImage:imageFromData scaledToSize:CGSizeMake(imageFromData.size.width * .3, imageFromData.size.height * .3)];
+    UIImage *myScaledImage = [self imageWithImage:imageFromData scaledToSize:CGSizeMake(imageFromData.size.width * .8, imageFromData.size.height * .8)];
     NSData *dataFromImage = UIImagePNGRepresentation(myScaledImage);
-
+    
     // Create path for image.
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     imagePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"image.png"];
@@ -553,7 +553,7 @@
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ImageText"];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"TemporaryImages"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-
+    
     [self clearTmpDirectory];
 }
 
@@ -589,15 +589,15 @@
 }
 -(void) share {
     if([[NSUserDefaults standardUserDefaults] boolForKey:@"didClickShare"] == NO) {
-    // save pdf
+        // save pdf
         [self makePDF];
-    // save text
+        // save text
         stringToShare = @"";
         for (int i = 0; i < [imageArray count]; i++) {
             stringToShare = [stringToShare stringByAppendingString:[NSString stringWithFormat:@"\n\n %@", [speakArray objectAtIndex:i]]];
         }
         [[NSUserDefaults standardUserDefaults] setObject:stringToShare forKey:@"StringToShare"];
-    // save image
+        // save image
         imageToShare = [UIImage imageWithData:[imageArray objectAtIndex:0]];
         // Create path.
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -605,9 +605,9 @@
         // Save image.
         [UIImagePNGRepresentation(imageToShare) writeToFile:filePath atomically:YES];
         [[NSUserDefaults standardUserDefaults] setObject:filePath forKey:@"ImageToShare"];
-    // update bool so this doesn't get called again
+        // update bool so this doesn't get called again
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"didClickShare"];
-    // synchronize
+        // synchronize
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
     
@@ -661,22 +661,29 @@
  ------------------------------- */
 
 -(void) makePDF {
-    [self setupPDFDocumentNamed:@"VoiceText" Width:850 Height:4100];
-    
-    [self beginPDFPage];
     
     NSString *textToShare = @"";
     for (int i = 0; i < [imageArray count]; i++) {
         textToShare = [textToShare stringByAppendingString:[NSString stringWithFormat:@"\n\n %@", [speakArray objectAtIndex:i]]];
     }
-    
-    CGRect textRect = [self addText:textToShare
-                          withFrame:CGRectMake(kPadding, kPadding, 400, 200) fontSize:48.0f];
-    CGRect blueLineRect = [self addLineWithFrame:CGRectMake(kPadding, textRect.origin.y + textRect.size.height + kPadding, _pageSize.width - kPadding*2, 4)
-                                       withColor:[UIColor blueColor]];
     UIImage *anImage = [UIImage imageWithData:[imageArray objectAtIndex:0]];
-    CGRect imageRect = [self addImage:anImage
-                              atPoint:CGPointMake((_pageSize.width/2)-(anImage.size.width/2), blueLineRect.origin.y + blueLineRect.size.height + kPadding)];
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    UIImage *myImg = [self imageWithImage:anImage scaledToSize:CGSizeMake(screenRect.size.width, screenRect.size.height)];
+    
+    
+    [self setupPDFDocumentNamed:@"VoiceText" Width:850 Height:4100];
+    
+    [self beginPDFPage];
+    
+    
+    CGRect textRect = [self addText:textToShare withFrame:CGRectMake(kPadding, kPadding, 400, 200) fontSize:48.0f];
+    CGRect blueLineRect = [self addLineWithFrame:CGRectMake(kPadding, textRect.origin.y + textRect.size.height + kPadding, _pageSize.width - kPadding*2, 4) withColor:[UIColor blueColor]];
+    
+    // new page
+    [self beginPDFPage];
+    
+    CGRect imageRect = [self addImage:myImg
+                              atPoint:CGPointMake((_pageSize.width/2)-(anImage.size.width/2), (_pageSize.height/2)-(anImage.size.height/2) + kPadding)];
     [self addLineWithFrame:CGRectMake(kPadding, imageRect.origin.y + imageRect.size.height + kPadding, _pageSize.width - kPadding*2, 4)
                  withColor:[UIColor redColor]];
     
@@ -697,7 +704,7 @@
     
     NSString *pdfPath = [documentsDirectory stringByAppendingPathComponent:newPDFName];
     
-
+    
     UIGraphicsBeginPDFContextToFile(pdfPath, CGRectZero, nil);
 }
 - (void)beginPDFPage {
@@ -754,13 +761,19 @@
 }
 
 
-
-
-
-
 /*---------------------------------
  EXTRA STUFF
  ------------------------------- */
++ (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
+    //UIGraphicsBeginImageContext(newSize);
+    // In next line, pass 0.0 to use the current device's pixel scaling factor (and thus account for Retina resolution).
+    // Pass 1.0 to force exact pixel size.
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
 -(UIImage*)imageByRotatingImage:(UIImage*)initImage fromImageOrientation:(UIImageOrientation)orientation
 {
     CGImageRef imgRef = initImage.CGImage;
