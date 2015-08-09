@@ -330,6 +330,14 @@
         isSkipping = NO;
     } else {
         if (imageArray.count != speakArray.count) {
+            
+            if ([[NSUserDefaults standardUserDefaults] integerForKey:@"ImportantEvent"] == 0) {
+                [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"ImportantEvent"];
+            } else if ([[NSUserDefaults standardUserDefaults] integerForKey:@"ImportantEvent"] == 1) {
+                [[NSUserDefaults standardUserDefaults] setInteger:2 forKey:@"ImportantEvent"];
+                [Appirater userDidSignificantEvent:YES];
+            }
+            
             //        dispatch_time_t countdownTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC));
             //        dispatch_after(countdownTime, dispatch_get_main_queue(), ^(void){
             AVSpeechUtterance* utter = [[AVSpeechUtterance alloc] initWithString:@""];
